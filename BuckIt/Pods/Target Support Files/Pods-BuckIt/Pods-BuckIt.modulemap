@@ -1,0 +1,6 @@
+framework module Pods_BuckIt {
+  umbrella header "Pods-BuckIt-umbrella.h"
+
+  export *
+  module * { export * }
+}
