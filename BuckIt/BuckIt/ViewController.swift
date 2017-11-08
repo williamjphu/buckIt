@@ -30,25 +30,27 @@ class ViewController: UIViewController , FBSDKLoginButtonDelegate{
         if FBSDKAccessToken.current() != nil {
             
             DispatchQueue.main.async {
-                self.performSegue(withIdentifier: "ShowHome", sender: self)
+                self.performSegue(withIdentifier: "showHome", sender: self)
             }
         }
+        
     }
     
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
-        if error != nil
-        {
+        if error != nil {
             print(error)
             return
-        } else
-        {
-            print("Successfully logged in with Facebook")
-            self.performSegue(withIdentifier: "ShowHome", sender: self)
+        } else if FBSDKAccessToken.current() == nil {
+            //welcomeMessage.text = "Authentication was canceled"
+        }
+        else if error == nil {
+            print("Successfull logged in via facebook")
+            self.performSegue(withIdentifier: "showHome", sender: self)
         }
     }
     
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
-        print("Did log out of Facebook")
+        print("Logged out of Facebook")
     }
 
 
