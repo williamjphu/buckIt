@@ -7,13 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		513C56CD69E6175D71607469 /* Pods_BuckIt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 166D2B8B926599B77BC72311 /* Pods_BuckIt.framework */; };
 		7770EC591FAEB054003F3B11 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7770EC581FAEB054003F3B11 /* HomeViewController.swift */; };
 		77D45FBE1FAE96EB0034DDBA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D45FBD1FAE96EB0034DDBA /* AppDelegate.swift */; };
 		77D45FC01FAE96EB0034DDBA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D45FBF1FAE96EB0034DDBA /* ViewController.swift */; };
 		77D45FC31FAE96EB0034DDBA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77D45FC11FAE96EB0034DDBA /* Main.storyboard */; };
 		77D45FC51FAE96EB0034DDBA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77D45FC41FAE96EB0034DDBA /* Assets.xcassets */; };
 		77D45FC81FAE96EB0034DDBA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77D45FC61FAE96EB0034DDBA /* LaunchScreen.storyboard */; };
+		C397DF2C1FB5B08A00D6C0AF /* Pods_BuckIt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C397DF2D1FB5B08A00D6C0AF /* Pods_BuckIt.framework */; };
+		C397DF2F1FB5B19000D6C0AF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C397DF2E1FB5B19000D6C0AF /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,10 @@
 		77D45FC71FAE96EB0034DDBA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		77D45FC91FAE96EB0034DDBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B29BF32C00461D384F3C4620 /* Pods-BuckIt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuckIt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BuckIt/Pods-BuckIt.debug.xcconfig"; sourceTree = "<group>"; };
+		C397DF291FB5B05F00D6C0AF /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C397DF2B1FB5B06500D6C0AF /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C397DF2D1FB5B08A00D6C0AF /* Pods_BuckIt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_BuckIt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C397DF2E1FB5B19000D6C0AF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,7 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				513C56CD69E6175D71607469 /* Pods_BuckIt.framework in Frameworks */,
+				C397DF2C1FB5B08A00D6C0AF /* Pods_BuckIt.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +84,7 @@
 				7770EC581FAEB054003F3B11 /* HomeViewController.swift */,
 				77D45FC61FAE96EB0034DDBA /* LaunchScreen.storyboard */,
 				77D45FC91FAE96EB0034DDBA /* Info.plist */,
+				C397DF2E1FB5B19000D6C0AF /* GoogleService-Info.plist */,
 			);
 			path = BuckIt;
 			sourceTree = "<group>";
@@ -86,6 +92,9 @@
 		9A8B634F22CBA66DCA32FBC7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C397DF2D1FB5B08A00D6C0AF /* Pods_BuckIt.framework */,
+				C397DF2B1FB5B06500D6C0AF /* FBSDKLoginKit.framework */,
+				C397DF291FB5B05F00D6C0AF /* FBSDKCoreKit.framework */,
 				166D2B8B926599B77BC72311 /* Pods_BuckIt.framework */,
 			);
 			name = Frameworks;
@@ -126,6 +135,7 @@
 				TargetAttributes = {
 					77D45FB91FAE96EB0034DDBA = {
 						CreatedOnToolsVersion = 9.1;
+						LastSwiftMigration = 0910;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -154,6 +164,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				77D45FC81FAE96EB0034DDBA /* LaunchScreen.storyboard in Resources */,
+				C397DF2F1FB5B19000D6C0AF /* GoogleService-Info.plist in Resources */,
 				77D45FC51FAE96EB0034DDBA /* Assets.xcassets in Resources */,
 				77D45FC31FAE96EB0034DDBA /* Main.storyboard in Resources */,
 			);
@@ -177,7 +188,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		F9EC6CBA32FA44D874789201 /* [CP] Copy Pods Resources */ = {
@@ -366,11 +377,15 @@
 			baseConfigurationReference = B29BF32C00461D384F3C4620 /* Pods-BuckIt.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = BuckIt/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = SJSU.BuckIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -381,11 +396,14 @@
 			baseConfigurationReference = 1B5944A0585E1AA42CEFF7F4 /* Pods-BuckIt.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = BuckIt/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = SJSU.BuckIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

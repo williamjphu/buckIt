@@ -8,18 +8,16 @@
 
 import UIKit
 import FBSDKLoginKit
+
 class ViewController: UIViewController , FBSDKLoginButtonDelegate{
   
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
         let loginButton = FBSDKLoginButton()
         view.addSubview(loginButton)
         loginButton.frame = CGRect(x: 16, y: 50, width: view.frame.width - 32, height: 50)
-        
         loginButton.delegate = self
         
     }
@@ -28,7 +26,6 @@ class ViewController: UIViewController , FBSDKLoginButtonDelegate{
         super.viewWillAppear(animated)
         
         if FBSDKAccessToken.current() != nil {
-            
             DispatchQueue.main.async {
                 self.performSegue(withIdentifier: "showHome", sender: self)
             }
