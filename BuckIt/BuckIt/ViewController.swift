@@ -8,18 +8,46 @@
 
 import UIKit
 import FBSDKLoginKit
+import GoogleSignIn
 
-class ViewController: UIViewController , FBSDKLoginButtonDelegate{
+class ViewController: UIViewController , FBSDKLoginButtonDelegate, GIDSignInUIDelegate{
   
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupFacebookButton()
+        
+        setupGoogleButton()
+        
+    }
+    
+    fileprivate func setupFacebookButton(){
+        //Draw Facebook sign in button
         let loginButton = FBSDKLoginButton()
         view.addSubview(loginButton)
         loginButton.frame = CGRect(x: 16, y: 50, width: view.frame.width - 32, height: 50)
         loginButton.delegate = self
+    }
+    
+    fileprivate func setupGoogleButton(){
+        //Draw Google sign in button
+        let googleButton = GIDSignInButton()
+        googleButton.frame = CGRect(x: 16, y: 50+66, width: view.frame.width - 32, height: 50)
+        view.addSubview(googleButton)
         
+        GIDSignIn.sharedInstance().uiDelegate = self
+        
+    }
+    
+    func sign(inWillDispatch signIn: GIDSignIn!, error: Error!) {
+        if error != nil{
+            print(error)
+            return
+        } else if error == nil {
+            print("Successfully logged in via Gmail")
+            self.performSegue(withIdentifier: "showHome", sender: self)
+
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,10 +69,11 @@ class ViewController: UIViewController , FBSDKLoginButtonDelegate{
             //welcomeMessage.text = "Authentication was canceled"
         }
         else if error == nil {
-            print("Successfull logged in via facebook")
+            print("Successfully logged in via facebook")
             self.performSegue(withIdentifier: "showHome", sender: self)
         }
     }
+    
     
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
         print("Logged out of Facebook")

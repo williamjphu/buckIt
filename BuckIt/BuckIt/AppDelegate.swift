@@ -8,10 +8,12 @@
 
 import UIKit
 import FBSDKCoreKit
+import FirebaseAuth
 import Firebase
+import GoogleSignIn
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
 
     var window: UIWindow?
 
@@ -20,18 +22,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Firebase
         FirebaseApp.configure()
         
+        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
+        GIDSignIn.sharedInstance().delegate = self
+        
         //Facebook
         let bool = FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         FBSDKAppEvents.activateApp()
+        
         return bool
     }
     
-    
+    //Google sign in
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if let err = error {
+            print("Failed to log into Google: ", err)
+            return
+        }
+        print("Successfully logged in to Google", user)
+        
+        guard let idToken = user.authentication.idToken else { return }
+        guard let accessToken = user.authentication.accessToken else { return }
+        let credentials = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: accessToken)
+            
+        Auth.auth().signIn(with: credentials, completion: {(user , error) in
+            if let err = error {
+                print("Failed to create a Firebase User with Google Account: " , err)
+                return
+            }
+            guard let uid = user?.uid else {return}
+            print("Sucessfully logging to Firebase with Google" , uid)
+        })
+    }
     
     //For Facebook Integration
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         
         let handled =  FBSDKApplicationDelegate.sharedInstance().application(app, open: url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String!, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+        
+        //For Google Integration
+        GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String!, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
         
         return handled
     }
