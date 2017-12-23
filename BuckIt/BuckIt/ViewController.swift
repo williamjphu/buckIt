@@ -36,29 +36,19 @@ class ViewController: UIViewController , FBSDKLoginButtonDelegate, GIDSignInUIDe
         view.addSubview(googleButton)
         
         GIDSignIn.sharedInstance().uiDelegate = self
-        
     }
     
-    func sign(inWillDispatch signIn: GIDSignIn!, error: Error!) {
-        if error != nil{
-            print(error)
-            return
-        } else if error == nil {
-            print("Successfully logged in via Gmail")
-            self.performSegue(withIdentifier: "showHome", sender: self)
-
-        }
-    }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         if FBSDKAccessToken.current() != nil {
             DispatchQueue.main.async {
                 self.performSegue(withIdentifier: "showHome", sender: self)
             }
         }
-        
+
     }
     
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
@@ -74,7 +64,7 @@ class ViewController: UIViewController , FBSDKLoginButtonDelegate, GIDSignInUIDe
         }
     }
     
-    
+
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
         print("Logged out of Facebook")
     }

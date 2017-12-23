@@ -7,6 +7,7 @@
 //
 
 import UIKit
+
 import FBSDKCoreKit
 import FirebaseAuth
 import Firebase
@@ -40,6 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
         }
         print("Successfully logged in to Google", user)
         
+        
         guard let idToken = user.authentication.idToken else { return }
         guard let accessToken = user.authentication.accessToken else { return }
         let credentials = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: accessToken)
@@ -51,8 +53,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
             }
             guard let uid = user?.uid else {return}
             print("Sucessfully logging to Firebase with Google" , uid)
+            
+            let newViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeViewController")
+            UIApplication.topViewController()?.present(newViewController, animated: true, completion: nil)
+
+            
         })
     }
+    
+   
     
     //For Facebook Integration
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
@@ -90,3 +99,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
 
 }
 
+extension UIApplication {
+    class func topViewController(base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+        if let nav = base as? UINavigationController {
+            return topViewController(base: nav.visibleViewController)
+        }
+        if let tab = base as? UITabBarController {
+            if let selected = tab.selectedViewController {
+                return topViewController(base: selected)
+            }
+        }
+        if let presented = base?.presentedViewController {
+            return topViewController(base: presented)
+        }
+        return base
+    }
+}

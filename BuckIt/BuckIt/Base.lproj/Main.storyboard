@@ -31,15 +31,25 @@
         <!--Home View Controller-->
         <scene sceneID="SO4-GV-rxx">
             <objects>
-                <viewController id="pJe-rQ-5hr" customClass="HomeViewController" customModule="BuckIt" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeViewController" id="pJe-rQ-5hr" customClass="HomeViewController" customModule="BuckIt" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OcD-Zt-dPa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7J2-xr-qqD">
+                                <rect key="frame" x="74" y="101" width="227" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Logout"/>
+                                <connections>
+                                    <action selector="didTapSignOutWithSender:" destination="pJe-rQ-5hr" eventType="touchUpInside" id="e33-YS-LTF"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="IEk-Ip-Pxq"/>
                     </view>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="showDetail" identifier="login" id="Ihx-eE-ggX"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="login" id="Ka7-BN-Aqw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kWq-TT-0la" userLabel="First Responder" sceneMemberID="firstResponder"/>
