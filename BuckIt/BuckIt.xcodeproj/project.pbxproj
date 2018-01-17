@@ -77,12 +77,10 @@
 		77D45FBC1FAE96EB0034DDBA /* BuckIt */ = {
 			isa = PBXGroup;
 			children = (
+				DAE101DA200EE1900036C029 /* LoginPage */,
 				77D45FBD1FAE96EB0034DDBA /* AppDelegate.swift */,
-				77D45FBF1FAE96EB0034DDBA /* ViewController.swift */,
 				77D45FC11FAE96EB0034DDBA /* Main.storyboard */,
 				77D45FC41FAE96EB0034DDBA /* Assets.xcassets */,
-				7770EC581FAEB054003F3B11 /* HomeViewController.swift */,
-				77D45FC61FAE96EB0034DDBA /* LaunchScreen.storyboard */,
 				77D45FC91FAE96EB0034DDBA /* Info.plist */,
 				C397DF2E1FB5B19000D6C0AF /* GoogleService-Info.plist */,
 			);
@@ -98,6 +96,16 @@
 				166D2B8B926599B77BC72311 /* Pods_BuckIt.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DAE101DA200EE1900036C029 /* LoginPage */ = {
+			isa = PBXGroup;
+			children = (
+				77D45FC61FAE96EB0034DDBA /* LaunchScreen.storyboard */,
+				7770EC581FAEB054003F3B11 /* HomeViewController.swift */,
+				77D45FBF1FAE96EB0034DDBA /* ViewController.swift */,
+			);
+			name = LoginPage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -188,7 +196,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		F9EC6CBA32FA44D874789201 /* [CP] Copy Pods Resources */ = {
