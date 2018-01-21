@@ -10,6 +10,7 @@ import UIKit
 import GoogleSignIn
 import FBSDKLoginKit
 
+// THIS IS THE SETTINGS PAGE
 class HomeViewController: UIViewController{
 
     @IBAction func didTapSignOut(sender: AnyObject) {
@@ -18,6 +19,7 @@ class HomeViewController: UIViewController{
         loginManager.logOut()
         self.performSegue(withIdentifier: "login", sender: self)
     }
+
     
 //
 //
