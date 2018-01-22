@@ -7,14 +7,14 @@
 //
 
 import UIKit
+import Firebase
 
-class EditProfileViewController: UIViewController {
+class EditProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-    }
+    let picker = UIImagePickerController()
+    @IBOutlet weak var imageView: UIImageView!
+
     
     @IBOutlet weak var nameText: UITextField!
     @IBOutlet weak var userNameText: UITextField!
@@ -53,4 +53,23 @@ class EditProfileViewController: UIViewController {
 
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Do any additional setup after loading the view.
+    }
+    
+    @IBAction func changeImagePressed(_ sender: Any) {
+        picker.allowsEditing = true
+        picker.sourceType = .photoLibrary
+        
+        present(picker, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let image = info[UIImagePickerControllerEditedImage] as? UIImage{
+            self.imageView.image = image
+        }
+        self.dismiss(animated: true, completion: nil)
+    }
 }

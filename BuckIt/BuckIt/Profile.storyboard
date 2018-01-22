@@ -351,6 +351,12 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="70" id="UeF-nL-0bE"/>
                                                     </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="35"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
@@ -448,6 +454,12 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="70" id="wJg-8b-Mc2"/>
                                                     </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="35"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Full Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="evf-9A-YCN">
                                                     <rect key="frame" x="93" y="29" width="80" height="21"/>
@@ -614,6 +626,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y1K-ll-N8N">
                                 <rect key="frame" x="161" y="172" width="53" height="30"/>
                                 <state key="normal" title="Change"/>
+                                <connections>
+                                    <action selector="changeImagePressed:" destination="7pC-uw-Ekz" eventType="touchUpInside" id="wcM-9V-wYf"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -666,6 +681,7 @@
                     </view>
                     <connections>
                         <outlet property="emailText" destination="BhQ-ZK-Yzz" id="jwd-sg-6q0"/>
+                        <outlet property="imageView" destination="Ba9-EY-SI5" id="20X-aD-khC"/>
                         <outlet property="nameText" destination="Zdu-C9-xO0" id="u6t-hf-h2M"/>
                         <outlet property="userNameText" destination="qew-Iq-ziG" id="Ezy-Sa-gYY"/>
                     </connections>
