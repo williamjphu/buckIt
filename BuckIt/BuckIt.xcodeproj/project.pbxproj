@@ -16,6 +16,8 @@
 		C397DF2C1FB5B08A00D6C0AF /* Pods_BuckIt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C397DF2D1FB5B08A00D6C0AF /* Pods_BuckIt.framework */; };
 		C397DF2F1FB5B19000D6C0AF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C397DF2E1FB5B19000D6C0AF /* GoogleService-Info.plist */; };
 		E05A8A9A200EE1C100C412B0 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E05A8A99200EE1C100C412B0 /* ProfileViewController.swift */; };
+		E05D2D0F2015C07D001EF97C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E05D2D0E2015C07D001EF97C /* User.swift */; };
+		E05D2D172015C4CB001EF97C /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E05D2D162015C4CB001EF97C /* TableViewCell.swift */; };
 		E08D6EE920116139003EC2DA /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08D6EE820116139003EC2DA /* EditProfileViewController.swift */; };
 		E0C1BA0020147DD7009FE4D5 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0C1B9FF20147DD7009FE4D5 /* Profile.storyboard */; };
 /* End PBXBuildFile section */
@@ -37,6 +39,8 @@
 		C397DF2D1FB5B08A00D6C0AF /* Pods_BuckIt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_BuckIt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C397DF2E1FB5B19000D6C0AF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		E05A8A99200EE1C100C412B0 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		E05D2D0E2015C07D001EF97C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		E05D2D162015C4CB001EF97C /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		E08D6EE820116139003EC2DA /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		E0C1B9FF20147DD7009FE4D5 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -113,6 +117,8 @@
 				E05A8A99200EE1C100C412B0 /* ProfileViewController.swift */,
 				E08D6EE820116139003EC2DA /* EditProfileViewController.swift */,
 				E0C1B9FF20147DD7009FE4D5 /* Profile.storyboard */,
+				E05D2D0E2015C07D001EF97C /* User.swift */,
+				E05D2D162015C4CB001EF97C /* TableViewCell.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -268,8 +274,10 @@
 			files = (
 				77D45FC01FAE96EB0034DDBA /* ViewController.swift in Sources */,
 				77D45FBE1FAE96EB0034DDBA /* AppDelegate.swift in Sources */,
+				E05D2D0F2015C07D001EF97C /* User.swift in Sources */,
 				E05A8A9A200EE1C100C412B0 /* ProfileViewController.swift in Sources */,
 				E08D6EE920116139003EC2DA /* EditProfileViewController.swift in Sources */,
+				E05D2D172015C4CB001EF97C /* TableViewCell.swift in Sources */,
 				7770EC591FAEB054003F3B11 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
