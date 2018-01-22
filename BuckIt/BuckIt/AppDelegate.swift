@@ -23,7 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         
-        window?.rootViewController = UINavigationController(rootViewController: ViewController())
+        // Set ViewController as the main View
+        window?.rootViewController = UINavigationController(rootViewController: LoginController())
         
         //Firebase
         FirebaseApp.configure()
@@ -64,8 +65,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
             
         })
     }
-    
-   
     
     //For Facebook Integration
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {

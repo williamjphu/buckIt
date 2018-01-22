@@ -12,7 +12,7 @@ import GoogleSignIn
 
 // THIS WILL BE THE LOGIN PAGE
 
-class ViewController: UIViewController , FBSDKLoginButtonDelegate, GIDSignInUIDelegate{
+class ViewController: UIViewController {
   
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -128,7 +128,7 @@ class ViewController: UIViewController , FBSDKLoginButtonDelegate, GIDSignInUIDe
         alreadyUserButton.heightAnchor.constraint(equalToConstant: 25).isActive
             = true
     }
-    
+    /*
     fileprivate func setupFacebookButton(){
         //Draw Facebook sign in button
         let loginButton = FBSDKLoginButton()
@@ -173,15 +173,13 @@ class ViewController: UIViewController , FBSDKLoginButtonDelegate, GIDSignInUIDe
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
         print("Logged out of Facebook")
     }
-
+    */
 
 }
 
 // Create UIColor RGB object
-extension UIColor
-{
-    convenience init(r: CGFloat, g: CGFloat, b: CGFloat)
-    {
+extension UIColor {
+    convenience init(r: CGFloat, g: CGFloat, b: CGFloat) {
         self.init(red: r/255, green: g/255, blue: b/255, alpha: 1)
     }
 }
