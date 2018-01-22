@@ -10,6 +10,7 @@ import UIKit
 import FBSDKLoginKit
 import GoogleSignIn
 
+@IBDesignable
 class ViewController: UIViewController , FBSDKLoginButtonDelegate, GIDSignInUIDelegate{
   
     override func viewDidLoad() {
@@ -69,6 +70,6 @@ class ViewController: UIViewController , FBSDKLoginButtonDelegate, GIDSignInUIDe
         print("Logged out of Facebook")
     }
 
-
+    
 }
 

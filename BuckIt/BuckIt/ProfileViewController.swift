@@ -7,9 +7,10 @@
 //
 
 import UIKit
-
+@IBDesignable
 class ProfileViewController: UIViewController {
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

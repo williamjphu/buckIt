@@ -19,6 +19,13 @@ class HomeViewController: UIViewController{
         self.performSegue(withIdentifier: "login", sender: self)
     }
     
+    @IBAction func next(sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Profile", bundle: nil)
+        var controller = storyboard.instantiateViewController(withIdentifier:"InitialControllerInitialController") as UIViewController
+        
+        self.present(controller, animated: true, completion: nil)
+    }
+    
 //
 //
 //    /*
