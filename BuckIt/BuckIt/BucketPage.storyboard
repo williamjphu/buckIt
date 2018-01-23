@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="0Lu-c7-ZmN">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -25,18 +25,73 @@
                                     <constraint firstAttribute="width" constant="375" id="UQo-cE-Zoa"/>
                                 </constraints>
                                 <items>
-                                    <tabBarItem title="Profile" image="Profile" id="emv-X0-COj" userLabel="Profile"/>
-                                    <tabBarItem title="Complete" image="Complete" id="2uX-2S-h4l" userLabel="Completed"/>
-                                    <tabBarItem title="Map" image="Globe" id="31a-on-QbJ" userLabel="Map"/>
-                                    <tabBarItem title="Trending" image="Trending" id="pdz-hm-IVk" userLabel="Trending"/>
-                                    <tabBarItem title="Activity" image="001-plus" id="OlV-m7-unl" userLabel="Add Activity"/>
+                                    <tabBarItem title="" image="Profile" id="emv-X0-COj" userLabel="Profile"/>
+                                    <tabBarItem title="" image="Complete" id="2uX-2S-h4l" userLabel="Completed"/>
+                                    <tabBarItem title="" image="Globe" id="31a-on-QbJ" userLabel="Map"/>
+                                    <tabBarItem title="" image="Trending" id="pdz-hm-IVk" userLabel="Trending"/>
+                                    <tabBarItem title="" image="001-plus" id="OlV-m7-unl" userLabel="Add Activity"/>
                                 </items>
                             </tabBar>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uRv-Gq-HcC">
+                                <rect key="frame" x="0.0" y="109" width="375" height="509"/>
+                            </scrollView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fNK-Pm-V1M">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <items>
+                                    <navigationItem title="BuckIt!" id="6n6-Dy-z8P">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="BVY-pm-pkE"/>
+                                    </navigationItem>
+                                </items>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <nil key="backgroundColor"/>
+                                </variation>
+                            </navigationBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yQL-6M-hnd">
+                                <rect key="frame" x="0.0" y="44" width="375" height="65"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="San Francisco" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="17C-c9-v6h">
+                                        <rect key="frame" x="8" y="8" width="152" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Things to do in San Francisco" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZTR-De-RlC">
+                                        <rect key="frame" x="8" y="39" width="179" height="16"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ovj-iE-uvt">
+                                        <rect key="frame" x="320" y="17" width="32" height="32"/>
+                                        <state key="normal" image="Globe"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.93448895219999994" green="0.64596247470000001" blue="0.37784552910000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="17C-c9-v6h" firstAttribute="top" secondItem="yQL-6M-hnd" secondAttribute="top" constant="8" id="LC6-J3-aZ7"/>
+                                    <constraint firstItem="ovj-iE-uvt" firstAttribute="top" secondItem="yQL-6M-hnd" secondAttribute="top" constant="17" id="NKo-uQ-ch7"/>
+                                    <constraint firstItem="ZTR-De-RlC" firstAttribute="leading" secondItem="yQL-6M-hnd" secondAttribute="leading" constant="8" id="bg2-Es-pqK"/>
+                                    <constraint firstItem="ZTR-De-RlC" firstAttribute="top" secondItem="17C-c9-v6h" secondAttribute="bottom" constant="1.5" id="gsZ-V9-YLu"/>
+                                    <constraint firstItem="ovj-iE-uvt" firstAttribute="leading" secondItem="yQL-6M-hnd" secondAttribute="leading" constant="320" id="vgV-BN-1DR"/>
+                                    <constraint firstItem="17C-c9-v6h" firstAttribute="leading" secondItem="yQL-6M-hnd" secondAttribute="leading" constant="8" id="x4a-Gt-7sD"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="fNK-Pm-V1M" firstAttribute="leading" secondItem="MhB-Ef-04g" secondAttribute="leading" id="MPR-5J-nlP"/>
                             <constraint firstItem="5T8-WR-Mwc" firstAttribute="leading" secondItem="rmO-4U-8XM" secondAttribute="leading" id="PUS-Wg-vbB"/>
+                            <constraint firstItem="uRv-Gq-HcC" firstAttribute="top" secondItem="MhB-Ef-04g" secondAttribute="top" constant="89" id="QLp-KR-7g9"/>
                             <constraint firstItem="5T8-WR-Mwc" firstAttribute="top" secondItem="MhB-Ef-04g" secondAttribute="top" constant="598" id="RdR-It-Rxu"/>
+                            <constraint firstItem="yQL-6M-hnd" firstAttribute="leading" secondItem="MhB-Ef-04g" secondAttribute="trailing" constant="-375" id="TkP-D4-Xkd"/>
+                            <constraint firstItem="uRv-Gq-HcC" firstAttribute="bottom" secondItem="5T8-WR-Mwc" secondAttribute="top" id="XcK-LZ-zNN"/>
+                            <constraint firstItem="fNK-Pm-V1M" firstAttribute="trailing" secondItem="uRv-Gq-HcC" secondAttribute="trailing" id="Z7u-qS-UWt"/>
+                            <constraint firstItem="uRv-Gq-HcC" firstAttribute="leading" secondItem="MhB-Ef-04g" secondAttribute="leading" id="ffd-ZC-7cf"/>
+                            <constraint firstItem="yQL-6M-hnd" firstAttribute="top" secondItem="fNK-Pm-V1M" secondAttribute="bottom" id="m83-1B-D6V"/>
+                            <constraint firstItem="MhB-Ef-04g" firstAttribute="top" secondItem="yQL-6M-hnd" secondAttribute="bottom" constant="-89" id="pIw-vl-gbI"/>
+                            <constraint firstItem="yQL-6M-hnd" firstAttribute="trailing" secondItem="fNK-Pm-V1M" secondAttribute="trailing" id="tWm-XL-KKm"/>
+                            <constraint firstItem="uRv-Gq-HcC" firstAttribute="trailing" secondItem="5T8-WR-Mwc" secondAttribute="trailing" id="z7J-L2-MWC"/>
+                            <constraint firstItem="MhB-Ef-04g" firstAttribute="bottom" secondItem="fNK-Pm-V1M" secondAttribute="bottom" constant="623" id="zDu-o6-4Wl"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="MhB-Ef-04g"/>
                     </view>
