@@ -16,6 +16,7 @@
 		C397DF2C1FB5B08A00D6C0AF /* Pods_BuckIt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C397DF2D1FB5B08A00D6C0AF /* Pods_BuckIt.framework */; };
 		C397DF2F1FB5B19000D6C0AF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C397DF2E1FB5B19000D6C0AF /* GoogleService-Info.plist */; };
 		DA4E786F2011AC1F0038F28E /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4E786E2011AC1F0038F28E /* LoginController.swift */; };
+		DAFC336620172273005FA137 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFC336520172273005FA137 /* SignUpController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		C397DF2D1FB5B08A00D6C0AF /* Pods_BuckIt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_BuckIt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C397DF2E1FB5B19000D6C0AF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		DA4E786E2011AC1F0038F28E /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		DAFC336520172273005FA137 /* SignUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				77D45FC61FAE96EB0034DDBA /* LaunchScreen.storyboard */,
 				DA4E786E2011AC1F0038F28E /* LoginController.swift */,
 				77D45FBF1FAE96EB0034DDBA /* ViewController.swift */,
+				DAFC336520172273005FA137 /* SignUpController.swift */,
 				7770EC581FAEB054003F3B11 /* HomeViewController.swift */,
 			);
 			name = LoginPage;
@@ -259,6 +262,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAFC336620172273005FA137 /* SignUpController.swift in Sources */,
 				77D45FC01FAE96EB0034DDBA /* ViewController.swift in Sources */,
 				DA4E786F2011AC1F0038F28E /* LoginController.swift in Sources */,
 				77D45FBE1FAE96EB0034DDBA /* AppDelegate.swift in Sources */,
