@@ -13,11 +13,8 @@
 		77D45FC31FAE96EB0034DDBA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77D45FC11FAE96EB0034DDBA /* Main.storyboard */; };
 		77D45FC51FAE96EB0034DDBA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77D45FC41FAE96EB0034DDBA /* Assets.xcassets */; };
 		77D45FC81FAE96EB0034DDBA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77D45FC61FAE96EB0034DDBA /* LaunchScreen.storyboard */; };
-		C35F4864200EDBA10043A1DF /* BucketListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35F4863200EDBA10043A1DF /* BucketListViewController.swift */; };
-		C35F4866200EE9EE0043A1DF /* BucketPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C35F4865200EE9EE0043A1DF /* BucketPage.storyboard */; };
 		C397DF2C1FB5B08A00D6C0AF /* Pods_BuckIt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C397DF2D1FB5B08A00D6C0AF /* Pods_BuckIt.framework */; };
 		C397DF2F1FB5B19000D6C0AF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C397DF2E1FB5B19000D6C0AF /* GoogleService-Info.plist */; };
-		C3AE04042017F20D00FA9D7C /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AE04032017F20D00FA9D7C /* Activity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,13 +29,10 @@
 		77D45FC71FAE96EB0034DDBA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		77D45FC91FAE96EB0034DDBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B29BF32C00461D384F3C4620 /* Pods-BuckIt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuckIt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BuckIt/Pods-BuckIt.debug.xcconfig"; sourceTree = "<group>"; };
-		C35F4863200EDBA10043A1DF /* BucketListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BucketListViewController.swift; sourceTree = "<group>"; };
-		C35F4865200EE9EE0043A1DF /* BucketPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BucketPage.storyboard; sourceTree = "<group>"; };
 		C397DF291FB5B05F00D6C0AF /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C397DF2B1FB5B06500D6C0AF /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C397DF2D1FB5B08A00D6C0AF /* Pods_BuckIt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_BuckIt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C397DF2E1FB5B19000D6C0AF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
-		C3AE04032017F20D00FA9D7C /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,7 +77,6 @@
 		77D45FBC1FAE96EB0034DDBA /* BuckIt */ = {
 			isa = PBXGroup;
 			children = (
-				C35F4862200EDB530043A1DF /* bucket-pages */,
 				77D45FBD1FAE96EB0034DDBA /* AppDelegate.swift */,
 				77D45FBF1FAE96EB0034DDBA /* ViewController.swift */,
 				77D45FC11FAE96EB0034DDBA /* Main.storyboard */,
@@ -105,16 +98,6 @@
 				166D2B8B926599B77BC72311 /* Pods_BuckIt.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		C35F4862200EDB530043A1DF /* bucket-pages */ = {
-			isa = PBXGroup;
-			children = (
-				C35F4863200EDBA10043A1DF /* BucketListViewController.swift */,
-				C35F4865200EE9EE0043A1DF /* BucketPage.storyboard */,
-				C3AE04032017F20D00FA9D7C /* Activity.swift */,
-			);
-			name = "bucket-pages";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -181,7 +164,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				77D45FC81FAE96EB0034DDBA /* LaunchScreen.storyboard in Resources */,
-				C35F4866200EE9EE0043A1DF /* BucketPage.storyboard in Resources */,
 				C397DF2F1FB5B19000D6C0AF /* GoogleService-Info.plist in Resources */,
 				77D45FC51FAE96EB0034DDBA /* Assets.xcassets in Resources */,
 				77D45FC31FAE96EB0034DDBA /* Main.storyboard in Resources */,
@@ -220,7 +202,7 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -235,29 +217,23 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-BuckIt/Pods-BuckIt-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
-				"${BUILT_PRODUCTS_DIR}/DynamicBlurView/DynamicBlurView.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
-				"${BUILT_PRODUCTS_DIR}/PopupDialog/PopupDialog.framework",
-				"${BUILT_PRODUCTS_DIR}/SwipeCellKit/SwipeCellKit.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DynamicBlurView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PopupDialog.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwipeCellKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -272,10 +248,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C3AE04042017F20D00FA9D7C /* Activity.swift in Sources */,
 				77D45FC01FAE96EB0034DDBA /* ViewController.swift in Sources */,
 				77D45FBE1FAE96EB0034DDBA /* AppDelegate.swift in Sources */,
-				C35F4864200EDBA10043A1DF /* BucketListViewController.swift in Sources */,
 				7770EC591FAEB054003F3B11 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
