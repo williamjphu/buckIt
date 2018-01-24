@@ -17,14 +17,15 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Change background
+        // change background color
         view.backgroundColor = UIColor(r: 255, g: 255, b: 255)
+        
         view.addSubview(registerButton)
         view.addSubview(alreadyUserButton)
         view.addSubview(logoImage)
         
         
-        // Layout constraints
+        // layout UI
         setupBuckitLogo()
         setupRegisterButton()
         setupAlreadyUserButton()
@@ -59,9 +60,16 @@ class ViewController: UIViewController {
         signUpButton.layer.borderWidth = 1
         signUpButton.layer.borderColor = UIColor.clear.cgColor
         signUpButton.layer.cornerRadius = 5
+        signUpButton.addTarget(self, action: #selector(handleRegister),
+                               for: .touchUpInside)
         
         return signUpButton
     }()
+    
+    @objc func handleRegister(sender: UIButton!) {
+        let signUpController = SignUpController()
+        present(signUpController, animated: true, completion: nil)
+    }
     
     /**
      *  Draw Already Member button
@@ -77,9 +85,15 @@ class ViewController: UIViewController {
         registered.layer.borderWidth = 1
         registered.layer.borderColor = UIColor.clear.cgColor
         registered.layer.cornerRadius = 5
+        registered.addTarget(self, action: #selector(handleSignIn), for: .touchUpInside)
         
         return registered
     }()
+    
+    @objc func handleSignIn(sender: UIButton!) {
+        let loginController = LoginController()
+        present(loginController, animated: true, completion: nil)
+    }
     
     /**
      *  Layout for the logo
@@ -114,7 +128,7 @@ class ViewController: UIViewController {
     }
     
     /**
-     *  Layout for the "ALREADY MEMEBER" button
+     *  Layout for the "ALREADY MEMBER" button
      **/
     func setupAlreadyUserButton() {
         

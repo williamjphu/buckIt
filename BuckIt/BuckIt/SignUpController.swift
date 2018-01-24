@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 import FBSDKLoginKit
 import GoogleSignIn
 
@@ -14,8 +15,199 @@ class SignUpController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUID
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        // change background color
+        view.backgroundColor = UIColor(r: 220, g: 220, b: 220)
+        
+        // display views
+        view.addSubview(inputsContainerView)
+        view.addSubview(createAccountButton)
+    
+        // layout UI
+        setupGoogleButton()
+        setupFacebookButton()
+        setupInputsContainer()
+        setupCreateAccountButton()
+    }
+    
+    let nameTextField: UITextField = {
+        
+        let nameText = UITextField()
+        nameText.placeholder = "First and last name"
+        nameText.translatesAutoresizingMaskIntoConstraints = false
+        
+        return nameText
+        
+    }()
+    
+    let nameSeparatorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(r:220, g:220, b:220)
+        view.layer.cornerRadius = 5
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
+    let emailTextField: UITextField = {
+        
+        let emailText = UITextField()
+        emailText.placeholder = "Email"
+        emailText.translatesAutoresizingMaskIntoConstraints = false
+        
+        return emailText
+        
+    }()
+    
+    let emailSeparatorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(r:220, g:220, b:220)
+        view.layer.cornerRadius = 5
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
+    let passwordTextField: UITextField = {
+        
+        let passwordText = UITextField()
+        passwordText.placeholder = "Password"
+        passwordText.translatesAutoresizingMaskIntoConstraints = false
+        passwordText.isSecureTextEntry = true
+        return passwordText
+        
+    }()
+    
+    let inputsContainerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.white
+        view.layer.cornerRadius = 5
+        view.layer.masksToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
+    /*
+     *
+     */
+    func setupInputsContainer() {
+        inputsContainerView.centerXAnchor.constraint(equalTo:
+            view.centerXAnchor).isActive = true
+        inputsContainerView.topAnchor.constraint(equalTo:
+            view.topAnchor, constant: 220).isActive = true
+        inputsContainerView.widthAnchor.constraint(equalTo:
+            view.widthAnchor, constant: -24).isActive = true
+        inputsContainerView.heightAnchor.constraint(equalToConstant:
+            150).isActive = true
+        
+        view.addSubview(nameTextField)
+        view.addSubview(nameSeparatorView)
+        view.addSubview(emailTextField)
+        view.addSubview(emailSeparatorView)
+        view.addSubview(passwordTextField)
+        
+        // setup x, y, height, and width for name text field
+        nameTextField.leftAnchor.constraint(equalTo:
+            inputsContainerView.leftAnchor, constant: 12).isActive = true
+        nameTextField.topAnchor.constraint(equalTo:
+            inputsContainerView.topAnchor).isActive = true
+        nameTextField.heightAnchor.constraint(equalTo:
+            inputsContainerView.heightAnchor, multiplier: 1/3).isActive = true
+        nameTextField.widthAnchor.constraint(equalTo:
+            inputsContainerView.widthAnchor).isActive = true
+        
+        // setup x, y, height, and width for field separator
+        nameSeparatorView.leftAnchor.constraint(equalTo:
+            inputsContainerView.leftAnchor).isActive = true
+        nameSeparatorView.topAnchor.constraint(equalTo:
+            nameTextField.bottomAnchor).isActive = true
+        nameSeparatorView.widthAnchor.constraint(equalTo:
+            inputsContainerView.widthAnchor).isActive = true
+        nameSeparatorView.heightAnchor.constraint(equalToConstant:
+            1).isActive = true
+        
+        // setup x, y, height, and width for emailText field
+        emailTextField.leftAnchor.constraint(equalTo:
+            inputsContainerView.leftAnchor, constant: 12).isActive = true
+        emailTextField.topAnchor.constraint(equalTo:
+            nameTextField.bottomAnchor).isActive = true
+        emailTextField.heightAnchor.constraint(equalTo:
+            inputsContainerView.heightAnchor, multiplier: 1/3).isActive = true
+        emailTextField.widthAnchor.constraint(equalTo:
+            inputsContainerView.widthAnchor).isActive = true
+        
+        // setup x, y, height, and width for emailText field separator
+        emailSeparatorView.leftAnchor.constraint(equalTo:
+            inputsContainerView.leftAnchor).isActive = true
+        emailSeparatorView.topAnchor.constraint(equalTo:
+            emailTextField.bottomAnchor).isActive = true
+        emailSeparatorView.widthAnchor.constraint(equalTo:
+            inputsContainerView.widthAnchor).isActive = true
+        emailSeparatorView.heightAnchor.constraint(equalToConstant:
+            1).isActive = true
+        
+        // setup x, y, height, and width for password text field
+        passwordTextField.leftAnchor.constraint(equalTo:
+            inputsContainerView.leftAnchor, constant: 12).isActive = true
+        passwordTextField.topAnchor.constraint(equalTo:
+            emailTextField.bottomAnchor).isActive = true
+        passwordTextField.heightAnchor.constraint(equalTo:
+            inputsContainerView.heightAnchor, multiplier: 1/3).isActive = true
+        passwordTextField.widthAnchor.constraint(equalTo:
+            inputsContainerView.widthAnchor).isActive = true
+    }
+    
+    let createAccountButton: UIButton = {
+        
+        let createAccount = UIButton(type: .system)
+        createAccount.backgroundColor = UIColor(r: 247, g: 146, b: 30)
+        createAccount.setTitle("CREATE ACCOUNT", for: [])
+        createAccount.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        createAccount.translatesAutoresizingMaskIntoConstraints = false
+        createAccount.setTitleColor(UIColor.white, for: [])
+        createAccount.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        createAccount.layer.borderWidth = 1
+        createAccount.layer.borderColor = UIColor.clear.cgColor
+        createAccount.layer.cornerRadius = 5
+        
+        createAccount.addTarget(self, action: #selector(handleRegister), for: .touchUpInside)
+        
+        return createAccount
+    }()
+    
+    func setupCreateAccountButton() {
+        
+        // set x, y, width, height constraints
+        createAccountButton.centerXAnchor.constraint(equalTo:
+            view.centerXAnchor).isActive = true
+        createAccountButton.bottomAnchor.constraint(equalTo:
+            view.bottomAnchor, constant: -45).isActive = true
+        createAccountButton.widthAnchor.constraint(equalTo:
+            view.widthAnchor, constant: -24).isActive = true
+        createAccountButton.heightAnchor.constraint(equalToConstant: 45).isActive
+            = true
+        
+    }
+    
+    @objc func handleRegister() {
+        
+        guard let email = emailTextField.text, let password = passwordTextField.text
+        else {
+                print("Form is not valid")
+            return
+        }
+        Auth.auth().createUser(withEmail: email, password: password,
+                               completion: { (user: User?, error) in
+                                if error != nil {
+                                    print(error)
+                                    return
+                                }
+                                
+                            })
+        
+        // successfully authenticated user
+        
     }
     
     /*
@@ -28,7 +220,6 @@ class SignUpController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUID
         loginButton.delegate = self as! FBSDKLoginButtonDelegate
         view.addSubview(loginButton)
     }
-    
     
     /*
      *  Login button for Gmail login

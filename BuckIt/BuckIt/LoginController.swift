@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 import FBSDKLoginKit
 import GoogleSignIn
 
@@ -14,7 +15,11 @@ class LoginController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDe
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        // back button
+       
+        
+        // change background color
         view.backgroundColor = UIColor(r: 220, g: 220, b: 220)
         view.addSubview(textLabel)
         view.addSubview(inputsContainerView)
@@ -22,7 +27,6 @@ class LoginController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDe
         
         
         // Display Google and Facebook login
-        setupTextLabel()
         setupFacebookButton()
         setupGoogleButton()
         setupInputsContainer()
@@ -40,13 +44,13 @@ class LoginController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDe
         
     }()
     
-    let nameTextField: UITextField = {
+    let emailTextField: UITextField = {
        
-        let nameText = UITextField()
-        nameText.placeholder = "Email"
-        nameText.translatesAutoresizingMaskIntoConstraints = false
+        let emailText = UITextField()
+        emailText.placeholder = "First and last name"
+        emailText.translatesAutoresizingMaskIntoConstraints = false
         
-        return nameText
+        return emailText
         
     }()
     
@@ -59,6 +63,7 @@ class LoginController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDe
         return view
     }()
     
+        
     let passwordTextField: UITextField = {
         
         let passwordText = UITextField()
@@ -69,17 +74,10 @@ class LoginController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDe
         
     }()
     
-    func setupTextLabel() {
-        
-        textLabel.frame = CGRect(x: 0, y: 0, width: 50, height: 100)
-        textLabel.center = CGPoint(x: (view.frame.width/2), y: 149)
-        textLabel.textAlignment = .center   // centers text in the frame
-        
-    }
-    
     let inputsContainerView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.white
+        view.layer.cornerRadius = 5
         view.layer.masksToBounds = true
         view.translatesAutoresizingMaskIntoConstraints = false
         
@@ -90,6 +88,7 @@ class LoginController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDe
      *
      */
     func setupInputsContainer() {
+        
         inputsContainerView.centerXAnchor.constraint(equalTo:
             view.centerXAnchor).isActive = true
         inputsContainerView.topAnchor.constraint(equalTo:
@@ -99,35 +98,35 @@ class LoginController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDe
         inputsContainerView.heightAnchor.constraint(equalToConstant:
             100).isActive = true
         
-        view.addSubview(nameTextField)
+        view.addSubview(emailTextField)
         view.addSubview(nameSeparatorView)
         view.addSubview(passwordTextField)
         
-        // setup x, y, height, and width for name text field
-        nameTextField.leftAnchor.constraint(equalTo:
+        // setup x, y, height, and width for nameText field
+        emailTextField.leftAnchor.constraint(equalTo:
             inputsContainerView.leftAnchor, constant: 12).isActive = true
-        nameTextField.topAnchor.constraint(equalTo:
+        emailTextField.topAnchor.constraint(equalTo:
             inputsContainerView.topAnchor).isActive = true
-        nameTextField.heightAnchor.constraint(equalTo:
+        emailTextField.heightAnchor.constraint(equalTo:
             inputsContainerView.heightAnchor, multiplier: 1/2).isActive = true
-        nameTextField.widthAnchor.constraint(equalTo:
+        emailTextField.widthAnchor.constraint(equalTo:
             inputsContainerView.widthAnchor).isActive = true
         
         // setup x, y, height, and width for field separator
         nameSeparatorView.leftAnchor.constraint(equalTo:
             inputsContainerView.leftAnchor).isActive = true
         nameSeparatorView.topAnchor.constraint(equalTo:
-            nameTextField.bottomAnchor).isActive = true
+            emailTextField.bottomAnchor).isActive = true
         nameSeparatorView.widthAnchor.constraint(equalTo:
             inputsContainerView.widthAnchor).isActive = true
         nameSeparatorView.heightAnchor.constraint(equalToConstant:
             1).isActive = true
         
-        // setup x, y, height, and width for password text field
+        // setup x, y, height, and width for passwordText field
         passwordTextField.leftAnchor.constraint(equalTo:
             inputsContainerView.leftAnchor, constant: 12).isActive = true
         passwordTextField.topAnchor.constraint(equalTo:
-            nameTextField.bottomAnchor).isActive = true
+            emailTextField.bottomAnchor).isActive = true
         passwordTextField.heightAnchor.constraint(equalTo:
             inputsContainerView.heightAnchor, multiplier: 1/2).isActive = true
         passwordTextField.widthAnchor.constraint(equalTo:
@@ -147,6 +146,8 @@ class LoginController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDe
         signin.layer.borderColor = UIColor.clear.cgColor
         signin.layer.cornerRadius = 5
         
+        signin.addTarget(self , action: #selector(handleSignIn), for: .touchUpInside)
+        
         return signin
     }()
     
@@ -161,6 +162,20 @@ class LoginController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDe
             view.widthAnchor, constant: -24).isActive = true
         signinButton.heightAnchor.constraint(equalToConstant: 45).isActive
             = true
+        
+    }
+    
+    @objc func handleSignIn() {
+        
+        Auth.auth().signIn(withEmail: emailTextField.text!, password: passwordTextField.text!, completion: { (user, error) in
+            if error == nil {
+                //Print into the console if successfully logged in
+                print("You have successfully logged in")
+                
+            }
+            
+            
+        })
         
     }
     

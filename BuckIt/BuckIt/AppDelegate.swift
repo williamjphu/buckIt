@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
         window?.makeKeyAndVisible()
         
         // Set ViewController as the main View
-        window?.rootViewController = UINavigationController(rootViewController: LoginController())
+        window?.rootViewController = UINavigationController(rootViewController: ViewController())
         
         //Firebase
         FirebaseApp.configure()
