@@ -14,20 +14,21 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
     @IBOutlet weak var mapView: MKMapView!
     let locationManager = CLLocationManager()
+    var initialLocation : CLLocation!
     
     var mapHasCenteredOnce = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        locationManager.delegate = self
-//        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-//        locationManager.requestWhenInUseAuthorization()
-//        locationManager.startUpdatingLocation()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
 //
 //        mapView.delegate = self
 //        mapView.userTrackingMode = MKUserTrackingMode.follow
-        let initialLocation = CLLocation(latitude: 37.33467, longitude: -121.87533)
-        centerMapOnLocation(location: initialLocation)
+//        initialLocation = CLLocation(latitude: 37.33467, longitude: -121.87533)
+//        centerMapOnLocation(location: initialLocation)
     }
     
 //    func locationAuthStatus() {
@@ -58,4 +59,23 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 //            }
 //        }
 //    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print(locations)
+        let location = locations[locations.count - 1]
+        if location.horizontalAccuracy > 0 {
+            locationManager.stopUpdatingLocation()
+            
+            print("longitude = \(location.coordinate.longitude), latitude = \(location.coordinate.latitude)")
+            let lat = location.coordinate.latitude
+            let lon = location.coordinate.longitude
+            let currentLoc = CLLocation(latitude: lat, longitude: lon)
+            centerMapOnLocation(location: currentLoc)
+        }
+    }
+    
+    //Write the didUpdateLocations method here: such as airplane mode, or no tracking allows
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
+    }
 }

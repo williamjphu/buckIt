@@ -29,8 +29,25 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="625"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search for an event ..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="viU-dl-8et">
+                                <rect key="frame" x="30" y="25" width="315" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2XB-zd-ymn">
+                                <rect key="frame" x="315" y="25" width="30" height="30"/>
+                                <state key="normal" title="🕵️‍♂️"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="5kj-Pj-nBO" firstAttribute="trailing" secondItem="2XB-zd-ymn" secondAttribute="trailing" constant="30" id="7YQ-6M-cxh"/>
+                            <constraint firstItem="2XB-zd-ymn" firstAttribute="top" secondItem="5kj-Pj-nBO" secondAttribute="top" constant="5" id="AK7-Wa-ugc"/>
+                            <constraint firstItem="viU-dl-8et" firstAttribute="top" secondItem="5kj-Pj-nBO" secondAttribute="top" constant="5" id="RiF-oV-l1m"/>
+                            <constraint firstItem="5kj-Pj-nBO" firstAttribute="trailing" secondItem="viU-dl-8et" secondAttribute="trailing" constant="30" id="irh-gK-pdL"/>
+                            <constraint firstItem="viU-dl-8et" firstAttribute="leading" secondItem="5kj-Pj-nBO" secondAttribute="leading" constant="30" id="w5q-gW-9o9"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="5kj-Pj-nBO"/>
                     </view>
                     <connections>
