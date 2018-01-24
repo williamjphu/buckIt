@@ -14,17 +14,20 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
     @IBOutlet weak var mapView: MKMapView!
     let locationManager = CLLocationManager()
+    
     var mapHasCenteredOnce = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //        locationManager.delegate = self
-        //        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-        //        locationManager.requestWhenInUseAuthorization()
-        //        locationManager.startUpdatingLocation()
-        
+//        locationManager.delegate = self
+//        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+//        locationManager.requestWhenInUseAuthorization()
+//        locationManager.startUpdatingLocation()
+//
 //        mapView.delegate = self
 //        mapView.userTrackingMode = MKUserTrackingMode.follow
+        let initialLocation = CLLocation(latitude: 37.33467, longitude: -121.87533)
+        centerMapOnLocation(location: initialLocation)
     }
     
 //    func locationAuthStatus() {
@@ -32,20 +35,21 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 //            mapView.showsUserLocation = true
 //        } else {
 //            locationManager.requestWhenInUseAuthorization()
+//            locationAuthStatus()
 //        }
 //    }
-//
+
 //    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
 //        if status == .authorizedWhenInUse {
 //            mapView.showsUserLocation = true
 //        }
 //    }
-//
-//    func centerMapOnLocation(location: CLLocation) {
-//        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, 2000, 2000)
-//        mapView.setRegion(coordinateRegion, animated: true)
-//    }
-//
+
+    func centerMapOnLocation(location: CLLocation) {
+        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, 1000, 1000)
+        mapView.setRegion(coordinateRegion, animated: true)
+    }
+
 //    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
 //        if let loc = userLocation.location {
 //            if !mapHasCenteredOnce {
@@ -54,15 +58,4 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 //            }
 //        }
 //    }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
