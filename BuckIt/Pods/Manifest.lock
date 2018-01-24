@@ -5,6 +5,7 @@ PODS:
   - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
+  - DynamicBlurView (2.0.2)
   - FBSDKCoreKit (4.27.1):
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.27.1):
@@ -57,6 +58,9 @@ PODS:
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
+  - PopupDialog (0.7.0):
+    - DynamicBlurView (~> 2.0)
+  - SwipeCellKit (2.0.1)
 
 DEPENDENCIES:
   - FBSDKCoreKit
@@ -64,9 +68,12 @@ DEPENDENCIES:
   - FBSDKShareKit
   - Firebase/Auth
   - GoogleSignIn
+  - PopupDialog (~> 0.7)
+  - SwipeCellKit
 
 SPEC CHECKSUMS:
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  DynamicBlurView: aa6db4defc6e537eb86fc5e58dd3991666178399
   FBSDKCoreKit: 03365dad5d790249196ffad8be4f6d8a2d98f932
   FBSDKLoginKit: 66ff53b73cffd967ab773e32fac39e90a60e6d46
   FBSDKShareKit: 6a6a0ef9e850c741e4e1d7a7d21335205e997ec1
@@ -80,7 +87,9 @@ SPEC CHECKSUMS:
   GTMOAuth2: be83fd28d63ae3087e7d351b1f39c1a7e24ab6e7
   GTMSessionFetcher: ebaa1f79a5366922c1735f1566901f50beba23b7
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  PopupDialog: 4abc6db5b22b7c8029e2162bde8891ee6aa4b6c8
+  SwipeCellKit: 76888d93d1843dc568fdf38fff21b15dbbcf6b28
 
-PODFILE CHECKSUM: 00dd40cf9d96bc9c49f94a320199b240e34b6eec
+PODFILE CHECKSUM: b727c499d0b78d88f4c4e2955bb88b8d67290770
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.4.0

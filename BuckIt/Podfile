@@ -11,4 +11,6 @@ pod ‘FBSDKShareKit’
 pod ‘FBSDKLoginKit’
 pod 'Firebase/Auth’
 pod 'GoogleSignIn'
+pod 'SwipeCellKit'
+pod 'PopupDialog', '~> 0.7'
 end
