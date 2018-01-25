@@ -10,9 +10,7 @@ import UIKit
 import FBSDKLoginKit
 import GoogleSignIn
 
-// THIS WILL BE THE LOGIN PAGE
-
-class ViewController: UIViewController {
+class ViewController: UIViewController , FBSDKLoginButtonDelegate, GIDSignInUIDelegate{
   
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -189,12 +187,11 @@ class ViewController: UIViewController {
     }
     */
 
-}
-
 // Create UIColor RGB object
 extension UIColor {
     convenience init(r: CGFloat, g: CGFloat, b: CGFloat) {
         self.init(red: r/255, green: g/255, blue: b/255, alpha: 1)
     }
+
 }
 
