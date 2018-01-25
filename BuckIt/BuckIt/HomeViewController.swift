@@ -10,7 +10,6 @@ import UIKit
 import GoogleSignIn
 import FBSDKLoginKit
 
-// THIS IS THE SETTINGS PAGE
 class HomeViewController: UIViewController{
 
     @IBAction func didTapSignOut(sender: AnyObject) {
@@ -26,6 +25,18 @@ class HomeViewController: UIViewController{
         
         self.present(controller, animated: true, completion: nil)
     }
-   
+    
+//
+//
+//    /*
+//    // MARK: - Navigation
+//
+//    // In a storyboard-based application, you will often want to do a little preparation before navigation
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        // Get the new view controller using segue.destinationViewController.
+//        // Pass the selected object to the new view controller.
+//    }
+//    */
+//
 }
 
