@@ -18,6 +18,13 @@
 		AE7F9C16201986AF00420457 /* BucketPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE7F9C13201986AE00420457 /* BucketPage.storyboard */; };
 		AE7F9C17201986AF00420457 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F9C14201986AE00420457 /* Activity.swift */; };
 		AE7F9C18201986AF00420457 /* BucketListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F9C15201986AF00420457 /* BucketListViewController.swift */; };
+		AE7F9C1F20198AFE00420457 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F9C1A20198AFE00420457 /* ProfileViewController.swift */; };
+		AE7F9C2020198AFE00420457 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F9C1B20198AFE00420457 /* TableViewCell.swift */; };
+		AE7F9C2120198AFE00420457 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE7F9C1C20198AFE00420457 /* Profile.storyboard */; };
+		AE7F9C2220198AFE00420457 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F9C1D20198AFE00420457 /* EditProfileViewController.swift */; };
+		AE7F9C2320198AFE00420457 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F9C1E20198AFE00420457 /* User.swift */; };
+		AE7F9C2A20198CAE00420457 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F9C2820198CAE00420457 /* LoginController.swift */; };
+		AE7F9C2B20198CAE00420457 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F9C2920198CAE00420457 /* SignUpController.swift */; };
 		C397DF2C1FB5B08A00D6C0AF /* Pods_BuckIt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C397DF2D1FB5B08A00D6C0AF /* Pods_BuckIt.framework */; };
 		C397DF2F1FB5B19000D6C0AF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C397DF2E1FB5B19000D6C0AF /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
@@ -38,6 +45,13 @@
 		AE7F9C13201986AE00420457 /* BucketPage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BucketPage.storyboard; sourceTree = "<group>"; };
 		AE7F9C14201986AE00420457 /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		AE7F9C15201986AF00420457 /* BucketListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketListViewController.swift; sourceTree = "<group>"; };
+		AE7F9C1A20198AFE00420457 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		AE7F9C1B20198AFE00420457 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		AE7F9C1C20198AFE00420457 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		AE7F9C1D20198AFE00420457 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		AE7F9C1E20198AFE00420457 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		AE7F9C2820198CAE00420457 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		AE7F9C2920198CAE00420457 /* SignUpController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
 		B29BF32C00461D384F3C4620 /* Pods-BuckIt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuckIt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BuckIt/Pods-BuckIt.debug.xcconfig"; sourceTree = "<group>"; };
 		C397DF291FB5B05F00D6C0AF /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C397DF2B1FB5B06500D6C0AF /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,6 +101,13 @@
 		77D45FBC1FAE96EB0034DDBA /* BuckIt */ = {
 			isa = PBXGroup;
 			children = (
+				AE7F9C2D20198D9D00420457 /* New Group4 */,
+				AE7F9C2C20198D9500420457 /* New Group3 */,
+				AE7F9C2720198BBA00420457 /* New Group2 */,
+				AE7F9C2620198BB700420457 /* New Group1 */,
+				AE7F9C2520198BB000420457 /* New Group */,
+				AE7F9C2420198BA400420457 /* login-homepage */,
+				AE7F9C1920198ADB00420457 /* profile */,
 				AE7F9C122019865C00420457 /* bucket-page */,
 				AE7F9C0F2019812800420457 /* map-view */,
 				77D45FBD1FAE96EB0034DDBA /* AppDelegate.swift */,
@@ -129,6 +150,62 @@
 				AE7F9C13201986AE00420457 /* BucketPage.storyboard */,
 			);
 			name = "bucket-page";
+			sourceTree = "<group>";
+		};
+		AE7F9C1920198ADB00420457 /* profile */ = {
+			isa = PBXGroup;
+			children = (
+				AE7F9C1D20198AFE00420457 /* EditProfileViewController.swift */,
+				AE7F9C1C20198AFE00420457 /* Profile.storyboard */,
+				AE7F9C1A20198AFE00420457 /* ProfileViewController.swift */,
+				AE7F9C1B20198AFE00420457 /* TableViewCell.swift */,
+				AE7F9C1E20198AFE00420457 /* User.swift */,
+			);
+			name = profile;
+			sourceTree = "<group>";
+		};
+		AE7F9C2420198BA400420457 /* login-homepage */ = {
+			isa = PBXGroup;
+			children = (
+				AE7F9C2820198CAE00420457 /* LoginController.swift */,
+				AE7F9C2920198CAE00420457 /* SignUpController.swift */,
+			);
+			name = "login-homepage";
+			sourceTree = "<group>";
+		};
+		AE7F9C2520198BB000420457 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "New Group";
+			sourceTree = "<group>";
+		};
+		AE7F9C2620198BB700420457 /* New Group1 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "New Group1";
+			sourceTree = "<group>";
+		};
+		AE7F9C2720198BBA00420457 /* New Group2 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "New Group2";
+			sourceTree = "<group>";
+		};
+		AE7F9C2C20198D9500420457 /* New Group3 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "New Group3";
+			sourceTree = "<group>";
+		};
+		AE7F9C2D20198D9D00420457 /* New Group4 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "New Group4";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -199,6 +276,7 @@
 				C397DF2F1FB5B19000D6C0AF /* GoogleService-Info.plist in Resources */,
 				77D45FC51FAE96EB0034DDBA /* Assets.xcassets in Resources */,
 				AE7F9BFC20182E3F00420457 /* MapView.storyboard in Resources */,
+				AE7F9C2120198AFE00420457 /* Profile.storyboard in Resources */,
 				77D45FC31FAE96EB0034DDBA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -259,6 +337,7 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/PopupDialog/PopupDialog.framework",
 				"${BUILT_PRODUCTS_DIR}/SwipeCellKit/SwipeCellKit.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -273,6 +352,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PopupDialog.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwipeCellKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -287,12 +367,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE7F9C2A20198CAE00420457 /* LoginController.swift in Sources */,
 				AE7F9C17201986AF00420457 /* Activity.swift in Sources */,
+				AE7F9C2020198AFE00420457 /* TableViewCell.swift in Sources */,
 				77D45FC01FAE96EB0034DDBA /* ViewController.swift in Sources */,
 				77D45FBE1FAE96EB0034DDBA /* AppDelegate.swift in Sources */,
 				7770EC591FAEB054003F3B11 /* HomeViewController.swift in Sources */,
+				AE7F9C1F20198AFE00420457 /* ProfileViewController.swift in Sources */,
 				AE7F9C18201986AF00420457 /* BucketListViewController.swift in Sources */,
 				AE7F9BFE20182E4E00420457 /* MapViewController.swift in Sources */,
+				AE7F9C2320198AFE00420457 /* User.swift in Sources */,
+				AE7F9C2220198AFE00420457 /* EditProfileViewController.swift in Sources */,
+				AE7F9C2B20198CAE00420457 /* SignUpController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
