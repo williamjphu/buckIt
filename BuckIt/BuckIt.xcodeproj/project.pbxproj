@@ -105,7 +105,7 @@
 				AE7F9C2C20198D9500420457 /* New Group3 */,
 				AE7F9C2720198BBA00420457 /* New Group2 */,
 				AE7F9C2620198BB700420457 /* New Group1 */,
-				AE7F9C2520198BB000420457 /* New Group */,
+				AE7F9C2520198BB000420457 /* Models */,
 				AE7F9C2420198BA400420457 /* login-homepage */,
 				AE7F9C1920198ADB00420457 /* profile */,
 				AE7F9C122019865C00420457 /* bucket-page */,
@@ -145,7 +145,6 @@
 		AE7F9C122019865C00420457 /* bucket-page */ = {
 			isa = PBXGroup;
 			children = (
-				AE7F9C14201986AE00420457 /* Activity.swift */,
 				AE7F9C15201986AF00420457 /* BucketListViewController.swift */,
 				AE7F9C13201986AE00420457 /* BucketPage.storyboard */,
 			);
@@ -159,7 +158,6 @@
 				AE7F9C1C20198AFE00420457 /* Profile.storyboard */,
 				AE7F9C1A20198AFE00420457 /* ProfileViewController.swift */,
 				AE7F9C1B20198AFE00420457 /* TableViewCell.swift */,
-				AE7F9C1E20198AFE00420457 /* User.swift */,
 			);
 			name = profile;
 			sourceTree = "<group>";
@@ -173,11 +171,13 @@
 			name = "login-homepage";
 			sourceTree = "<group>";
 		};
-		AE7F9C2520198BB000420457 /* New Group */ = {
+		AE7F9C2520198BB000420457 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				AE7F9C1E20198AFE00420457 /* User.swift */,
+				AE7F9C14201986AE00420457 /* Activity.swift */,
 			);
-			name = "New Group";
+			name = Models;
 			sourceTree = "<group>";
 		};
 		AE7F9C2620198BB700420457 /* New Group1 */ = {
@@ -313,7 +313,7 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
