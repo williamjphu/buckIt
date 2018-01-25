@@ -81,7 +81,8 @@
 		77D45FBC1FAE96EB0034DDBA /* BuckIt */ = {
 			isa = PBXGroup;
 			children = (
-				AE7F9BF820182E1D00420457 /* map-view */,
+				AE7F9BFB20182E3F00420457 /* MapView.storyboard */,
+				AE7F9BFD20182E4E00420457 /* MapViewController.swift */,
 				77D45FBD1FAE96EB0034DDBA /* AppDelegate.swift */,
 				77D45FBF1FAE96EB0034DDBA /* ViewController.swift */,
 				77D45FC11FAE96EB0034DDBA /* Main.storyboard */,
@@ -103,15 +104,6 @@
 				166D2B8B926599B77BC72311 /* Pods_BuckIt.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		AE7F9BF820182E1D00420457 /* map-view */ = {
-			isa = PBXGroup;
-			children = (
-				AE7F9BFB20182E3F00420457 /* MapView.storyboard */,
-				AE7F9BFD20182E4E00420457 /* MapViewController.swift */,
-			);
-			name = "map-view";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
