@@ -111,10 +111,8 @@
 				AE7F9C122019865C00420457 /* bucket-page */,
 				AE7F9C0F2019812800420457 /* map-view */,
 				77D45FBD1FAE96EB0034DDBA /* AppDelegate.swift */,
-				77D45FBF1FAE96EB0034DDBA /* ViewController.swift */,
 				77D45FC11FAE96EB0034DDBA /* Main.storyboard */,
 				77D45FC41FAE96EB0034DDBA /* Assets.xcassets */,
-				7770EC581FAEB054003F3B11 /* HomeViewController.swift */,
 				77D45FC61FAE96EB0034DDBA /* LaunchScreen.storyboard */,
 				77D45FC91FAE96EB0034DDBA /* Info.plist */,
 				C397DF2E1FB5B19000D6C0AF /* GoogleService-Info.plist */,
@@ -165,6 +163,8 @@
 		AE7F9C2420198BA400420457 /* login-homepage */ = {
 			isa = PBXGroup;
 			children = (
+				7770EC581FAEB054003F3B11 /* HomeViewController.swift */,
+				77D45FBF1FAE96EB0034DDBA /* ViewController.swift */,
 				AE7F9C2820198CAE00420457 /* LoginController.swift */,
 				AE7F9C2920198CAE00420457 /* SignUpController.swift */,
 			);
