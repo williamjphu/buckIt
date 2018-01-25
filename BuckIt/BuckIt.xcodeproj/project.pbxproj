@@ -15,6 +15,8 @@
 		77D45FC81FAE96EB0034DDBA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77D45FC61FAE96EB0034DDBA /* LaunchScreen.storyboard */; };
 		C397DF2C1FB5B08A00D6C0AF /* Pods_BuckIt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C397DF2D1FB5B08A00D6C0AF /* Pods_BuckIt.framework */; };
 		C397DF2F1FB5B19000D6C0AF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C397DF2E1FB5B19000D6C0AF /* GoogleService-Info.plist */; };
+		DA4E786F2011AC1F0038F28E /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4E786E2011AC1F0038F28E /* LoginController.swift */; };
+		DAFC336620172273005FA137 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFC336520172273005FA137 /* SignUpController.swift */; };
 		E05A8A9A200EE1C100C412B0 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E05A8A99200EE1C100C412B0 /* ProfileViewController.swift */; };
 		E05D2D0F2015C07D001EF97C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E05D2D0E2015C07D001EF97C /* User.swift */; };
 		E05D2D172015C4CB001EF97C /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E05D2D162015C4CB001EF97C /* TableViewCell.swift */; };
@@ -38,6 +40,8 @@
 		C397DF2B1FB5B06500D6C0AF /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C397DF2D1FB5B08A00D6C0AF /* Pods_BuckIt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_BuckIt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C397DF2E1FB5B19000D6C0AF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		DA4E786E2011AC1F0038F28E /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		DAFC336520172273005FA137 /* SignUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
 		E05A8A99200EE1C100C412B0 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		E05D2D0E2015C07D001EF97C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		E05D2D162015C4CB001EF97C /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
@@ -87,13 +91,11 @@
 		77D45FBC1FAE96EB0034DDBA /* BuckIt */ = {
 			isa = PBXGroup;
 			children = (
+				DAE101DA200EE1900036C029 /* LoginPage */,
 				E05A8A98200EE19300C412B0 /* Profile */,
 				77D45FBD1FAE96EB0034DDBA /* AppDelegate.swift */,
-				77D45FBF1FAE96EB0034DDBA /* ViewController.swift */,
 				77D45FC11FAE96EB0034DDBA /* Main.storyboard */,
 				77D45FC41FAE96EB0034DDBA /* Assets.xcassets */,
-				7770EC581FAEB054003F3B11 /* HomeViewController.swift */,
-				77D45FC61FAE96EB0034DDBA /* LaunchScreen.storyboard */,
 				77D45FC91FAE96EB0034DDBA /* Info.plist */,
 				C397DF2E1FB5B19000D6C0AF /* GoogleService-Info.plist */,
 			);
@@ -111,6 +113,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		DAE101DA200EE1900036C029 /* LoginPage */ = {
+			isa = PBXGroup;
+			children = (
+				77D45FC61FAE96EB0034DDBA /* LaunchScreen.storyboard */,
+				DA4E786E2011AC1F0038F28E /* LoginController.swift */,
+				77D45FBF1FAE96EB0034DDBA /* ViewController.swift */,
+				DAFC336520172273005FA137 /* SignUpController.swift */,
+				7770EC581FAEB054003F3B11 /* HomeViewController.swift */,
+			);
+			name = LoginPage;
+      sourceTree = "<group>";
+    };
 		E05A8A98200EE19300C412B0 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -212,7 +226,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		F9EC6CBA32FA44D874789201 /* [CP] Copy Pods Resources */ = {
@@ -272,7 +286,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAFC336620172273005FA137 /* SignUpController.swift in Sources */,
 				77D45FC01FAE96EB0034DDBA /* ViewController.swift in Sources */,
+				DA4E786F2011AC1F0038F28E /* LoginController.swift in Sources */,
 				77D45FBE1FAE96EB0034DDBA /* AppDelegate.swift in Sources */,
 				E05D2D0F2015C07D001EF97C /* User.swift in Sources */,
 				E05A8A9A200EE1C100C412B0 /* ProfileViewController.swift in Sources */,
