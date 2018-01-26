@@ -219,7 +219,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KCp-Lf-iO6">
-                                <rect key="frame" x="0.0" y="275" width="375" height="343"/>
+                                <rect key="frame" x="0.0" y="275" width="375" height="336"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="375" id="0h4-vQ-MKH"/>
@@ -274,6 +274,20 @@
                                     <segue destination="BmH-G5-bd0" kind="showDetail" id="CH9-c6-3l9"/>
                                 </connections>
                             </button>
+                            <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qjW-Vx-VNO">
+                                <rect key="frame" x="0.0" y="611" width="375" height="55"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="kTg-8I-Qwt"/>
+                                </constraints>
+                                <items>
+                                    <tabBarItem title="" image="Profile" id="2WC-xR-4Rp" userLabel="Profile"/>
+                                    <tabBarItem title="" image="Complete" id="ZZ7-Au-dKJ" userLabel="Completed"/>
+                                    <tabBarItem title="" image="Globe" id="myF-Cf-IwE" userLabel="Map"/>
+                                    <tabBarItem title="" image="Trending" id="4Bd-bf-8j0" userLabel="Trending"/>
+                                    <tabBarItem title="" image="001-plus" id="X5m-XD-b98" userLabel="Add Activity"/>
+                                </items>
+                            </tabBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -295,8 +309,11 @@
                             <constraint firstItem="y6B-nL-ANY" firstAttribute="trailing" secondItem="O3x-LL-T1L" secondAttribute="trailing" id="RFc-gH-mUe"/>
                             <constraint firstItem="y6B-nL-ANY" firstAttribute="top" secondItem="K6p-Bd-Pbc" secondAttribute="top" id="bOl-2S-PQZ"/>
                             <constraint firstItem="O3x-LL-T1L" firstAttribute="top" secondItem="YoK-eP-yNz" secondAttribute="top" id="bR8-Qu-phs"/>
+                            <constraint firstItem="qjW-Vx-VNO" firstAttribute="top" secondItem="KCp-Lf-iO6" secondAttribute="bottom" id="cbO-aj-rwm"/>
                             <constraint firstItem="y6B-nL-ANY" firstAttribute="leading" secondItem="O3x-LL-T1L" secondAttribute="leading" id="jdL-v2-OdV"/>
-                            <constraint firstItem="YoK-eP-yNz" firstAttribute="bottom" secondItem="KCp-Lf-iO6" secondAttribute="bottom" constant="49" id="nHf-4x-Ezz"/>
+                            <constraint firstItem="qjW-Vx-VNO" firstAttribute="leading" secondItem="KCp-Lf-iO6" secondAttribute="leading" id="kbv-ey-0R4"/>
+                            <constraint firstItem="qjW-Vx-VNO" firstAttribute="trailing" secondItem="KCp-Lf-iO6" secondAttribute="trailing" id="mv6-aZ-buw"/>
+                            <constraint firstItem="YoK-eP-yNz" firstAttribute="bottom" secondItem="KCp-Lf-iO6" secondAttribute="bottom" constant="56" id="nHf-4x-Ezz"/>
                             <constraint firstItem="uuF-MC-Jay" firstAttribute="top" secondItem="prg-uT-Br5" secondAttribute="bottom" constant="6" id="uEA-pp-syq"/>
                             <constraint firstItem="KCp-Lf-iO6" firstAttribute="leading" secondItem="uuF-MC-Jay" secondAttribute="leading" id="wAz-0l-5O3"/>
                         </constraints>
@@ -856,8 +873,13 @@
         </scene>
     </scenes>
     <resources>
+        <image name="001-plus" width="32" height="32"/>
+        <image name="Complete" width="32" height="32"/>
+        <image name="Globe" width="32" height="32"/>
         <image name="Help" width="36" height="19"/>
         <image name="Image_8" width="28" height="28"/>
+        <image name="Profile" width="32" height="32"/>
+        <image name="Trending" width="32" height="32"/>
         <image name="about" width="46" height="19"/>
         <image name="back" width="78" height="29"/>
         <image name="cancel-button" width="342" height="45"/>
@@ -865,6 +887,7 @@
         <image name="settingPic" width="28" height="28"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="psZ-yb-yI0"/>
         <segue reference="P93-w7-PHz"/>
     </inferredMetricsTieBreakers>
 </document>

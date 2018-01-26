@@ -32,9 +32,9 @@ class ProfileViewController: UIViewController {
 
                         self.name.text = value["full name"] as? String
                         
-                        let databaseProfilePic = value["urlToImage"] as? String
-                        let data = NSData(contentsOf: NSURL(string: databaseProfilePic!)! as URL)
-                        self.setProfilePicture(imageView: self.profileImage, imageToSet: UIImage(data:data! as Data)!)
+//                        let databaseProfilePic = value["urlToImage"] as? String
+//                        let data = NSData(contentsOf: NSURL(string: databaseProfilePic!)! as URL)
+//                        self.setProfilePicture(imageView: self.profileImage, imageToSet: UIImage(data:data! as Data)!)
                     }
                 }
             }

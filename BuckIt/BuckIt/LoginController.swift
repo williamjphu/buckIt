@@ -180,16 +180,18 @@ class LoginController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDe
     
     @objc func handleSignIn() {
         
-        Auth.auth().signIn(withEmail: emailTextField.text!, password: passwordTextField.text!, completion: { (user, error) in
-            if error == nil {
-                //Print into the console if successfully logged in
-                print("You have successfully logged in")
-                
+        Firebase.Auth.auth().signIn(withEmail: emailTextField.text!, password: passwordTextField.text!) { (user, error) in
+            
+            if let error = error{
+                print(error.localizedDescription)
             }
             
-            // successfully signed in
-            
-        })
+            if let user = user{
+                let vc = UIStoryboard(name: "Profile" , bundle: nil).instantiateViewController(withIdentifier: "userVC")
+                
+                self.present(vc, animated: true, completion: nil)
+            }
+        }
         
     }
     
