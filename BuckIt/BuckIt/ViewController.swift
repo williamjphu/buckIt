@@ -149,7 +149,7 @@ class ViewController: UIViewController , FBSDKLoginButtonDelegate, GIDSignInUIDe
         let landing = ViewController()
         present(landing, animated: true, completion: nil)
         
-}
+    }
 
     fileprivate func setupFacebookButton(){
         //Draw Facebook sign in button
