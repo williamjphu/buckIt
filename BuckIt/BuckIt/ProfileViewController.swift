@@ -10,7 +10,8 @@ import UIKit
 import FirebaseDatabase
 import Firebase
 class ProfileViewController: UIViewController {
-
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +31,7 @@ class ProfileViewController: UIViewController {
                 if let uid = value["uid"] as? String {
                     if uid == Firebase.Auth.auth().currentUser!.uid{
 
-                        self.name.text = value["full name"] as? String
+                        self.name.text = value["name"] as? String
                         
 //                        let databaseProfilePic = value["urlToImage"] as? String
 //                        let data = NSData(contentsOf: NSURL(string: databaseProfilePic!)! as URL)
@@ -39,10 +40,13 @@ class ProfileViewController: UIViewController {
                 }
             }
         })
+        ref.removeAllObservers()
     }
     
     func setProfilePicture(imageView: UIImageView, imageToSet: UIImage){
 
         imageView.image = imageToSet
     }
+    
+    
 }

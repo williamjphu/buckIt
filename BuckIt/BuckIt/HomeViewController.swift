@@ -9,14 +9,29 @@
 import UIKit
 import GoogleSignIn
 import FBSDKLoginKit
-
+import Firebase
 class HomeViewController: UIViewController{
 
     @IBAction func didTapSignOut(sender: AnyObject) {
-        GIDSignIn.sharedInstance().signOut()
-        let loginManager = FBSDKLoginManager()
-        loginManager.logOut()
-        self.performSegue(withIdentifier: "login", sender: self)
+        
+        
+//        if Auth.auth().currentUser != nil {
+//            do {
+//                try
+                    GIDSignIn.sharedInstance().signOut()
+                    let loginManager = FBSDKLoginManager()
+                    loginManager.logOut()
+                    let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Login")
+                present(vc, animated: true, completion: nil)
+                
+//            } catch let error as NSError {
+//                print(error.localizedDescription)
+//            }
+//        }
+        
+        
+        
+//        self.performSegue(withIdentifier: "login", sender: self)
     }
     
 //

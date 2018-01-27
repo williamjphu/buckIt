@@ -227,8 +227,9 @@ class LoginController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDe
         {
             DispatchQueue.main.async
             {
-                self.performSegue(withIdentifier: "showHome", sender: self)
-            }
+                let vc = UIStoryboard(name: "Profile" , bundle: nil).instantiateViewController(withIdentifier: "userVC")
+                
+                self.present(vc, animated: true, completion: nil)            }
         }
     }
     
@@ -241,13 +242,60 @@ class LoginController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDe
         }
         else if error == nil {
             print("Successfully logged in via facebook")
-            self.performSegue(withIdentifier: "showHome", sender: self)
+            let accessToken = FBSDKAccessToken.current()
+            let credentials = FacebookAuthProvider.credential(withAccessToken: (accessToken?.tokenString)!)
+            var imageStringUrl : String?
+            
+            let graphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"picture.type(large)"])
+            graphRequest?.start(completionHandler: { (connection, result, error) in
+                if error != nil {
+                    print(error ?? "")
+                }
+                
+                if let resultDic = result as? NSDictionary {
+                    let data = resultDic["picture"] as? NSDictionary
+                    let dataDict = data!["data"] as? NSDictionary
+                    imageStringUrl = dataDict!["url"] as? String
+                }
+            })
+            
+            
+            Auth.auth().signIn(with: credentials, completion: { (user, err) in
+                if err != nil{
+                    print("FB User is wrong", err ?? "")
+                }
+                print("User successfully logged in to Firebase with: ", user ?? "")
+                guard let uid = user?.uid else{
+                    return
+                }
+                let ref = Database.database().reference()
+                let usersReference = ref.child("users").child(uid)
+                let values = ["uid": user?.uid,
+                              "name": user?.displayName,
+                              "email": user?.email,
+                              "profilePicture": imageStringUrl]
+                usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
+                    if let err = err {
+                        print(err)
+                        return
+                    }
+                })
+                
+                
+            })
+            
+            
+            let vc = UIStoryboard(name: "Profile" , bundle: nil).instantiateViewController(withIdentifier: "userVC")
+            
+            self.present(vc, animated: true, completion: nil)
         }
     }
+    
     
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
         print("Logged out of Facebook")
     }
+    
     
 }
 

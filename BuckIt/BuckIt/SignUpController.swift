@@ -265,7 +265,7 @@ class SignUpController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUID
                 {
 
                     let userInfo: [String: Any] = ["uid": user.uid,
-                                                   "full name": self.nameTextField.text!]
+                                                   "name": self.nameTextField.text!]
                     self.ref.child("users").child(user.uid).setValue(userInfo)
 
 
@@ -324,7 +324,9 @@ class SignUpController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUID
         {
             DispatchQueue.main.async
                 {
-                    self.performSegue(withIdentifier: "showHome", sender: self)
+                    let vc = UIStoryboard(name: "Profile" , bundle: nil).instantiateViewController(withIdentifier: "userVC")
+                    
+                    self.present(vc, animated: true, completion: nil)
             }
         }
     }
@@ -338,13 +340,16 @@ class SignUpController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUID
         }
         else if error == nil {
             print("Successfully logged in via facebook")
-            self.performSegue(withIdentifier: "showHome", sender: self)
+            let vc = UIStoryboard(name: "Profile" , bundle: nil).instantiateViewController(withIdentifier: "userVC")
+            
+            self.present(vc, animated: true, completion: nil)
         }
     }
     
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
         print("Logged out of Facebook")
     }
+    
     
     
 }
