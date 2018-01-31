@@ -265,7 +265,9 @@ class SignUpController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUID
                 {
 
                     let userInfo: [String: Any] = ["uid": user.uid,
-                                                   "name": self.nameTextField.text!]
+                                                   "name": self.nameTextField.text!,
+                                                   "email": user.email]
+                    
                     self.ref.child("users").child(user.uid).setValue(userInfo)
 
 

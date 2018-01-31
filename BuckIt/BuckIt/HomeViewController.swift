@@ -15,19 +15,19 @@ class HomeViewController: UIViewController{
     @IBAction func didTapSignOut(sender: AnyObject) {
         
         
-//        if Auth.auth().currentUser != nil {
-//            do {
-//                try
+        if Auth.auth().currentUser != nil {
+            do {
+                try
                     GIDSignIn.sharedInstance().signOut()
                     let loginManager = FBSDKLoginManager()
                     loginManager.logOut()
                     let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Login")
                 present(vc, animated: true, completion: nil)
                 
-//            } catch let error as NSError {
-//                print(error.localizedDescription)
-//            }
-//        }
+            } catch let error as NSError {
+                print(error.localizedDescription)
+            }
+        }
         
         
         
