@@ -18,13 +18,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Initial Map view" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tRX-Od-y0Z">
-                                <rect key="frame" x="0.0" y="622" width="375" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="JY5-El-f4I">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="625"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -50,6 +43,8 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5kj-Pj-nBO"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="" image="Globe" id="MMW-Ac-UOF"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="mapView" destination="JY5-El-f4I" id="nno-FK-XkT"/>
                     </connections>
@@ -59,4 +54,7 @@
             <point key="canvasLocation" x="-146.40000000000001" y="-216.34182908545728"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Globe" width="32" height="32"/>
+    </resources>
 </document>
