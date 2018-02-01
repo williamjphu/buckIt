@@ -48,6 +48,10 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Will you allow BuckIt! to always know your locations?</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Do you allow BuckIt! to know your current location?</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

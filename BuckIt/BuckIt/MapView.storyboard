@@ -35,10 +35,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="JY5-El-f4I" firstAttribute="trailing" secondItem="5kj-Pj-nBO" secondAttribute="trailing" id="3ad-zL-6us"/>
                             <constraint firstItem="5kj-Pj-nBO" firstAttribute="trailing" secondItem="2XB-zd-ymn" secondAttribute="trailing" constant="30" id="7YQ-6M-cxh"/>
                             <constraint firstItem="2XB-zd-ymn" firstAttribute="top" secondItem="5kj-Pj-nBO" secondAttribute="top" constant="5" id="AK7-Wa-ugc"/>
+                            <constraint firstItem="JY5-El-f4I" firstAttribute="bottom" secondItem="5kj-Pj-nBO" secondAttribute="bottom" id="AyM-ez-r4Y"/>
                             <constraint firstItem="viU-dl-8et" firstAttribute="top" secondItem="5kj-Pj-nBO" secondAttribute="top" constant="5" id="RiF-oV-l1m"/>
+                            <constraint firstItem="JY5-El-f4I" firstAttribute="top" secondItem="OT3-VT-oXs" secondAttribute="top" id="alH-rE-yiG"/>
                             <constraint firstItem="5kj-Pj-nBO" firstAttribute="trailing" secondItem="viU-dl-8et" secondAttribute="trailing" constant="30" id="irh-gK-pdL"/>
+                            <constraint firstItem="JY5-El-f4I" firstAttribute="leading" secondItem="5kj-Pj-nBO" secondAttribute="leading" id="qyR-YC-dg7"/>
                             <constraint firstItem="viU-dl-8et" firstAttribute="leading" secondItem="5kj-Pj-nBO" secondAttribute="leading" constant="30" id="w5q-gW-9o9"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5kj-Pj-nBO"/>
