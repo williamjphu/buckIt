@@ -59,7 +59,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 //            }
 //        }
 //    }
-    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         print(locations)
         let location = locations[locations.count - 1]
