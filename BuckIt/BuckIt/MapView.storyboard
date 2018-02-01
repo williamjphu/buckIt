@@ -18,8 +18,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="JY5-El-f4I">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="JY5-El-f4I">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="625"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search for an event ..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="viU-dl-8et">
                                 <rect key="frame" x="30" y="25" width="315" height="30"/>
@@ -46,6 +47,8 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5kj-Pj-nBO"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="" image="Globe" id="MMW-Ac-UOF"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="mapView" destination="JY5-El-f4I" id="nno-FK-XkT"/>
                     </connections>
@@ -55,4 +58,7 @@
             <point key="canvasLocation" x="-146.40000000000001" y="-216.34182908545728"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Globe" width="32" height="32"/>
+    </resources>
 </document>
