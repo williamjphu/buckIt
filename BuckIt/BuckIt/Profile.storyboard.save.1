@@ -12,65 +12,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Username View Controller-->
-        <scene sceneID="JIU-Hc-IuS">
-            <objects>
-                <viewController storyboardIdentifier="username" id="dQj-ab-l5j" customClass="UsernameViewController" customModule="BuckIt" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="XEE-DL-97p">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0c6-tb-wD1">
-                                <rect key="frame" x="147" y="105" width="80" height="80"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sqa-yX-1DS">
-                                <rect key="frame" x="162" y="205" width="50" height="30"/>
-                                <state key="normal" title="Upload"/>
-                                <connections>
-                                    <action selector="selectImagePressed:" destination="dQj-ab-l5j" eventType="touchUpInside" id="zUl-dg-kJa"/>
-                                </connections>
-                            </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="J6R-d9-fvi">
-                                <rect key="frame" x="63" y="273" width="249" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xjR-xu-RsF">
-                                <rect key="frame" x="162" y="318" width="50" height="30"/>
-                                <state key="normal" title="Next"/>
-                                <connections>
-                                    <action selector="nextPressed:" destination="dQj-ab-l5j" eventType="touchUpInside" id="viZ-mq-fRP"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="0c6-tb-wD1" firstAttribute="top" secondItem="Wxe-bD-QbV" secondAttribute="top" constant="85" id="2Au-BR-Jn0"/>
-                            <constraint firstItem="J6R-d9-fvi" firstAttribute="centerX" secondItem="xjR-xu-RsF" secondAttribute="centerX" id="B6X-xz-uGc"/>
-                            <constraint firstItem="J6R-d9-fvi" firstAttribute="leading" secondItem="Wxe-bD-QbV" secondAttribute="leading" constant="63" id="E8P-9Y-Y0d"/>
-                            <constraint firstItem="J6R-d9-fvi" firstAttribute="top" secondItem="Sqa-yX-1DS" secondAttribute="bottom" constant="38" id="M5k-Lx-3Pu"/>
-                            <constraint firstItem="0c6-tb-wD1" firstAttribute="leading" secondItem="Wxe-bD-QbV" secondAttribute="leading" constant="147" id="NXY-pa-BMU"/>
-                            <constraint firstItem="Sqa-yX-1DS" firstAttribute="top" secondItem="0c6-tb-wD1" secondAttribute="bottom" constant="20" id="QDj-hR-iv9"/>
-                            <constraint firstItem="Sqa-yX-1DS" firstAttribute="trailing" secondItem="xjR-xu-RsF" secondAttribute="trailing" id="eDa-ev-NrY"/>
-                            <constraint firstItem="0c6-tb-wD1" firstAttribute="centerX" secondItem="Sqa-yX-1DS" secondAttribute="centerX" id="hSC-X8-08N"/>
-                            <constraint firstItem="0c6-tb-wD1" firstAttribute="centerX" secondItem="XEE-DL-97p" secondAttribute="centerX" id="i7g-Y4-2UQ"/>
-                            <constraint firstItem="Sqa-yX-1DS" firstAttribute="leading" secondItem="xjR-xu-RsF" secondAttribute="leading" id="v08-gN-qKO"/>
-                            <constraint firstItem="xjR-xu-RsF" firstAttribute="top" secondItem="J6R-d9-fvi" secondAttribute="bottom" constant="15" id="xK3-SX-NC8"/>
-                            <constraint firstItem="xjR-xu-RsF" firstAttribute="centerY" secondItem="XEE-DL-97p" secondAttribute="centerY" id="xhp-eZ-lEk"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="Wxe-bD-QbV"/>
-                    </view>
-                    <connections>
-                        <outlet property="imageView" destination="0c6-tb-wD1" id="87p-s8-KoP"/>
-                        <outlet property="nextButton" destination="xjR-xu-RsF" id="dcN-au-p1D"/>
-                        <outlet property="userName" destination="J6R-d9-fvi" id="8mL-Ly-tgJ"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZbW-NH-MbZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-700" y="1200"/>
-        </scene>
         <!--Profile View Controller-->
         <scene sceneID="7aX-Rp-Y5a">
             <objects>
@@ -381,8 +322,6 @@
                     <connections>
                         <outlet property="name" destination="MSP-Kc-2HF" id="d9y-m6-CW4"/>
                         <outlet property="profileImage" destination="R1v-QO-HCY" id="gt6-EV-3hw"/>
-                        <outlet property="quote" destination="nje-Vt-cbP" id="S7A-oM-oEy"/>
-                        <outlet property="username" destination="oz4-fC-MPW" id="DsQ-dP-I7M"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FUb-aX-Tej" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -954,7 +893,10 @@
         <image name="settingPic" width="28" height="28"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="CH9-c6-3l9"/>
-        <segue reference="SFd-iV-Wop"/>
+        <segue reference="psZ-yb-yI0"/>
+        <segue reference="P93-w7-PHz"/>
     </inferredMetricsTieBreakers>
 </document>
+
+
+

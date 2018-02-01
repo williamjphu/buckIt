@@ -271,7 +271,7 @@ class SignUpController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUID
                     self.ref.child("users").child(user.uid).setValue(userInfo)
 
 
-                    let vc = UIStoryboard(name: "Profile" , bundle: nil).instantiateViewController(withIdentifier: "userVC")
+                    let vc = UIStoryboard(name: "Profile" , bundle: nil).instantiateViewController(withIdentifier: "username")
 
                     self.present(vc, animated: true, completion: nil)
 
@@ -326,7 +326,7 @@ class SignUpController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUID
         {
             DispatchQueue.main.async
                 {
-                    let vc = UIStoryboard(name: "Profile" , bundle: nil).instantiateViewController(withIdentifier: "userVC")
+                    let vc = UIStoryboard(name: "Profile" , bundle: nil).instantiateViewController(withIdentifier: "username")
                     
                     self.present(vc, animated: true, completion: nil)
             }
@@ -342,7 +342,7 @@ class SignUpController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUID
         }
         else if error == nil {
             print("Successfully logged in via facebook")
-            let vc = UIStoryboard(name: "Profile" , bundle: nil).instantiateViewController(withIdentifier: "userVC")
+            let vc = UIStoryboard(name: "Profile" , bundle: nil).instantiateViewController(withIdentifier: "username")
             
             self.present(vc, animated: true, completion: nil)
         }

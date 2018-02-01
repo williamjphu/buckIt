@@ -244,7 +244,6 @@ class LoginController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDe
             print("Successfully logged in via facebook")
             let accessToken = FBSDKAccessToken.current()
             let credentials = FacebookAuthProvider.credential(withAccessToken: (accessToken?.tokenString)!)
-            var imageStringUrl : String?
             
             let graphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"picture.type(large)"])
             graphRequest?.start(completionHandler: { (connection, result, error) in
@@ -255,7 +254,6 @@ class LoginController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDe
                 if let resultDic = result as? NSDictionary {
                     let data = resultDic["picture"] as? NSDictionary
                     let dataDict = data!["data"] as? NSDictionary
-                    imageStringUrl = dataDict!["url"] as? String
                 }
             })
             
@@ -272,8 +270,7 @@ class LoginController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDe
                 let usersReference = ref.child("users").child(uid)
                 let values = ["uid": user?.uid,
                               "name": user?.displayName,
-                              "email": user?.email,
-                              "profilePicture": imageStringUrl]
+                              "email": user?.email]
                 usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
                     if let err = err {
                         print(err)

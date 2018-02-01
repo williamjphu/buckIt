@@ -27,6 +27,7 @@
 		AE7F9C2B20198CAE00420457 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F9C2920198CAE00420457 /* SignUpController.swift */; };
 		C397DF2C1FB5B08A00D6C0AF /* Pods_BuckIt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C397DF2D1FB5B08A00D6C0AF /* Pods_BuckIt.framework */; };
 		C397DF2F1FB5B19000D6C0AF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C397DF2E1FB5B19000D6C0AF /* GoogleService-Info.plist */; };
+		E0D6C3232022EC8900721FCE /* UsernameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D6C3222022EC8900721FCE /* UsernameViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,7 @@
 		C397DF2B1FB5B06500D6C0AF /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C397DF2D1FB5B08A00D6C0AF /* Pods_BuckIt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_BuckIt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C397DF2E1FB5B19000D6C0AF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		E0D6C3222022EC8900721FCE /* UsernameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsernameViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +169,7 @@
 				AE7F9C2820198CAE00420457 /* LoginController.swift */,
 				AE7F9C2920198CAE00420457 /* SignUpController.swift */,
 				77D45FBF1FAE96EB0034DDBA /* ViewController.swift */,
+				E0D6C3222022EC8900721FCE /* UsernameViewController.swift */,
 			);
 			name = "login-homepage";
 			sourceTree = "<group>";
@@ -374,6 +377,7 @@
 				77D45FBE1FAE96EB0034DDBA /* AppDelegate.swift in Sources */,
 				7770EC591FAEB054003F3B11 /* HomeViewController.swift in Sources */,
 				AE7F9C1F20198AFE00420457 /* ProfileViewController.swift in Sources */,
+				E0D6C3232022EC8900721FCE /* UsernameViewController.swift in Sources */,
 				AE7F9C18201986AF00420457 /* BucketListViewController.swift in Sources */,
 				AE7F9BFE20182E4E00420457 /* MapViewController.swift in Sources */,
 				AE7F9C2320198AFE00420457 /* User.swift in Sources */,

@@ -175,8 +175,9 @@ class ViewController: UIViewController , FBSDKLoginButtonDelegate, GIDSignInUIDe
 
         if FBSDKAccessToken.current() != nil {
             DispatchQueue.main.async {
-                self.performSegue(withIdentifier: "showHome", sender: self)
-            }
+                let vc = UIStoryboard(name: "Profile" , bundle: nil).instantiateViewController(withIdentifier: "username")
+                
+                self.present(vc, animated: true, completion: nil)            }
         }
 
     }
@@ -190,8 +191,9 @@ class ViewController: UIViewController , FBSDKLoginButtonDelegate, GIDSignInUIDe
         }
         else if error == nil {
             print("Successfully logged in via facebook")
-            self.performSegue(withIdentifier: "showHome", sender: self)
-        }
+            let vc = UIStoryboard(name: "Profile" , bundle: nil).instantiateViewController(withIdentifier: "username")
+            
+            self.present(vc, animated: true, completion: nil)        }
     }
     
 
