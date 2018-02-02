@@ -18,8 +18,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        // change rootViewController
+        // Note: Only use this to see changes for each controller so that I don't have to change back
+        // and forth
+        let VC = SignUpProfileController()
+        let navigationController = UINavigationController(rootViewController: VC)
+        self.window!.rootViewController = navigationController
+        self.window!.makeKeyAndVisible()
+        //
+        //
+        
         //Firebase
         FirebaseApp.configure()
         
