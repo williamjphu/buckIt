@@ -182,6 +182,7 @@ class LoginController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDe
         
         Auth.auth().signIn(withEmail: emailTextField.text!, password: passwordTextField.text!, completion: { (user, error) in
             if error == nil {
+               
                 //Print into the console if successfully logged in
                 print("You have successfully logged in")
                 

@@ -27,6 +27,7 @@
 		AE7F9C2B20198CAE00420457 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F9C2920198CAE00420457 /* SignUpController.swift */; };
 		C397DF2C1FB5B08A00D6C0AF /* Pods_BuckIt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C397DF2D1FB5B08A00D6C0AF /* Pods_BuckIt.framework */; };
 		C397DF2F1FB5B19000D6C0AF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C397DF2E1FB5B19000D6C0AF /* GoogleService-Info.plist */; };
+		DAA9BAE52024279900DFED0B /* SignUpProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA9BAE42024279900DFED0B /* SignUpProfileController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,7 @@
 		C397DF2B1FB5B06500D6C0AF /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C397DF2D1FB5B08A00D6C0AF /* Pods_BuckIt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_BuckIt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C397DF2E1FB5B19000D6C0AF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		DAA9BAE42024279900DFED0B /* SignUpProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpProfileController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,9 +103,6 @@
 		77D45FBC1FAE96EB0034DDBA /* BuckIt */ = {
 			isa = PBXGroup;
 			children = (
-				AE7F9C2D20198D9D00420457 /* New Group4 */,
-				AE7F9C2C20198D9500420457 /* New Group3 */,
-				AE7F9C2720198BBA00420457 /* New Group2 */,
 				AE7F9C2620198BB700420457 /* New Group1 */,
 				AE7F9C2520198BB000420457 /* Models */,
 				AE7F9C2420198BA400420457 /* login-homepage */,
@@ -166,6 +165,7 @@
 				7770EC581FAEB054003F3B11 /* HomeViewController.swift */,
 				AE7F9C2820198CAE00420457 /* LoginController.swift */,
 				AE7F9C2920198CAE00420457 /* SignUpController.swift */,
+				DAA9BAE42024279900DFED0B /* SignUpProfileController.swift */,
 				77D45FBF1FAE96EB0034DDBA /* ViewController.swift */,
 			);
 			name = "login-homepage";
@@ -185,27 +185,6 @@
 			children = (
 			);
 			name = "New Group1";
-			sourceTree = "<group>";
-		};
-		AE7F9C2720198BBA00420457 /* New Group2 */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "New Group2";
-			sourceTree = "<group>";
-		};
-		AE7F9C2C20198D9500420457 /* New Group3 */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "New Group3";
-			sourceTree = "<group>";
-		};
-		AE7F9C2D20198D9D00420457 /* New Group4 */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "New Group4";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -378,6 +357,7 @@
 				AE7F9BFE20182E4E00420457 /* MapViewController.swift in Sources */,
 				AE7F9C2320198AFE00420457 /* User.swift in Sources */,
 				AE7F9C2220198AFE00420457 /* EditProfileViewController.swift in Sources */,
+				DAA9BAE52024279900DFED0B /* SignUpProfileController.swift in Sources */,
 				AE7F9C2B20198CAE00420457 /* SignUpController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

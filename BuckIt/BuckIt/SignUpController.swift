@@ -205,23 +205,29 @@ class SignUpController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUID
     
     @objc func handleRegister() {
         
+        let userProfile = SignUpProfileController()
+        
         guard let email = emailTextField.text, let password = passwordTextField.text
         else {
                 print("Form is not valid")
             return
         }
-//        Auth.auth().createUser(withEmail: email, password: password,
-//                               completion: { (user: User?, error) in
-//                                if error != nil {
-//                                    print(error)
-//                                    return
-//                                }
-//
-//                            })
-
-        // successfully authenticated user
         
-    }
+        // if the credentials are input and correct, register the user
+        Auth.auth().createUser(withEmail: email, password: password,
+                                         completion: { (user, error) in
+                                                
+                                            if error != nil {
+                                                print(error)
+                                                return
+                                            } // end if error !=
+                
+                // once the credentials have been input, move on to user profile set up
+                self.present(userProfile, animated: true, completion: nil)
+                                                
+        }) // successfully authenticated user
+        
+    } // end handle
     
     @objc func handleBackButton() {
         
