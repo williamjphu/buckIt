@@ -298,9 +298,10 @@ class SignUpController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUID
     fileprivate func setupFacebookButton() {
         //Draw Facebook sign in button
         let loginButton = FBSDKLoginButton()
+        view.addSubview(loginButton)
         loginButton.frame = CGRect(x: 15, y: 85, width: view.frame.width - 32, height: 50)
         loginButton.delegate = self as! FBSDKLoginButtonDelegate
-        view.addSubview(loginButton)
+        loginButton.readPermissions = ["email", "public_profile"]
     }
     
     /*
@@ -326,7 +327,7 @@ class SignUpController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUID
         {
             DispatchQueue.main.async
                 {
-                    let vc = UIStoryboard(name: "Profile" , bundle: nil).instantiateViewController(withIdentifier: "username")
+                    let vc = UIStoryboard(name: "Profile" , bundle: nil).instantiateViewController(withIdentifier: "userVC")
                     
                     self.present(vc, animated: true, completion: nil)
             }
@@ -342,11 +343,47 @@ class SignUpController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUID
         }
         else if error == nil {
             print("Successfully logged in via facebook")
+            
             let vc = UIStoryboard(name: "Profile" , bundle: nil).instantiateViewController(withIdentifier: "username")
             
             self.present(vc, animated: true, completion: nil)
         }
+        
+        let accessToken = FBSDKAccessToken.current()
+        let credentials = FacebookAuthProvider.credential(withAccessToken: (accessToken?.tokenString)!)
+
+        Auth.auth().signIn(with: credentials, completion: { (user, err) in
+            if err != nil{
+                print("FB User is wrong", err ?? "")
+            }
+            print("User successfully logged in to Firebase with: ", user ?? "")
+            guard let uid = user?.uid else{
+                return
+            }
+            let ref = Database.database().reference()
+            let usersReference = ref.child("users").child(uid)
+            let values = ["uid": user?.uid,
+                          "name": user?.displayName,
+                          "email": user?.email]
+            usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
+                if let err = err {
+                    print(err)
+                    return
+                }
+            })
+
+
+        })
+        
+//        FBSDKGraphRequest(graphPath: "/me", parameters: ["fields": "id, name, email"]).start { (connection, result, err) in
+//            if err != nil {
+//                print("Failed to start graph request:", err)
+//                return
+//            }
+//        }
     }
+    
+    
     
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
         print("Logged out of Facebook")

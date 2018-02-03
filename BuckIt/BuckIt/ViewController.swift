@@ -157,6 +157,7 @@ class ViewController: UIViewController , FBSDKLoginButtonDelegate, GIDSignInUIDe
         view.addSubview(loginButton)
         loginButton.frame = CGRect(x: 16, y: 50, width: view.frame.width - 32, height: 50)
         loginButton.delegate = self
+        loginButton.readPermissions = ["email", "public_profile"]
     }
     
     fileprivate func setupGoogleButton(){
@@ -175,7 +176,7 @@ class ViewController: UIViewController , FBSDKLoginButtonDelegate, GIDSignInUIDe
 
         if FBSDKAccessToken.current() != nil {
             DispatchQueue.main.async {
-                let vc = UIStoryboard(name: "Profile" , bundle: nil).instantiateViewController(withIdentifier: "username")
+                let vc = UIStoryboard(name: "Profile" , bundle: nil).instantiateViewController(withIdentifier: "userVC")
                 
                 self.present(vc, animated: true, completion: nil)            }
         }
@@ -191,7 +192,7 @@ class ViewController: UIViewController , FBSDKLoginButtonDelegate, GIDSignInUIDe
         }
         else if error == nil {
             print("Successfully logged in via facebook")
-            let vc = UIStoryboard(name: "Profile" , bundle: nil).instantiateViewController(withIdentifier: "username")
+            let vc = UIStoryboard(name: "Profile" , bundle: nil).instantiateViewController(withIdentifier: "userVC")
             
             self.present(vc, animated: true, completion: nil)        }
     }

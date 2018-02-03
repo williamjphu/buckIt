@@ -12,39 +12,30 @@ import FBSDKLoginKit
 import Firebase
 class HomeViewController: UIViewController {
 
+  
     @IBAction func didTapSignOut(sender: AnyObject) {
         
         
-//        if Auth.auth().currentUser != nil {
-//            do {
-//                try
+        if Auth.auth().currentUser != nil {
+            do {
+                try
                     GIDSignIn.sharedInstance().signOut()
                     let loginManager = FBSDKLoginManager()
                     loginManager.logOut()
                     let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Login")
                 present(vc, animated: true, completion: nil)
                 
-//            } catch let error as NSError {
-//                print(error.localizedDescription)
-//            }
-//        }
+            } catch let error as NSError {
+                print(error.localizedDescription)
+            }
+        }
         
         
         
 //        self.performSegue(withIdentifier: "login", sender: self)
     }
     
-//
-//
-//    /*
-//    // MARK: - Navigation
-//
-//    // In a storyboard-based application, you will often want to do a little preparation before navigation
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        // Get the new view controller using segue.destinationViewController.
-//        // Pass the selected object to the new view controller.
-//    }
-//    */
-//
+  
+
 }
 
