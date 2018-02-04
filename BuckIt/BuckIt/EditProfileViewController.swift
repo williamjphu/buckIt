@@ -11,8 +11,10 @@ import Firebase
 
 class EditProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
-
+    var ref: DatabaseReference!
+    
     let picker = UIImagePickerController()
+
     @IBOutlet weak var imageView: UIImageView!
 
     
@@ -57,7 +59,9 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        let store = Storage.storage().reference(forURL: "gs://buckit-ed26f.appspot.com")
+        userStorage = store.child("profile")
+
         //maximize text input to 80 character
         descriptionText.delegate = self
         userNameText.delegate = self
@@ -76,6 +80,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                         self.nameText.text = value["name"] as? String
                         self.emailText.text = value["email"] as? String
                         self.userNameText.text = value["username"] as? String
+                        self.descriptionText.text = value["description"] as? String
                         let databaseProfilePic = value["picture"] as? String
                         let data = NSData(contentsOf: NSURL(string: databaseProfilePic!)! as URL)
                         self.setProfilePicture(imageView: self.imageView, imageToSet: UIImage(data:data! as Data)!)
@@ -113,10 +118,32 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         let newLength = text.characters.count + string.characters.count - range.length
         return newLength <= 45 // Bool
     }
-    
+    var userStorage = StorageReference()
+
     @IBAction func saveChange(_ sender: Any) {
         
+        ref = Database.database().reference()
+
+        let uid = Firebase.Auth.auth().currentUser!.uid
         
-        
+        let imageRef = self.userStorage.child("\(uid).jpg")
+        let data = UIImageJPEGRepresentation(self.imageView.image!, 0.5)
+        let usersReference = ref.child("users").child(uid)
+        imageRef.downloadURL(completion: { (url, er) in
+            if er != nil
+            {
+                print(er!.localizedDescription)
+            }
+            if let url = url
+            {
+                let values = ["picture": url.absoluteString as? String,
+                        "username": self.userNameText.text,
+                      "name": self.nameText.text,
+                      "email": self.emailText.text,
+                     "description": self.descriptionText.text]
+        usersReference.updateChildValues(values)
+            }
+            
+        })
     }
 }

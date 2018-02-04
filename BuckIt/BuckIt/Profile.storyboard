@@ -200,7 +200,7 @@
                                             <segue destination="OCU-XC-YmO" kind="showDetail" id="Z1i-b8-QYK"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quote" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nje-Vt-cbP">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nje-Vt-cbP">
                                         <rect key="frame" x="21" y="139" width="346" height="23"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="23" id="Cil-nT-xZn"/>

@@ -365,13 +365,14 @@ class SignUpController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUID
             let values = ["uid": user?.uid,
                           "name": user?.displayName,
                           "email": user?.email]
-            usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
-                if let err = err {
-                    print(err)
-                    return
-                }
-            })
-
+//            usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
+//                if let err = err {
+//                    print(err)
+//                    return
+//                }
+            
+//            })
+            self.ref.child("users").child((user?.uid)!).setValue(values)
 
         })
         

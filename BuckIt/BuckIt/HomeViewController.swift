@@ -30,10 +30,7 @@ class HomeViewController: UIViewController {
             }
         }
         
-        
-        
-//        self.performSegue(withIdentifier: "login", sender: self)
-    }
+        }
     
   
 

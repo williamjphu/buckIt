@@ -246,18 +246,18 @@ class LoginController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDe
             let credentials = FacebookAuthProvider.credential(withAccessToken: (accessToken?.tokenString)!)
             
             
-//            let graphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"picture.type(large)"])
-//            graphRequest?.start(completionHandler: { (connection, result, error) in
-//                if error != nil {
-//                    print(error ?? "")
-//                }
-//
-//                if let resultDic = result as? NSDictionary {
-//                    let data = resultDic["picture"] as? NSDictionary
-//                    let dataDict = data!["data"] as? NSDictionary
-//
-//                }
-//            })
+//                        let graphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"picture.type(large)"])
+//                        graphRequest?.start(completionHandler: { (connection, result, error) in
+//                            if error != nil {
+//                                print(error ?? "")
+//                            }
+//            
+//                            if let resultDic = result as? NSDictionary {
+//                                let data = resultDic["picture"] as? NSDictionary
+//                                let dataDict = data!["data"] as? NSDictionary
+//            
+//                            }
+//                        })
             
             Auth.auth().signIn(with: credentials, completion: { (user, err) in
                 if err != nil{
