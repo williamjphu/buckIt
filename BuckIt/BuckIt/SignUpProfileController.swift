@@ -18,13 +18,17 @@ class SignUpProfileController: UIViewController {
         // change background color
         view.backgroundColor = UIColor(r: 220, g: 220, b: 220)
         
-        //
+        // display views
         view.addSubview(profilePicture)
         view.addSubview(usernameTextField)
+        view.addSubview(submitButton)
+        view.addSubview(cancelButton)
     
         // set up views
         setupProfilePicture()
         setupUserNameTextField()
+        setupSubmitButton()
+        setupCancelButton()
 
     }
     
@@ -59,6 +63,48 @@ class SignUpProfileController: UIViewController {
     }()
     
     /****
+     ** Set the attributes for the Submit button
+     ****/
+    let submitButton: UIButton = {
+        let submit = UIButton(type: .system)
+        submit.backgroundColor = UIColor(r: 50, g: 205, b: 50)
+        submit.setTitle("SUBMIT", for: [])
+        submit.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        submit.translatesAutoresizingMaskIntoConstraints = false
+        submit.setTitleColor(UIColor.white, for: [])
+        submit.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        submit.layer.borderWidth = 1
+        submit.layer.borderColor = UIColor.clear.cgColor
+        submit.layer.cornerRadius = 5
+        
+        // call the action of the button
+        submit.addTarget(self, action: #selector(submitAction(sender:)), for: .touchUpInside)
+        
+        return submit
+    }()
+    
+    /****
+     ** Set the attributes for the Cancel button
+     ****/
+    let cancelButton: UIButton = {
+        let cancel = UIButton(type: .system)
+        cancel.backgroundColor = UIColor(r: 255, g: 0, b: 0)
+        cancel.setTitle("CANCEL", for: [])
+        cancel.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        cancel.translatesAutoresizingMaskIntoConstraints = false
+        cancel.setTitleColor(UIColor.white, for: [])
+        cancel.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        cancel.layer.borderWidth = 1
+        cancel.layer.borderColor = UIColor.clear.cgColor
+        cancel.layer.cornerRadius = 5
+        
+        // call the action of the button
+        cancel.addTarget(self, action: #selector(cancelAction(sender:)), for: .touchUpInside)
+        
+        return cancel
+    }()
+    
+    /****
      ** Setup round image for the user's profile picture.
      ****/
     func setupProfilePicture() {
@@ -77,21 +123,75 @@ class SignUpProfileController: UIViewController {
         profilePicture.layer.cornerRadius = 75
     }
     
+    /****
+     ** Setup the user name text field.
+     ****/
     func setupUserNameTextField() {
         usernameTextField.centerXAnchor.constraint(equalTo:
             view.centerXAnchor).isActive = true
         usernameTextField.topAnchor.constraint(equalTo:
-            view.topAnchor, constant: 300).isActive = true
+            view.topAnchor, constant: 275).isActive = true
         usernameTextField.widthAnchor.constraint(equalTo:
-            view.widthAnchor, constant: -50).isActive = true
+            view.widthAnchor, constant: -24).isActive = true
         usernameTextField.heightAnchor.constraint(equalToConstant:
-            25).isActive = true
+            45).isActive = true
     }
     
-    //func setupAltProfilePicture() {
-    //    altProfilePicture.layer.cornerRadius = self.altProfilePicture.frame.size.width/2
-    //    altProfilePicture.clipsToBounds = true
-    //    altProfilePicture.translatesAutoresizingMaskIntoConstraints = false
-    //}
+    /****
+     ** Setup for the Submit button
+     ****/
+    func setupSubmitButton() {
+        submitButton.centerXAnchor.constraint(equalTo:
+            view.centerXAnchor).isActive = true
+        submitButton.bottomAnchor.constraint(equalTo:
+            view.bottomAnchor, constant: -100).isActive = true
+        submitButton.widthAnchor.constraint(equalTo:
+            view.widthAnchor, constant: -24).isActive = true
+        submitButton.heightAnchor.constraint(equalToConstant: 45).isActive
+            = true
+    }
+    
+    /****
+     ** Setup for the Cancel button
+     ****/
+    func setupCancelButton() {
+        cancelButton.centerXAnchor.constraint(equalTo:
+            view.centerXAnchor).isActive = true
+        cancelButton.bottomAnchor.constraint(equalTo:
+            view.bottomAnchor, constant: -45).isActive = true
+        cancelButton.widthAnchor.constraint(equalTo:
+            view.widthAnchor, constant: -24).isActive = true
+        cancelButton.heightAnchor.constraint(equalToConstant: 45).isActive
+            = true
+    }
+    
+    /****
+     ** The action for when the submit button is tapped
+     ****/
+    @objc func submitAction(sender: UIButton) {
+        // input function here
+        print("Profile Submitted")  // test action
+    }
+    
+    /****
+     ** The action to cancel when inputting username and profile picture.
+     ** Cancelling will go back to the sign up page.
+     ****/
+    @objc func cancelAction(sender: UIButton) {
+        
+        // transition from left to right and going back
+        // to the sign up page
+        let landInPage = SignUpController()
+        let transition = CATransition()
+        transition.duration = 0.5
+        transition.type = kCATransitionPush
+        transition.subtype = kCATransitionFromLeft
+        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        view.window!.layer.add(transition, forKey: kCATransition)
+        
+        // change to the designated screen modally
+        present(landInPage, animated: false, completion: nil)
+        
+    }
     
 }
