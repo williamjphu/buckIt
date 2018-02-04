@@ -180,11 +180,23 @@ class LoginController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDe
     
     @objc func handleSignIn() {
         
+        view.endEditing(true)
+        
         Auth.auth().signIn(withEmail: emailTextField.text!, password: passwordTextField.text!, completion: { (user, error) in
             if error == nil {
                
-                //Print into the console if successfully logged in
-                print("You have successfully logged in")
+                print("User logged in") // print for testing purposes
+                
+                // alert the user that they have logged in
+                let alert = UIAlertController(title: "User has logged in",
+                                              message: "You have successfully logged in",
+                                              preferredStyle: UIAlertControllerStyle.alert)
+                
+                // dismiss alert when pressed
+                alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+                
+                // display alert and move on to the next page
+                self.present(alert, animated: true)
                 
             }
             
