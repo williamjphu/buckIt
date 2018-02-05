@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
         // change rootViewController
         // Note: Only use this to see changes for each controller so that I don't have to change back
         // and forth
-        let VC = SignUpProfileController()
+        let VC = ViewController()
         let navigationController = UINavigationController(rootViewController: VC)
         self.window!.rootViewController = navigationController
         self.window!.makeKeyAndVisible()

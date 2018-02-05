@@ -16,7 +16,7 @@ class ViewController: UIViewController , FBSDKLoginButtonDelegate, GIDSignInUIDe
         super.viewDidLoad()
         
         // back button.. this works
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(handleBackButton))
+        //navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(handleBackButton))
         
         // change background color
         view.backgroundColor = UIColor(r: 255, g: 255, b: 255)
@@ -69,7 +69,7 @@ class ViewController: UIViewController , FBSDKLoginButtonDelegate, GIDSignInUIDe
     
     @objc func handleRegister(sender: UIButton!) {
         let signUpController = SignUpController()
-        present(signUpController, animated: true, completion: nil)
+         self.navigationController?.pushViewController(signUpController, animated: true)
     }
     
     /**
@@ -92,8 +92,10 @@ class ViewController: UIViewController , FBSDKLoginButtonDelegate, GIDSignInUIDe
     }()
     
     @objc func handleSignIn(sender: UIButton!) {
+        
         let loginController = LoginController()
-        present(loginController, animated: true, completion: nil)
+        self.navigationController?.pushViewController(loginController, animated: true)
+        //present(loginController, animated: true, completion: nil)
     }
     
     /**

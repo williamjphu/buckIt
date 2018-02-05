@@ -29,6 +29,7 @@ class LoginController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDe
         view.addSubview(textLabel)
         view.addSubview(inputsContainerView)
         view.addSubview(signinButton)
+        view.addSubview(forgotPassword)
         
         
         // Display Google and Facebook login
@@ -36,12 +37,20 @@ class LoginController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDe
         setupGoogleButton()
         setupInputsContainer()
         setupSigninButton()
+        setupForgotPassword()
         
     }
     
+    /****
+     ** Set the transition for the back button. Hitting the back button will return
+     ** to the BuckIt! screen
+     ****/
     @objc func handleBackButton() {
         
         let landing = ViewController()
+        let navigate = UINavigationController()
+        
+        navigate.popToViewController(landing, animated: true)
         present(landing, animated: true, completion: nil)
         
     }
@@ -76,7 +85,6 @@ class LoginController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDe
         return view
     }()
     
-        
     let passwordTextField: UITextField = {
         
         let passwordText = UITextField()
@@ -97,9 +105,9 @@ class LoginController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDe
         return view
     }()
     
-    /*
-     *
-     */
+    /****
+     ** Setup container for the text fields
+     ****/
     func setupInputsContainer() {
         
         inputsContainerView.centerXAnchor.constraint(equalTo:
@@ -164,6 +172,36 @@ class LoginController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDe
         return signin
     }()
     
+    let forgotPassword: UIButton = {
+       
+        let recover = UIButton(type: .system)
+        recover.backgroundColor = UIColor.clear
+        recover.setTitle("Forgot Password?", for: [])
+        recover.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        recover.setTitleColor(UIColor.blue, for: [])
+        recover.translatesAutoresizingMaskIntoConstraints = false
+        
+        return recover
+        
+    }()
+    
+    /****
+     ** Setup position for Forgot Password
+     ****/
+    func setupForgotPassword() {
+        
+        // set x, y, widht, height constraints
+        forgotPassword.centerXAnchor.constraint(equalTo:
+            view.centerXAnchor).isActive = true
+        forgotPassword.topAnchor.constraint(equalTo:
+            view.topAnchor, constant: 325).isActive = true
+        forgotPassword.widthAnchor.constraint(equalTo:
+            view.widthAnchor, constant: -24).isActive = true
+        forgotPassword.heightAnchor.constraint(equalToConstant: 45).isActive
+            = true
+        
+    }
+    
     func setupSigninButton() {
         
         // set x, y, width, height constraints
@@ -178,37 +216,57 @@ class LoginController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDe
         
     }
     
+    /****
+     ** Handle logging in. Make sure the credentials are correct and
+     ** alerts the user when fields are empty or when credentials are
+     ** incorrect.
+     ****/
     @objc func handleSignIn() {
-        
         view.endEditing(true)
         
-        Auth.auth().signIn(withEmail: emailTextField.text!, password: passwordTextField.text!, completion: { (user, error) in
-            if error == nil {
-               
-                print("User logged in") // print for testing purposes
-                
-                // alert the user that they have logged in
-                let alert = UIAlertController(title: "User has logged in",
-                                              message: "You have successfully logged in",
-                                              preferredStyle: UIAlertControllerStyle.alert)
-                
-                // dismiss alert when pressed
-                alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
-                
-                // display alert and move on to the next page
-                self.present(alert, animated: true)
-                
-            }
-            
-            // successfully signed in
-            
-        })
+        // alert the user when email or password is empty
+        if( (emailTextField.text?.isEmpty)! || (passwordTextField.text?.isEmpty)! ) {
+            let emptyText = UIAlertController(title: "Error",
+                                          message: "Enter email or password",
+                                          preferredStyle: UIAlertControllerStyle.alert)
+            emptyText.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+            self.present(emptyText, animated: true)
+        }
         
+        // authenticate the user
+        Auth.auth().signIn(withEmail: emailTextField.text!, password: passwordTextField.text!, completion:
+            { (user, error) in
+                if error == nil {
+                    print("User logged in") // print for testing purposes
+                
+                    // alert the user that they have logged in
+                    let alert = UIAlertController(title: "User has logged in",
+                                                  message: "You have successfully logged in",
+                                                  preferredStyle: UIAlertControllerStyle.alert)
+                
+                    // dismiss alert when pressed
+                    alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+                    
+                    // display alert
+                    self.present(alert, animated: true)
+                }
+                else if ( !(error == nil) ){
+                    let alert2 = UIAlertController(title: "Error",
+                                                  message: "Incorrect user name or password. Please try again",
+                                                  preferredStyle: UIAlertControllerStyle.alert)
+                    
+                    // dismiss alert when pressed
+                    alert2.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+                    self.present(alert2, animated: true)
+                }
+            })
     }
     
-    /*
-     *  Login button for Facebook login
-     */
+    
+    
+    /****
+     ** Login button for Facebook login
+     ****/
     fileprivate func setupFacebookButton() {
         //Draw Facebook sign in button
         let loginButton = FBSDKLoginButton()
@@ -217,10 +275,9 @@ class LoginController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDe
         view.addSubview(loginButton)
     }
  
-    
-    /*
-     *  Login button for Gmail login
-     */
+    /****
+     ** Login button for Gmail login
+     ****/
     fileprivate func setupGoogleButton(){
         
         //Draw Google sign in button
@@ -243,6 +300,9 @@ class LoginController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDe
         }
     }
     
+    /****
+     ** Login button using Facebook
+     ****/
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         if error != nil {
             print(error)

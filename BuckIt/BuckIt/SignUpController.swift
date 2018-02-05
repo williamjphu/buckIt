@@ -213,7 +213,7 @@ class SignUpController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUID
             return
         }
         
-        // if the credentials are input and correct, register the user
+        // register the user using their email and password
         Auth.auth().createUser(withEmail: email, password: password,
                                          completion: { (user, error) in
                                                 
@@ -225,7 +225,7 @@ class SignUpController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUID
                 // once the credentials have been input, move on to user profile set up
                 self.present(userProfile, animated: true, completion: nil)
                                                 
-        }) // successfully authenticated user
+        }) // successfully registered user
         
     } // end handle
     
