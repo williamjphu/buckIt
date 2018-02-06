@@ -15,6 +15,7 @@ import GoogleSignIn
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
+    
 
     var window: UIWindow?
 
@@ -45,6 +46,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
     
     //Google sign in
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        
+        
         if let err = error {
             print("Failed to log into Google: ", err)
             return
@@ -55,24 +58,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
         guard let idToken = user.authentication.idToken else { return }
         guard let accessToken = user.authentication.accessToken else { return }
         let credentials = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: accessToken)
-            
+        
         Auth.auth().signIn(with: credentials, completion: {(user , error) in
             if let err = error {
                 print("Failed to create a Firebase User with Google Account: " , err)
                 return
             }
             guard let uid = user?.uid else {return}
+            
+            let ref = Database.database().reference()
+            let usersReference = ref.child("users").child(uid)
+            let values = ["uid": user?.uid,
+                          "name": user?.displayName,
+                          "email": user?.email,]
+            usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
+                if let err = err {
+                    print(err)
+                    return
+                }
+            })
+            
             print("Sucessfully logging to Firebase with Google" , uid)
             
-            let newViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeViewController")
+            let newViewController = UIStoryboard(name: "Profile", bundle: nil).instantiateViewController(withIdentifier: "userVC")
             UIApplication.topViewController()?.present(newViewController, animated: true, completion: nil)
-
+            
             
         })
     }
-    
+
    
-    
     //For Facebook Integration
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         

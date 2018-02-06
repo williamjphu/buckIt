@@ -76,6 +76,7 @@ PODS:
   - PopupDialog (0.7.0):
     - DynamicBlurView (~> 2.0)
   - SwipeCellKit (2.0.1)
+  - UITextView+Placeholder (1.2.0)
 
 DEPENDENCIES:
   - FBSDKCoreKit
@@ -88,6 +89,7 @@ DEPENDENCIES:
   - GoogleSignIn
   - PopupDialog (~> 0.7)
   - SwipeCellKit
+  - UITextView+Placeholder
 
 SPEC CHECKSUMS:
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
@@ -110,7 +112,8 @@ SPEC CHECKSUMS:
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   PopupDialog: 4abc6db5b22b7c8029e2162bde8891ee6aa4b6c8
   SwipeCellKit: 76888d93d1843dc568fdf38fff21b15dbbcf6b28
+  UITextView+Placeholder: 77680995fcdd07c3f52ec92fe1150874a2ac89ff
 
-PODFILE CHECKSUM: 3018566ed371665ad334418c87fc74a01fbd8b07
+PODFILE CHECKSUM: f8bb0849ba002325c27168ab6e3e511bef2afc9c
 
 COCOAPODS: 1.4.0
