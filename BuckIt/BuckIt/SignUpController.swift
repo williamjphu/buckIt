@@ -251,39 +251,29 @@ class SignUpController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUID
     
     @objc func handleRegister() {
         
-        guard nameTextField.text != "", emailTextField.text != "", passwordTextField.text != "", confirmTextField.text != "" else {return}
-
-        if passwordTextField.text == confirmTextField.text
-        {
-            Firebase.Auth.auth().createUser(withEmail: emailTextField.text!, password: passwordTextField.text!, completion: { (user, error) in
-
-                if let error = error
-                {
-                    print(error.localizedDescription)
-                }
-                if let user = user
-                {
-
-                    let userInfo: [String: Any] = ["uid": user.uid,
-                                                   "name": self.nameTextField.text!,
-                                                   "email": user.email]
-                    
-                    self.ref.child("users").child(user.uid).setValue(userInfo)
-
-
-                    let vc = UIStoryboard(name: "Profile" , bundle: nil).instantiateViewController(withIdentifier: "userVC")
-
-                    self.present(vc, animated: true, completion: nil)
-
-                }
-            })
-
-        } else
-        {
-            print("Password does not match")
+        let userProfile = SignUpProfileController()
+        
+        guard let email = emailTextField.text, let password = passwordTextField.text
+        else {
+                print("Form is not valid")
+            return
         }
         
-    }
+        // register the user using their email and password
+        Auth.auth().createUser(withEmail: email, password: password,
+                                         completion: { (user, error) in
+                                                
+                                            if error != nil {
+                                                print(error)
+                                                return
+                                            } // end if error !=
+                
+                // once the credentials have been input, move on to user profile set up
+                self.present(userProfile, animated: true, completion: nil)
+                                                
+        }) // successfully registered user
+        
+    } // end handle
     
     @objc func handleBackButton() {
         
