@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Profile-->
+        <!--ProfileNav-->
         <scene sceneID="Yx7-oS-jPW">
             <objects>
-                <viewControllerPlaceholder storyboardName="Profile" id="AtU-18-ZZ0" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="Profile" referencedIdentifier="ProfileNav" id="AtU-18-ZZ0" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="fVj-n1-Khy"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Cf-1a-Q4L" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -62,7 +62,7 @@
         <!--Tab Bar View Controller-->
         <scene sceneID="nm7-rz-sDr">
             <objects>
-                <tabBarController id="nac-eM-WFh" customClass="TabBarViewController" customModule="BuckIt" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="tabBarVC" id="nac-eM-WFh" customClass="TabBarViewController" customModule="BuckIt" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="d31-X8-1hx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

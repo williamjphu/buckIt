@@ -10,7 +10,7 @@ import UIKit
 import GoogleSignIn
 import FBSDKLoginKit
 import Firebase
-class HomeViewController: UIViewController{
+class SettingsController: UIViewController{
 
     @IBAction func didTapSignOut(sender: AnyObject) {
         

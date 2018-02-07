@@ -47,7 +47,7 @@ class LoginController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDe
      ****/
     @objc func handleBackButton() {
         
-        let landing = ViewController()
+        let landing = HomepageController()
         let navigate = UINavigationController()
         
         navigate.popToViewController(landing, animated: true)
@@ -295,7 +295,7 @@ class LoginController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDe
         {
             DispatchQueue.main.async
             {
-                let vc = UIStoryboard(name: "Profile" , bundle: nil).instantiateViewController(withIdentifier: "userVC")
+                let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
                 
                 self.present(vc, animated: true, completion: nil)            }
         }
@@ -356,7 +356,7 @@ class LoginController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDe
             })
             
             
-            let vc = UIStoryboard(name: "Profile" , bundle: nil).instantiateViewController(withIdentifier: "userVC")
+            let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
             
             self.present(vc, animated: true, completion: nil)
         }

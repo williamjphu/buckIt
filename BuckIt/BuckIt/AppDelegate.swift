@@ -21,16 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        // change rootViewController
-        // Note: Only use this to see changes for each controller so that I don't have to change back
-        // and forth
-        let VC = ViewController()
-        let navigationController = UINavigationController(rootViewController: VC)
-        self.window!.rootViewController = navigationController
-        self.window!.makeKeyAndVisible()
-        //
-        //
-        
         //Firebase
         FirebaseApp.configure()
         
@@ -80,7 +70,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
             
             print("Sucessfully logging to Firebase with Google" , uid)
             
-            let newViewController = UIStoryboard(name: "Profile", bundle: nil).instantiateViewController(withIdentifier: "userVC")
+            let newViewController = UIStoryboard(name: "TabController", bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
             UIApplication.topViewController()?.present(newViewController, animated: true, completion: nil)
             
             

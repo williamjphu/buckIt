@@ -251,7 +251,8 @@ class SignUpController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUID
     
     @objc func handleRegister() {
         
-        let userProfile = SignUpProfileController()
+        let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
+        
         
         guard let email = emailTextField.text, let password = passwordTextField.text
         else {
@@ -269,7 +270,7 @@ class SignUpController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUID
                                             } // end if error !=
                 
                 // once the credentials have been input, move on to user profile set up
-                self.present(userProfile, animated: true, completion: nil)
+                self.present(vc, animated: true, completion: nil)
                                                 
         }) // successfully registered user
         
@@ -277,7 +278,7 @@ class SignUpController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUID
     
     @objc func handleBackButton() {
         
-        let landing = ViewController()
+        let landing = HomepageController()
         present(landing, animated: true, completion: nil)
         
     }
@@ -316,7 +317,7 @@ class SignUpController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUID
         {
             DispatchQueue.main.async
                 {
-                    let vc = UIStoryboard(name: "Profile" , bundle: nil).instantiateViewController(withIdentifier: "userVC")
+                    let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
                     
                     self.present(vc, animated: true, completion: nil)
             }
@@ -332,7 +333,7 @@ class SignUpController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUID
         }
         else if error == nil {
             print("Successfully logged in via facebook")
-            let vc = UIStoryboard(name: "Profile" , bundle: nil).instantiateViewController(withIdentifier: "userVC")
+            let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
             
             self.present(vc, animated: true, completion: nil)
         }
