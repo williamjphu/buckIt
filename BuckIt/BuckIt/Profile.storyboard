@@ -954,7 +954,6 @@
         <image name="settingPic" width="28" height="28"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="CH9-c6-3l9"/>
         <segue reference="SFd-iV-Wop"/>
     </inferredMetricsTieBreakers>
 </document>

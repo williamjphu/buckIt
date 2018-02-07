@@ -25,27 +25,14 @@
             </objects>
             <point key="canvasLocation" x="32.799999999999997" y="75.112443778110944"/>
         </scene>
-        <!--Home View Controller-->
+        <!--Sign Up Profile Controller-->
         <scene sceneID="m18-3m-Vew">
             <objects>
-                <viewController id="NVk-xs-HKS" customClass="HomeViewController" customModule="BuckIt" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="username" id="NVk-xs-HKS" customClass="SignUpProfileController" customModule="BuckIt" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1gL-bV-W3k">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qoK-lg-Bkr">
-                                <rect key="frame" x="164" y="260" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="didTapSignOutWithSender:" destination="NVk-xs-HKS" eventType="touchUpInside" id="eQH-XL-7gU"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="qoK-lg-Bkr" firstAttribute="centerX" secondItem="1gL-bV-W3k" secondAttribute="centerX" id="7Jo-hR-tOA"/>
-                            <constraint firstItem="qoK-lg-Bkr" firstAttribute="top" secondItem="xJP-bh-3KP" secondAttribute="top" constant="240" id="Y5m-Ji-8kx"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="xJP-bh-3KP"/>
                     </view>
                 </viewController>
