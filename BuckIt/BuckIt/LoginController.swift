@@ -47,7 +47,8 @@ class LoginController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDe
      ****/
     @objc func handleBackButton() {
         
-        let landing = ViewController()
+
+        let landing = HomepageController()
         let navigate = UINavigationController()
         
         navigate.popToViewController(landing, animated: true)
@@ -173,7 +174,7 @@ class LoginController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDe
     }()
     
     let forgotPassword: UIButton = {
-        
+
         let recover = UIButton(type: .system)
         recover.backgroundColor = UIColor.clear
         recover.setTitle("Forgot Password?", for: [])
@@ -227,8 +228,9 @@ class LoginController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDe
         // alert the user when email or password is empty
         if( (emailTextField.text?.isEmpty)! || (passwordTextField.text?.isEmpty)! ) {
             let emptyText = UIAlertController(title: "Error",
-                                              message: "Enter email or password",
-                                              preferredStyle: UIAlertControllerStyle.alert)
+
+                                          message: "Enter email or password",
+                                          preferredStyle: UIAlertControllerStyle.alert)
             emptyText.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
             self.present(emptyText, animated: true)
         }
@@ -238,12 +240,10 @@ class LoginController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDe
             { (user, error) in
                 if error == nil {
                     print("User logged in") // print for testing purposes
-                    
                     // alert the user that they have logged in
                     let alert = UIAlertController(title: "User has logged in",
                                                   message: "You have successfully logged in",
                                                   preferredStyle: UIAlertControllerStyle.alert)
-                    
                     // dismiss alert when pressed
                     alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
                     
@@ -251,7 +251,7 @@ class LoginController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDe
                     self.present(alert, animated: true)
                     
                     if let user = user{
-                        let vc = UIStoryboard(name: "Profile" , bundle: nil).instantiateViewController(withIdentifier: "userVC")
+                        let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
                         
                         self.present(vc, animated: true, completion: nil)
                     }
@@ -260,12 +260,14 @@ class LoginController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDe
                     let alert2 = UIAlertController(title: "Error",
                                                    message: "Incorrect user name or password. Please try again",
                                                    preferredStyle: UIAlertControllerStyle.alert)
+
                     
                     // dismiss alert when pressed
                     alert2.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
                     self.present(alert2, animated: true)
                 }
         })
+
     }
     
     
@@ -280,7 +282,6 @@ class LoginController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDe
         loginButton.delegate = self as! FBSDKLoginButtonDelegate
         view.addSubview(loginButton)
     }
-    
     /****
      ** Login button for Gmail login
      ****/
@@ -300,10 +301,10 @@ class LoginController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDe
         if FBSDKAccessToken.current() != nil
         {
             DispatchQueue.main.async
-                {
-                    let vc = UIStoryboard(name: "Profile" , bundle: nil).instantiateViewController(withIdentifier: "userVC")
-                    
-                    self.present(vc, animated: true, completion: nil)            }
+            {
+                let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
+                
+                self.present(vc, animated: true, completion: nil)            }
         }
     }
     
@@ -343,12 +344,16 @@ class LoginController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDe
                 }
                 print("User successfully logged in to Firebase with: ", user ?? "")
                 
-                let vc = UIStoryboard(name: "Profile" , bundle: nil).instantiateViewController(withIdentifier: "userVC")
+                let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
                 
                 self.present(vc, animated: true, completion: nil)
                 
             })
             
+
+            let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
+            
+            self.present(vc, animated: true, completion: nil)
         }
     }
     
