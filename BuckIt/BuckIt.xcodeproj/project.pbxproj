@@ -35,7 +35,7 @@
 		C3B95C2D2022CDFC00836918 /* NewActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B95C2C2022CDFC00836918 /* NewActivityViewController.swift */; };
 		C3B95C2F2022CE1000836918 /* CompletedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B95C2E2022CE1000836918 /* CompletedViewController.swift */; };
 		C3B95C312022CEC600836918 /* TabController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3B95C302022CEC600836918 /* TabController.storyboard */; };
-		DAA9BAE52024279900DFED0B /* SignUpProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA9BAE42024279900DFED0B /* SignUpProfileController.swift */; };
+		E0D6C3232022EC8900721FCE /* SignUpProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D6C3222022EC8900721FCE /* SignUpProfileController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,7 +74,7 @@
 		C3B95C2C2022CDFC00836918 /* NewActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewActivityViewController.swift; sourceTree = "<group>"; };
 		C3B95C2E2022CE1000836918 /* CompletedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedViewController.swift; sourceTree = "<group>"; };
 		C3B95C302022CEC600836918 /* TabController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TabController.storyboard; sourceTree = "<group>"; };
-		DAA9BAE42024279900DFED0B /* SignUpProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpProfileController.swift; sourceTree = "<group>"; };
+		E0D6C3222022EC8900721FCE /* SignUpProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpProfileController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,7 +186,7 @@
 			children = (
 				AE7F9C2820198CAE00420457 /* LoginController.swift */,
 				AE7F9C2920198CAE00420457 /* SignUpController.swift */,
-				DAA9BAE42024279900DFED0B /* SignUpProfileController.swift */,
+				E0D6C3222022EC8900721FCE /* SignUpProfileController.swift */,
 				77D45FBF1FAE96EB0034DDBA /* HomepageController.swift */,
 			);
 			name = "login-homepage";
@@ -344,7 +344,7 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -408,13 +408,13 @@
 				77D45FBE1FAE96EB0034DDBA /* AppDelegate.swift in Sources */,
 				7770EC591FAEB054003F3B11 /* SettingsController.swift in Sources */,
 				AE7F9C1F20198AFE00420457 /* ProfileViewController.swift in Sources */,
+				E0D6C3232022EC8900721FCE /* SignUpProfileController.swift in Sources */,
 				C3B95C2B2022CDE000836918 /* TrendingViewController.swift in Sources */,
 				AE7F9C18201986AF00420457 /* BucketListViewController.swift in Sources */,
 				AE7F9BFE20182E4E00420457 /* MapViewController.swift in Sources */,
 				AE7F9C2320198AFE00420457 /* User.swift in Sources */,
 				C3B95C232022C8D100836918 /* TabBarViewController.swift in Sources */,
 				AE7F9C2220198AFE00420457 /* EditProfileViewController.swift in Sources */,
-				DAA9BAE52024279900DFED0B /* SignUpProfileController.swift in Sources */,
 				AE7F9C2B20198CAE00420457 /* SignUpController.swift in Sources */,
 				C3B95C2D2022CDFC00836918 /* NewActivityViewController.swift in Sources */,
 			);

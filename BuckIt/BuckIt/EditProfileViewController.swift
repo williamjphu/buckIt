@@ -60,7 +60,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         super.viewDidLoad()
         let store = Storage.storage().reference(forURL: "gs://buckit-ed26f.appspot.com")
         userStorage = store.child("profile")
-        
+
         //maximize text input to 80 character
         descriptionText.delegate = self
         userNameText.delegate = self
@@ -118,6 +118,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         return newLength <= 45 // Bool
     }
     var userStorage = StorageReference()
+
     
     @IBAction func saveChange(_ sender: Any) {
         

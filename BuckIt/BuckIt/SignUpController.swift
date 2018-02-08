@@ -145,7 +145,7 @@ class SignUpController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUID
         view.addSubview(passwordTextField)
         view.addSubview(passwordSeparatorView)
         view.addSubview(confirmTextField)
-
+        
         // setup x, y, height, and width for name text field
         nameTextField.leftAnchor.constraint(equalTo:
             inputsContainerView.leftAnchor, constant: 12).isActive = true
@@ -155,7 +155,7 @@ class SignUpController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUID
             inputsContainerView.heightAnchor, multiplier: 1/4).isActive = true
         nameTextField.widthAnchor.constraint(equalTo:
             inputsContainerView.widthAnchor).isActive = true
-
+        
         // setup x, y, height, and width for field separator
         nameSeparatorView.leftAnchor.constraint(equalTo:
             inputsContainerView.leftAnchor).isActive = true
@@ -165,7 +165,7 @@ class SignUpController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUID
             inputsContainerView.widthAnchor).isActive = true
         nameSeparatorView.heightAnchor.constraint(equalToConstant:
             1).isActive = true
-
+        
         // setup x, y, height, and width for emailText field
         emailTextField.leftAnchor.constraint(equalTo:
             inputsContainerView.leftAnchor, constant: 12).isActive = true
@@ -175,7 +175,7 @@ class SignUpController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUID
             inputsContainerView.heightAnchor, multiplier: 1/4).isActive = true
         emailTextField.widthAnchor.constraint(equalTo:
             inputsContainerView.widthAnchor).isActive = true
-
+        
         // setup x, y, height, and width for emailText field separator
         emailSeparatorView.leftAnchor.constraint(equalTo:
             inputsContainerView.leftAnchor).isActive = true
@@ -185,7 +185,7 @@ class SignUpController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUID
             inputsContainerView.widthAnchor).isActive = true
         emailSeparatorView.heightAnchor.constraint(equalToConstant:
             1).isActive = true
-
+        
         // setup x, y, height, and width for password text field
         passwordTextField.leftAnchor.constraint(equalTo:
             inputsContainerView.leftAnchor, constant: 12).isActive = true
@@ -195,7 +195,7 @@ class SignUpController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUID
             inputsContainerView.heightAnchor, multiplier: 1/4).isActive = true
         passwordTextField.widthAnchor.constraint(equalTo:
             inputsContainerView.widthAnchor).isActive = true
-
+        
         // setup x, y, height, and width for password field separator
         passwordSeparatorView.leftAnchor.constraint(equalTo:
             inputsContainerView.leftAnchor).isActive = true
@@ -205,7 +205,7 @@ class SignUpController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUID
             inputsContainerView.widthAnchor).isActive = true
         passwordSeparatorView.heightAnchor.constraint(equalToConstant:
             1).isActive = true
-
+        
         // setup x, y, height, and width for confirm password text field
         confirmTextField.leftAnchor.constraint(equalTo:
             inputsContainerView.leftAnchor, constant: 12).isActive = true
@@ -251,30 +251,53 @@ class SignUpController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUID
     
     @objc func handleRegister() {
         
-        let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
+        let userProfile = SignUpProfileController()
         
-        
-        guard let email = emailTextField.text, let password = passwordTextField.text
-        else {
-                print("Form is not valid")
-            return
+        guard nameTextField.text != "", emailTextField.text != "", passwordTextField.text != "", confirmTextField.text != ""
+            else {
+                // alert the user when fields are empty
+                if( (nameTextField.text?.isEmpty)! || (emailTextField.text?.isEmpty)! || (passwordTextField.text?.isEmpty)! || (confirmTextField.text?.isEmpty)! ) {
+                    let emptyText = UIAlertController(title: "Error",
+                                                      message: "Please fill in all the fields",
+                                                      preferredStyle: UIAlertControllerStyle.alert)
+                    emptyText.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+                    self.present(emptyText, animated: true)
+                }
+                return
         }
         
-        // register the user using their email and password
-        Auth.auth().createUser(withEmail: email, password: password,
-                                         completion: { (user, error) in
-                                                
-                                            if error != nil {
-                                                print(error)
-                                                return
-                                            } // end if error !=
+        if passwordTextField.text == confirmTextField.text
+        {
+            Firebase.Auth.auth().createUser(withEmail: emailTextField.text!, password: passwordTextField.text!, completion: { (user, error) in
                 
-                // once the credentials have been input, move on to user profile set up
-                self.present(vc, animated: true, completion: nil)
-                                                
-        }) // successfully registered user
-        
+                if let error = error
+                {
+                    print(error.localizedDescription)
+                    
+                }
+                if let user = user {
+                    
+                    let userInfo: [String: Any] = ["uid": user.uid,
+                                                   "name": self.nameTextField.text!,
+                                                   "email": user.email]
+                    
+                    self.ref.child("users").child(user.uid).setValue(userInfo)
+                    
+                    let vc = UIStoryboard(name: "Main" , bundle: nil).instantiateViewController(withIdentifier: "username")
+                    
+                    self.present(vc, animated: true, completion: nil)
+                }
+            })
+            
+        } else
+        {
+            print("Password does not match")
+        }
     } // end handle
+    
+    // once the credentials have been input, move on to user profile set up
+    //self.present(userProfile, animated: true, completion: nil)
+
     
     @objc func handleBackButton() {
         
@@ -333,10 +356,33 @@ class SignUpController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUID
         }
         else if error == nil {
             print("Successfully logged in via facebook")
+
             let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
             
             self.present(vc, animated: true, completion: nil)
         }
+        
+        let accessToken = FBSDKAccessToken.current()
+        let credentials = FacebookAuthProvider.credential(withAccessToken: (accessToken?.tokenString)!)
+        
+        Auth.auth().signIn(with: credentials, completion: { (user, err) in
+            if err != nil{
+                print("FB User is wrong", err ?? "")
+            }
+            print("User successfully logged in to Firebase with: ", user ?? "")
+            guard let uid = user?.uid else{
+                return
+            }
+            let ref = Database.database().reference()
+            let usersReference = ref.child("users").child(uid)
+            let values = ["uid": user?.uid,
+                          "name": user?.displayName,
+                          "email": user?.email]
+            
+            self.ref.child("users").child((user?.uid)!).setValue(values)
+            
+        })
+        
     }
     
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
@@ -346,3 +392,4 @@ class SignUpController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUID
     
     
 }
+

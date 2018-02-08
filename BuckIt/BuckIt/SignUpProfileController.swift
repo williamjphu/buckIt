@@ -7,8 +7,13 @@
 //
 
 import UIKit
-
-class SignUpProfileController: UIViewController {
+import Firebase
+class SignUpProfileController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    let picker = UIImagePickerController()
+    var userStorage = StorageReference()
+    var ref = DatabaseReference()
+    
 
     //let userNameTextField = UITextField(frame: CGRect(x: 150, y: 150, width: 300, height: 30))
     
@@ -20,15 +25,68 @@ class SignUpProfileController: UIViewController {
         
         // display views
         view.addSubview(profilePicture)
+        view.addSubview(uploadButton)
         view.addSubview(usernameTextField)
         view.addSubview(submitButton)
         view.addSubview(cancelButton)
-    
+        
         // set up views
         setupProfilePicture()
+        setUploadButton()
         setupUserNameTextField()
         setupSubmitButton()
         setupCancelButton()
+        
+        
+        picker.delegate = self
+        let store = Storage.storage().reference(forURL: "gs://buckit-ed26f.appspot.com")
+        
+        ref = Firebase.Database.database().reference()
+        userStorage = store.child("profile")
+        
+    }
+    
+    //Set the attributes for the Submit button
+    let uploadButton: UIButton = {
+        let upload = UIButton(type: .system)
+        upload.backgroundColor = UIColor(r: 50, g: 205, b: 50)
+        upload.setTitle("Upload", for: [])
+        upload.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        upload.translatesAutoresizingMaskIntoConstraints = false
+        upload.setTitleColor(UIColor.white, for: [])
+        upload.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        upload.layer.borderWidth = 1
+        upload.layer.borderColor = UIColor.clear.cgColor
+        upload.layer.cornerRadius = 5
+        
+        // call the action of the button
+        upload.addTarget(self, action: #selector(setUpload(sender:)), for: .touchUpInside)
+        
+        return upload
+    }()
+    
+    /****
+     ** Setup for the upload button
+     ****/
+    func setUploadButton() {
+        uploadButton.centerXAnchor.constraint(equalTo:
+            view.centerXAnchor).isActive = true
+        uploadButton.bottomAnchor.constraint(equalTo:
+            view.bottomAnchor, constant: -350).isActive = true
+        uploadButton.widthAnchor.constraint(equalTo:
+            view.widthAnchor, constant: -150).isActive = true
+        uploadButton.heightAnchor.constraint(equalToConstant: 45).isActive
+            = true
+    }
+    
+    // upload button action
+    @objc func setUpload(sender: UIButton)
+    {
+        picker.allowsEditing = true
+        picker.sourceType = .photoLibrary
+        
+        present(picker, animated: true, completion: nil)
+        
 
     }
     
@@ -121,6 +179,7 @@ class SignUpProfileController: UIViewController {
         profilePicture.heightAnchor.constraint(equalToConstant:
             150).isActive = true
         profilePicture.layer.cornerRadius = 75
+
     }
     
     /****
@@ -130,7 +189,7 @@ class SignUpProfileController: UIViewController {
         usernameTextField.centerXAnchor.constraint(equalTo:
             view.centerXAnchor).isActive = true
         usernameTextField.topAnchor.constraint(equalTo:
-            view.topAnchor, constant: 275).isActive = true
+            view.topAnchor, constant: 370).isActive = true
         usernameTextField.widthAnchor.constraint(equalTo:
             view.widthAnchor, constant: -24).isActive = true
         usernameTextField.heightAnchor.constraint(equalToConstant:
@@ -165,12 +224,63 @@ class SignUpProfileController: UIViewController {
             = true
     }
     
+
+    @objc func selectImagePressed(_ sender: Any) {
+        picker.allowsEditing = true
+        picker.sourceType = .photoLibrary
+        
+        present(picker, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let image = info[UIImagePickerControllerEditedImage] as? UIImage{
+            self.profilePicture.image = image
+        }
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     /****
      ** The action for when the submit button is tapped
      ****/
     @objc func submitAction(sender: UIButton) {
         // input function here
         print("Profile Submitted")  // test action
+        let uid = Firebase.Auth.auth().currentUser!.uid
+        let ref = Firebase.Database.database().reference()
+        
+        guard usernameTextField.text != "" else { return }
+        
+        
+        let imageRef = self.userStorage.child("\(uid).jpg")
+        let data = UIImageJPEGRepresentation(self.profilePicture.image!, 0.5)
+        let uploadTask = imageRef.putData(data!, metadata: nil, completion: { (metadata, err) in
+            
+            if err != nil{
+                print(err!.localizedDescription)
+            }
+            imageRef.downloadURL(completion: { (url, er) in
+                if er != nil
+                {
+                    print(er!.localizedDescription)
+                }
+                if let url = url
+                {
+                    let picture = ["picture": url.absoluteString]
+                    let username = ["username": self.usernameTextField.text!]
+                    ref.child("users").child(uid).updateChildValues(picture)
+                    ref.child("users").child(uid).updateChildValues(username)
+                    
+                    
+                    let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
+                    
+                    self.present(vc, animated: true, completion: nil)
+                }
+                
+            })
+        })
+        
+        uploadTask.resume()
+
     }
     
     /****
@@ -192,6 +302,10 @@ class SignUpProfileController: UIViewController {
         // change to the designated screen modally
         present(landInPage, animated: false, completion: nil)
         
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Login")
+        present(vc, animated: true, completion: nil)
+        
     }
     
 }
+

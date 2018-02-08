@@ -175,6 +175,7 @@ class HomepageController: UIViewController , FBSDKLoginButtonDelegate, GIDSignIn
         
         if FBSDKAccessToken.current() != nil {
             DispatchQueue.main.async {
+
                 let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
                 
                 self.present(vc, animated: true, completion: nil)            }
@@ -191,6 +192,7 @@ class HomepageController: UIViewController , FBSDKLoginButtonDelegate, GIDSignIn
         }
         else if error == nil {
             print("Successfully logged in via facebook")
+
             let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
             
             self.present(vc, animated: true, completion: nil)        }
