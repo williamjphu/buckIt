@@ -177,18 +177,18 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="plI-MG-Ime">
-                                        <rect key="frame" x="318" y="5" width="30" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="plI-MG-Ime">
+                                        <rect key="frame" x="267" y="8" width="108" height="25"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Edit"/>
+                                        <state key="normal" image="editprofile"/>
                                         <connections>
                                             <segue destination="7pC-uw-Ekz" kind="show" id="g2t-nv-bim"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mAB-Vt-JVj">
-                                        <rect key="frame" x="239" y="5" width="48" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mAB-Vt-JVj">
+                                        <rect key="frame" x="214" y="5" width="45" height="28"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Logout"/>
+                                        <state key="normal" image="Image_8"/>
                                         <connections>
                                             <segue destination="BmH-G5-bd0" kind="show" id="hbO-DA-28s"/>
                                         </connections>
@@ -757,6 +757,14 @@
                                     <action selector="didTapSignOutWithSender:" destination="BmH-G5-bd0" eventType="touchUpInside" id="uws-Vt-HTt"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TzA-mZ-kbY">
+                                <rect key="frame" x="16" y="15" width="34" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="back"/>
+                                <connections>
+                                    <segue destination="E5V-Bl-O5e" kind="show" id="tkP-Zg-S6H"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -800,21 +808,24 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lun-Ka-mkc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3032.8000000000002" y="896.40179910044981"/>
+            <point key="canvasLocation" x="1837.5999999999999" y="1642.128935532234"/>
         </scene>
     </scenes>
     <resources>
         <image name="Help" width="36" height="19"/>
+        <image name="Image_8" width="28" height="28"/>
         <image name="Profile" width="32" height="32"/>
         <image name="about" width="46" height="19"/>
         <image name="back" width="78" height="29"/>
         <image name="cancel-button" width="342" height="45"/>
+        <image name="editprofile" width="100" height="25"/>
         <image name="profile-icon-9" width="512" height="512"/>
         <image name="save-button" width="342" height="45"/>
         <image name="settingPic" width="28" height="28"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="hbO-DA-28s"/>
         <segue reference="psZ-yb-yI0"/>
-        <segue reference="v46-ym-CGC"/>
+        <segue reference="tkP-Zg-S6H"/>
     </inferredMetricsTieBreakers>
 </document>

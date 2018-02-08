@@ -283,7 +283,7 @@ class SignUpController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUID
                     
                     self.ref.child("users").child(user.uid).setValue(userInfo)
                     
-                    let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
+                    let vc = UIStoryboard(name: "Main" , bundle: nil).instantiateViewController(withIdentifier: "username")
                     
                     self.present(vc, animated: true, completion: nil)
                 }
