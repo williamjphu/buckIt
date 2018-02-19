@@ -10,51 +10,64 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Homepage Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="BuckIt" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Login" id="BYZ-38-t0r" customClass="HomepageController" customModule="BuckIt" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <connections>
-                        <segue destination="pJe-rQ-5hr" kind="presentation" identifier="showHome" id="Ag5-3K-7gB"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="32.799999999999997" y="75.112443778110944"/>
         </scene>
-        <!--Home View Controller-->
-        <scene sceneID="SO4-GV-rxx">
+        <!--Sign Up Profile Controller-->
+        <scene sceneID="m18-3m-Vew">
             <objects>
-                <viewController storyboardIdentifier="HomeViewController" id="pJe-rQ-5hr" customClass="HomeViewController" customModule="BuckIt" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="OcD-Zt-dPa">
+                <viewController storyboardIdentifier="username" id="NVk-xs-HKS" customClass="SignUpProfileController" customModule="BuckIt" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1gL-bV-W3k">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="xJP-bh-3KP"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WGf-6M-6pt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="974" y="73"/>
+        </scene>
+        <!--Home View Controller-->
+        <scene sceneID="wEC-ir-3e2">
+            <objects>
+                <viewController id="Ue1-o7-RZ4" customClass="HomeViewController" customModule="BuckIt" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="NLh-zn-Axh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7J2-xr-qqD">
-                                <rect key="frame" x="74" y="101" width="227" height="43"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Logout"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UYa-gz-r1y">
+                                <rect key="frame" x="83" y="194" width="207" height="30"/>
+                                <state key="normal" title="Log out"/>
                                 <connections>
-                                    <action selector="didTapSignOutWithSender:" destination="pJe-rQ-5hr" eventType="touchUpInside" id="e33-YS-LTF"/>
+                                    <action selector="didTapSignOutWithSender:" destination="Ue1-o7-RZ4" eventType="touchUpInside" id="9EF-Na-TiZ"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <viewLayoutGuide key="safeArea" id="IEk-Ip-Pxq"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="UYa-gz-r1y" firstAttribute="top" secondItem="EPE-Ht-4B3" secondAttribute="top" constant="174" id="kps-tH-nBm"/>
+                            <constraint firstItem="EPE-Ht-4B3" firstAttribute="trailing" secondItem="UYa-gz-r1y" secondAttribute="trailing" constant="85" id="mFo-mq-G3g"/>
+                            <constraint firstItem="UYa-gz-r1y" firstAttribute="leading" secondItem="EPE-Ht-4B3" secondAttribute="leading" constant="83" id="yv1-C1-EUo"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="EPE-Ht-4B3"/>
                     </view>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="login" id="Ka7-BN-Aqw"/>
-                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="kWq-TT-0la" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qJu-V1-iXh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1005.6" y="74.212893553223395"/>
+            <point key="canvasLocation" x="3527" y="46"/>
         </scene>
     </scenes>
 </document>
