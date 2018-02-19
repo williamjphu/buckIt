@@ -68,6 +68,7 @@ PODS:
   - GTMSessionFetcher/Full (1.1.12):
     - GTMSessionFetcher/Core (= 1.1.12)
   - leveldb-library (1.20)
+  - Mapbox-iOS-SDK (3.7.3)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
     - nanopb/encode (= 0.3.8)
@@ -87,6 +88,7 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/Storage
   - GoogleSignIn
+  - Mapbox-iOS-SDK (~> 3.7)
   - PopupDialog (~> 0.7)
   - SwipeCellKit
   - UITextView+Placeholder
@@ -109,11 +111,12 @@ SPEC CHECKSUMS:
   GTMOAuth2: be83fd28d63ae3087e7d351b1f39c1a7e24ab6e7
   GTMSessionFetcher: ebaa1f79a5366922c1735f1566901f50beba23b7
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
+  Mapbox-iOS-SDK: 5304bd9605babe6da9050ea4cb23c1671420b737
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   PopupDialog: 4abc6db5b22b7c8029e2162bde8891ee6aa4b6c8
   SwipeCellKit: 76888d93d1843dc568fdf38fff21b15dbbcf6b28
   UITextView+Placeholder: 77680995fcdd07c3f52ec92fe1150874a2ac89ff
 
-PODFILE CHECKSUM: f8bb0849ba002325c27168ab6e3e511bef2afc9c
+PODFILE CHECKSUM: 7969dd246a97235e0e45a68a6f80cc3949fe3cf8
 
-COCOAPODS: 1.3.1
+COCOAPODS: 1.4.0

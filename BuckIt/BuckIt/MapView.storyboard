@@ -10,48 +10,21 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Map View Controller-->
+        <!--View Controller-->
         <scene sceneID="rHf-7W-2nn">
             <objects>
-                <viewController id="yP7-1q-uae" customClass="MapViewController" customModule="BuckIt" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="OT3-VT-oXs">
+                <viewController id="yP7-1q-uae" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="OT3-VT-oXs" customClass="MGLMapView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="JY5-El-f4I">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="625"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </mapView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search for an event ..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="viU-dl-8et">
-                                <rect key="frame" x="30" y="25" width="315" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2XB-zd-ymn">
-                                <rect key="frame" x="315" y="25" width="30" height="30"/>
-                                <state key="normal" title="🕵️‍♂️"/>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="JY5-El-f4I" firstAttribute="trailing" secondItem="5kj-Pj-nBO" secondAttribute="trailing" id="3ad-zL-6us"/>
-                            <constraint firstItem="5kj-Pj-nBO" firstAttribute="trailing" secondItem="2XB-zd-ymn" secondAttribute="trailing" constant="30" id="7YQ-6M-cxh"/>
-                            <constraint firstItem="2XB-zd-ymn" firstAttribute="top" secondItem="5kj-Pj-nBO" secondAttribute="top" constant="5" id="AK7-Wa-ugc"/>
-                            <constraint firstItem="JY5-El-f4I" firstAttribute="bottom" secondItem="5kj-Pj-nBO" secondAttribute="bottom" id="AyM-ez-r4Y"/>
-                            <constraint firstItem="viU-dl-8et" firstAttribute="top" secondItem="5kj-Pj-nBO" secondAttribute="top" constant="5" id="RiF-oV-l1m"/>
-                            <constraint firstItem="JY5-El-f4I" firstAttribute="top" secondItem="OT3-VT-oXs" secondAttribute="top" id="alH-rE-yiG"/>
-                            <constraint firstItem="5kj-Pj-nBO" firstAttribute="trailing" secondItem="viU-dl-8et" secondAttribute="trailing" constant="30" id="irh-gK-pdL"/>
-                            <constraint firstItem="JY5-El-f4I" firstAttribute="leading" secondItem="5kj-Pj-nBO" secondAttribute="leading" id="qyR-YC-dg7"/>
-                            <constraint firstItem="viU-dl-8et" firstAttribute="leading" secondItem="5kj-Pj-nBO" secondAttribute="leading" constant="30" id="w5q-gW-9o9"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="5kj-Pj-nBO"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="styleURL__" value="mapbox://styles/mapbox/outdoors-v10"/>
+                        </userDefinedRuntimeAttributes>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="Globe" id="MMW-Ac-UOF"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <outlet property="mapView" destination="JY5-El-f4I" id="nno-FK-XkT"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="std-eG-5Xv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
