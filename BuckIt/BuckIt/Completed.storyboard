@@ -30,11 +30,12 @@
                         <viewLayoutGuide key="safeArea" id="r8j-US-DVO"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="Complete" id="Lip-hD-Lsl"/>
+                    <navigationItem key="navigationItem" id="IxE-wI-ffu"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gNO-sh-29g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="20" y="105"/>
+            <point key="canvasLocation" x="-183" y="384"/>
         </scene>
     </scenes>
     <resources>
