@@ -25,6 +25,7 @@
 		AE7F9C2320198AFE00420457 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F9C1E20198AFE00420457 /* User.swift */; };
 		AE7F9C2A20198CAE00420457 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F9C2820198CAE00420457 /* LoginController.swift */; };
 		AE7F9C2B20198CAE00420457 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F9C2920198CAE00420457 /* SignUpController.swift */; };
+		C36DBBD320352A1600776F2B /* NewBucketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36DBBD220352A1600776F2B /* NewBucketViewController.swift */; };
 		C397DF2C1FB5B08A00D6C0AF /* Pods_BuckIt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C397DF2D1FB5B08A00D6C0AF /* Pods_BuckIt.framework */; };
 		C397DF2F1FB5B19000D6C0AF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C397DF2E1FB5B19000D6C0AF /* GoogleService-Info.plist */; };
 		C3B95C232022C8D100836918 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B95C222022C8D100836918 /* TabBarViewController.swift */; };
@@ -62,6 +63,7 @@
 		AE7F9C2820198CAE00420457 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		AE7F9C2920198CAE00420457 /* SignUpController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
 		B29BF32C00461D384F3C4620 /* Pods-BuckIt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuckIt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BuckIt/Pods-BuckIt.debug.xcconfig"; sourceTree = "<group>"; };
+		C36DBBD220352A1600776F2B /* NewBucketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewBucketViewController.swift; sourceTree = "<group>"; };
 		C397DF291FB5B05F00D6C0AF /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C397DF2B1FB5B06500D6C0AF /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C397DF2D1FB5B08A00D6C0AF /* Pods_BuckIt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_BuckIt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -165,6 +167,7 @@
 			children = (
 				AE7F9C15201986AF00420457 /* BucketListViewController.swift */,
 				AE7F9C13201986AE00420457 /* BucketPage.storyboard */,
+				C36DBBD220352A1600776F2B /* NewBucketViewController.swift */,
 			);
 			name = "bucket-page";
 			sourceTree = "<group>";
@@ -344,7 +347,7 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -417,6 +420,7 @@
 				AE7F9C2220198AFE00420457 /* EditProfileViewController.swift in Sources */,
 				AE7F9C2B20198CAE00420457 /* SignUpController.swift in Sources */,
 				C3B95C2D2022CDFC00836918 /* NewActivityViewController.swift in Sources */,
+				C36DBBD320352A1600776F2B /* NewBucketViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
