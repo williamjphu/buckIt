@@ -81,8 +81,8 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                         self.userNameText.text = value["username"] as? String
                         self.descriptionText.text = value["description"] as? String
                         let databaseProfilePic = value["picture"] as? String
-                        let data = NSData(contentsOf: NSURL(string: databaseProfilePic!)! as URL)
-                        self.setProfilePicture(imageView: self.imageView, imageToSet: UIImage(data:data! as Data)!)
+                        //let data = NSData(contentsOf: NSURL(string: databaseProfilePic!)! as URL)
+                        //self.setProfilePicture(imageView: self.imageView, imageToSet: UIImage(data:data! as Data)!)
                     }
                 }
             }
