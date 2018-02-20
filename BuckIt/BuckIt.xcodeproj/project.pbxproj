@@ -166,8 +166,8 @@
 			isa = PBXGroup;
 			children = (
 				AE7F9C15201986AF00420457 /* BucketListViewController.swift */,
-				AE7F9C13201986AE00420457 /* BucketPage.storyboard */,
 				C36DBBD220352A1600776F2B /* NewBucketViewController.swift */,
+				AE7F9C13201986AE00420457 /* BucketPage.storyboard */,
 			);
 			name = "bucket-page";
 			sourceTree = "<group>";
