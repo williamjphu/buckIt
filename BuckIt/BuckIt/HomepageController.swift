@@ -5,13 +5,12 @@
 //  Created by Samnang Sok on 11/4/17.
 //  Copyright © 2017 Samnang Sok. All rights reserved.
 //
-
 import UIKit
 import FBSDKLoginKit
 import GoogleSignIn
 
-class ViewController: UIViewController , FBSDKLoginButtonDelegate, GIDSignInUIDelegate{
-  
+class HomepageController: UIViewController , FBSDKLoginButtonDelegate, GIDSignInUIDelegate{
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -146,17 +145,18 @@ class ViewController: UIViewController , FBSDKLoginButtonDelegate, GIDSignInUIDe
     
     @objc func handleBackButton() {
         
-        let landing = ViewController()
+        let landing = HomepageController()
         present(landing, animated: true, completion: nil)
         
     }
-
+    
     fileprivate func setupFacebookButton(){
         //Draw Facebook sign in button
         let loginButton = FBSDKLoginButton()
         view.addSubview(loginButton)
         loginButton.frame = CGRect(x: 16, y: 50, width: view.frame.width - 32, height: 50)
         loginButton.delegate = self
+        loginButton.readPermissions = ["email", "public_profile"]
     }
     
     fileprivate func setupGoogleButton(){
@@ -172,13 +172,15 @@ class ViewController: UIViewController , FBSDKLoginButtonDelegate, GIDSignInUIDe
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         if FBSDKAccessToken.current() != nil {
             DispatchQueue.main.async {
-                self.performSegue(withIdentifier: "showHome", sender: self)
-            }
-        }
 
+                let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
+                
+                self.present(vc, animated: true, completion: nil)            }
+        }
+        
     }
     
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
@@ -190,16 +192,18 @@ class ViewController: UIViewController , FBSDKLoginButtonDelegate, GIDSignInUIDe
         }
         else if error == nil {
             print("Successfully logged in via facebook")
-            self.performSegue(withIdentifier: "showHome", sender: self)
-        }
+
+            let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
+            
+            self.present(vc, animated: true, completion: nil)        }
     }
     
-
+    
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
         print("Logged out of Facebook")
     }
-
-
+    
+    
 }
 
 // Create UIColor RGB object
