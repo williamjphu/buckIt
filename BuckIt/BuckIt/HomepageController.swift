@@ -193,7 +193,7 @@ class HomepageController: UIViewController , FBSDKLoginButtonDelegate, GIDSignIn
         else if error == nil {
             print("Successfully logged in via facebook")
 
-            let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
+            let vc = UIStoryboard(name: "Main" , bundle: nil).instantiateViewController(withIdentifier: "username")
             
             self.present(vc, animated: true, completion: nil)        }
     }

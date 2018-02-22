@@ -53,6 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
                 print("Failed to create a Firebase User with Google Account: " , err)
                 return
             }
+             
             guard let uid = user?.uid else {return}
             
             let ref = Database.database().reference()
@@ -69,7 +70,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
             
             print("Sucessfully logging to Firebase with Google" , uid)
             
-            let newViewController = UIStoryboard(name: "TabController", bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
+            let newViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "username")
             UIApplication.topViewController()?.present(newViewController, animated: true, completion: nil)
             
             

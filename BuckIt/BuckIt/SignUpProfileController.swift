@@ -28,14 +28,12 @@ class SignUpProfileController: UIViewController, UIImagePickerControllerDelegate
         view.addSubview(uploadButton)
         view.addSubview(usernameTextField)
         view.addSubview(submitButton)
-        view.addSubview(cancelButton)
         
         // set up views
         setupProfilePicture()
         setUploadButton()
         setupUserNameTextField()
         setupSubmitButton()
-        setupCancelButton()
         
         
         picker.delegate = self
@@ -141,26 +139,6 @@ class SignUpProfileController: UIViewController, UIImagePickerControllerDelegate
         return submit
     }()
     
-    /****
-     ** Set the attributes for the Cancel button
-     ****/
-    let cancelButton: UIButton = {
-        let cancel = UIButton(type: .system)
-        cancel.backgroundColor = UIColor(r: 255, g: 0, b: 0)
-        cancel.setTitle("CANCEL", for: [])
-        cancel.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-        cancel.translatesAutoresizingMaskIntoConstraints = false
-        cancel.setTitleColor(UIColor.white, for: [])
-        cancel.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-        cancel.layer.borderWidth = 1
-        cancel.layer.borderColor = UIColor.clear.cgColor
-        cancel.layer.cornerRadius = 5
-        
-        // call the action of the button
-        cancel.addTarget(self, action: #selector(cancelAction(sender:)), for: .touchUpInside)
-        
-        return cancel
-    }()
     
     /****
      ** Setup round image for the user's profile picture.
@@ -207,20 +185,6 @@ class SignUpProfileController: UIViewController, UIImagePickerControllerDelegate
         submitButton.widthAnchor.constraint(equalTo:
             view.widthAnchor, constant: -24).isActive = true
         submitButton.heightAnchor.constraint(equalToConstant: 45).isActive
-            = true
-    }
-    
-    /****
-     ** Setup for the Cancel button
-     ****/
-    func setupCancelButton() {
-        cancelButton.centerXAnchor.constraint(equalTo:
-            view.centerXAnchor).isActive = true
-        cancelButton.bottomAnchor.constraint(equalTo:
-            view.bottomAnchor, constant: -45).isActive = true
-        cancelButton.widthAnchor.constraint(equalTo:
-            view.widthAnchor, constant: -24).isActive = true
-        cancelButton.heightAnchor.constraint(equalToConstant: 45).isActive
             = true
     }
     
@@ -283,29 +247,6 @@ class SignUpProfileController: UIViewController, UIImagePickerControllerDelegate
 
     }
     
-    /****
-     ** The action to cancel when inputting username and profile picture.
-     ** Cancelling will go back to the sign up page.
-     ****/
-    @objc func cancelAction(sender: UIButton) {
-        
-        // transition from left to right and going back
-        // to the sign up page
-        let landInPage = SignUpController()
-        let transition = CATransition()
-        transition.duration = 0.5
-        transition.type = kCATransitionPush
-        transition.subtype = kCATransitionFromLeft
-        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        view.window!.layer.add(transition, forKey: kCATransition)
-        
-        // change to the designated screen modally
-        present(landInPage, animated: false, completion: nil)
-        
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Login")
-        present(vc, animated: true, completion: nil)
-        
-    }
     
 }
 
