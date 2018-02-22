@@ -12,6 +12,7 @@ pod ‘FBSDKLoginKit’
 pod 'Firebase/Auth’
 pod 'GoogleSignIn'
 pod 'SwipeCellKit'
+pod 'UITextView+Placeholder'
 pod 'PopupDialog', '~> 0.7'
 pod 'Firebase/Core'
 pod 'Firebase/Storage'

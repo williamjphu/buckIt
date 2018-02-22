@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7770EC591FAEB054003F3B11 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7770EC581FAEB054003F3B11 /* HomeViewController.swift */; };
+		7770EC591FAEB054003F3B11 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7770EC581FAEB054003F3B11 /* SettingsController.swift */; };
 		77D45FBE1FAE96EB0034DDBA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D45FBD1FAE96EB0034DDBA /* AppDelegate.swift */; };
-		77D45FC01FAE96EB0034DDBA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D45FBF1FAE96EB0034DDBA /* ViewController.swift */; };
+		77D45FC01FAE96EB0034DDBA /* HomepageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D45FBF1FAE96EB0034DDBA /* HomepageController.swift */; };
 		77D45FC31FAE96EB0034DDBA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77D45FC11FAE96EB0034DDBA /* Main.storyboard */; };
 		77D45FC51FAE96EB0034DDBA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77D45FC41FAE96EB0034DDBA /* Assets.xcassets */; };
 		77D45FC81FAE96EB0034DDBA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77D45FC61FAE96EB0034DDBA /* LaunchScreen.storyboard */; };
@@ -25,17 +25,27 @@
 		AE7F9C2320198AFE00420457 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F9C1E20198AFE00420457 /* User.swift */; };
 		AE7F9C2A20198CAE00420457 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F9C2820198CAE00420457 /* LoginController.swift */; };
 		AE7F9C2B20198CAE00420457 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F9C2920198CAE00420457 /* SignUpController.swift */; };
+		C36DBBD320352A1600776F2B /* NewBucketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36DBBD220352A1600776F2B /* NewBucketViewController.swift */; };
 		C397DF2C1FB5B08A00D6C0AF /* Pods_BuckIt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C397DF2D1FB5B08A00D6C0AF /* Pods_BuckIt.framework */; };
 		C397DF2F1FB5B19000D6C0AF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C397DF2E1FB5B19000D6C0AF /* GoogleService-Info.plist */; };
+		C3B95C232022C8D100836918 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B95C222022C8D100836918 /* TabBarViewController.swift */; };
+		C3B95C252022CD5A00836918 /* Trending.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3B95C242022CD5A00836918 /* Trending.storyboard */; };
+		C3B95C272022CD8300836918 /* NewActivity.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3B95C262022CD8300836918 /* NewActivity.storyboard */; };
+		C3B95C292022CDA800836918 /* Completed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3B95C282022CDA800836918 /* Completed.storyboard */; };
+		C3B95C2B2022CDE000836918 /* TrendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B95C2A2022CDE000836918 /* TrendingViewController.swift */; };
+		C3B95C2D2022CDFC00836918 /* NewActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B95C2C2022CDFC00836918 /* NewActivityViewController.swift */; };
+		C3B95C2F2022CE1000836918 /* CompletedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B95C2E2022CE1000836918 /* CompletedViewController.swift */; };
+		C3B95C312022CEC600836918 /* TabController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3B95C302022CEC600836918 /* TabController.storyboard */; };
+		E0D6C3232022EC8900721FCE /* SignUpProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D6C3222022EC8900721FCE /* SignUpProfileController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		166D2B8B926599B77BC72311 /* Pods_BuckIt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BuckIt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B5944A0585E1AA42CEFF7F4 /* Pods-BuckIt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuckIt.release.xcconfig"; path = "Pods/Target Support Files/Pods-BuckIt/Pods-BuckIt.release.xcconfig"; sourceTree = "<group>"; };
-		7770EC581FAEB054003F3B11 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		7770EC581FAEB054003F3B11 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		77D45FBA1FAE96EB0034DDBA /* BuckIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BuckIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77D45FBD1FAE96EB0034DDBA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		77D45FBF1FAE96EB0034DDBA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		77D45FBF1FAE96EB0034DDBA /* HomepageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomepageController.swift; sourceTree = "<group>"; };
 		77D45FC21FAE96EB0034DDBA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		77D45FC41FAE96EB0034DDBA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		77D45FC71FAE96EB0034DDBA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -53,10 +63,20 @@
 		AE7F9C2820198CAE00420457 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		AE7F9C2920198CAE00420457 /* SignUpController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
 		B29BF32C00461D384F3C4620 /* Pods-BuckIt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuckIt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BuckIt/Pods-BuckIt.debug.xcconfig"; sourceTree = "<group>"; };
+		C36DBBD220352A1600776F2B /* NewBucketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewBucketViewController.swift; sourceTree = "<group>"; };
 		C397DF291FB5B05F00D6C0AF /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C397DF2B1FB5B06500D6C0AF /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C397DF2D1FB5B08A00D6C0AF /* Pods_BuckIt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_BuckIt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C397DF2E1FB5B19000D6C0AF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		C3B95C222022C8D100836918 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		C3B95C242022CD5A00836918 /* Trending.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Trending.storyboard; sourceTree = "<group>"; };
+		C3B95C262022CD8300836918 /* NewActivity.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewActivity.storyboard; sourceTree = "<group>"; };
+		C3B95C282022CDA800836918 /* Completed.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Completed.storyboard; sourceTree = "<group>"; };
+		C3B95C2A2022CDE000836918 /* TrendingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingViewController.swift; sourceTree = "<group>"; };
+		C3B95C2C2022CDFC00836918 /* NewActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewActivityViewController.swift; sourceTree = "<group>"; };
+		C3B95C2E2022CE1000836918 /* CompletedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedViewController.swift; sourceTree = "<group>"; };
+		C3B95C302022CEC600836918 /* TabController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TabController.storyboard; sourceTree = "<group>"; };
+		E0D6C3222022EC8900721FCE /* SignUpProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpProfileController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,9 +122,9 @@
 			isa = PBXGroup;
 			children = (
 				AE7F9C2D20198D9D00420457 /* New Group4 */,
-				AE7F9C2C20198D9500420457 /* New Group3 */,
-				AE7F9C2720198BBA00420457 /* New Group2 */,
-				AE7F9C2620198BB700420457 /* New Group1 */,
+				AE7F9C2C20198D9500420457 /* Completed */,
+				AE7F9C2720198BBA00420457 /* New Activity */,
+				AE7F9C2620198BB700420457 /* Trending */,
 				AE7F9C2520198BB000420457 /* Models */,
 				AE7F9C2420198BA400420457 /* login-homepage */,
 				AE7F9C1920198ADB00420457 /* profile */,
@@ -116,6 +136,8 @@
 				77D45FC61FAE96EB0034DDBA /* LaunchScreen.storyboard */,
 				77D45FC91FAE96EB0034DDBA /* Info.plist */,
 				C397DF2E1FB5B19000D6C0AF /* GoogleService-Info.plist */,
+				C3B95C222022C8D100836918 /* TabBarViewController.swift */,
+				C3B95C302022CEC600836918 /* TabController.storyboard */,
 			);
 			path = BuckIt;
 			sourceTree = "<group>";
@@ -144,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				AE7F9C15201986AF00420457 /* BucketListViewController.swift */,
+				C36DBBD220352A1600776F2B /* NewBucketViewController.swift */,
 				AE7F9C13201986AE00420457 /* BucketPage.storyboard */,
 			);
 			name = "bucket-page";
@@ -152,6 +175,7 @@
 		AE7F9C1920198ADB00420457 /* profile */ = {
 			isa = PBXGroup;
 			children = (
+				7770EC581FAEB054003F3B11 /* SettingsController.swift */,
 				AE7F9C1D20198AFE00420457 /* EditProfileViewController.swift */,
 				AE7F9C1C20198AFE00420457 /* Profile.storyboard */,
 				AE7F9C1A20198AFE00420457 /* ProfileViewController.swift */,
@@ -163,10 +187,10 @@
 		AE7F9C2420198BA400420457 /* login-homepage */ = {
 			isa = PBXGroup;
 			children = (
-				7770EC581FAEB054003F3B11 /* HomeViewController.swift */,
 				AE7F9C2820198CAE00420457 /* LoginController.swift */,
 				AE7F9C2920198CAE00420457 /* SignUpController.swift */,
-				77D45FBF1FAE96EB0034DDBA /* ViewController.swift */,
+				E0D6C3222022EC8900721FCE /* SignUpProfileController.swift */,
+				77D45FBF1FAE96EB0034DDBA /* HomepageController.swift */,
 			);
 			name = "login-homepage";
 			sourceTree = "<group>";
@@ -180,25 +204,31 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
-		AE7F9C2620198BB700420457 /* New Group1 */ = {
+		AE7F9C2620198BB700420457 /* Trending */ = {
 			isa = PBXGroup;
 			children = (
+				C3B95C242022CD5A00836918 /* Trending.storyboard */,
+				C3B95C2A2022CDE000836918 /* TrendingViewController.swift */,
 			);
-			name = "New Group1";
+			name = Trending;
 			sourceTree = "<group>";
 		};
-		AE7F9C2720198BBA00420457 /* New Group2 */ = {
+		AE7F9C2720198BBA00420457 /* New Activity */ = {
 			isa = PBXGroup;
 			children = (
+				C3B95C262022CD8300836918 /* NewActivity.storyboard */,
+				C3B95C2C2022CDFC00836918 /* NewActivityViewController.swift */,
 			);
-			name = "New Group2";
+			name = "New Activity";
 			sourceTree = "<group>";
 		};
-		AE7F9C2C20198D9500420457 /* New Group3 */ = {
+		AE7F9C2C20198D9500420457 /* Completed */ = {
 			isa = PBXGroup;
 			children = (
+				C3B95C282022CDA800836918 /* Completed.storyboard */,
+				C3B95C2E2022CE1000836918 /* CompletedViewController.swift */,
 			);
-			name = "New Group3";
+			name = Completed;
 			sourceTree = "<group>";
 		};
 		AE7F9C2D20198D9D00420457 /* New Group4 */ = {
@@ -276,8 +306,12 @@
 				C397DF2F1FB5B19000D6C0AF /* GoogleService-Info.plist in Resources */,
 				77D45FC51FAE96EB0034DDBA /* Assets.xcassets in Resources */,
 				AE7F9BFC20182E3F00420457 /* MapView.storyboard in Resources */,
+				C3B95C252022CD5A00836918 /* Trending.storyboard in Resources */,
+				C3B95C292022CDA800836918 /* Completed.storyboard in Resources */,
+				C3B95C312022CEC600836918 /* TabController.storyboard in Resources */,
 				AE7F9C2120198AFE00420457 /* Profile.storyboard in Resources */,
 				77D45FC31FAE96EB0034DDBA /* Main.storyboard in Resources */,
+				C3B95C272022CD8300836918 /* NewActivity.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,6 +371,7 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/PopupDialog/PopupDialog.framework",
 				"${BUILT_PRODUCTS_DIR}/SwipeCellKit/SwipeCellKit.framework",
+				"${BUILT_PRODUCTS_DIR}/UITextView+Placeholder/UITextView_Placeholder.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -352,6 +387,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PopupDialog.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwipeCellKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UITextView_Placeholder.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -370,15 +406,21 @@
 				AE7F9C2A20198CAE00420457 /* LoginController.swift in Sources */,
 				AE7F9C17201986AF00420457 /* Activity.swift in Sources */,
 				AE7F9C2020198AFE00420457 /* TableViewCell.swift in Sources */,
-				77D45FC01FAE96EB0034DDBA /* ViewController.swift in Sources */,
+				77D45FC01FAE96EB0034DDBA /* HomepageController.swift in Sources */,
+				C3B95C2F2022CE1000836918 /* CompletedViewController.swift in Sources */,
 				77D45FBE1FAE96EB0034DDBA /* AppDelegate.swift in Sources */,
-				7770EC591FAEB054003F3B11 /* HomeViewController.swift in Sources */,
+				7770EC591FAEB054003F3B11 /* SettingsController.swift in Sources */,
 				AE7F9C1F20198AFE00420457 /* ProfileViewController.swift in Sources */,
+				E0D6C3232022EC8900721FCE /* SignUpProfileController.swift in Sources */,
+				C3B95C2B2022CDE000836918 /* TrendingViewController.swift in Sources */,
 				AE7F9C18201986AF00420457 /* BucketListViewController.swift in Sources */,
 				AE7F9BFE20182E4E00420457 /* MapViewController.swift in Sources */,
 				AE7F9C2320198AFE00420457 /* User.swift in Sources */,
+				C3B95C232022C8D100836918 /* TabBarViewController.swift in Sources */,
 				AE7F9C2220198AFE00420457 /* EditProfileViewController.swift in Sources */,
 				AE7F9C2B20198CAE00420457 /* SignUpController.swift in Sources */,
+				C3B95C2D2022CDFC00836918 /* NewActivityViewController.swift in Sources */,
+				C36DBBD320352A1600776F2B /* NewBucketViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
