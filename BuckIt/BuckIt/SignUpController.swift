@@ -329,23 +329,6 @@ class SignUpController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUID
         view.addSubview(googleButton)
     }
     
-    override func viewWillAppear(_ animated: Bool)
-    {
-        super.viewWillAppear(animated)
-        
-        navigationController?.navigationItem.title = "TITLE"
-        
-        
-        if FBSDKAccessToken.current() != nil
-        {
-            DispatchQueue.main.async
-                {
-                    let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
-                    
-                    self.present(vc, animated: true, completion: nil)
-            }
-        }
-    }
     
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         if error != nil {

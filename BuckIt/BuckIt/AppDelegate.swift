@@ -57,6 +57,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
             guard let uid = user?.uid else {return}
             
             let ref = Database.database().reference()
+            let theUserUID = Auth.auth().currentUser?.uid
+
+            ref.child("users").observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
+                if !snapshot.hasChild(theUserUID!)
+                {
             let usersReference = ref.child("users").child(uid)
             let values = ["uid": user?.uid,
                           "name": user?.displayName,
@@ -69,12 +74,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
             })
             
             print("Sucessfully logging to Firebase with Google" , uid)
-            
             let newViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "username")
             UIApplication.topViewController()?.present(newViewController, animated: true, completion: nil)
-            
-            
-        })
+                }else
+                {
+                    let newViewController = UIStoryboard(name: "TabController", bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
+                    UIApplication.topViewController()?.present(newViewController, animated: true, completion: nil)
+                    }
+            })
+        
+            })
+        
     }
     
     

@@ -285,20 +285,6 @@ class LoginController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDe
         view.addSubview(googleButton)
     }
 
-    override func viewWillAppear(_ animated: Bool)
-    {
-        super.viewWillAppear(animated)
-
-        if FBSDKAccessToken.current() != nil
-        {
-            DispatchQueue.main.async
-            {
-                let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
-
-                self.present(vc, animated: true, completion: nil)            }
-        }
-    }
-
     /****
      ** Login button using Facebook
      ****/
@@ -310,10 +296,8 @@ class LoginController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDe
             //welcomeMessage.text = "Authentication was canceled"
         }
         else if error == nil {
-            print("Successfully logged in via facebook")
             let accessToken = FBSDKAccessToken.current()
             let credentials = FacebookAuthProvider.credential(withAccessToken: (accessToken?.tokenString)!)
-            var imageStringUrl : String?
 
             let graphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"picture.type(large)"])
             graphRequest?.start(completionHandler: { (connection, result, error) in
@@ -324,27 +308,44 @@ class LoginController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDe
                 if let resultDic = result as? NSDictionary {
                     let data = resultDic["picture"] as? NSDictionary
                     let dataDict = data!["data"] as? NSDictionary
-                    imageStringUrl = dataDict!["url"] as? String
+                  
                 }
             })
-
-
+           
+            //Facebook login
             Auth.auth().signIn(with: credentials, completion: { (user, err) in
                 if err != nil{
                     print("FB User is wrong", err ?? "")
                 }
-                print("User successfully logged in to Firebase with: ", user ?? "")
-
+               
+                let ref = Firebase.Database.database().reference()
+                
+                
+                // check to see if the user is in the database
+                let theUserUID = Auth.auth().currentUser?.uid
+                ref.child("users").observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
+                    if snapshot.hasChild(theUserUID!)
+                    {
+                         print("User successfully logged in to Firebase with: ", user ?? "")
                 let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
 
                 self.present(vc, animated: true, completion: nil)
+                    } else {
+                        let loginManager = FBSDKLoginManager()
+                        loginManager.logOut()
 
+                        let emptyText1 = UIAlertController(title: "Error",
+                                                          message: "Please go sign up",
+                                                          preferredStyle: UIAlertControllerStyle.alert)
+                        emptyText1.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+                        self.present(emptyText1, animated: true)
+                        
+                    }
+
+                    
             })
-
-
-            let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
-
-            self.present(vc, animated: true, completion: nil)
+               
+            })
         }
     }
 

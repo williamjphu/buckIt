@@ -136,6 +136,11 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                               "description": self.descriptionText.text]
                 usersReference.updateChildValues(picture)
                 usersReference.updateChildValues(values)
+                
+                let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
+                
+                self.present(vc, animated: true, completion: nil)
+
             }
             })
         })
