@@ -54,7 +54,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         picker.delegate = self
         let store = Storage.storage().reference(forURL: "gs://buckit-ed26f.appspot.com")
         userStorage = store.child("profile")
-
+        
         //maximize text input to 80 character
         descriptionText.delegate = self
         userNameText.delegate = self
@@ -110,8 +110,9 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         return newLength <= 45 // Bool
     }
     var userStorage = StorageReference()
-
     
+    
+    //Override the edit data to the database
     @IBAction func saveChange(_ sender: Any) {
         
         ref = Database.database().reference()
@@ -123,25 +124,25 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         let usersReference = ref.child("users").child(uid)
         
         let uploadTask = imageRef.putData(data!, metadata: nil, completion: { (metadata, err) in
-        imageRef.downloadURL(completion: { (url, er) in
-            if er != nil
-            {
-                print(er!.localizedDescription)
-            }
-            if let url = url
-            {
-                let picture = ["picture": url.absoluteString]
-                let values = ["username": self.userNameText.text,
-                              "name": self.nameText.text,
-                              "description": self.descriptionText.text]
-                usersReference.updateChildValues(picture)
-                usersReference.updateChildValues(values)
-                
-                let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
-                
-                self.present(vc, animated: true, completion: nil)
-
-            }
+            imageRef.downloadURL(completion: { (url, er) in
+                if er != nil
+                {
+                    print(er!.localizedDescription)
+                }
+                if let url = url
+                {
+                    let picture = ["picture": url.absoluteString]
+                    let values = ["username": self.userNameText.text,
+                                  "name": self.nameText.text,
+                                  "description": self.descriptionText.text]
+                    usersReference.updateChildValues(picture)
+                    usersReference.updateChildValues(values)
+                    
+                    let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
+                    
+                    self.present(vc, animated: true, completion: nil)
+                    
+                }
             })
         })
     }

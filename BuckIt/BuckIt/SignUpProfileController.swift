@@ -14,7 +14,7 @@ class SignUpProfileController: UIViewController, UIImagePickerControllerDelegate
     var userStorage = StorageReference()
     var ref = DatabaseReference()
     
-
+    
     //let userNameTextField = UITextField(frame: CGRect(x: 150, y: 150, width: 300, height: 30))
     
     override func viewDidLoad() {
@@ -85,7 +85,7 @@ class SignUpProfileController: UIViewController, UIImagePickerControllerDelegate
         
         present(picker, animated: true, completion: nil)
         
-
+        
     }
     
     /****
@@ -157,7 +157,7 @@ class SignUpProfileController: UIViewController, UIImagePickerControllerDelegate
         profilePicture.heightAnchor.constraint(equalToConstant:
             150).isActive = true
         profilePicture.layer.cornerRadius = 75
-
+        
     }
     
     /****
@@ -188,7 +188,7 @@ class SignUpProfileController: UIViewController, UIImagePickerControllerDelegate
             = true
     }
     
-
+    
     @objc func selectImagePressed(_ sender: Any) {
         picker.allowsEditing = true
         picker.sourceType = .photoLibrary
@@ -244,7 +244,7 @@ class SignUpProfileController: UIViewController, UIImagePickerControllerDelegate
         })
         
         uploadTask.resume()
-
+        
     }
     
     

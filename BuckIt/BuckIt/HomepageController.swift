@@ -8,6 +8,7 @@
 import UIKit
 import FBSDKLoginKit
 import GoogleSignIn
+import Firebase
 
 class HomepageController: UIViewController , FBSDKLoginButtonDelegate, GIDSignInUIDelegate{
     
@@ -172,13 +173,14 @@ class HomepageController: UIViewController , FBSDKLoginButtonDelegate, GIDSignIn
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         if FBSDKAccessToken.current() != nil {
             DispatchQueue.main.async {
-
+                
                 let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
                 
-                self.present(vc, animated: true, completion: nil)            }
+                self.present(vc, animated: true, completion: nil)
+                
+            }
         }
         
     }
@@ -192,7 +194,7 @@ class HomepageController: UIViewController , FBSDKLoginButtonDelegate, GIDSignIn
         }
         else if error == nil {
             print("Successfully logged in via facebook")
-
+            
             let vc = UIStoryboard(name: "Main" , bundle: nil).instantiateViewController(withIdentifier: "username")
             
             self.present(vc, animated: true, completion: nil)        }
