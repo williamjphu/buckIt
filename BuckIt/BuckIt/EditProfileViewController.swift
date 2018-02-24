@@ -20,7 +20,6 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet weak var descriptionText: UITextField!
     @IBOutlet weak var nameText: UITextField!
     @IBOutlet weak var userNameText: UITextField!
-    @IBOutlet weak var emailText: UITextField!
     
     //draw line for the input field
     override func viewDidLayoutSubviews() {
@@ -47,25 +46,19 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         userNameText.layer.addSublayer(border1)
         userNameText.layer.masksToBounds = true
         
-        //line for Email
-        border2.frame = CGRect(x: 0, y: emailText.frame.size.height - width, width: emailText.frame.size.width, height: emailText.frame.size.height)
-        
-        border2.borderWidth = width
-        emailText.layer.addSublayer(border2)
-        emailText.layer.masksToBounds = true
         
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        picker.delegate = self
         let store = Storage.storage().reference(forURL: "gs://buckit-ed26f.appspot.com")
         userStorage = store.child("profile")
-
+        
         //maximize text input to 80 character
         descriptionText.delegate = self
         userNameText.delegate = self
         nameText.delegate = self
-        emailText.delegate = self
         
         //retrieve data from Firebase
         let ref  = Database.database().reference()
@@ -77,12 +70,11 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                     if uid == Firebase.Auth.auth().currentUser!.uid{
                         
                         self.nameText.text = value["name"] as? String
-                        self.emailText.text = value["email"] as? String
                         self.userNameText.text = value["username"] as? String
                         self.descriptionText.text = value["description"] as? String
                         let databaseProfilePic = value["picture"] as? String
-                        //let data = NSData(contentsOf: NSURL(string: databaseProfilePic!)! as URL)
-                        //self.setProfilePicture(imageView: self.imageView, imageToSet: UIImage(data:data! as Data)!)
+                        let data = NSData(contentsOf: NSURL(string: databaseProfilePic!)! as URL)
+                        self.setProfilePicture(imageView: self.imageView, imageToSet: UIImage(data:data! as Data)!)
                     }
                 }
             }
@@ -118,8 +110,9 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         return newLength <= 45 // Bool
     }
     var userStorage = StorageReference()
-
     
+    
+    //Override the edit data to the database
     @IBAction func saveChange(_ sender: Any) {
         
         ref = Database.database().reference()
@@ -129,21 +122,28 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         let imageRef = self.userStorage.child("\(uid).jpg")
         let data = UIImageJPEGRepresentation(self.imageView.image!, 0.5)
         let usersReference = ref.child("users").child(uid)
-        imageRef.downloadURL(completion: { (url, er) in
-            if er != nil
-            {
-                print(er!.localizedDescription)
-            }
-            if let url = url
-            {
-                let values = ["picture": url.absoluteString as? String,
-                              "username": self.userNameText.text,
-                              "name": self.nameText.text,
-                              "email": self.emailText.text,
-                              "description": self.descriptionText.text]
-                usersReference.updateChildValues(values)
-            }
-            
+        
+        let uploadTask = imageRef.putData(data!, metadata: nil, completion: { (metadata, err) in
+            imageRef.downloadURL(completion: { (url, er) in
+                if er != nil
+                {
+                    print(er!.localizedDescription)
+                }
+                if let url = url
+                {
+                    let picture = ["picture": url.absoluteString]
+                    let values = ["username": self.userNameText.text,
+                                  "name": self.nameText.text,
+                                  "description": self.descriptionText.text]
+                    usersReference.updateChildValues(picture)
+                    usersReference.updateChildValues(values)
+                    
+                    let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
+                    
+                    self.present(vc, animated: true, completion: nil)
+                    
+                }
+            })
         })
     }
 }

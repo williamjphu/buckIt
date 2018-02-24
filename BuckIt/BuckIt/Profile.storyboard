@@ -500,16 +500,6 @@
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6du-gq-J3Z">
-                                <rect key="frame" x="16" y="308" width="41" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="41" id="1xU-bM-Fg9"/>
-                                    <constraint firstAttribute="height" constant="21" id="oL3-iW-fMJ"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zdu-C9-xO0">
                                 <rect key="frame" x="16" y="211" width="343" height="30"/>
                                 <constraints>
@@ -569,17 +559,8 @@
                                     <action selector="changeImagePressed:" destination="7pC-uw-Ekz" eventType="touchUpInside" id="rYg-xg-x6r"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kh0-n7-nn0">
-                                <rect key="frame" x="16" y="331" width="343" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="Bp9-5e-Ymf"/>
-                                </constraints>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" textContentType="email"/>
-                            </textField>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile-icon-9" translatesAutoresizingMaskIntoConstraints="NO" id="Ba9-EY-SI5">
-                                <rect key="frame" x="137.5" y="79" width="100" height="100"/>
+                                <rect key="frame" x="138" y="79" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Ba9-EY-SI5" secondAttribute="height" multiplier="1:1" id="52W-kR-gya"/>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="100" id="hQe-t5-8cV"/>
@@ -607,22 +588,16 @@
                             <constraint firstItem="cMG-h2-XjI" firstAttribute="top" secondItem="bKe-cR-oGF" secondAttribute="bottom" constant="8" id="1JK-mZ-FbY"/>
                             <constraint firstItem="qew-Iq-ziG" firstAttribute="top" secondItem="bcX-49-LCH" secondAttribute="bottom" id="8oJ-1U-HM7"/>
                             <constraint firstItem="bcX-49-LCH" firstAttribute="top" secondItem="Zdu-C9-xO0" secondAttribute="bottom" constant="8" id="Cfi-Zk-HDF"/>
-                            <constraint firstItem="Kh0-n7-nn0" firstAttribute="top" secondItem="6du-gq-J3Z" secondAttribute="bottom" constant="2" id="DmE-yi-ZVE"/>
-                            <constraint firstItem="6du-gq-J3Z" firstAttribute="top" secondItem="qew-Iq-ziG" secondAttribute="bottom" constant="8" id="GNs-b7-oDL"/>
-                            <constraint firstItem="6du-gq-J3Z" firstAttribute="leading" secondItem="DWk-Ag-8zH" secondAttribute="leading" constant="16" id="Kvi-i6-R5W"/>
                             <constraint firstItem="Zdu-C9-xO0" firstAttribute="leading" secondItem="DWk-Ag-8zH" secondAttribute="leading" constant="16" id="QCD-bE-Oat"/>
                             <constraint firstItem="cMG-h2-XjI" firstAttribute="centerX" secondItem="DWk-Ag-8zH" secondAttribute="centerX" id="RAb-bh-M4j"/>
                             <constraint firstItem="Dey-Fq-T0z" firstAttribute="top" secondItem="STB-Yh-AtQ" secondAttribute="bottom" constant="8" id="SBB-Ur-9wG"/>
                             <constraint firstItem="Y1K-ll-N8N" firstAttribute="top" secondItem="Ba9-EY-SI5" secondAttribute="bottom" constant="-9" id="SO2-94-mJu"/>
-                            <constraint firstItem="Kh0-n7-nn0" firstAttribute="leading" secondItem="DWk-Ag-8zH" secondAttribute="leading" constant="16" id="U0J-xK-Aw7"/>
                             <constraint firstItem="bKe-cR-oGF" firstAttribute="top" secondItem="Dey-Fq-T0z" secondAttribute="bottom" constant="8" id="Utb-i9-FR4"/>
                             <constraint firstItem="xJM-w9-Z6l" firstAttribute="top" secondItem="Ba9-EY-SI5" secondAttribute="bottom" constant="11" id="XCf-C7-5m5"/>
                             <constraint firstItem="Zdu-C9-xO0" firstAttribute="top" secondItem="xJM-w9-Z6l" secondAttribute="bottom" id="ZSS-nj-UGd"/>
-                            <constraint firstItem="DWk-Ag-8zH" firstAttribute="trailing" secondItem="Kh0-n7-nn0" secondAttribute="trailing" constant="16" id="bCS-dU-qDS"/>
                             <constraint firstItem="DWk-Ag-8zH" firstAttribute="bottom" secondItem="Ba9-EY-SI5" secondAttribute="bottom" constant="439" id="bac-b2-vhD"/>
                             <constraint firstItem="xJM-w9-Z6l" firstAttribute="leading" secondItem="DWk-Ag-8zH" secondAttribute="leading" constant="16" id="dOg-yZ-Y9S"/>
                             <constraint firstItem="DWk-Ag-8zH" firstAttribute="trailing" secondItem="qew-Iq-ziG" secondAttribute="trailing" constant="16" id="dem-Hr-BVm"/>
-                            <constraint firstItem="STB-Yh-AtQ" firstAttribute="top" secondItem="Kh0-n7-nn0" secondAttribute="bottom" constant="3" id="gD9-I2-kv4"/>
                             <constraint firstItem="Dey-Fq-T0z" firstAttribute="leading" secondItem="DWk-Ag-8zH" secondAttribute="leading" constant="16" id="gym-hQ-AVe"/>
                             <constraint firstItem="STB-Yh-AtQ" firstAttribute="leading" secondItem="DWk-Ag-8zH" secondAttribute="leading" constant="16" id="iuA-g7-dSp"/>
                             <constraint firstItem="Ba9-EY-SI5" firstAttribute="top" secondItem="DWk-Ag-8zH" secondAttribute="top" constant="15" id="kHk-2T-DGU"/>
@@ -632,12 +607,12 @@
                             <constraint firstItem="bcX-49-LCH" firstAttribute="leading" secondItem="DWk-Ag-8zH" secondAttribute="leading" constant="16" id="vwV-SA-fq9"/>
                             <constraint firstItem="qew-Iq-ziG" firstAttribute="leading" secondItem="DWk-Ag-8zH" secondAttribute="leading" constant="16" id="wNx-0b-tI5"/>
                             <constraint firstItem="Y1K-ll-N8N" firstAttribute="centerX" secondItem="Ba9-EY-SI5" secondAttribute="centerX" id="waE-pZ-WSl"/>
+                            <constraint firstAttribute="bottom" secondItem="Dey-Fq-T0z" secondAttribute="bottom" constant="182" id="z6n-l2-BkK"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="DWk-Ag-8zH"/>
                     </view>
                     <connections>
                         <outlet property="descriptionText" destination="Dey-Fq-T0z" id="ZOA-Wj-g37"/>
-                        <outlet property="emailText" destination="Kh0-n7-nn0" id="5Pb-F5-QY5"/>
                         <outlet property="imageView" destination="Ba9-EY-SI5" id="4Ph-qN-fz0"/>
                         <outlet property="nameText" destination="Zdu-C9-xO0" id="KgI-i0-ORw"/>
                         <outlet property="userNameText" destination="qew-Iq-ziG" id="ogb-LU-1Sb"/>
