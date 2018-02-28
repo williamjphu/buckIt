@@ -170,7 +170,7 @@ class HomepageController: UIViewController , FBSDKLoginButtonDelegate, GIDSignIn
     }
     
     
-    
+    //if users already login through facebook. Take to profile
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if FBSDKAccessToken.current() != nil {
