@@ -76,7 +76,9 @@ class NewBucketViewController: UIViewController, UIImagePickerControllerDelegate
                         
                     }
                 })
-                self.dismiss(animated: true, completion: nil)
+                let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
+                
+                self.present(vc, animated: true, completion: nil)
             }
             uploadTask.resume()
         }
