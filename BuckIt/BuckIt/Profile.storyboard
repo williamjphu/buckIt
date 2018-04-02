@@ -583,27 +583,13 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cMG-h2-XjI">
-                                <rect key="frame" x="16" y="546" width="343" height="45"/>
-                                <color key="backgroundColor" red="1" green="0.18356785859999999" blue="0.0148796962" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="hJB-P5-BDG"/>
-                                    <constraint firstAttribute="width" constant="343" id="u53-v1-c9U"/>
-                                </constraints>
-                                <state key="normal" title="Cancel"/>
-                                <connections>
-                                    <action selector="cancel:" destination="7pC-uw-Ekz" eventType="touchUpInside" id="Goq-TN-iCo"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="DWk-Ag-8zH" firstAttribute="trailing" secondItem="Zdu-C9-xO0" secondAttribute="trailing" constant="16" id="0lJ-bo-QBR"/>
-                            <constraint firstItem="cMG-h2-XjI" firstAttribute="top" secondItem="bKe-cR-oGF" secondAttribute="bottom" constant="8" id="1JK-mZ-FbY"/>
                             <constraint firstItem="qew-Iq-ziG" firstAttribute="top" secondItem="bcX-49-LCH" secondAttribute="bottom" id="8oJ-1U-HM7"/>
                             <constraint firstItem="bcX-49-LCH" firstAttribute="top" secondItem="Zdu-C9-xO0" secondAttribute="bottom" constant="8" id="Cfi-Zk-HDF"/>
                             <constraint firstItem="Zdu-C9-xO0" firstAttribute="leading" secondItem="DWk-Ag-8zH" secondAttribute="leading" constant="16" id="QCD-bE-Oat"/>
-                            <constraint firstItem="cMG-h2-XjI" firstAttribute="centerX" secondItem="DWk-Ag-8zH" secondAttribute="centerX" id="RAb-bh-M4j"/>
                             <constraint firstItem="Dey-Fq-T0z" firstAttribute="top" secondItem="STB-Yh-AtQ" secondAttribute="bottom" constant="8" id="SBB-Ur-9wG"/>
                             <constraint firstItem="Y1K-ll-N8N" firstAttribute="top" secondItem="Ba9-EY-SI5" secondAttribute="bottom" constant="-9" id="SO2-94-mJu"/>
                             <constraint firstItem="bKe-cR-oGF" firstAttribute="top" secondItem="Dey-Fq-T0z" secondAttribute="bottom" constant="8" id="Utb-i9-FR4"/>

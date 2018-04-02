@@ -41,6 +41,7 @@ class NewBucketViewController: UIViewController, UIImagePickerControllerDelegate
         else{
             print("Error")
         }
+        //ERROR HERE: Everything is getting dismissed instead of just the imagepicker
         self.dismiss(animated: true, completion: nil)
     }
     
