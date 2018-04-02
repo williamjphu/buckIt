@@ -182,9 +182,20 @@ class HomepageController: UIViewController , FBSDKLoginButtonDelegate, GIDSignIn
                 
             }
         }
+        //users who are not facebook/gmail already login. take to profile
+        if Firebase.Auth.auth().currentUser != nil{
+            DispatchQueue.main.async {
+                
+                let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
+                
+                self.present(vc, animated: true, completion: nil)
+                
+            }
+        }
+        
         
     }
-    
+    //facebook authentication login
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         if error != nil {
             print(error)
