@@ -54,7 +54,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func setProfilePicture(imageView: UIImageView, imageToSet: UIImage){
-
         imageView.image = imageToSet
     }
     
