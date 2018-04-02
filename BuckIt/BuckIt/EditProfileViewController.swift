@@ -146,4 +146,10 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             })
         })
     }
+    
+    @IBAction func cancel(_ sender: Any) {
+        let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
+        
+        self.present(vc, animated: true, completion: nil)
+    }
 }
