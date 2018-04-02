@@ -25,6 +25,7 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
     @IBOutlet weak var useMyLocationButton: UISwitch!
     @IBOutlet weak var locationText: UITextField!
     var theCoordinates: CLLocationCoordinate2D?
+    var refActivity: DatabaseReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,6 +84,41 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
         self.dismiss(animated: true, completion: nil)
     }
     
+    /* create the post for activities made when hitting the post button */
+    @IBAction func postActivity(_ sender: Any) {
+        
+        refActivity = Database.database().reference().child("activities")   /* reference the activities key */
+        let user = Auth.auth().currentUser!.uid     /* the user ID */
+        let storage = Storage.storage().reference(forURL: "gs://buckit-ed26f.appspot.com")  /* reference URL path to Firebase storage */
+        let key = refActivity.childByAutoId().key   /* generate a new unique key ID */
+        let imageRef = storage.child("activity").child(user).child("\(key).jpeg")   /* designate file path */
+        let data = UIImageJPEGRepresentation(self.activityPic.image!, 0.6)  /* return the image as .jpg */
+        
+        /* upload the file to its designated path */
+        let uploadTask = imageRef.putData(data!, metadata: nil) { (metadata, error) in
+            imageRef.downloadURL(completion: { (url, error) in
+            if error != nil { /* print the proper error */
+                print(error!.localizedDescription)
+                return
+            }
+            if let url = url {
+    
+                /* use textfields for input and then write data in DB */
+                /* also store image in database storage */
+                let activity = ["userID": user,
+                                "activityID": key,
+                                "title": self.titleText.text,
+                                "activityImagePath": url.absoluteString,
+                                "description": self.descriptionText.text ] as [String : Any]
+                
+                let activityFeed = ["\(key)" : activity]
+                self.refActivity.updateChildValues(activityFeed)    /* write and update all values */
+    
+            } })
+            
+        }
+        
+    } /* end func postActivity */
     
     //locates the address specified in the location text and finds it on the mapview
     @IBAction func getLocation(_ sender: Any) {
@@ -103,6 +139,8 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
             
         }
     }
+    
+    
 
 
 }

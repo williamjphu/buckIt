@@ -26,7 +26,11 @@
                                 </constraints>
                                 <items>
                                     <navigationItem title="New Activity" id="Eoq-Cu-tr5">
-                                        <barButtonItem key="rightBarButtonItem" title="Post" id="net-0R-5sB"/>
+                                        <barButtonItem key="rightBarButtonItem" title="Post" id="net-0R-5sB">
+                                            <connections>
+                                                <action selector="postActivity:" destination="hc8-6c-VPp" id="uJS-Wi-uQP"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                                 <variation key="heightClass=regular-widthClass=compact">

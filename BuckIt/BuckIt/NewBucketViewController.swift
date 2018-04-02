@@ -55,6 +55,7 @@ class NewBucketViewController: UIViewController, UIImagePickerControllerDelegate
         let title = "Created BuckIt!"
         let message = self.titleText.text
         let popup = PopupDialog(title: title, message: message, image: self.imageView.image)
+        
         // Create buttons
         let buttonOne = DefaultButton(title: "Got it") {
             print("Created Buckit")
