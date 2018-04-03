@@ -181,9 +181,7 @@ class HomepageController: UIViewController , FBSDKLoginButtonDelegate, GIDSignIn
                 self.present(vc, animated: true, completion: nil)
                 
             }
-        }
-        //users who are not facebook/gmail already login. take to profile
-        if Firebase.Auth.auth().currentUser != nil{
+        } else if Firebase.Auth.auth().currentUser != nil{
             DispatchQueue.main.async {
                 
                 let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
