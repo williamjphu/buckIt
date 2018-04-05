@@ -26,7 +26,6 @@
 		AE7F9C2A20198CAE00420457 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F9C2820198CAE00420457 /* LoginController.swift */; };
 		AE7F9C2B20198CAE00420457 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F9C2920198CAE00420457 /* SignUpController.swift */; };
 		C342B2322044BA6E00A81EAA /* BuckIt.swift in Sources */ = {isa = PBXBuildFile; fileRef = C342B2312044BA6E00A81EAA /* BuckIt.swift */; };
-		C342B2382044C12B00A81EAA /* BuckitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C342B2372044C12B00A81EAA /* BuckitTableViewCell.swift */; };
 		C36DBBD320352A1600776F2B /* NewBucketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36DBBD220352A1600776F2B /* NewBucketViewController.swift */; };
 		C397DF2C1FB5B08A00D6C0AF /* Pods_BuckIt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C397DF2D1FB5B08A00D6C0AF /* Pods_BuckIt.framework */; };
 		C397DF2F1FB5B19000D6C0AF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C397DF2E1FB5B19000D6C0AF /* GoogleService-Info.plist */; };
@@ -39,6 +38,7 @@
 		C3B95C2F2022CE1000836918 /* CompletedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B95C2E2022CE1000836918 /* CompletedViewController.swift */; };
 		C3B95C312022CEC600836918 /* TabController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3B95C302022CEC600836918 /* TabController.storyboard */; };
 		C3E2A5C72072CEC700818CE1 /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E2A5C62072CEC700818CE1 /* ActivityTableViewCell.swift */; };
+		E084A47A20755D860099CCCD /* BuckitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E084A47920755D860099CCCD /* BuckitCell.swift */; };
 		E0D6C3232022EC8900721FCE /* SignUpProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D6C3222022EC8900721FCE /* SignUpProfileController.swift */; };
 /* End PBXBuildFile section */
 
@@ -67,7 +67,6 @@
 		AE7F9C2920198CAE00420457 /* SignUpController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
 		B29BF32C00461D384F3C4620 /* Pods-BuckIt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuckIt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BuckIt/Pods-BuckIt.debug.xcconfig"; sourceTree = "<group>"; };
 		C342B2312044BA6E00A81EAA /* BuckIt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuckIt.swift; sourceTree = "<group>"; };
-		C342B2372044C12B00A81EAA /* BuckitTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuckitTableViewCell.swift; sourceTree = "<group>"; };
 		C36DBBD220352A1600776F2B /* NewBucketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewBucketViewController.swift; sourceTree = "<group>"; };
 		C397DF291FB5B05F00D6C0AF /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C397DF2B1FB5B06500D6C0AF /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,6 +81,7 @@
 		C3B95C2E2022CE1000836918 /* CompletedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedViewController.swift; sourceTree = "<group>"; };
 		C3B95C302022CEC600836918 /* TabController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TabController.storyboard; sourceTree = "<group>"; };
 		C3E2A5C62072CEC700818CE1 /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
+		E084A47920755D860099CCCD /* BuckitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuckitCell.swift; sourceTree = "<group>"; };
 		E0D6C3222022EC8900721FCE /* SignUpProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpProfileController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -171,7 +171,6 @@
 		AE7F9C122019865C00420457 /* bucket-page */ = {
 			isa = PBXGroup;
 			children = (
-				AE7F9C15201986AF00420457 /* BucketListViewController.swift */,
 				C36DBBD220352A1600776F2B /* NewBucketViewController.swift */,
 				AE7F9C13201986AE00420457 /* BucketPage.storyboard */,
 			);
@@ -185,8 +184,9 @@
 				AE7F9C1D20198AFE00420457 /* EditProfileViewController.swift */,
 				AE7F9C1C20198AFE00420457 /* Profile.storyboard */,
 				AE7F9C1A20198AFE00420457 /* ProfileViewController.swift */,
+				AE7F9C15201986AF00420457 /* BucketListViewController.swift */,
 				AE7F9C1B20198AFE00420457 /* FollowingTableViewCell.swift */,
-				C342B2372044C12B00A81EAA /* BuckitTableViewCell.swift */,
+				E084A47920755D860099CCCD /* BuckitCell.swift */,
 			);
 			name = profile;
 			sourceTree = "<group>";
@@ -356,7 +356,7 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -429,8 +429,8 @@
 				C3B95C232022C8D100836918 /* TabBarViewController.swift in Sources */,
 				AE7F9C2220198AFE00420457 /* EditProfileViewController.swift in Sources */,
 				C342B2322044BA6E00A81EAA /* BuckIt.swift in Sources */,
+				E084A47A20755D860099CCCD /* BuckitCell.swift in Sources */,
 				AE7F9C2B20198CAE00420457 /* SignUpController.swift in Sources */,
-				C342B2382044C12B00A81EAA /* BuckitTableViewCell.swift in Sources */,
 				C3B95C2D2022CDFC00836918 /* NewActivityViewController.swift in Sources */,
 				C36DBBD320352A1600776F2B /* NewBucketViewController.swift in Sources */,
 			);

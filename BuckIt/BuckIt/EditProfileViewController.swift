@@ -85,6 +85,8 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     func setProfilePicture(imageView: UIImageView, imageToSet: UIImage){
         
         imageView.image = imageToSet
+        imageView.layer.cornerRadius = imageView.bounds.width / 2.0
+        imageView.layer.masksToBounds = true
     }
     
     //change image

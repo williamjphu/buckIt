@@ -19,7 +19,9 @@ class NewBucketViewController: UIViewController, UIImagePickerControllerDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("new bucket is being called")
     }
+    
     
     @IBAction func importImage(_ sender: Any) {
         let image = UIImagePickerController()

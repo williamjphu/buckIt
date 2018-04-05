@@ -9,9 +9,9 @@
 import UIKit
 
 class BuckIt : NSObject {
-    var buckitId : String?
-    var title : String?
-    var desc : String?
-    var pathToImage : String?
-    var userId : String?
+    var buckitId : String!
+    var title : String!
+    var desc : String!
+    var pathToImage : String!
+    var userId : String!
 }

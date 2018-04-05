@@ -9,22 +9,18 @@
 import UIKit
 import FirebaseDatabase
 import Firebase
-class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
+class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollectionViewDataSource  {
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var collectionview: UICollectionView!
+    
     var buckits = [BuckIt]()
     
     override func viewWillAppear(_ animated: Bool) {
         fetchUsers()
-        buckits.removeAll()
-        
+        fetchUserBuckIts()
+//        buckits.removeAll()
     }
     
-    override func viewDidLoad() {
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
-        fetchUserBuckIts()
-    }
     
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var username: UILabel!
@@ -55,13 +51,15 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func setProfilePicture(imageView: UIImageView, imageToSet: UIImage){
         imageView.image = imageToSet
+        imageView.layer.cornerRadius = imageView.bounds.width / 2.0
+        imageView.layer.masksToBounds = true
     }
     
     func fetchUserBuckIts(){
-        let ref = Database.database().reference()
-        ref.child("BuckIts").queryOrderedByKey().observeSingleEvent(of: .value, with: { (snap) in
+            let ref  = Database.database().reference()
+            ref.child("BuckIts").queryOrderedByKey().observeSingleEvent(of: .value, with: { (snap) in
             let buckitSnap = snap.value as! [String: AnyObject]
-            
+
             for (_,buckit) in buckitSnap {
                 if let uid = buckit["userID"] as? String{
                     if uid == Auth.auth().currentUser?.uid{
@@ -70,35 +68,51 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                             let buckitID = buckit["buckitID"] as? String,
                             let pathToImage = buckit["pathToImage"] as? String,
                             let title = buckit["title"] as? String {
-                            
+
                             buckitItem.desc = description
                             buckitItem.buckitId = buckitID
                             buckitItem.pathToImage = pathToImage
                             buckitItem.title = title
                             buckitItem.userId = uid
-                            
+
                             self.buckits.append(buckitItem)
                         }
-                        self.tableView.reloadData()
+                        self.collectionview.reloadData()
                     }
                 }
             }
         })
         ref.removeAllObservers()
     }
+
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(buckits.count)
+    //section number
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    //return the number of buckit
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.buckits.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let tableCell = tableView.dequeueReusableCell(withIdentifier: "bucketCell", for: indexPath) as! BuckitTableViewCell
-        tableCell.buckitImage.downloadImage(from: self.buckits[indexPath.row].pathToImage)
-        tableCell.buckitTitle.text = self.buckits[indexPath.row].title
-        return tableCell
+    //create each cell for each buckit being added
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "buckItCell", for: indexPath) as! BuckitCell
+        
+        //creating the cell
+        cell.buckitImage.downloadImage(from: self.buckits[indexPath.row].pathToImage)
+        cell.BuckitName.text = self.buckits[indexPath.row].title
+        
+        return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(self.buckits[indexPath.row])
+        performSegue(withIdentifier: "BuckitList", sender: self.buckits[indexPath.row])
+        
+    }
 }
 
 extension UIImageView {
