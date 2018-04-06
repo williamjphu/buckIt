@@ -14,11 +14,12 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
     @IBOutlet weak var collectionview: UICollectionView!
     
     var buckits = [BuckIt]()
-    
+
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        buckits.removeAll()
         fetchUsers()
         fetchUserBuckIts()
-//        buckits.removeAll()
     }
     
     
@@ -26,6 +27,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var quote: UILabel!
+    //retrieve users data
     func fetchUsers()
     {
         let ref  = Database.database().reference()
@@ -48,13 +50,14 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
         })
         ref.removeAllObservers()
     }
-    
+    //get the profile picture and make it round
     func setProfilePicture(imageView: UIImageView, imageToSet: UIImage){
         imageView.image = imageToSet
         imageView.layer.cornerRadius = imageView.bounds.width / 2.0
         imageView.layer.masksToBounds = true
     }
     
+    //retrieve buckit data
     func fetchUserBuckIts(){
             let ref  = Database.database().reference()
             ref.child("BuckIts").queryOrderedByKey().observeSingleEvent(of: .value, with: { (snap) in
@@ -107,11 +110,19 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
         
         return cell
     }
-    
+    //buckit is clickable
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(self.buckits[indexPath.row])
         performSegue(withIdentifier: "BuckitList", sender: self.buckits[indexPath.row])
         
+    }
+    //send data to Buckit list view
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? BucketListViewController{
+            if let buckit = sender as? BuckIt{
+                //send the selected buckit to the buckitlistview
+                destination.buckit = buckit
+            }
+        }
     }
 }
 
