@@ -14,8 +14,7 @@ import FirebaseStorage
 import Firebase
 import UITextView_Placeholder
 
-class NewActivityViewController: UIViewController, UINavigationControllerDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate {
-
+class NewActivityViewController: UIViewController, UINavigationControllerDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
 
     @IBOutlet weak var titleText: UITextView!
     @IBOutlet weak var profilePic: UIImageView!
@@ -24,13 +23,70 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var useMyLocationButton: UISwitch!
     @IBOutlet weak var locationText: UITextField!
+    @IBOutlet weak var categoryTextfield: UITextField! /* textfield for the category picker */
+    
     var theCoordinates: CLLocationCoordinate2D?
+    var selection: String?
+    
+    /* categories for the picker view */
+    let categories = [ "Food",
+                       "Music",
+                       "Meet-up",
+                       "Recreation",
+                       "Fundraiser"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTitleTextArea()
+        createPicker()
+        pickerToolbar()
     }
-
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return categories.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return categories[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        selection = categories[row]
+        categoryTextfield.text = selection
+    }
+    
+    /* the scrolling screen for picker */
+    func createPicker() {
+        
+        let categoryPicker = UIPickerView()
+        categoryPicker.delegate = self
+        categoryTextfield.inputView = categoryPicker
+        
+    } /* end createPicker() */
+    
+    /* create toolbar for the picker */
+    func pickerToolbar() {
+        
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(NewActivityViewController.dismissPicker))
+    
+        toolbar.setItems([doneButton], animated: false)
+        toolbar.isUserInteractionEnabled = true
+        
+        categoryTextfield.inputAccessoryView = toolbar
+        
+    } /* end pickerToolbar() */
+    
+    @objc func dismissPicker() {
+        view.endEditing(true)
+    }
+    
     //needed to dismiss the keyboard
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         titleText.endEditing(true)
@@ -104,13 +160,15 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
         }
     }
 
-    //creates new Activity
+    /* creates new activity and stores it in the database */
     @IBAction func createActivity(_ sender: Any) {
+        
         let uid = Auth.auth().currentUser!.uid
-        var ref = Database.database().reference()
+        var ref = Database.database().reference()   /* reference to the database */
         let storage = Storage.storage().reference(forURL: "gs://buckit-ed26f.appspot.com")
-        let key = ref.child("Activities").childByAutoId().key
-        let imageRef = storage.child("Activities").child(uid).child("\(key).jpeg")
+        
+        let key = ref.child("activities").child(categoryTextfield.text!).childByAutoId().key /* stores key by category */
+        let imageRef = storage.child("Activities").child(uid).child("\(key).jpeg") /* store images in "Activities" DB */
         let data = UIImageJPEGRepresentation(self.activityPic.image!, 0.6)
         
         let uploadTask = imageRef.putData(data!, metadata: nil) { (metadata, error) in
@@ -125,10 +183,11 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
                                 "title" : self.titleText.text!,
                                 "description": self.descriptionText.text!,
                                 "location": self.locationText.text!,
+                                "category": self.categoryTextfield.text!,
                                 "activityID" : key] as [String : Any]
                     
                     let activityFeed = ["\(key)" : feed]
-                    ref.child("Activities").updateChildValues(activityFeed)
+                    ref.child("activities").child(self.categoryTextfield.text!).updateChildValues(activityFeed)
                     
                 }
             })
@@ -136,6 +195,7 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
             
             self.present(vc, animated: true, completion: nil)
         }
+        
         uploadTask.resume()
         
     }
