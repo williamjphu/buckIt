@@ -297,7 +297,7 @@ class SignUpController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUID
     
     // once the credentials have been input, move on to user profile set up
     //self.present(userProfile, animated: true, completion: nil)
-
+    
     
     @objc func handleBackButton() {
         
@@ -329,23 +329,6 @@ class SignUpController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUID
         view.addSubview(googleButton)
     }
     
-    override func viewWillAppear(_ animated: Bool)
-    {
-        super.viewWillAppear(animated)
-        
-        navigationController?.navigationItem.title = "TITLE"
-        
-        
-        if FBSDKAccessToken.current() != nil
-        {
-            DispatchQueue.main.async
-                {
-                    let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
-                    
-                    self.present(vc, animated: true, completion: nil)
-            }
-        }
-    }
     
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         if error != nil {
@@ -355,34 +338,51 @@ class SignUpController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUID
             //welcomeMessage.text = "Authentication was canceled"
         }
         else if error == nil {
-            print("Successfully logged in via facebook")
-
-            let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
             
-            self.present(vc, animated: true, completion: nil)
+            let ref = Firebase.Database.database().reference()
+            
+            
+            
+                    let accessToken = FBSDKAccessToken.current()
+                    let credentials = FacebookAuthProvider.credential(withAccessToken: (accessToken?.tokenString)!)
+                    
+                    
+                    Auth.auth().signIn(with: credentials, completion: { (user, err) in
+                        if err != nil{
+                            print("FB User is wrong", err ?? "")
+                        }
+                        print("User successfully logged in to Firebase with: ", user ?? "")
+                        
+                        // check to see if the user is in the database
+                        let theUserUID = Auth.auth().currentUser?.uid
+                        ref.child("users").observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
+                            if snapshot.hasChild(theUserUID!)
+                            {
+                                let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
+                                
+                                self.present(vc, animated: true, completion: nil)
+                                
+                            }
+                        else
+                        {
+                        guard let uid = user?.uid else{
+                            return
+                        }
+                        let ref = Database.database().reference()
+                        let usersReference = ref.child("users").child(uid)
+                        let values = ["uid": user?.uid,
+                                      "name": user?.displayName,
+                                      "email": user?.email]
+                        
+                        self.ref.child("users").child((user?.uid)!).setValue(values)
+                        let vc = UIStoryboard(name: "Main" , bundle: nil).instantiateViewController(withIdentifier: "username")
+                        
+                        self.present(vc, animated: true, completion: nil)
+                        }
+                    })
+            
+            })
         }
-        
-        let accessToken = FBSDKAccessToken.current()
-        let credentials = FacebookAuthProvider.credential(withAccessToken: (accessToken?.tokenString)!)
-        
-        Auth.auth().signIn(with: credentials, completion: { (user, err) in
-            if err != nil{
-                print("FB User is wrong", err ?? "")
-            }
-            print("User successfully logged in to Firebase with: ", user ?? "")
-            guard let uid = user?.uid else{
-                return
-            }
-            let ref = Database.database().reference()
-            let usersReference = ref.child("users").child(uid)
-            let values = ["uid": user?.uid,
-                          "name": user?.displayName,
-                          "email": user?.email]
-            
-            self.ref.child("users").child((user?.uid)!).setValue(values)
-            
-        })
-        
     }
     
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {

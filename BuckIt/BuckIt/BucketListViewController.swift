@@ -12,6 +12,10 @@ import PopupDialog
 
 class BucketListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SwipeTableViewCellDelegate {
 
+    var buckit = BuckIt()
+    
+    @IBOutlet weak var buckitTitle: UILabel!
+    @IBOutlet weak var buckitDescription: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
     var activities = [Activity]()
@@ -21,6 +25,7 @@ class BucketListViewController: UIViewController, UITableViewDelegate, UITableVi
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.register(SwipeTableViewCell.self, forCellReuseIdentifier: "cell")
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,7 +50,7 @@ class BucketListViewController: UIViewController, UITableViewDelegate, UITableVi
         let row = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SwipeTableViewCell
         row.delegate = self
         
-        //create label from database 
+        //create label from database
         let label = UILabel(frame: CGRect(x: 140.0, y: 14.0, width: 100.0, height: 30.0))
         label.text = "Visit the North Pole"
 //        label.text = self.activities[indexPath.row].title

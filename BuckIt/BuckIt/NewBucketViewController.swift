@@ -19,7 +19,9 @@ class NewBucketViewController: UIViewController, UIImagePickerControllerDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("new bucket is being called")
     }
+    
     
     @IBAction func importImage(_ sender: Any) {
         let image = UIImagePickerController()
@@ -41,6 +43,7 @@ class NewBucketViewController: UIViewController, UIImagePickerControllerDelegate
         else{
             print("Error")
         }
+        //ERROR HERE: Everything is getting dismissed instead of just the imagepicker
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -76,7 +79,9 @@ class NewBucketViewController: UIViewController, UIImagePickerControllerDelegate
                         
                     }
                 })
-                self.dismiss(animated: true, completion: nil)
+                let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
+                
+                self.present(vc, animated: true, completion: nil)
             }
             uploadTask.resume()
         }

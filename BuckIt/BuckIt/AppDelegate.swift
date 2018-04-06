@@ -26,6 +26,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
         
+        //if users already login, it delegate to
+        if GIDSignIn.sharedInstance().hasAuthInKeychain(){
+            let sb = UIStoryboard(name: "TabController", bundle: nil)
+            if let tabBarVC = sb.instantiateViewController(withIdentifier: "tabBarVC") as? UITabBarController {
+                window?.rootViewController = tabBarVC
+            }
+
+        }        
         //Facebook
         let bool = FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         FBSDKAppEvents.activateApp()
@@ -53,9 +61,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
                 print("Failed to create a Firebase User with Google Account: " , err)
                 return
             }
+             
             guard let uid = user?.uid else {return}
             
             let ref = Database.database().reference()
+            let theUserUID = Auth.auth().currentUser?.uid
+
+            ref.child("users").observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
+                if !snapshot.hasChild(theUserUID!)
+                {
             let usersReference = ref.child("users").child(uid)
             let values = ["uid": user?.uid,
                           "name": user?.displayName,
@@ -68,12 +82,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
             })
             
             print("Sucessfully logging to Firebase with Google" , uid)
-            
-            let newViewController = UIStoryboard(name: "TabController", bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
+            let newViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "username")
             UIApplication.topViewController()?.present(newViewController, animated: true, completion: nil)
-            
-            
-        })
+                }else
+                {
+                    let newViewController = UIStoryboard(name: "TabController", bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
+                    UIApplication.topViewController()?.present(newViewController, animated: true, completion: nil)
+                    }
+            })
+        
+            })
+        
     }
     
     

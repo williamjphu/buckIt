@@ -104,5 +104,40 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
         }
     }
 
-
+    //creates new Activity
+    @IBAction func createActivity(_ sender: Any) {
+        let uid = Auth.auth().currentUser!.uid
+        var ref = Database.database().reference()
+        let storage = Storage.storage().reference(forURL: "gs://buckit-ed26f.appspot.com")
+        let key = ref.child("Activities").childByAutoId().key
+        let imageRef = storage.child("Activities").child(uid).child("\(key).jpeg")
+        let data = UIImageJPEGRepresentation(self.activityPic.image!, 0.6)
+        
+        let uploadTask = imageRef.putData(data!, metadata: nil) { (metadata, error) in
+            if error != nil {
+                print(error!.localizedDescription)
+                return
+            }
+            imageRef.downloadURL(completion: { (url, error) in
+                if let url = url {
+                    let feed = ["userID" : uid,
+                                "pathToImage" : url.absoluteString,
+                                "title" : self.titleText.text!,
+                                "description": self.descriptionText.text!,
+                                "location": self.locationText.text!,
+                                "activityID" : key] as [String : Any]
+                    
+                    let activityFeed = ["\(key)" : feed]
+                    ref.child("Activities").updateChildValues(activityFeed)
+                    
+                }
+            })
+            let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
+            
+            self.present(vc, animated: true, completion: nil)
+        }
+        uploadTask.resume()
+        
+    }
+    
 }
