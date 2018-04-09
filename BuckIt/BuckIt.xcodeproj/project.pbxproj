@@ -143,7 +143,6 @@
 				AE7F9C122019865C00420457 /* bucket-page */,
 				AE7F9C0F2019812800420457 /* map-view */,
 				77D45FBD1FAE96EB0034DDBA /* AppDelegate.swift */,
-				AE767A962077605D00BCED76 /* ActivityPin.swift */,
 				77D45FC11FAE96EB0034DDBA /* Main.storyboard */,
 				77D45FC41FAE96EB0034DDBA /* Assets.xcassets */,
 				77D45FC61FAE96EB0034DDBA /* LaunchScreen.storyboard */,
@@ -213,6 +212,7 @@
 		AE7F9C2520198BB000420457 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				AE767A962077605D00BCED76 /* ActivityPin.swift */,
 				AE7F9C1E20198AFE00420457 /* User.swift */,
 				AE7F9C14201986AE00420457 /* Activity.swift */,
 				C342B2312044BA6E00A81EAA /* BuckIt.swift */,
