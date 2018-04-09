@@ -8,12 +8,17 @@
 
 import MapKit
 
+// MKPointAnnotation
 class ActivityPin: NSObject, MKAnnotation {
-    var activityName: String?
-    var coordinate = CLLocationCoordinate2D()
+    var title: String?
+    var subtitle: String?
+    var coordinate: CLLocationCoordinate2D
+    var imageName: String
     
-    init(activityName: String, coordinate: CLLocationCoordinate2D) {
-        self.activityName = activityName
+    init(title: String, subtitle: String, coordinate: CLLocationCoordinate2D, imageName: String) {
+        self.title = title
+        self.subtitle = subtitle
         self.coordinate = coordinate
+        self.imageName = imageName
     }
 }
