@@ -9,17 +9,22 @@
 import UIKit
 import MapKit
 
-// class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
-
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     private let locationManager = CLLocationManager()
     private var currentCoordinate: CLLocationCoordinate2D?
 
+    var activitiesPin: Array<ActivityPin> = Array()
+    
     @IBOutlet weak var mapView: MKMapView!
+    
+    class CPA: MKPointAnnotation {
+        var imageName: String?
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
+        addAnnotations()
         configureLocationServices()
     }
     
@@ -47,20 +52,34 @@ class MapViewController: UIViewController {
     }
 
     private func addAnnotations() {
-        let appleParkAnnotation = MKPointAnnotation()
-        appleParkAnnotation.title = "Apple Park"
-        appleParkAnnotation.coordinate = CLLocationCoordinate2D(latitude: 37.332072300, longitude: -122.011138100)
-        
-        let ortegaParkAnnotation = MKPointAnnotation()
-        ortegaParkAnnotation.title = "Ortega Park"
-        ortegaParkAnnotation.coordinate = CLLocationCoordinate2D(latitude: 37.342226, longitude: -122.025617)
-        
-        mapView.addAnnotation(appleParkAnnotation)
-        mapView.addAnnotation(ortegaParkAnnotation)
-    }
-}
+        var applePin: ActivityPin!
+        var parkPin: ActivityPin!
 
-extension MapViewController: CLLocationManagerDelegate {
+        let appleCoordinate = CLLocationCoordinate2D(latitude: 37.332072300, longitude: -122.011138100)
+        applePin = ActivityPin(title: "Apple Park", subtitle: "It works on the Apple HQ", coordinate: appleCoordinate, imageName: "add")
+
+        let parkCoordinate = CLLocationCoordinate2D(latitude: 37.342226, longitude: -122.025617)
+        parkPin = ActivityPin(title: "Ortega Park", subtitle: "The park", coordinate: parkCoordinate, imageName: "thumbup-click")
+
+        activitiesPin.append(applePin)
+        activitiesPin.append(parkPin)
+        
+        mapView.addAnnotation(applePin)
+        mapView.addAnnotation(parkPin)
+        
+//        var pin1 = CPA()
+//        pin1.coordinate = CLLocationCoordinate2DMake(37.332072300, -122.011138100)
+//        pin1.title = "Apple Park"
+//        pin1.subtitle = "It works on the Apple HQ"
+//        pin1.imageName = "add"
+//
+//        var pin2 = CPA()
+//        pin2.coordinate = CLLocationCoordinate2DMake(37.342226, -122.025617)
+//        pin2.title = "Ortega Park"
+//        pin2.subtitle = "The park"
+//        pin2.imageName = "thumbup-click"
+    }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         print("Did get latest location")
         guard let latestLocation = locations.first else { return }
@@ -79,29 +98,34 @@ extension MapViewController: CLLocationManagerDelegate {
             beginLocationUpdates(locationManager: manager)
         }
     }
-}
+//}
 
-extension MapViewController: MKMapViewDelegate {
+//extension MapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         print("Inside ViewFor")
-        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "AnnotationView")
         
+        let annotationIdentifier = "ActivityAnnotation"
+
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier)
         if annotationView == nil {
-            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "AnnotationView")
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
+            annotationView!.canShowCallout = true
             print("AnnotationView created\n\n")
         }
         
-        if let title = annotation.title, title == "Apple Park" {
-            print("Trigger on Apple park")
-            annotationView?.image = UIImage(named: "add")
-        } else if let title = annotation.title, title == "Ortega Park" {
-            annotationView?.image = UIImage(named: "thumbup-click")
-        } else if annotation === mapView.userLocation {
-            annotationView?.image = UIImage(named: "plus")
+        if annotation === mapView.userLocation {
+            annotationView?.image = UIImage(named: "current_user.png")
         }
         
-        annotationView?.canShowCallout = true
-        
+        if let annotationView = annotationView, let _ = annotation as? ActivityPin {
+            for activity in activitiesPin {
+                if let title = annotation.title, title == activity.title {
+                    print("\t \(activity.imageName)\n\n")
+                    annotationView.image = UIImage(named: "\(activity.imageName)")
+                    annotationView.canShowCallout = true
+                }
+            }
+        }
         return annotationView
     }
     
