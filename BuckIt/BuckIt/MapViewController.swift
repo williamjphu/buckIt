@@ -59,7 +59,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     private func fetchActivities() {
         print("fetchaActivites called")
         let reference = Database.database().reference()
-        reference.child("activities").child("Food").observeSingleEvent(of: .value, with: { (snap) in
+        reference.child("activities").child("Meet-up").observeSingleEvent(of: .value, with: { (snap) in
             let activitySnap = snap.value as! [String: AnyObject]
             
             for (_,activity) in activitySnap {
