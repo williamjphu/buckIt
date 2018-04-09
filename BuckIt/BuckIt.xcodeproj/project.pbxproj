@@ -13,6 +13,7 @@
 		77D45FC31FAE96EB0034DDBA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77D45FC11FAE96EB0034DDBA /* Main.storyboard */; };
 		77D45FC51FAE96EB0034DDBA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77D45FC41FAE96EB0034DDBA /* Assets.xcassets */; };
 		77D45FC81FAE96EB0034DDBA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77D45FC61FAE96EB0034DDBA /* LaunchScreen.storyboard */; };
+		AE767A972077605D00BCED76 /* ActivityPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE767A962077605D00BCED76 /* ActivityPin.swift */; };
 		AE7F9BFC20182E3F00420457 /* MapView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE7F9BFB20182E3F00420457 /* MapView.storyboard */; };
 		AE7F9BFE20182E4E00420457 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F9BFD20182E4E00420457 /* MapViewController.swift */; };
 		AE7F9C16201986AF00420457 /* BucketPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE7F9C13201986AE00420457 /* BucketPage.storyboard */; };
@@ -54,6 +55,7 @@
 		77D45FC41FAE96EB0034DDBA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		77D45FC71FAE96EB0034DDBA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		77D45FC91FAE96EB0034DDBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AE767A962077605D00BCED76 /* ActivityPin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityPin.swift; sourceTree = "<group>"; };
 		AE7F9BFB20182E3F00420457 /* MapView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MapView.storyboard; sourceTree = "<group>"; };
 		AE7F9BFD20182E4E00420457 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		AE7F9C13201986AE00420457 /* BucketPage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BucketPage.storyboard; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 				AE7F9C122019865C00420457 /* bucket-page */,
 				AE7F9C0F2019812800420457 /* map-view */,
 				77D45FBD1FAE96EB0034DDBA /* AppDelegate.swift */,
+				AE767A962077605D00BCED76 /* ActivityPin.swift */,
 				77D45FC11FAE96EB0034DDBA /* Main.storyboard */,
 				77D45FC41FAE96EB0034DDBA /* Assets.xcassets */,
 				77D45FC61FAE96EB0034DDBA /* LaunchScreen.storyboard */,
@@ -430,6 +433,7 @@
 				C3E2A5C72072CEC700818CE1 /* ActivityTableViewCell.swift in Sources */,
 				AE7F9BFE20182E4E00420457 /* MapViewController.swift in Sources */,
 				AE7F9C2320198AFE00420457 /* User.swift in Sources */,
+				AE767A972077605D00BCED76 /* ActivityPin.swift in Sources */,
 				C3B95C232022C8D100836918 /* TabBarViewController.swift in Sources */,
 				AE7F9C2220198AFE00420457 /* EditProfileViewController.swift in Sources */,
 				C342B2322044BA6E00A81EAA /* BuckIt.swift in Sources */,
