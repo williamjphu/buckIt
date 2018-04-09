@@ -8,11 +8,12 @@
 
 import UIKit
 import MapKit
+import Firebase
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     private let locationManager = CLLocationManager()
     private var currentCoordinate: CLLocationCoordinate2D?
-
+    
     var activitiesPin: Array<ActivityPin> = Array()
     
     @IBOutlet weak var mapView: MKMapView!
@@ -24,7 +25,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
-        addAnnotations()
         configureLocationServices()
     }
     
@@ -50,34 +50,54 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         let zoomRegion = MKCoordinateRegionMakeWithDistance(coordinate, zoomLevel, zoomLevel)
         mapView.setRegion(zoomRegion, animated: true)
     }
-
+    let categories = [ "Food",
+                       "Music",
+                       "Meet-up",
+                       "Recreation",
+                       "Fundraiser"]
+    
+    private func fetchActivities() {
+        print("fetchaActivites called")
+        let reference = Database.database().reference()
+        reference.child("activities").child("Food").observeSingleEvent(of: .value, with: { (snap) in
+            let activitySnap = snap.value as! [String: AnyObject]
+            
+            for (_,activity) in activitySnap {
+                if let uid = activity["userID"] as? String {
+                    print("\t\t Authenticating ... \n")
+                    if uid == Auth.auth().currentUser?.uid {
+                        print("\t\t User authenticated \(uid)")
+                        if let title = activity["activityName"] as? String,
+                            let subtitle = activity["description"] as? String,
+                            let latitude = activity["latidude"] as? Double,
+                            let longitude = activity["longitude"] as? Double,
+                            let pathToImage = activity["pathToImage"] as? String {
+                            
+                            let coordinate = CLLocationCoordinate2DMake(latitude, longitude)
+                            let actitivyItem = ActivityPin(title: title, subtitle: subtitle, coordinate: coordinate, imageName: "bucket")
+                            
+                            self.activitiesPin.append(actitivyItem)
+                            self.mapView.addAnnotation(actitivyItem)
+                        }
+                    }
+                }
+            }
+        })
+        reference.removeAllObservers()
+    }
+    
     private func addAnnotations() {
-        var applePin: ActivityPin!
-        var parkPin: ActivityPin!
-
-        let appleCoordinate = CLLocationCoordinate2D(latitude: 37.332072300, longitude: -122.011138100)
-        applePin = ActivityPin(title: "Apple Park", subtitle: "It works on the Apple HQ", coordinate: appleCoordinate, imageName: "add")
-
-        let parkCoordinate = CLLocationCoordinate2D(latitude: 37.342226, longitude: -122.025617)
-        parkPin = ActivityPin(title: "Ortega Park", subtitle: "The park", coordinate: parkCoordinate, imageName: "thumbup-click")
-
-        activitiesPin.append(applePin)
-        activitiesPin.append(parkPin)
-        
-        mapView.addAnnotation(applePin)
-        mapView.addAnnotation(parkPin)
-        
-//        var pin1 = CPA()
-//        pin1.coordinate = CLLocationCoordinate2DMake(37.332072300, -122.011138100)
-//        pin1.title = "Apple Park"
-//        pin1.subtitle = "It works on the Apple HQ"
-//        pin1.imageName = "add"
-//
-//        var pin2 = CPA()
-//        pin2.coordinate = CLLocationCoordinate2DMake(37.342226, -122.025617)
-//        pin2.title = "Ortega Park"
-//        pin2.subtitle = "The park"
-//        pin2.imageName = "thumbup-click"
+        //        var applePin: ActivityPin!
+        //        var parkPin: ActivityPin!
+        //        let appleCoordinate = CLLocationCoordinate2D(latitude: 37.332072300, longitude: -122.011138100)
+        //        applePin = ActivityPin(title: "Apple Park", subtitle: "It works on the Apple HQ", coordinate: appleCoordinate, imageName: "add")
+        //        let parkCoordinate = CLLocationCoordinate2D(latitude: 37.342226, longitude: -122.025617)
+        //        parkPin = ActivityPin(title: "Ortega Park", subtitle: "The park", coordinate: parkCoordinate, imageName: "thumbup-click")
+        //        activitiesPin.append(applePin)
+        //        activitiesPin.append(parkPin)
+        //        mapView.addAnnotation(applePin)
+        //        mapView.addAnnotation(parkPin)
+        fetchActivities()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -98,18 +118,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             beginLocationUpdates(locationManager: manager)
         }
     }
-//}
-
-//extension MapViewController: MKMapViewDelegate {
+    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         print("Inside ViewFor")
         
         let annotationIdentifier = "ActivityAnnotation"
-
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier)
+        
         if annotationView == nil {
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
-            annotationView!.canShowCallout = true
             print("AnnotationView created\n\n")
         }
         
@@ -122,10 +139,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 if let title = annotation.title, title == activity.title {
                     print("\t \(activity.imageName)\n\n")
                     annotationView.image = UIImage(named: "\(activity.imageName)")
-                    annotationView.canShowCallout = true
                 }
             }
         }
+        
+        annotationView?.canShowCallout = true
+        
         return annotationView
     }
     
