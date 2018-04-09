@@ -9,5 +9,8 @@
 import UIKit
 
 class ActivityTableViewCell: UITableViewCell {
+
     @IBOutlet weak var activityTitle: UILabel!
+    @IBOutlet weak var activityDescription: UILabel!
+    @IBOutlet weak var addButton: UIButton!
 }

@@ -19,7 +19,6 @@ class NewBucketViewController: UIViewController, UIImagePickerControllerDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("new bucket is being called")
     }
     
     
