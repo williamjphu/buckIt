@@ -229,7 +229,7 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
                                 "activityName" : self.titleText.text!,
                                 "description": self.descriptionText.text!,
                                 "locationName": self.locationText.text!,
-                                "latidude": self.theCoordinates?.latitude,      /* location latitude */
+                                "latitude": self.theCoordinates?.latitude,      /* location latitude */
                                 "longitude": self.theCoordinates?.longitude,    /* location longitude */
                                 "category": self.categoryTextfield.text!,
                                 "activityID" : key] as [String : Any]
