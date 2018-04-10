@@ -69,6 +69,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                         
                         self.activitiesPin.append(actitivyItem)
                         self.mapView.addAnnotation(actitivyItem)
+                        
                     }
                 }
             }
