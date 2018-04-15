@@ -72,22 +72,9 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Few-0w-EcM">
-                                                            <rect key="frame" x="314" y="24" width="46" height="20"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="46" id="bcC-qN-j6N"/>
-                                                                <constraint firstAttribute="height" constant="20" id="cXO-83-S1A"/>
-                                                            </constraints>
-                                                            <state key="normal" title="Add"/>
-                                                            <connections>
-                                                                <segue destination="uLi-qg-YN1" kind="show" id="b5c-oW-9E7"/>
-                                                            </connections>
-                                                        </button>
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstItem="4jb-k1-C6Q" firstAttribute="top" secondItem="SDa-UA-6w5" secondAttribute="bottom" constant="1" id="3u3-3W-roI"/>
-                                                        <constraint firstItem="Few-0w-EcM" firstAttribute="top" secondItem="r5n-Xu-ug8" secondAttribute="top" constant="24" id="CtL-UO-Xkt"/>
-                                                        <constraint firstAttribute="trailing" secondItem="Few-0w-EcM" secondAttribute="trailing" constant="15" id="IAX-3i-NFN"/>
                                                         <constraint firstItem="SDa-UA-6w5" firstAttribute="top" secondItem="r5n-Xu-ug8" secondAttribute="top" constant="11" id="daN-AE-TNv"/>
                                                         <constraint firstItem="4jb-k1-C6Q" firstAttribute="leading" secondItem="r5n-Xu-ug8" secondAttribute="leading" constant="20" id="eC9-O8-qnb"/>
                                                         <constraint firstItem="SDa-UA-6w5" firstAttribute="leading" secondItem="r5n-Xu-ug8" secondAttribute="leading" constant="20" id="wfK-cY-P5N"/>
@@ -97,7 +84,6 @@
                                                 <connections>
                                                     <outlet property="activityDescription" destination="4jb-k1-C6Q" id="XD0-4M-tSF"/>
                                                     <outlet property="activityTitle" destination="SDa-UA-6w5" id="4vN-8d-CXr"/>
-                                                    <outlet property="addButton" destination="Few-0w-EcM" id="38O-EP-hf2"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
@@ -148,11 +134,37 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="9Zo-wi-yPY" id="DOb-P8-nOg"/>
+                        <segue destination="VpB-LJ-32i" kind="show" identifier="activityProfile" id="6pn-fD-Nk6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QKj-Nu-IBs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="100" y="158.77061469265368"/>
+        </scene>
+        <!--Activity Profile-->
+        <scene sceneID="qPw-gd-4rH">
+            <objects>
+                <viewController id="VpB-LJ-32i" customClass="ActivityProfileViewController" customModule="BuckIt" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bpQ-vZ-W5B">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Lml-pa-gfs"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Activity Profile" id="SUz-rN-vDn">
+                        <barButtonItem key="rightBarButtonItem" title="Add" id="99K-TA-Lh9">
+                            <connections>
+                                <action selector="addToBucketPressed:" destination="VpB-LJ-32i" id="sEx-9f-Qk1"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="uLi-qg-YN1" kind="show" identifier="addToBuckit" id="oAQ-ac-Xlk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vTq-jV-atS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="100" y="984"/>
         </scene>
         <!--Choose a BuckIt-->
         <scene sceneID="27G-he-PsA">
@@ -230,7 +242,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y9Y-h3-uUh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="879.20000000000005" y="134.48275862068968"/>
+            <point key="canvasLocation" x="982" y="984"/>
         </scene>
     </scenes>
     <resources>
