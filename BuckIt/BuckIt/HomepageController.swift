@@ -8,6 +8,7 @@
 import UIKit
 import FBSDKLoginKit
 import GoogleSignIn
+import Firebase
 
 class HomepageController: UIViewController , FBSDKLoginButtonDelegate, GIDSignInUIDelegate{
     
@@ -169,20 +170,30 @@ class HomepageController: UIViewController , FBSDKLoginButtonDelegate, GIDSignIn
     }
     
     
-    
+    //if users already login through facebook. Take to profile
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         if FBSDKAccessToken.current() != nil {
             DispatchQueue.main.async {
-
+                
                 let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
                 
-                self.present(vc, animated: true, completion: nil)            }
+                self.present(vc, animated: true, completion: nil)
+                
+            }
+        } else if Firebase.Auth.auth().currentUser != nil{
+            DispatchQueue.main.async {
+                
+                let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
+                
+                self.present(vc, animated: true, completion: nil)
+                
+            }
         }
         
+        
     }
-    
+    //facebook authentication login
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         if error != nil {
             print(error)
@@ -192,8 +203,8 @@ class HomepageController: UIViewController , FBSDKLoginButtonDelegate, GIDSignIn
         }
         else if error == nil {
             print("Successfully logged in via facebook")
-
-            let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
+            
+            let vc = UIStoryboard(name: "Main" , bundle: nil).instantiateViewController(withIdentifier: "username")
             
             self.present(vc, animated: true, completion: nil)        }
     }

@@ -12,21 +12,51 @@ import PopupDialog
 
 class BucketListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SwipeTableViewCellDelegate {
 
-    @IBOutlet weak var tableView: UITableView!
+    //call the buckit model
+    var buckit = BuckIt()
     
+    @IBOutlet weak var buckitTitle: UILabel!
+    @IBOutlet weak var buckitDescription: UILabel!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var buckitImage: UIImageView!
+
     var activities = [Activity]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fillActivityInfo()
+
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.register(SwipeTableViewCell.self, forCellReuseIdentifier: "cell")
+
+    }
+    //Retrieve the title,desc,image from BuckitCell class
+    func fillActivityInfo(){
+        buckitTitle.text! = buckit.title!
+        buckitDescription.text! = buckit.desc!
+        buckitImage.downloadImage(from: buckit.pathToImage!)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         activities.removeAll()
 //        fetchActivities()
+    }
+    //send data and delegate to edit buckit
+    @IBAction func editBuckitPressed(_ sender: Any) {
+        performSegue(withIdentifier: "editBuckit", sender: self.buckit)
+    }
+    
+    //Go to edit Buckit
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? BuckitEditViewController{
+            if let buckit = sender as? BuckIt{
+                //send the selected post to the editBuckit
+                print("SENT")
+                destination.buckit = buckit
+            }
+        }
     }
     
     //the number of items in the list
@@ -45,7 +75,7 @@ class BucketListViewController: UIViewController, UITableViewDelegate, UITableVi
         let row = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SwipeTableViewCell
         row.delegate = self
         
-        //create label from database 
+        //create label from database
         let label = UILabel(frame: CGRect(x: 140.0, y: 14.0, width: 100.0, height: 30.0))
         label.text = "Visit the North Pole"
 //        label.text = self.activities[indexPath.row].title

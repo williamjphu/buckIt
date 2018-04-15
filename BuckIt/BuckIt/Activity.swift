@@ -8,7 +8,6 @@
 
 import UIKit
 
-//class Post : AnyObject{
 class Activity : NSObject {
     
     var theDescription : String?

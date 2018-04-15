@@ -7,97 +7,136 @@
 //
 
 import UIKit
-import CoreLocation
 import MapKit
+import Firebase
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
-
-    @IBOutlet weak var mapView: MKMapView!
-    var locationManager : CLLocationManager!
-    //var initialLocation : CLLocation!
+    private let locationManager = CLLocationManager()
+    private var currentCoordinate: CLLocationCoordinate2D?
     
-    var mapHasCenteredOnce = false
+    var activitiesPin: Array<ActivityPin> = Array()
+    
+    @IBOutlet weak var mapView: MKMapView!
+    
+    class CPA: MKPointAnnotation {
+        var imageName: String?
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        locationManager.delegate = self
-//        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-//        locationManager.requestWhenInUseAuthorization()
-//        locationManager.startUpdatingLocation()
-//
-//        mapView.delegate = self
-//        mapView.userTrackingMode = MKUserTrackingMode.follow
-//        initialLocation = CLLocation(latitude: 37.33467, longitude: -121.87533)
-//        centerMapOnLocation(location: initialLocation)
-        determineCurrentLocation()
+        mapView.delegate = self
+        configureLocationServices()
     }
     
-//    func locationAuthStatus() {
-//        if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
-//            mapView.showsUserLocation = true
-//        } else {
-//            locationManager.requestWhenInUseAuthorization()
-//            locationAuthStatus()
-//        }
-//    }
-
-//    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-//        if status == .authorizedWhenInUse {
-//            mapView.showsUserLocation = true
-//        }
-//    }
-
-//    func centerMapOnLocation(location: CLLocation) {
-//        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, 1000, 1000)
-//        mapView.setRegion(coordinateRegion, animated: true)
-//    }
-
-//    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
-//        if let loc = userLocation.location {
-//            if !mapHasCenteredOnce {
-//                centerMapOnLocation(location: loc)
-//                mapHasCenteredOnce = true
-//            }
-//        }
-//    }
-    
-    func determineCurrentLocation() {
-        locationManager = CLLocationManager()
+    private func configureLocationServices() {
         locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestWhenInUseAuthorization()
+        let status = CLLocationManager.authorizationStatus()
         
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.startUpdatingLocation()
+        if status == .notDetermined {
+            locationManager.requestWhenInUseAuthorization()
+        } else if status == .authorizedWhenInUse {
+            beginLocationUpdates(locationManager: locationManager)
+        }
+    }
+    
+    private func beginLocationUpdates(locationManager: CLLocationManager) {
+        mapView.showsUserLocation = true
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.startUpdatingLocation()
+    }
+    
+    private func zoomToLatestLocation(with coordinate: CLLocationCoordinate2D) {
+        let zoomLevel: Double = 10000
+        let zoomRegion = MKCoordinateRegionMakeWithDistance(coordinate, zoomLevel, zoomLevel)
+        mapView.setRegion(zoomRegion, animated: true)
+    }
+    
+    private func fetchActivities(childName: String, imageFile: String) {
+        print("fetchActivites called")
+        let reference = Database.database().reference()
+        reference.child("activities").child(childName).observeSingleEvent(of: .value, with: { (snap) in
+            if snap.exists() {
+                let activitySnap = snap.value as! [String: AnyObject]
+                
+                for (_,activity) in activitySnap {
+                    if let title = activity["activityName"] as? String,
+                        let subtitle = activity["description"] as? String,
+                        let latitude = activity["latitude"] as? Double,
+                        let longitude = activity["longitude"] as? Double {
+                        
+                        let coordinate = CLLocationCoordinate2DMake(latitude, longitude)
+                        let actitivyItem = ActivityPin(title: title, subtitle: subtitle, coordinate: coordinate, imageName: imageFile)
+                        
+                        self.activitiesPin.append(actitivyItem)
+                        self.mapView.addAnnotation(actitivyItem)
+                        
+                    }
+                }
+            }
+        })
+        reference.removeAllObservers()
+    }
+    
+    private func addAnnotations() {
+        let categoriesDictionary = [ "Food" : "fried-chicken",
+                                     "Music" : "music-player",
+                                     "Meet-up" : "bucket",
+                                     "Recreation" : "tent",
+                                     "Fundraiser" : "money-bag"]
+    
+        for (key, value) in categoriesDictionary {
+            fetchActivities(childName: "\(key)", imageFile: "\(value)")
         }
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print(locations)
-//        let location = locations[locations.count - 1]
-//        if location.horizontalAccuracy > 0 {
-//            locationManager.stopUpdatingLocation()
-//
-//            print("longitude = \(location.coordinate.longitude), latitude = \(location.coordinate.latitude)")
-//            let lat = location.coordinate.latitude
-//            let lon = location.coordinate.longitude
-//            let currentLoc = CLLocation(latitude: lat, longitude: lon)
-//            centerMapOnLocation(location: currentLoc)
-//        }
-        let userLocation : CLLocation = locations[0] as CLLocation
-        locationManager.stopUpdatingLocation()
-        let center = CLLocationCoordinate2D(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude)
-        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-        mapView.setRegion(region, animated: true)
+        print("Did get latest location")
+        guard let latestLocation = locations.first else { return }
         
-        let annotation : MKPointAnnotation = MKPointAnnotation()
-        annotation.coordinate = CLLocationCoordinate2DMake(userLocation.coordinate.latitude, userLocation.coordinate.longitude)
-        annotation.title = "Current location"
-        mapView.addAnnotation(annotation)
+        if currentCoordinate == nil {
+            zoomToLatestLocation(with: latestLocation.coordinate)
+            addAnnotations()
+        }
+        
+        currentCoordinate = latestLocation.coordinate
     }
     
-    //Write the didUpdateLocations method here: such as airplane mode, or no tracking allows
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: NSError) {
-        print("Error \(error)")
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        print("Status changed")
+        if status == .authorizedAlways || status == .authorizedWhenInUse {
+            beginLocationUpdates(locationManager: manager)
+        }
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        print("Inside ViewFor")
+        
+        let annotationIdentifier = "ActivityAnnotation"
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier)
+        
+        if annotationView == nil {
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
+            print("AnnotationView created\n\n")
+        }
+        
+        if annotation === mapView.userLocation {
+            annotationView?.image = UIImage(named: "current_user.png")
+        }
+        
+        if let annotationView = annotationView, let _ = annotation as? ActivityPin {
+            for activity in activitiesPin {
+                if let title = annotation.title, title == activity.title {
+                    print("\t \(activity.imageName)\n\n")
+                    annotationView.image = UIImage(named: "\(activity.imageName)")
+                }
+            }
+        }
+        
+        annotationView?.canShowCallout = true
+        return annotationView
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        print("Selected annotation: \(String(describing: view.annotation?.title))")
     }
 }

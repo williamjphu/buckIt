@@ -8,18 +8,10 @@
 
 import UIKit
 
-class TableViewCell: UITableViewCell {
-
-    @IBOutlet weak var bucketImage: UIImageView!
-    @IBOutlet weak var bucketLabel: UILabel!
-
-    @IBOutlet weak var followerImage: UIImageView!
-    @IBOutlet weak var fwerLabel: UILabel!
-
-    
+class FollowingTableViewCell: UITableViewCell {
     @IBOutlet weak var followingImage: UIImageView!
     @IBOutlet weak var fwingLabel: UILabel!
     
     var userId: String!
-
+    
 }

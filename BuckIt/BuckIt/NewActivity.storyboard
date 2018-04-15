@@ -26,7 +26,11 @@
                                 </constraints>
                                 <items>
                                     <navigationItem title="New Activity" id="Eoq-Cu-tr5">
-                                        <barButtonItem key="rightBarButtonItem" title="Post" id="net-0R-5sB"/>
+                                        <barButtonItem key="rightBarButtonItem" title="Post" id="net-0R-5sB">
+                                            <connections>
+                                                <action selector="createActivity:" destination="hc8-6c-VPp" id="6QD-q2-AL1"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                                 <variation key="heightClass=regular-widthClass=compact">
@@ -172,6 +176,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Select category" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cnF-WS-uBI">
+                                <rect key="frame" x="18" y="460" width="341" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -217,6 +228,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="activityPic" destination="rdf-OL-sus" id="Vdv-SG-Y37"/>
+                        <outlet property="categoryTextfield" destination="cnF-WS-uBI" id="Zfb-k4-TbG"/>
                         <outlet property="descriptionText" destination="qmn-jh-BJS" id="kNl-A8-MvV"/>
                         <outlet property="locationText" destination="xWF-za-L7u" id="9Ci-Sj-aB1"/>
                         <outlet property="mapView" destination="yIN-ZN-6d1" id="6m9-cH-5hG"/>
