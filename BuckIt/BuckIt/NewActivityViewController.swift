@@ -14,16 +14,12 @@ import FirebaseStorage
 import Firebase
 import UITextView_Placeholder
 
-class NewActivityViewController: UIViewController, UINavigationControllerDelegate, UITextViewDelegate, UITextFieldDelegate, UIImagePickerControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+class NewActivityViewController: UIViewController, UINavigationControllerDelegate,UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
+    @IBOutlet weak var titleText: UITextField!
     @IBOutlet weak var descriptionText: UITextView!     /* text view for description box */
-    
-    // @IBOutlet weak var titleText: UITextView!
-    // @IBOutlet weak var profilePic: UIImageView!
     @IBOutlet weak var activityPic: UIImageView!
-    @IBOutlet weak var mapView: MKMapView!
-    @IBOutlet weak var useMyLocationButton: UISwitch!
-    @IBOutlet weak var locationText: UITextField!
+    @IBOutlet weak var locationText: UITextField!           /* textfield for the location */
     @IBOutlet weak var categoryTextfield: UITextField!      /* textfield for the category picker */
     
     var manager: CLLocationManager!
@@ -37,21 +33,18 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
                        "Recreation",
                        "Fundraiser"]
     
-    var searchCompleter = MKLocalSearchCompleter()
-    var searchResults = [MKLocalSearchCompletion]()
-    
-    @IBOutlet weak var searchResultsTableView: UITableView!
-    
     override func viewDidLoad() {
-    
         super.viewDidLoad()
-        
-        searchCompleter.delegate = self
+        locationText.delegate = self
         setupDescriptionTextArea()
-        setupTitleTextArea()
         createPicker()
         pickerToolbar()
-        
+    }
+    
+    /* triggers a segue to the next view */
+    func textFieldDidBeginEditing(_ locationText: UITextField) {
+        performSegue(withIdentifier: "setLocationSegue", sender: self)
+        locationText.resignFirstResponder()
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -73,16 +66,13 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
     
     /* the scrolling screen for picker */
     func createPicker() {
-        
         let categoryPicker = UIPickerView()
         categoryPicker.delegate = self
         categoryTextfield.inputView = categoryPicker
-        
-    } /* end createPicker() */
+    }
     
     /* create toolbar for the picker */
     func pickerToolbar() {
-        
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         
@@ -92,7 +82,6 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
         toolbar.isUserInteractionEnabled = true
         
         categoryTextfield.inputAccessoryView = toolbar
-        
     } /* end pickerToolbar() */
     
     @objc func dismissPicker() {
@@ -103,9 +92,6 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         self.descriptionText.resignFirstResponder()
-        //titleText.endEditing(true)
-        //descriptionText.endEditing(true)
-        //locationText.endEditing(true)
     }
     
     //needed to dismiss keyboard when you press return on the location text field
@@ -115,31 +101,18 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
         return false
     }
     
+    /*
+     *  setup description text view
+     */
     func setupDescriptionTextArea() {
         descriptionText.delegate = self
         descriptionText.placeholder = "Describe event..."
         descriptionText.textColor = UIColor.lightGray
-        descriptionText.layer.borderWidth = 1.0
+        descriptionText.layer.borderWidth = 3.0
         descriptionText.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0).cgColor
     }
     
-    //add placeholders and make the profile pic circular
-    func setupTitleTextArea(){
-        //titleText.delegate = self
-        //titleText.placeholder = "Add a Title..."
-        
-        //descriptionText.delegate = self
-        //descriptionText.placeholder = "Add a Description..."
-        
-        //locationText.delegate = self
-        
-        /* setup profile pic */
-        //profilePic.layer.borderWidth = 1
-        //profilePic.layer.masksToBounds = false
-        //profilePic.layer.cornerRadius = self.profilePic.frame.height/2
-        //profilePic.clipsToBounds = true
-    }
-    
+    //NEED TO CONNECT THIS TO SOMTHING
     //import an image when you click the activity pic
     @IBAction func importImage(_ sender: Any) {
         let image = UIImagePickerController()
@@ -164,26 +137,29 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
         self.dismiss(animated: true, completion: nil)
     }
     
-    //locates the address specified in the location text and finds it on the mapview
-    @IBAction func getLocation(_ sender: Any) {
-        let location = self.locationText.text
-        let geocoder = CLGeocoder()
-        geocoder.geocodeAddressString(location! as String) { (placemarks, error) in
-            if let placemarks = placemarks {
-                if placemarks.count != 0 {
-                    let annotation = MKPlacemark(placemark: placemarks.first!)
-                    let location = MKPlacemark(placemark: placemarks.first!).location
-                    self.theCoordinates = location!.coordinate
-                    
-                    self.mapView.setRegion(MKCoordinateRegionMakeWithDistance(self.theCoordinates!, 2000, 2000), animated: true)
-                    
-                    self.mapView.addAnnotation(annotation)
-                }
-            }
-            
-        }
-    }
     
+    //NEED FOR FUTURE REFERENCE
+    //locates the address specified in the location text and finds it on the mapview
+//    @IBAction func getLocation(_ sender: Any) {
+//        let location = self.locationText.text
+//        let geocoder = CLGeocoder()
+//        geocoder.geocodeAddressString(location! as String) { (placemarks, error) in
+//            if let placemarks = placemarks {
+//                if placemarks.count != 0 {
+//                    let annotation = MKPlacemark(placemark: placemarks.first!)
+//                    let location = MKPlacemark(placemark: placemarks.first!).location
+//                    self.theCoordinates = location!.coordinate
+//
+//                    self.mapView.setRegion(MKCoordinateRegionMakeWithDistance(self.theCoordinates!, 2000, 2000), animated: true)
+//
+//                    self.mapView.addAnnotation(annotation)
+//                }
+//            }
+//
+//        }
+//    }
+    
+    //NEED TO DO THIS
     /* get the location of the user to store into DB */
     func fetchLocation() {
         let ref = Database.database().reference()
@@ -191,7 +167,7 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
     
     /* creates new activity and stores it in the database */
     @IBAction func createActivity(_ sender: Any) {
-        
+    
         let uid = Auth.auth().currentUser!.uid
         var ref = Database.database().reference()   /* reference to the database */
         let geoRef = Database.database().reference()  /* reference to the database for location */
@@ -224,7 +200,7 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
                 if let url = url {
                     let feed = ["userID" : uid,
                                 "pathToImage" : url.absoluteString,
-//                                "activityName" : self.titleText.text!,
+                                "activityName" : self.titleText.text!,
                                 "description": self.descriptionText.text!,
                                 "locationName": self.locationText.text!,
                                 "latitude": self.theCoordinates?.latitude,      /* location latitude */
@@ -250,58 +226,3 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
     } /* end createActivity() */
 
 } // end class
-
-extension NewActivityViewController: UISearchBarDelegate {
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        searchCompleter.queryFragment = searchText
-    }
-}
-
-extension NewActivityViewController: MKLocalSearchCompleterDelegate {
-    
-    func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
-        searchResults = completer.results
-        searchResultsTableView.reloadData()
-    }
-    
-    func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
-        // handle error
-    }
-}
-
-extension NewActivityViewController: UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchResults.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let searchResult = searchResults[indexPath.row]
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
-        cell.textLabel?.text = searchResult.title
-        cell.detailTextLabel?.text = searchResult.subtitle
-        return cell
-    }
-}
-
-extension NewActivityViewController: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        let completion = searchResults[indexPath.row]
-        
-        let searchRequest = MKLocalSearchRequest(completion: completion)
-        let search = MKLocalSearch(request: searchRequest)
-        search.start { (response, error) in
-            let coordinate = response?.mapItems[0].placemark.coordinate
-            print(String(describing: coordinate))
-        }
-    }
-}
-
