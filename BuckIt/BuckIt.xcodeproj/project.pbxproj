@@ -30,6 +30,7 @@
 		C36DBBD320352A1600776F2B /* NewBucketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36DBBD220352A1600776F2B /* NewBucketViewController.swift */; };
 		C397DF2C1FB5B08A00D6C0AF /* Pods_BuckIt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C397DF2D1FB5B08A00D6C0AF /* Pods_BuckIt.framework */; };
 		C397DF2F1FB5B19000D6C0AF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C397DF2E1FB5B19000D6C0AF /* GoogleService-Info.plist */; };
+		C39D94352083E0CC006093B7 /* ActivityProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39D94342083E0CC006093B7 /* ActivityProfileViewController.swift */; };
 		C3A3E473207763F60081C8D6 /* chooseBuckitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A3E472207763F60081C8D6 /* chooseBuckitTableViewCell.swift */; };
 		C3B95C232022C8D100836918 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B95C222022C8D100836918 /* TabBarViewController.swift */; };
 		C3B95C252022CD5A00836918 /* Trending.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3B95C242022CD5A00836918 /* Trending.storyboard */; };
@@ -76,6 +77,7 @@
 		C397DF2B1FB5B06500D6C0AF /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C397DF2D1FB5B08A00D6C0AF /* Pods_BuckIt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_BuckIt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C397DF2E1FB5B19000D6C0AF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		C39D94342083E0CC006093B7 /* ActivityProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityProfileViewController.swift; sourceTree = "<group>"; };
 		C3A3E472207763F60081C8D6 /* chooseBuckitTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chooseBuckitTableViewCell.swift; sourceTree = "<group>"; };
 		C3B95C222022C8D100836918 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		C3B95C242022CD5A00836918 /* Trending.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Trending.storyboard; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 				C3B95C2A2022CDE000836918 /* TrendingViewController.swift */,
 				C3E2A5C62072CEC700818CE1 /* ActivityTableViewCell.swift */,
 				C3A3E472207763F60081C8D6 /* chooseBuckitTableViewCell.swift */,
+				C39D94342083E0CC006093B7 /* ActivityProfileViewController.swift */,
 			);
 			name = Trending;
 			sourceTree = "<group>";
@@ -421,6 +424,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C39D94352083E0CC006093B7 /* ActivityProfileViewController.swift in Sources */,
 				AE7F9C2A20198CAE00420457 /* LoginController.swift in Sources */,
 				AE7F9C17201986AF00420457 /* Activity.swift in Sources */,
 				AE7F9C2020198AFE00420457 /* FollowingTableViewCell.swift in Sources */,
