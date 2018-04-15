@@ -66,7 +66,6 @@ class FirebaseDataContoller {
                         let coordinate = CLLocationCoordinate2DMake(latitude, longitude)
                         let actitivyItem = ActivityPin(title: title, subtitle: subtitle, coordinate: coordinate, imageName: imageFile)
                         self.activitiesPin.append(actitivyItem)
-                        print("inside fetch count: \(self.activitiesPin.count)")
                         self.mapViewObj.addAnnotation(actitivyItem)
                     }
                 }
