@@ -15,7 +15,7 @@ import Firebase
 import UITextView_Placeholder
 
 class NewActivityViewController: UIViewController, UINavigationControllerDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
-
+    
     @IBOutlet weak var titleText: UITextView!
     @IBOutlet weak var profilePic: UIImageView!
     @IBOutlet weak var activityPic: UIImageView!
@@ -23,13 +23,11 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var useMyLocationButton: UISwitch!
     @IBOutlet weak var locationText: UITextField!
-    @IBOutlet weak var categoryTextfield: UITextField!  /* textfield for the category picker */
+    @IBOutlet weak var categoryTextfield: UITextField!      /* textfield for the category picker */
     
     var manager: CLLocationManager!
     var theCoordinates: CLLocationCoordinate2D?
     var selection: String?
-    var searchCompleter = MKLocalSearchCompleter()
-    var searchResults = [MKLocalSearchCompleter]()
     
     /* categories for the picker view */
     let categories = [ "Food",
@@ -38,11 +36,21 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
                        "Recreation",
                        "Fundraiser"]
     
+    var searchCompleter = MKLocalSearchCompleter()
+    var searchResults = [MKLocalSearchCompletion]()
+    
+    @IBOutlet weak var searchResultsTableView: UITableView!
+    
     override func viewDidLoad() {
+    
         super.viewDidLoad()
+        
+        searchCompleter.delegate = self
+        
         setupTitleTextArea()
         createPicker()
         pickerToolbar()
+    
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -96,6 +104,7 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
         descriptionText.endEditing(true)
         locationText.endEditing(true)
     }
+    
     //needed to dismiss keyboard when you press return on the location text field
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.locationText.endEditing(true)
@@ -142,7 +151,6 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
         self.dismiss(animated: true, completion: nil)
     }
     
-    
     //locates the address specified in the location text and finds it on the mapview
     @IBAction func getLocation(_ sender: Any) {
         let location = self.locationText.text
@@ -165,12 +173,9 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
     
     /* get the location of the user to store into DB */
     func fetchLocation() {
-        
         let ref = Database.database().reference()
-        
-        
     }
-
+    
     /* creates new activity and stores it in the database */
     @IBAction func createActivity(_ sender: Any) {
         
@@ -183,31 +188,11 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
         let imageRef = storage.child("Activities").child(uid).child("\(key).jpeg") /* store images in "Activities" DB */
         let data = UIImageJPEGRepresentation(self.activityPic.image!, 0.6)
         
-        /* get location of the address input */
-        /*
-        let location = self.locationText.text
-        let geocoder = CLGeocoder()
-        geocoder.geocodeAddressString(location! as String) { (placemarks, error) in
-            
-            if let placemarks = placemarks {
-                
-                if placemarks.count != 0 {
-                    let annotation = MKPlacemark(placemark: placemarks.first!)
-                    let location = MKPlacemark(placemark: placemarks.first!).location
-                    self.theCoordinates = location!.coordinate
-                    self.mapView.setRegion(MKCoordinateRegionMakeWithDistance(self.theCoordinates!, 2000, 2000), animated: true)
-                    self.mapView.addAnnotation(annotation)
-                }
-                
-            }
-            
-        }
-        */
-        
         /* get location of the address by taking the coordinates. this will take the location from the locationText
            input field find use the address to pinpoint to the MKMapView */
         let address = locationText.text!    /* the location address */
         let geocoder = CLGeocoder()
+        
         geocoder.geocodeAddressString(address, completionHandler: {(placemarks, error) -> Void in
             if((error) != nil){
                 print("Error", error)
@@ -246,9 +231,64 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
             self.present(vc, animated: true, completion: nil)
             
         }
-        
+
         uploadTask.resume()
         
     } /* end createActivity() */
+
+} // end class
+
+extension NewActivityViewController: UISearchBarDelegate {
     
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchCompleter.queryFragment = searchText
+    }
 }
+
+extension NewActivityViewController: MKLocalSearchCompleterDelegate {
+    
+    func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
+        searchResults = completer.results
+        searchResultsTableView.reloadData()
+    }
+    
+    func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
+        // handle error
+    }
+}
+
+extension NewActivityViewController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return searchResults.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let searchResult = searchResults[indexPath.row]
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
+        cell.textLabel?.text = searchResult.title
+        cell.detailTextLabel?.text = searchResult.subtitle
+        return cell
+    }
+}
+
+extension NewActivityViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let completion = searchResults[indexPath.row]
+        
+        let searchRequest = MKLocalSearchRequest(completion: completion)
+        let search = MKLocalSearch(request: searchRequest)
+        search.start { (response, error) in
+            let coordinate = response?.mapItems[0].placemark.coordinate
+            print(String(describing: coordinate))
+        }
+    }
+}
+
