@@ -14,12 +14,13 @@ import FirebaseStorage
 import Firebase
 import UITextView_Placeholder
 
-class NewActivityViewController: UIViewController, UINavigationControllerDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+class NewActivityViewController: UIViewController, UINavigationControllerDelegate, UITextViewDelegate, UITextFieldDelegate, UIImagePickerControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
-    @IBOutlet weak var titleText: UITextView!
-    @IBOutlet weak var profilePic: UIImageView!
+    @IBOutlet weak var descriptionText: UITextView!     /* text view for description box */
+    
+    // @IBOutlet weak var titleText: UITextView!
+    // @IBOutlet weak var profilePic: UIImageView!
     @IBOutlet weak var activityPic: UIImageView!
-    @IBOutlet weak var descriptionText: UITextView!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var useMyLocationButton: UISwitch!
     @IBOutlet weak var locationText: UITextField!
@@ -46,11 +47,11 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
         super.viewDidLoad()
         
         searchCompleter.delegate = self
-        
+        setupDescriptionTextArea()
         setupTitleTextArea()
         createPicker()
         pickerToolbar()
-    
+        
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -100,31 +101,43 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
     
     //needed to dismiss the keyboard
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        titleText.endEditing(true)
-        descriptionText.endEditing(true)
-        locationText.endEditing(true)
+        super.touchesBegan(touches, with: event)
+        self.descriptionText.resignFirstResponder()
+        //titleText.endEditing(true)
+        //descriptionText.endEditing(true)
+        //locationText.endEditing(true)
     }
     
     //needed to dismiss keyboard when you press return on the location text field
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.locationText.endEditing(true)
+       // self.locationText.endEditing(true)
+        self.descriptionText.endEditing(true)
         return false
+    }
+    
+    func setupDescriptionTextArea() {
+        descriptionText.delegate = self
+        descriptionText.placeholder = "Describe event..."
+        descriptionText.textColor = UIColor.lightGray
+        descriptionText.layer.borderWidth = 1.0
+        descriptionText.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0).cgColor
     }
     
     //add placeholders and make the profile pic circular
     func setupTitleTextArea(){
-        titleText.delegate = self
-        titleText.placeholder = "Add a Title..."
+        //titleText.delegate = self
+        //titleText.placeholder = "Add a Title..."
         
-        descriptionText.delegate = self
-        descriptionText.placeholder = "Add a Description..."
+        //descriptionText.delegate = self
+        //descriptionText.placeholder = "Add a Description..."
         
-        locationText.delegate = self
+        //locationText.delegate = self
         
-        profilePic.layer.borderWidth = 1
-        profilePic.layer.masksToBounds = false
-        profilePic.layer.cornerRadius = self.profilePic.frame.height/2
-        profilePic.clipsToBounds = true
+        /* setup profile pic */
+        //profilePic.layer.borderWidth = 1
+        //profilePic.layer.masksToBounds = false
+        //profilePic.layer.cornerRadius = self.profilePic.frame.height/2
+        //profilePic.clipsToBounds = true
     }
     
     //import an image when you click the activity pic
@@ -211,7 +224,7 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
                 if let url = url {
                     let feed = ["userID" : uid,
                                 "pathToImage" : url.absoluteString,
-                                "activityName" : self.titleText.text!,
+//                                "activityName" : self.titleText.text!,
                                 "description": self.descriptionText.text!,
                                 "locationName": self.locationText.text!,
                                 "latitude": self.theCoordinates?.latitude,      /* location latitude */
