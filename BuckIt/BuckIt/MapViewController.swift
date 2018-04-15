@@ -13,19 +13,21 @@ import Firebase
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     private let locationManager = CLLocationManager()
     private var currentCoordinate: CLLocationCoordinate2D?
-    
-    var activitiesPin: Array<ActivityPin> = Array()
+    private var activitiesPin = FirebaseDataContoller.sharedInstance.activitiesPin
+//    private var controller = FirebaseDataContoller()
     
     @IBOutlet weak var mapView: MKMapView!
-    
-    class CPA: MKPointAnnotation {
-        var imageName: String?
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
+        FirebaseDataContoller.sharedInstance.mapViewObj = self.mapView
         configureLocationServices()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+//        addAnnotations()
+//        print("Counter: INSIDE AFter \(activitiesPin.count) \n\n")
     }
     
     private func configureLocationServices() {
@@ -51,42 +53,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         mapView.setRegion(zoomRegion, animated: true)
     }
     
-    private func fetchActivities(childName: String, imageFile: String) {
-        print("fetchActivites called")
-        let reference = Database.database().reference()
-        reference.child("activities").child(childName).observeSingleEvent(of: .value, with: { (snap) in
-            if snap.exists() {
-                let activitySnap = snap.value as! [String: AnyObject]
-                
-                for (_,activity) in activitySnap {
-                    if let title = activity["activityName"] as? String,
-                        let subtitle = activity["description"] as? String,
-                        let latitude = activity["latitude"] as? Double,
-                        let longitude = activity["longitude"] as? Double {
-                        
-                        let coordinate = CLLocationCoordinate2DMake(latitude, longitude)
-                        let actitivyItem = ActivityPin(title: title, subtitle: subtitle, coordinate: coordinate, imageName: imageFile)
-                        
-                        self.activitiesPin.append(actitivyItem)
-                        self.mapView.addAnnotation(actitivyItem)
-                        
-                    }
-                }
-            }
-        })
-        reference.removeAllObservers()
-    }
-    
     private func addAnnotations() {
-        let categoriesDictionary = [ "Food" : "fried-chicken",
-                                     "Music" : "music-player",
-                                     "Meet-up" : "bucket",
-                                     "Recreation" : "tent",
-                                     "Fundraiser" : "money-bag"]
-    
-        for (key, value) in categoriesDictionary {
-            fetchActivities(childName: "\(key)", imageFile: "\(value)")
-        }
+//        print("Counter in ADDANNO: \(FirebaseDataContoller.sharedInstance.activitiesPin.count)")
+//        print("Counter in ADDANNO: \(FirebaseDataContoller.sharedInstance.activitiesPinGetter.count)")
+//        for activity in FirebaseDataContoller.sharedInstance.activitiesPinGetter {
+//            self.mapView.addAnnotation(activity)
+//            print("After addANNO in the loop")
+//        }
+//        print("Counter in ADDANNO: \(FirebaseDataContoller.sharedInstance.activitiesPin.count)")
+//        print("Counter in ADDANNO: \(FirebaseDataContoller.sharedInstance.activitiesPinGetter.count)")
+        print("Inside ANNO before")
+        FirebaseDataContoller.sharedInstance.fetchActivitiesToMap()
+        print("Inside ANNO After \(FirebaseDataContoller.sharedInstance.activitiesPin.count)\n")
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -97,7 +75,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             zoomToLatestLocation(with: latestLocation.coordinate)
             addAnnotations()
         }
-        
+        print("\(FirebaseDataContoller.sharedInstance.activitiesPin.count)")
         currentCoordinate = latestLocation.coordinate
     }
     
@@ -124,7 +102,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
         
         if let annotationView = annotationView, let _ = annotation as? ActivityPin {
-            for activity in activitiesPin {
+            for activity in FirebaseDataContoller.sharedInstance.activitiesPin {
                 if let title = annotation.title, title == activity.title {
                     print("\t \(activity.imageName)\n\n")
                     annotationView.image = UIImage(named: "\(activity.imageName)")
