@@ -15,8 +15,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     let picker = UIImagePickerController()
     
     @IBOutlet weak var imageView: UIImageView!
-    
-    
+        
     @IBOutlet weak var descriptionText: UITextField!
     @IBOutlet weak var nameText: UITextField!
     @IBOutlet weak var userNameText: UITextField!
@@ -55,6 +54,13 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         let store = Storage.storage().reference(forURL: "gs://buckit-ed26f.appspot.com")
         userStorage = store.child("profile")
         
+        
+        //listen for keyboard events
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+        
         //maximize text input to 80 character
         descriptionText.delegate = self
         userNameText.delegate = self
@@ -82,6 +88,13 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         ref.removeAllObservers()
     }
     
+    deinit {
+        //stop listening for keyboard hide/show events
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+    }
+    
     func setProfilePicture(imageView: UIImageView, imageToSet: UIImage){
         
         imageView.image = imageToSet
@@ -95,6 +108,8 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         picker.sourceType = .photoLibrary
         
         present(picker, animated: true, completion: nil)
+        hideKeyBoard()
+
     }
     
     //change image
@@ -116,6 +131,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     //Override the edit data to the database
     @IBAction func saveChange(_ sender: Any) {
+        hideKeyBoard()
         
         ref = Database.database().reference()
         
@@ -148,5 +164,40 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             })
         })
     }
+    
+    //needed to dismiss the keyboard
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        nameText.endEditing(true)
+        descriptionText.endEditing(true)
+        userNameText.endEditing(true)
+    }
+    
+    //hide the keyboard function
+    func hideKeyBoard()
+    {
+        descriptionText.resignFirstResponder()
+        nameText.resignFirstResponder()
+        userNameText.resignFirstResponder()
+    }
 
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        hideKeyBoard()
+
+        return true
+    }
+
+    //push the UI up the keyboard is out
+    @objc func keyboardWillChange(notification: Notification){
+        //get the keyboard length
+        guard let keyboardRect = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+            return
+        }
+        if notification.name == Notification.Name.UIKeyboardWillShow || notification.name == Notification.Name.UIKeyboardWillChangeFrame{
+            view.frame.origin.y = -keyboardRect.height + 100
+        } else
+        {
+            view.frame.origin.y = 0
+        }
+    }
 }

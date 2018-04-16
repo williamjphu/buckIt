@@ -15,6 +15,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     private var currentCoordinate: CLLocationCoordinate2D?
     @IBOutlet weak var mapView: MKMapView!
     
+    @IBOutlet weak var search: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
@@ -99,4 +100,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         let zoomRegion = MKCoordinateRegionMakeWithDistance(coordinate, zoomLevel, zoomLevel)
         mapView.setRegion(zoomRegion, animated: true)
     }
+    
+    //needed to dismiss the keyboard
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        search.endEditing(true)
+    }
+    
 }
