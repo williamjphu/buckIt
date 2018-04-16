@@ -13,6 +13,7 @@
 		77D45FC31FAE96EB0034DDBA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77D45FC11FAE96EB0034DDBA /* Main.storyboard */; };
 		77D45FC51FAE96EB0034DDBA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77D45FC41FAE96EB0034DDBA /* Assets.xcassets */; };
 		77D45FC81FAE96EB0034DDBA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77D45FC61FAE96EB0034DDBA /* LaunchScreen.storyboard */; };
+		AE34420C2082EBF400126452 /* FirebaseDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE34420B2082EBF400126452 /* FirebaseDataController.swift */; };
 		AE767A972077605D00BCED76 /* ActivityPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE767A962077605D00BCED76 /* ActivityPin.swift */; };
 		AE7F9BFC20182E3F00420457 /* MapView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE7F9BFB20182E3F00420457 /* MapView.storyboard */; };
 		AE7F9BFE20182E4E00420457 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F9BFD20182E4E00420457 /* MapViewController.swift */; };
@@ -58,6 +59,7 @@
 		77D45FC41FAE96EB0034DDBA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		77D45FC71FAE96EB0034DDBA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		77D45FC91FAE96EB0034DDBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AE34420B2082EBF400126452 /* FirebaseDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDataController.swift; sourceTree = "<group>"; };
 		AE767A962077605D00BCED76 /* ActivityPin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityPin.swift; sourceTree = "<group>"; };
 		AE7F9BFB20182E3F00420457 /* MapView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MapView.storyboard; sourceTree = "<group>"; };
 		AE7F9BFD20182E4E00420457 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				C397DF2E1FB5B19000D6C0AF /* GoogleService-Info.plist */,
 				C3B95C222022C8D100836918 /* TabBarViewController.swift */,
 				C3B95C302022CEC600836918 /* TabController.storyboard */,
+				AE34420B2082EBF400126452 /* FirebaseDataController.swift */,
 			);
 			path = BuckIt;
 			sourceTree = "<group>";
@@ -453,6 +456,7 @@
 				AE7F9C2B20198CAE00420457 /* SignUpController.swift in Sources */,
 				C3B95C2D2022CDFC00836918 /* NewActivityViewController.swift in Sources */,
 				C36DBBD320352A1600776F2B /* NewBucketViewController.swift in Sources */,
+				AE34420C2082EBF400126452 /* FirebaseDataController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

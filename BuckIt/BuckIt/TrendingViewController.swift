@@ -21,10 +21,11 @@ class TrendingViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        activities.removeAll()
-        fetchAllActivities()
+        for (key,_) in FirebaseDataContoller.sharedInstance.categoriesDictionary {
+            fetchAllActivities(childName: "\(key)")
+        }
     }
-    
+  
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "activityProfile", sender: self.activities[indexPath.row])
     }
@@ -49,9 +50,10 @@ class TrendingViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     //this gets all the activities and puts it in activity array
-    func fetchAllActivities(){
+    func fetchAllActivities(childName: String){
         let ref = Database.database().reference()
-        ref.child("Activities").queryOrderedByKey().observeSingleEvent(of: .value, with: {(snap) in
+//        ref.child("activities").child(childName).observeSingleEvent(of: .value, with: {(snap) in
+        ref.child("activities").child(childName).observe(.value) { (snap) in
             let activitySnap = snap.value as? [String: AnyObject]
 
             for(_,activity) in activitySnap! {
@@ -60,24 +62,21 @@ class TrendingViewController: UIViewController, UITableViewDelegate, UITableView
                         let activityID = activity["activityID"] as? String,
                         let uid = activity["userID"] as? String,
                         let pathToImage = activity["pathToImage"] as? String,
-                        let title = activity["title"] as? String,
-                        let location = activity["location"] as? String{
+                        let title = activity["activityName"] as? String {
 
                         theActivity.theDescription = description
                         theActivity.activityID = activityID
                         theActivity.pathToImage = pathToImage
                         theActivity.title = title
                         theActivity.userID = uid
-                        theActivity.location = location
 
                         self.activities.append(theActivity)
                     }
                     self.tableView.reloadData()
             }
-        })
+        }
         ref.removeAllObservers()
     }
-
 }
 
 //class for the add to Bucket Page
