@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseDatabase
 import Firebase
+import PopupDialog
 
 class TrendingViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -17,15 +18,23 @@ class TrendingViewController: UIViewController, UITableViewDelegate, UITableView
     //array of activities that are displayed on the page
     var activities = [Activity]()
     
-    override func viewWillAppear(_ animated: Bool) {
-//        activities.removeAll()
-    }
-    
     override func viewDidLoad() {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         for (key,_) in FirebaseDataContoller.sharedInstance.categoriesDictionary {
             fetchAllActivities(childName: "\(key)")
+        }
+    }
+  
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "activityProfile", sender: self.activities[indexPath.row])
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? ActivityProfileViewController{
+            if let activity = sender as? Activity{
+                destination.activity = activity
+            }
         }
     }
     
@@ -75,7 +84,7 @@ class addToBucketViewController: UIViewController, UITableViewDelegate, UITableV
     
     //lists all the buckits you can add to
     @IBOutlet weak var tableView: UITableView!
-    
+    var activity = Activity()
     override func viewWillAppear(_ animated: Bool) {
         buckits.removeAll()
     }
@@ -128,6 +137,37 @@ class addToBucketViewController: UIViewController, UITableViewDelegate, UITableV
         tableCell.buckitTitle.text = self.buckits[indexPath.row].title
         return tableCell
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedBuckit = self.buckits[indexPath.row]
+        let message = selectedBuckit.title
+        let title = "Added to BuckIt!"
+        let popup = PopupDialog(title: title, message: message)
+        // Create dialogue
+        let buttonOne = DefaultButton(title: "Got it") {
+            print("Created Buckit")
+            
+            //should replace the true with upvotes
+            let activityFeed = [ self.activity.activityID! : true] as [String: Any]
+            
+            //add to buckit
+            let ref = Database.database().reference().child("BuckIts").child(selectedBuckit.buckitId).child("Activities")
+            ref.updateChildValues(activityFeed)
+            
+            //go back to trending page
+            _ = self.navigationController?.popViewController(animated: true)
+        }
+        let buttonTwo = CancelButton(title: "Cancel") {
+            print("You canceled the car dialog.")
+            _ = self.navigationController?.popViewController(animated: true)
+        }
+        
+        popup.addButtons([buttonOne, buttonTwo])
+        
+        //Present dialog
+        self.present(popup, animated: true, completion: nil)
+    }
+    
+    
 }
 
 

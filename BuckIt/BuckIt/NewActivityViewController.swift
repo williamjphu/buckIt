@@ -14,22 +14,17 @@ import FirebaseStorage
 import Firebase
 import UITextView_Placeholder
 
-class NewActivityViewController: UIViewController, UINavigationControllerDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
-
-    @IBOutlet weak var titleText: UITextView!
-    @IBOutlet weak var profilePic: UIImageView!
+class NewActivityViewController: UIViewController, UINavigationControllerDelegate,UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    @IBOutlet weak var titleText: UITextField!
+    @IBOutlet weak var descriptionText: UITextView!     /* text view for description box */
     @IBOutlet weak var activityPic: UIImageView!
-    @IBOutlet weak var descriptionText: UITextView!
-    @IBOutlet weak var mapView: MKMapView!
-    @IBOutlet weak var useMyLocationButton: UISwitch!
-    @IBOutlet weak var locationText: UITextField!
-    @IBOutlet weak var categoryTextfield: UITextField!  /* textfield for the category picker */
+    @IBOutlet weak var locationText: UITextField!           /* textfield for the location */
+    @IBOutlet weak var categoryTextfield: UITextField!      /* textfield for the category picker */
     
     var manager: CLLocationManager!
     var theCoordinates: CLLocationCoordinate2D?
     var selection: String?
-    var searchCompleter = MKLocalSearchCompleter()
-    var searchResults = [MKLocalSearchCompleter]()
     
     /* categories for the picker view */
     let categories = [ "Food",
@@ -40,9 +35,16 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTitleTextArea()
+        locationText.delegate = self
+        setupDescriptionTextArea()
         createPicker()
         pickerToolbar()
+    }
+    
+    /* triggers a segue to the next view */
+    func textFieldDidBeginEditing(_ locationText: UITextField) {
+        performSegue(withIdentifier: "setLocationSegue", sender: self)
+        locationText.resignFirstResponder()
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -64,16 +66,13 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
     
     /* the scrolling screen for picker */
     func createPicker() {
-        
         let categoryPicker = UIPickerView()
         categoryPicker.delegate = self
         categoryTextfield.inputView = categoryPicker
-        
-    } /* end createPicker() */
+    }
     
     /* create toolbar for the picker */
     func pickerToolbar() {
-        
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         
@@ -83,7 +82,6 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
         toolbar.isUserInteractionEnabled = true
         
         categoryTextfield.inputAccessoryView = toolbar
-        
     } /* end pickerToolbar() */
     
     @objc func dismissPicker() {
@@ -92,32 +90,29 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
     
     //needed to dismiss the keyboard
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        titleText.endEditing(true)
-        descriptionText.endEditing(true)
-        locationText.endEditing(true)
+        super.touchesBegan(touches, with: event)
+        self.descriptionText.resignFirstResponder()
     }
+    
     //needed to dismiss keyboard when you press return on the location text field
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.locationText.endEditing(true)
+       // self.locationText.endEditing(true)
+        self.descriptionText.endEditing(true)
         return false
     }
     
-    //add placeholders and make the profile pic circular
-    func setupTitleTextArea(){
-        titleText.delegate = self
-        titleText.placeholder = "Add a Title..."
-        
+    /*
+     *  setup description text view
+     */
+    func setupDescriptionTextArea() {
         descriptionText.delegate = self
-        descriptionText.placeholder = "Add a Description..."
-        
-        locationText.delegate = self
-        
-        profilePic.layer.borderWidth = 1
-        profilePic.layer.masksToBounds = false
-        profilePic.layer.cornerRadius = self.profilePic.frame.height/2
-        profilePic.clipsToBounds = true
+        descriptionText.placeholder = "Describe event..."
+        descriptionText.textColor = UIColor.lightGray
+        descriptionText.layer.borderWidth = 3.0
+        descriptionText.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0).cgColor
     }
     
+    //NEED TO CONNECT THIS TO SOMTHING
     //import an image when you click the activity pic
     @IBAction func importImage(_ sender: Any) {
         let image = UIImagePickerController()
@@ -143,37 +138,36 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
     }
     
     
+    //NEED FOR FUTURE REFERENCE
     //locates the address specified in the location text and finds it on the mapview
-    @IBAction func getLocation(_ sender: Any) {
-        let location = self.locationText.text
-        let geocoder = CLGeocoder()
-        geocoder.geocodeAddressString(location! as String) { (placemarks, error) in
-            if let placemarks = placemarks {
-                if placemarks.count != 0 {
-                    let annotation = MKPlacemark(placemark: placemarks.first!)
-                    let location = MKPlacemark(placemark: placemarks.first!).location
-                    self.theCoordinates = location!.coordinate
-                    
-                    self.mapView.setRegion(MKCoordinateRegionMakeWithDistance(self.theCoordinates!, 2000, 2000), animated: true)
-                    
-                    self.mapView.addAnnotation(annotation)
-                }
-            }
-            
-        }
-    }
+//    @IBAction func getLocation(_ sender: Any) {
+//        let location = self.locationText.text
+//        let geocoder = CLGeocoder()
+//        geocoder.geocodeAddressString(location! as String) { (placemarks, error) in
+//            if let placemarks = placemarks {
+//                if placemarks.count != 0 {
+//                    let annotation = MKPlacemark(placemark: placemarks.first!)
+//                    let location = MKPlacemark(placemark: placemarks.first!).location
+//                    self.theCoordinates = location!.coordinate
+//
+//                    self.mapView.setRegion(MKCoordinateRegionMakeWithDistance(self.theCoordinates!, 2000, 2000), animated: true)
+//
+//                    self.mapView.addAnnotation(annotation)
+//                }
+//            }
+//
+//        }
+//    }
     
+    //NEED TO DO THIS
     /* get the location of the user to store into DB */
     func fetchLocation() {
-        
         let ref = Database.database().reference()
-        
-        
     }
-
+    
     /* creates new activity and stores it in the database */
     @IBAction func createActivity(_ sender: Any) {
-        
+    
         let uid = Auth.auth().currentUser!.uid
         var ref = Database.database().reference()   /* reference to the database */
         let geoRef = Database.database().reference()  /* reference to the database for location */
@@ -183,31 +177,11 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
         let imageRef = storage.child("Activities").child(uid).child("\(key).jpeg") /* store images in "Activities" DB */
         let data = UIImageJPEGRepresentation(self.activityPic.image!, 0.6)
         
-        /* get location of the address input */
-        /*
-        let location = self.locationText.text
-        let geocoder = CLGeocoder()
-        geocoder.geocodeAddressString(location! as String) { (placemarks, error) in
-            
-            if let placemarks = placemarks {
-                
-                if placemarks.count != 0 {
-                    let annotation = MKPlacemark(placemark: placemarks.first!)
-                    let location = MKPlacemark(placemark: placemarks.first!).location
-                    self.theCoordinates = location!.coordinate
-                    self.mapView.setRegion(MKCoordinateRegionMakeWithDistance(self.theCoordinates!, 2000, 2000), animated: true)
-                    self.mapView.addAnnotation(annotation)
-                }
-                
-            }
-            
-        }
-        */
-        
         /* get location of the address by taking the coordinates. this will take the location from the locationText
            input field find use the address to pinpoint to the MKMapView */
         let address = locationText.text!    /* the location address */
         let geocoder = CLGeocoder()
+        
         geocoder.geocodeAddressString(address, completionHandler: {(placemarks, error) -> Void in
             if((error) != nil){
                 print("Error", error)
@@ -246,9 +220,9 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
             self.present(vc, animated: true, completion: nil)
             
         }
-        
+
         uploadTask.resume()
         
     } /* end createActivity() */
-    
-}
+
+} // end class
