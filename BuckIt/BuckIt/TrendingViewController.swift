@@ -52,7 +52,6 @@ class TrendingViewController: UIViewController, UITableViewDelegate, UITableView
     //this gets all the activities and puts it in activity array
     func fetchAllActivities(childName: String){
         let ref = Database.database().reference()
-//        ref.child("activities").child(childName).observeSingleEvent(of: .value, with: {(snap) in
         ref.child("activities").child(childName).observe(.value) { (snap) in
             let activitySnap = snap.value as? [String: AnyObject]
 
