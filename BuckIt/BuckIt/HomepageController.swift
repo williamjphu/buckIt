@@ -173,26 +173,26 @@ class HomepageController: UIViewController , FBSDKLoginButtonDelegate, GIDSignIn
     //if users already login through facebook. Take to profile
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+           let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
         if FBSDKAccessToken.current() != nil {
             DispatchQueue.main.async {
                 
-                let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
-                
                 self.present(vc, animated: true, completion: nil)
-                
+            
             }
         } else if Firebase.Auth.auth().currentUser != nil{
             DispatchQueue.main.async {
                 
-                let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
-                
                 self.present(vc, animated: true, completion: nil)
                 
             }
+        } else if GIDSignIn.sharedInstance().hasAuthInKeychain(){
+            
+                self.present(vc, animated: true, completion: nil)
         }
         
-        
     }
+    
     //facebook authentication login
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         if error != nil {

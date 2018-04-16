@@ -94,4 +94,10 @@ class NewBucketViewController: UIViewController, UIImagePickerControllerDelegate
         self.present(popup, animated: true, completion: nil)
 
     }
+    
+    //needed to dismiss the keyboard
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        titleText.endEditing(true)
+        descriptionText.endEditing(true)
+    }
 }

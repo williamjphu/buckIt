@@ -25,14 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
         
-        //if users already login, it delegate to
-        if GIDSignIn.sharedInstance().hasAuthInKeychain(){
-            let sb = UIStoryboard(name: "TabController", bundle: nil)
-            if let tabBarVC = sb.instantiateViewController(withIdentifier: "tabBarVC") as? UITabBarController {
-                window?.rootViewController = tabBarVC
-            }
-
-        }        
+       
         //Facebook
         let bool = FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         FBSDKAppEvents.activateApp()

@@ -42,8 +42,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
                         self.username.text = value["username"] as? String
                         self.quote.text = value["description"] as? String
                         let databaseProfilePic = value["picture"] as? String
-//                        let data = NSData(contentsOf: (NSURL(string: databaseProfilePic!)! as URL))
-//                        self.setProfilePicture(imageView: self.profileImage, imageToSet: UIImage(data:data! as Data)!)
+                        let data = NSData(contentsOf: (NSURL(string: databaseProfilePic!)! as URL))
+                        self.setProfilePicture(imageView: self.profileImage, imageToSet: UIImage(data:data! as Data)!)
                     }
                 }
             }
