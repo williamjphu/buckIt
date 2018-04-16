@@ -38,6 +38,7 @@ class BuckitEditViewController: UIViewController, UIImagePickerControllerDelegat
         border.borderWidth = width
         nameText.layer.addSublayer(border)
         nameText.layer.masksToBounds = true
+        
     }
     
     override func viewDidLoad() {
@@ -50,6 +51,18 @@ class BuckitEditViewController: UIViewController, UIImagePickerControllerDelegat
         descriptionText.delegate = self
         nameText.delegate = self
         fillActivityInfo()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+    }
+    
+    deinit {
+        //stop listening for keyboard hide/show events
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
     }
     
     func fillActivityInfo(){
@@ -118,6 +131,40 @@ class BuckitEditViewController: UIViewController, UIImagePickerControllerDelegat
     @IBAction func deleteBuckitPressed(_ sender: Any) {
         let buid = buckit.buckitId
         ref.child("BuckIts").child(buid!).removeValue()
+    }
+    
+    //needed to dismiss the keyboard
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        nameText.endEditing(true)
+        descriptionText.endEditing(true)
+    }
+    
+    //hide the keyboard function
+    func hideKeyBoard()
+    {
+        descriptionText.resignFirstResponder()
+        nameText.resignFirstResponder()
+    }
+    
+    //return the textfield back to normal
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        hideKeyBoard()
+        
+        return true
+    }
+    
+    //push the UI up the keyboard is out
+    @objc func keyboardWillChange(notification: Notification){
+        //get the keyboard length
+        guard let keyboardRect = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+            return
+        }
+        if notification.name == Notification.Name.UIKeyboardWillShow || notification.name == Notification.Name.UIKeyboardWillChangeFrame{
+            view.frame.origin.y = -keyboardRect.height + 100
+        } else
+        {
+            view.frame.origin.y = 0
+        }
     }
     
 }

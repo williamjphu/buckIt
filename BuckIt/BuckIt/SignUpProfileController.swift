@@ -247,6 +247,10 @@ class SignUpProfileController: UIViewController, UIImagePickerControllerDelegate
         
     }
     
+    //needed to dismiss the keyboard
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        usernameTextField.endEditing(true)
+    }
     
 }
 

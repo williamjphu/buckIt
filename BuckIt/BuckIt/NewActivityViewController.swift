@@ -39,6 +39,13 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
         setupDescriptionTextArea()
         createPicker()
         pickerToolbar()
+        
+        //listen for keyboard events
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+
     }
     
     /* triggers a segue to the next view */
@@ -88,18 +95,6 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
         view.endEditing(true)
     }
     
-    //needed to dismiss the keyboard
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        self.descriptionText.resignFirstResponder()
-    }
-    
-    //needed to dismiss keyboard when you press return on the location text field
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-       // self.locationText.endEditing(true)
-        self.descriptionText.endEditing(true)
-        return false
-    }
     
     /*
      *  setup description text view
@@ -225,4 +220,37 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
         
     } /* end createActivity() */
 
+    //needed to dismiss the keyboard
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        titleText.endEditing(true)
+        descriptionText.endEditing(true)
+    }
+    
+    //hide the keyboard function
+    func hideKeyBoard()
+    {
+        descriptionText.resignFirstResponder()
+        titleText.resignFirstResponder()
+    }
+    
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        hideKeyBoard()
+        
+        return true
+    }
+    
+    //push the UI up the keyboard is out
+    @objc func keyboardWillChange(notification: Notification){
+        //get the keyboard length
+        guard let keyboardRect = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+            return
+        }
+        if notification.name == Notification.Name.UIKeyboardWillShow || notification.name == Notification.Name.UIKeyboardWillChangeFrame{
+            view.frame.origin.y = -keyboardRect.height + 100
+        } else
+        {
+            view.frame.origin.y = 0
+        }
+    }
 } // end class
