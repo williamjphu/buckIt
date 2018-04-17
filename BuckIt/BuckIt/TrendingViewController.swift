@@ -21,9 +21,8 @@ class TrendingViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        for (key,_) in FirebaseDataContoller.sharedInstance.categoriesDictionary {
-            fetchAllActivities(childName: "\(key)")
-        }
+        fetchAllActivities()
+        
     }
   
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -50,9 +49,9 @@ class TrendingViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     //this gets all the activities and puts it in activity array
-    func fetchAllActivities(childName: String){
+    func fetchAllActivities(){
         let ref = Database.database().reference()
-        ref.child("activities").child(childName).observe(.value) { (snap) in
+        ref.child("Activities").observe(.value) { (snap) in
             let activitySnap = snap.value as? [String: AnyObject]
 
             for(_,activity) in activitySnap! {
