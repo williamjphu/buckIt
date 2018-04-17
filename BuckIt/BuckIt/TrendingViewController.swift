@@ -22,7 +22,6 @@ class TrendingViewController: UIViewController, UITableViewDelegate, UITableView
         self.tableView.delegate = self
         self.tableView.dataSource = self
         fetchAllActivities()
-        
     }
   
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -50,8 +49,9 @@ class TrendingViewController: UIViewController, UITableViewDelegate, UITableView
     
     //this gets all the activities and puts it in activity array
     func fetchAllActivities(){
-        let ref = Database.database().reference()
+        let ref = FirebaseDataContoller.sharedInstance.refToFirebase
         ref.child("Activities").observe(.value) { (snap) in
+            print("Triggers inside fetchAllActivities")
             let activitySnap = snap.value as? [String: AnyObject]
 
             for(_,activity) in activitySnap! {
@@ -97,7 +97,8 @@ class addToBucketViewController: UIViewController, UITableViewDelegate, UITableV
     var buckits = [BuckIt]()
     
     func fetchAllBuckets(){
-        let ref  = Database.database().reference()
+//        let ref = FirebaseDataContoller.sharedInstance.refToBuckits
+        let ref = FirebaseDataContoller.sharedInstance.refToFirebase
         ref.child("BuckIts").queryOrderedByKey().observeSingleEvent(of: .value, with: { (snap) in
             let buckitSnap = snap.value as! [String: AnyObject]
             

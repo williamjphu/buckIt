@@ -15,5 +15,16 @@ class Activity : NSObject {
     var activityID : String?
     var title : String?
     var userID : String?
-    var location : String?
+    var locationName : String?
+    var category : String?
+    
+//    init(title: String?="", description: String?="", category: String?="", pathToImage: String?="", activityID: String?="", userID: String?="", locationName: String?="") {
+//        self.title = title
+//        self.theDescription = description
+//        self.category = category
+//        self.pathToImage = pathToImage
+//        self.activityID = activityID
+//        self.userID = userID
+//        self.locationName = locationName
+//    }
 }
