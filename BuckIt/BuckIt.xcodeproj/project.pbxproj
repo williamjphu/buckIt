@@ -21,7 +21,6 @@
 		AE7F9C17201986AF00420457 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F9C14201986AE00420457 /* Activity.swift */; };
 		AE7F9C18201986AF00420457 /* BucketListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F9C15201986AF00420457 /* BucketListViewController.swift */; };
 		AE7F9C1F20198AFE00420457 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F9C1A20198AFE00420457 /* ProfileViewController.swift */; };
-		AE7F9C2020198AFE00420457 /* FollowingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F9C1B20198AFE00420457 /* FollowingTableViewCell.swift */; };
 		AE7F9C2120198AFE00420457 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE7F9C1C20198AFE00420457 /* Profile.storyboard */; };
 		AE7F9C2220198AFE00420457 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F9C1D20198AFE00420457 /* EditProfileViewController.swift */; };
 		AE7F9C2320198AFE00420457 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F9C1E20198AFE00420457 /* User.swift */; };
@@ -67,7 +66,6 @@
 		AE7F9C14201986AE00420457 /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		AE7F9C15201986AF00420457 /* BucketListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketListViewController.swift; sourceTree = "<group>"; };
 		AE7F9C1A20198AFE00420457 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		AE7F9C1B20198AFE00420457 /* FollowingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowingTableViewCell.swift; sourceTree = "<group>"; };
 		AE7F9C1C20198AFE00420457 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		AE7F9C1D20198AFE00420457 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		AE7F9C1E20198AFE00420457 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -198,7 +196,6 @@
 				AE7F9C1C20198AFE00420457 /* Profile.storyboard */,
 				AE7F9C1A20198AFE00420457 /* ProfileViewController.swift */,
 				AE7F9C15201986AF00420457 /* BucketListViewController.swift */,
-				AE7F9C1B20198AFE00420457 /* FollowingTableViewCell.swift */,
 				E084A47920755D860099CCCD /* BuckitCell.swift */,
 				E084A489207745990099CCCD /* BuckitEditViewController.swift */,
 			);
@@ -433,7 +430,6 @@
 				C39D94352083E0CC006093B7 /* ActivityProfileViewController.swift in Sources */,
 				AE7F9C2A20198CAE00420457 /* LoginController.swift in Sources */,
 				AE7F9C17201986AF00420457 /* Activity.swift in Sources */,
-				AE7F9C2020198AFE00420457 /* FollowingTableViewCell.swift in Sources */,
 				77D45FC01FAE96EB0034DDBA /* HomepageController.swift in Sources */,
 				C3A3E473207763F60081C8D6 /* chooseBuckitTableViewCell.swift in Sources */,
 				E084A48A207745990099CCCD /* BuckitEditViewController.swift in Sources */,

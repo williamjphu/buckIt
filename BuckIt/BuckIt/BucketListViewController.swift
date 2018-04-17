@@ -182,7 +182,8 @@ class BucketListViewController: UIViewController, UITableViewDelegate, UITableVi
                                     theActivity.title = title
                                     theActivity.userID = uid
                                     theActivity.locationName = location
-
+                                    
+                                    //add activity to the list
                                     self.activities.append(theActivity)
                                 }
                                 self.tableView.reloadData()
@@ -191,8 +192,6 @@ class BucketListViewController: UIViewController, UITableViewDelegate, UITableVi
                     })
                 }
             }
-            print("COUNT:")
-            print(self.activities.count)
         })
         ref.removeAllObservers()
     }
