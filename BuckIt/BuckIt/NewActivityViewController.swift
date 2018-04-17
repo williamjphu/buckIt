@@ -168,7 +168,7 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
         let geoRef = Database.database().reference()  /* reference to the database for location */
         let storage = Storage.storage().reference(forURL: "gs://buckit-ed26f.appspot.com")
         
-        let key = ref.child("Activities").childByAutoId().key /* stores key by category */
+        let key = ref.child("activities").child(categoryTextfield.text!).childByAutoId().key /* stores key by category */
         let imageRef = storage.child("Activities").child(uid).child("\(key).jpeg") /* store images in "Activities" DB */
         let data = UIImageJPEGRepresentation(self.activityPic.image!, 0.6)
         
@@ -206,7 +206,7 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
                     let activityFeed = ["\(key)" : feed]
                     
                     /* update child value in category field */
-                    ref.child("Activities").updateChildValues(activityFeed)
+                    ref.child("activities").updateChildValues(activityFeed)
                     
                 }
             })

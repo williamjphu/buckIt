@@ -9,6 +9,7 @@
 import UIKit
 import SwipeCellKit
 import PopupDialog
+import Firebase
 
 class BucketListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SwipeTableViewCellDelegate {
 
@@ -41,7 +42,7 @@ class BucketListViewController: UIViewController, UITableViewDelegate, UITableVi
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         activities.removeAll()
-//        fetchActivities()
+        fetchActivities()
     }
     //send data and delegate to edit buckit
     @IBAction func editBuckitPressed(_ sender: Any) {
@@ -61,8 +62,7 @@ class BucketListViewController: UIViewController, UITableViewDelegate, UITableVi
     
     //the number of items in the list
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
-        //      return self.activities.count
+        return self.activities.count
     }
     
     //makes the row able to be edited
@@ -76,9 +76,9 @@ class BucketListViewController: UIViewController, UITableViewDelegate, UITableVi
         row.delegate = self
         
         //create label from database
-        let label = UILabel(frame: CGRect(x: 140.0, y: 14.0, width: 100.0, height: 30.0))
-        label.text = "Visit the North Pole"
-//        label.text = self.activities[indexPath.row].title
+        let label = UILabel(frame: CGRect(x: 140.0, y: 14.0, width: 200.0, height: 30.0))
+//        label.text = "Visit the North Pole"
+        label.text = self.activities[indexPath.row].title
         label.tag = indexPath.row
         row.contentView.addSubview(label)
         
@@ -147,57 +147,54 @@ class BucketListViewController: UIViewController, UITableViewDelegate, UITableVi
         return options
     }
 
-//    func fetchActivities(){
-//        let ref = FIRDatabase.database().reference()
-//        ref.child("Activities").queryOrderedByKey().observeSingleEvent(of: .value, with: {(snap) in
-//            let activitySnap = snap.value as? [String: AnyObject]
-//            //this gets all the activities and puts it in activity array
-//
-//            if (activitySnap?.count != nil){
-//
-//                for(_,activities) in activitySnap! {
-//                    if let uid = activities["userID"] as? String{
-//                        let theActivity = Activity()
-//                        if let description = activity["description"] as? String,
-//                            let activityID = activity["activityID"] as? String,
-//                            let pathToImage = activity["pathToImage"] as? String,
-//                            let title = activity["title"] as? String,
-//                            let location = activity["location"] as? String{
-//
-//                            theActivity.theDescription = description
-//                            theActivity.activityID = activityID
-//                            theActivity.pathToImage = pathToImage
-//                            theActivity.title = title
-//                            theActivity.userID = uid
-//                            theActivity.location = location
-//
-//                            self.activities.append(theActivity)
-//                        }
-                            // Need to reload data here
-//                        self._____________.reloadData()
-//                    }
-//
-//                }
-//            }
-//        })
-//        ref.removeAllObservers()
-//    }
-    
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
+    func fetchActivities(){
+        let ref = Database.database().reference()
+        //Loop through the Activity array inside each Buckit and find the ActivityID's --> key
+        ref.child("BuckIts").child(buckit.buckitId).child("Activities").observeSingleEvent(of: .value, with: {(snap) in
+            //if snap.value is nil, the buckit has no activities
+            if(snap.exists()){
+                let buckitSnap = snap.value as! [String: AnyObject]
+                //for each activity inside this buckit
+                for key in buckitSnap.keys {
+                    
+                    ref.child("Activities").observeSingleEvent(of: .value, with: {(activitySnap) in
+                        let snapshot = activitySnap.value as! [String: AnyObject]
+                        
+                        //Loop through the Activity Node and add the activities that has an activityID == key
+                        for (_,activity) in snapshot{
+                            //If the current Activity matches the key from the Buckit, add it
+                            if activity["activityID"] as? String == key {
+                                let theActivity = Activity()
+                                if let description = activity["description"] as? String,
+                                    let category = activity["category"] as? String,
+                                    //commented out for now, need to add later
+    //                                let latitude = activity["latitude"] as? String,
+    //                                let longitude = activity["longitude"] as? String,
+                                    let activityID = activity["activityID"] as? String,
+                                    let pathToImage = activity["pathToImage"] as? String,
+                                    let title = activity["activityName"] as? String,
+                                    let uid = activity["userID"] as? String,
+                                    let location = activity["locationName"] as? String{
 
-    /*
-    // MARK: - Navigation
+                                    theActivity.theDescription = description
+                                    theActivity.activityID = activityID
+                                    theActivity.pathToImage = pathToImage
+                                    theActivity.title = title
+                                    theActivity.userID = uid
+                                    theActivity.location = location
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+                                    self.activities.append(theActivity)
+                                }
+                                self.tableView.reloadData()
+                            }
+                        }
+                    })
+                }
+            }
+            print("COUNT:")
+            print(self.activities.count)
+        })
+        ref.removeAllObservers()
     }
-    */
 
 }
