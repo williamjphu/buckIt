@@ -13,13 +13,15 @@ import Firebase
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     private let locationManager = CLLocationManager()
     private var currentCoordinate: CLLocationCoordinate2D?
+    private var activitiesPin = [ActivityPin]()
+    private var activities = [Activity]()
+    
     @IBOutlet weak var mapView: MKMapView!
     
     @IBOutlet weak var search: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
-        FirebaseDataContoller.sharedInstance.mapViewObj = self.mapView
         configureLocationServices()
     }
     
@@ -29,10 +31,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         if currentCoordinate == nil {
             zoomToLatestLocation(with: latestLocation.coordinate)
-            // Add the annotations to the map via Firebase Singleton
-            FirebaseDataContoller.sharedInstance.fetchActivitiesToMap()
+            fetchActivities()
         }
-        print("Current # of pins: \(FirebaseDataContoller.sharedInstance.activitiesPin.count)")
+        print("Current # of pins: \(activitiesPin.count)")
         currentCoordinate = latestLocation.coordinate
     }
     
@@ -59,7 +60,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         // Display pin icon for all the activities from the Firebase
         if let annotationView = annotationView, let _ = annotation as? ActivityPin {
-            for activity in FirebaseDataContoller.sharedInstance.activitiesPinGetter {
+            for activity in activitiesPin {
                 if let title = annotation.title, title == activity.title {
                     annotationView.image = UIImage(named: "\(activity.imageName)")
                 }
@@ -73,6 +74,42 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     // Display a messege in the console for the pin selected on the map
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         print("Selected annotation: \(String(describing: view.annotation?.title))")
+    }
+    
+    // This helper method fetches of one category from Firebase
+    func fetchActivities() {
+        let ref = FirebaseDataContoller.sharedInstance.refToFirebase
+        ref.child("activities").child("Food").observeSingleEvent(of: .value, with: { (snap) in
+            if snap.exists() {
+                let activitySnap = snap.value as! [String: AnyObject]
+                for (_,activity) in activitySnap {
+                    var activityObj = Activity()
+                    if let title = activity["activityName"] as? String,
+                        let subtitle = activity["description"] as? String,
+                        let latitude = activity["latitude"] as? Double,
+                        let longitude = activity["longitude"] as? Double,
+                        let category = activity["category"] as? String {
+                        
+                        var imageFileName : String = ""
+                        for (key, value) in FirebaseDataContoller.sharedInstance.categoriesDictionary {
+                            if category == "\(key)" {
+                                imageFileName = "\(value)"
+                            }
+                        }
+                        let coordinate = CLLocationCoordinate2DMake(latitude, longitude)
+                        let activityPin = ActivityPin(title: title, subtitle: subtitle, coordinate: coordinate, category: category, imageName: imageFileName)
+                        activityObj.title = title
+                        activityObj.theDescription = subtitle
+                        
+                        self.activities.append(activityObj)
+                        self.activitiesPin.append(activityPin)
+                        print("Count inside: \(self.activitiesPin.count) \n")
+                        self.mapView.addAnnotation(activityPin)
+                    }
+                }
+            }
+        })
+        reference.removeAllObservers()
     }
     
     // This helper method allows to request permission to track user's location
@@ -105,5 +142,4 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         search.endEditing(true)
     }
-    
 }
