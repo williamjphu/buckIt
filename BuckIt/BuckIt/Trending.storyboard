@@ -139,9 +139,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QKj-Nu-IBs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="100" y="158.77061469265368"/>
+            <point key="canvasLocation" x="14" y="159"/>
         </scene>
-        <!--Activity Profile-->
+        <!--Activity-->
         <scene sceneID="qPw-gd-4rH">
             <objects>
                 <viewController id="VpB-LJ-32i" customClass="ActivityProfileViewController" customModule="BuckIt" customModuleProvider="target" sceneMemberID="viewController">
@@ -151,7 +151,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Lml-pa-gfs"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Activity Profile" id="SUz-rN-vDn">
+                    <navigationItem key="navigationItem" title="Activity" id="SUz-rN-vDn">
                         <barButtonItem key="rightBarButtonItem" title="Add" id="99K-TA-Lh9">
                             <connections>
                                 <action selector="addToBucketPressed:" destination="VpB-LJ-32i" id="sEx-9f-Qk1"/>
@@ -164,7 +164,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vTq-jV-atS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="100" y="984"/>
+            <point key="canvasLocation" x="788" y="159"/>
         </scene>
         <!--Choose a BuckIt-->
         <scene sceneID="27G-he-PsA">
@@ -242,7 +242,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y9Y-h3-uUh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="982" y="984"/>
+            <point key="canvasLocation" x="1490" y="159"/>
         </scene>
     </scenes>
     <resources>
