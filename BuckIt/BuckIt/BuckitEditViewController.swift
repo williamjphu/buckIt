@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 class BuckitEditViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
-    var ref = Database.database().reference()
+    var ref = FirebaseDataContoller.sharedInstance.refToFirebase
     var userStorage = StorageReference()
     
     var buckit = BuckIt()
@@ -44,7 +44,7 @@ class BuckitEditViewController: UIViewController, UIImagePickerControllerDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         picker.delegate = self
-        let store = Storage.storage().reference(forURL: "gs://buckit-ed26f.appspot.com")
+        let store = FirebaseDataContoller.sharedInstance.refToStorage
         userStorage = store.child("BuckIts")
         
         //maximize text input to 80 character

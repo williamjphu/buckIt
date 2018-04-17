@@ -148,7 +148,7 @@ class BucketListViewController: UIViewController, UITableViewDelegate, UITableVi
     }
 
     func fetchActivities(){
-        let ref = Database.database().reference()
+        let ref = FirebaseDataContoller.sharedInstance.refToFirebase
         //Loop through the Activity array inside each Buckit and find the ActivityID's --> key
         ref.child("BuckIts").child(buckit.buckitId).child("Activities").observeSingleEvent(of: .value, with: {(snap) in
             //if snap.value is nil, the buckit has no activities

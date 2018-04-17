@@ -51,7 +51,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         picker.delegate = self
-        let store = Storage.storage().reference(forURL: "gs://buckit-ed26f.appspot.com")
+        let store = FirebaseDataContoller.sharedInstance.refToStorage
         userStorage = store.child("profile")
         
         
@@ -67,7 +67,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         nameText.delegate = self
         
         //retrieve data from Firebase
-        let ref  = Database.database().reference()
+        let ref  = FirebaseDataContoller.sharedInstance.refToFirebase
         ref.child("users").queryOrderedByKey().observeSingleEvent(of: .value, with: {snapshot in
             let users = snapshot.value as! [String: AnyObject]
             
@@ -133,7 +133,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     @IBAction func saveChange(_ sender: Any) {
         hideKeyBoard()
         
-        ref = Database.database().reference()
+        ref = FirebaseDataContoller.sharedInstance.refToFirebase
         
         let uid = Firebase.Auth.auth().currentUser!.uid
         

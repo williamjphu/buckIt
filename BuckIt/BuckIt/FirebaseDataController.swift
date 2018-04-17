@@ -11,6 +11,7 @@ import Firebase
 import MapKit
 
 var reference: DatabaseReference = Database.database().reference()
+var reforenceStorage: StorageReference = Storage.storage().reference(forURL: "gs://buckit-ed26f.appspot.com")
 
 class FirebaseDataContoller {
     // This allows to have a singleton object:
@@ -25,11 +26,15 @@ class FirebaseDataContoller {
                                  "Fundraiser" : "money-bag"]
 
     private var _refToFirebase : DatabaseReference = reference
+    private var _refToStorage : StorageReference = reforenceStorage
     
     var refToFirebase : DatabaseReference {
         return _refToFirebase
     }
 
+    var refToStorage : StorageReference {
+        return _refToStorage
+    }
     var categoriesDictionary : [String : String] {
         return _categoriesDictionary
     }

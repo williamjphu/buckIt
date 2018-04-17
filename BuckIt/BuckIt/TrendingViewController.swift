@@ -51,7 +51,6 @@ class TrendingViewController: UIViewController, UITableViewDelegate, UITableView
     func fetchAllActivities(){
         let ref = FirebaseDataContoller.sharedInstance.refToFirebase
         ref.child("Activities").observe(.value) { (snap) in
-            print("Triggers inside fetchAllActivities")
             let activitySnap = snap.value as? [String: AnyObject]
 
             for(_,activity) in activitySnap! {

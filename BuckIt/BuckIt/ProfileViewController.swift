@@ -28,9 +28,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var quote: UILabel!
     //retrieve users data
-    func fetchUsers()
-    {
-        let ref  = Database.database().reference()
+    func fetchUsers() {
+        let ref  = FirebaseDataContoller.sharedInstance.refToFirebase
         ref.child("users").queryOrderedByKey().observeSingleEvent(of: .value, with: {snapshot in
             let users = snapshot.value as! [String: AnyObject]
             
@@ -59,7 +58,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
     
     //retrieve buckit data
     func fetchUserBuckIts(){
-            let ref  = Database.database().reference()
+            let ref = FirebaseDataContoller.sharedInstance.refToFirebase
             ref.child("BuckIts").queryOrderedByKey().observeSingleEvent(of: .value, with: { (snap) in
             let buckitSnap = snap.value as! [String: AnyObject]
 
