@@ -181,7 +181,7 @@ class BucketListViewController: UIViewController, UITableViewDelegate, UITableVi
                                     theActivity.pathToImage = pathToImage
                                     theActivity.title = title
                                     theActivity.userID = uid
-                                    theActivity.location = location
+                                    theActivity.locationName = location
 
                                     self.activities.append(theActivity)
                                 }
