@@ -45,7 +45,6 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
-
     }
     
     /* triggers a segue to the next view */
