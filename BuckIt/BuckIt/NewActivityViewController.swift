@@ -14,13 +14,21 @@ import FirebaseStorage
 import Firebase
 import UITextView_Placeholder
 
+protocol HandleMapSearch: class {
+    func dropPinZoomIn(_ placemark:MKPlacemark)
+}
+
 class NewActivityViewController: UIViewController, UINavigationControllerDelegate,UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    var selectedPin: MKPlacemark?
+    var resultSearchController: UISearchController!
     
     @IBOutlet weak var titleText: UITextField!
     @IBOutlet weak var descriptionText: UITextView!     /* text view for description box */
     @IBOutlet weak var activityPic: UIImageView!
     @IBOutlet weak var locationText: UITextField!           /* textfield for the location */
     @IBOutlet weak var categoryTextfield: UITextField!      /* textfield for the category picker */
+    @IBOutlet weak var mapView: MKMapView!
     
     var manager: CLLocationManager!
     var theCoordinates: CLLocationCoordinate2D?
@@ -33,25 +41,48 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
                        "Recreation",
                        "Fundraiser"]
     
+    var nameFromMapController: String?
+    
+//    var fromVC: NewActivityMapViewController = NewActivityMapViewController()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        locationText.delegate = self
+        
+//        locationText.delegate = self
         setupDescriptionTextArea()
         createPicker()
         pickerToolbar()
+//
+        let locationSearchTable = storyboard!.instantiateViewController(withIdentifier: "LocationSearchTable") as! LocationSearchTable
+        resultSearchController = UISearchController(searchResultsController: locationSearchTable)
+        resultSearchController.searchResultsUpdater = locationSearchTable
+        
+        let searchBar = resultSearchController!.searchBar
+        searchBar.sizeToFit()
+        searchBar.placeholder = "Search for places"
+        navigationItem.titleView = resultSearchController?.searchBar
+        resultSearchController.hidesNavigationBarDuringPresentation = false
+        resultSearchController.dimsBackgroundDuringPresentation = true
+        definesPresentationContext = true
+        locationSearchTable.mapView = mapView
+        locationSearchTable.handleMapSearchDelegate = self
         
         //listen for keyboard events
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
     }
     
-    /* triggers a segue to the next view */
-    func textFieldDidBeginEditing(_ locationText: UITextField) {
-        performSegue(withIdentifier: "setLocationSegue", sender: self)
-        locationText.resignFirstResponder()
+    override func viewDidAppear(_ animated: Bool) {
+        print("VALUE RETRIEVED: \(String(describing: nameFromMapController))")
     }
+    
+    /* triggers a segue to the next view */
+//    func textFieldDidBeginEditing(_ locationText: UITextField) {
+//        performSegue(withIdentifier: "setLocationSegue", sender: self)
+        
+//        locationText.resignFirstResponder()
+//    }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -253,3 +284,35 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
         }
     }
 } // end class
+
+extension NewActivityViewController: HandleMapSearch {
+    
+    func dropPinZoomIn(_ placemark: MKPlacemark){
+        // cache the pin
+        selectedPin = placemark
+        // clear existing pins
+        mapView.removeAnnotations(mapView.annotations)
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = placemark.coordinate
+        annotation.title = placemark.name
+        
+        if let city = placemark.locality,
+            let state = placemark.administrativeArea {
+            annotation.subtitle = "\(city) \(state)"
+        }
+        
+//        locationLabel.text = placemark.name
+//        self.testLocatioName = placemark.name!
+//        let coordinate = placemark.coordinate
+//        let latitude : Double = coordinate.latitude
+//        let longitude : Double = coordinate.longitude
+        
+//        latitudeLabel.text = "\(latitude)"
+//        longitudeLabel.text = "\(longitude)"
+        
+        mapView.addAnnotation(annotation)
+        let span = MKCoordinateSpanMake(0.05, 0.05)
+        let region = MKCoordinateRegionMake(placemark.coordinate, span)
+        mapView.setRegion(region, animated: true)
+    }
+}
