@@ -77,7 +77,6 @@ class BucketListViewController: UIViewController, UITableViewDelegate, UITableVi
         
         //create label from database
         let label = UILabel(frame: CGRect(x: 140.0, y: 14.0, width: 200.0, height: 30.0))
-//        label.text = "Visit the North Pole"
         label.text = self.activities[indexPath.row].title
         label.tag = indexPath.row
         row.contentView.addSubview(label)
@@ -166,9 +165,9 @@ class BucketListViewController: UIViewController, UITableViewDelegate, UITableVi
                             if activity["activityID"] as? String == key {
                                 let theActivity = Activity()
                                 if let description = activity["description"] as? String,
-                                    let category = activity["category"] as? String,
-                                    let latitude = activity["latitude"] as? String,
-                                    let longitude = activity["longitude"] as? String,
+//                                    let category = activity["category"] as? String,
+//                                    let latitude = activity["latitude"] as? String,
+//                                    let longitude = activity["longitude"] as? String,
                                     let activityID = activity["activityID"] as? String,
                                     let pathToImage = activity["pathToImage"] as? String,
                                     let title = activity["activityName"] as? String,

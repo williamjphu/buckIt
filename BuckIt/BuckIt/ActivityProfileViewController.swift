@@ -7,18 +7,85 @@
 //
 
 import UIKit
+import MapKit
+import Firebase
 
-class ActivityProfileViewController: UIViewController {
+class ActivityProfileViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+    
     var activity = Activity()
+    
+    @IBOutlet weak var activityTitle: UILabel!
+    @IBOutlet weak var activityDescription: UILabel!
+    @IBOutlet weak var activityImage: UIImageView!
+    @IBOutlet weak var upVoteCount: UILabel!
+    @IBOutlet weak var downVoteCount: UILabel!
+    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var locationLabel: UILabel!
+    
+    @IBOutlet weak var userProfilePic: UIImageView!
+    @IBOutlet weak var userName: UILabel!
+    
+    @IBOutlet weak var addATipTextField: UITextView!
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        fillActivityData()
+        loadUserData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    }
+    
+    //load the specific activity clicked
+    func fillActivityData(){
+        activityTitle.text = activity.title
+        activityDescription.text = activity.theDescription
+        activityImage.downloadImage(from: activity.pathToImage)
+        locationLabel.text = activity.locationName
+        //load location and pin on map
+    }
+    
+    //fetch for the current_user to display their picture on the tips section
+    func loadUserData(){
+        let ref  = FirebaseDataContoller.sharedInstance.refToFirebase
+        let uid = Auth.auth().currentUser?.uid
+        ref.child("users").child(uid!).observeSingleEvent(of: .value) { (snap) in
+            let user = snap.value as! [String: AnyObject]
+            self.userProfilePic.downloadImage(from: user["picture"] as! String)
+            self.userName.text = user["name"] as? String
+        }
+    }
+    
+    func loadTips(){
+        //fetch all tips here
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        print("HELLO")
+        //dequeue cell with identifier: tip cell
+        let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "tipCell", for: indexPath) as! TipCollectionViewCell
+        
+        //        cell.tipDescription.text = "Description"
+        //        cell.tipOwnerName.text = "Username"
+        //        cell.tipTitle.text = "Try In-n-Out"
+        return cell
     }
 
+
+    //segue to choose a buckit to add the activity to
     @IBAction func addToBucketPressed(_ sender: Any) {
         performSegue(withIdentifier: "addToBuckit", sender: self.activity)
     }
+    
+    //send the activity to the nextVC
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? addToBucketViewController{
             if let activity = sender as? Activity{
@@ -27,7 +94,5 @@ class ActivityProfileViewController: UIViewController {
             }
         }
     }
-    
-    
 
 }

@@ -59,8 +59,10 @@ class TrendingViewController: UIViewController, UITableViewDelegate, UITableView
                         let activityID = activity["activityID"] as? String,
                         let uid = activity["userID"] as? String,
                         let pathToImage = activity["pathToImage"] as? String,
+                        let location = activity["locationName"] as? String,
                         let title = activity["activityName"] as? String {
 
+                        theActivity.locationName = location
                         theActivity.theDescription = description
                         theActivity.activityID = activityID
                         theActivity.pathToImage = pathToImage
