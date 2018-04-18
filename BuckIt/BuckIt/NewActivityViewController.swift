@@ -115,7 +115,7 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
         descriptionText.delegate = self
         descriptionText.placeholder = "Describe your activity..."
         descriptionText.textColor = UIColor.black
-        descriptionText.layer.borderWidth = 3.0
+        descriptionText.layer.borderWidth = 0.5
         descriptionText.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0).cgColor
     }
     

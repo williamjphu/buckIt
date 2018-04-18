@@ -131,6 +131,10 @@ class BuckitEditViewController: UIViewController, UIImagePickerControllerDelegat
     @IBAction func deleteBuckitPressed(_ sender: Any) {
         let buid = buckit.buckitId
         ref.child("BuckIts").child(buid!).removeValue()
+        let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
+        
+        self.present(vc, animated: true, completion: nil)
+
     }
     
     //needed to dismiss the keyboard
@@ -160,7 +164,7 @@ class BuckitEditViewController: UIViewController, UIImagePickerControllerDelegat
             return
         }
         if notification.name == Notification.Name.UIKeyboardWillShow || notification.name == Notification.Name.UIKeyboardWillChangeFrame{
-            view.frame.origin.y = -keyboardRect.height + 100
+            view.frame.origin.y = -keyboardRect.height + 120
         } else
         {
             view.frame.origin.y = 0
