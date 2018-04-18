@@ -90,7 +90,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
     
     //section number
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        return 2
     }
     
     //return the number of buckit

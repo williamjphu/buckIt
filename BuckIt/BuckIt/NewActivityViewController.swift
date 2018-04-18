@@ -11,6 +11,8 @@ import MapKit
 import CoreLocation
 import Firebase
 import UITextView_Placeholder
+import PopupDialog
+
 
 protocol HandleMapSearch: class {
     func dropPinZoomIn(_ placemark:MKPlacemark)
@@ -179,16 +181,21 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
                 }
             })
             
-            self.succesfulAlert = UIAlertController(title: "Congratulation!", message: "Your activity was succesfully added", preferredStyle: .alert)
-            let cancelAction = UIAlertAction(title: "Let's keep BuckIting!", style: .cancel) { (action) in
+            let title = "Created Activity!"
+            let message = "Your activity was succesfully added"
+            let popup = PopupDialog(title: title, message: message)
+            // Create buttons
+            let buttonOne = DefaultButton(title: "Got it!", height: 60) {
                 print("Activity added to Firebase")
-                self.succesfulAlert=nil;
                 // Show the main profile when this is completed
                 let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
                 self.present(vc, animated: true, completion: nil)
             }
-            self.succesfulAlert!.addAction(cancelAction)
-            self.present(self.succesfulAlert!, animated: true, completion: nil)
+            //Add buttons to dialog
+            popup.addButtons([buttonOne])
+            
+            //Present dialog
+            self.present(popup, animated: true, completion: nil)
         }
         uploadTask.resume()
     } /* end createActivity() */

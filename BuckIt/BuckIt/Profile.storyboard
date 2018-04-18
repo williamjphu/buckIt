@@ -11,6 +11,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Roboto-Bold.ttf">
+            <string>Roboto-Bold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Navigation Controller-->
         <scene sceneID="1us-Rw-p3X">
@@ -62,21 +67,23 @@
                                                         <constraint firstAttribute="height" constant="199" id="RKp-fx-Jdk"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gc7-7V-cNA">
-                                                    <rect key="frame" x="20" y="120.5" width="87" height="44.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="37"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="Gc7-7V-cNA">
+                                                    <rect key="frame" x="8" y="150" width="87" height="42.5"/>
+                                                    <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="35"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
+                                                    <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <size key="shadowOffset" width="1" height="1"/>
                                                 </label>
                                             </subviews>
                                         </view>
                                         <constraints>
                                             <constraint firstItem="SvB-KB-1z8" firstAttribute="leading" secondItem="XoM-dx-AwO" secondAttribute="leading" id="4Hy-sk-dNs"/>
                                             <constraint firstAttribute="trailing" secondItem="SvB-KB-1z8" secondAttribute="trailing" id="L3m-ag-A39"/>
-                                            <constraint firstAttribute="bottomMargin" secondItem="Gc7-7V-cNA" secondAttribute="bottom" constant="26" id="RSw-eV-ktq"/>
-                                            <constraint firstItem="Gc7-7V-cNA" firstAttribute="leading" secondItem="XoM-dx-AwO" secondAttribute="leadingMargin" constant="12" id="pXu-td-pyV"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="Gc7-7V-cNA" secondAttribute="bottom" constant="-1.5" id="RSw-eV-ktq"/>
+                                            <constraint firstItem="Gc7-7V-cNA" firstAttribute="leading" secondItem="XoM-dx-AwO" secondAttribute="leadingMargin" id="pXu-td-pyV"/>
                                             <constraint firstItem="SvB-KB-1z8" firstAttribute="top" secondItem="XoM-dx-AwO" secondAttribute="top" id="rnI-8d-1I3"/>
-                                            <constraint firstItem="Gc7-7V-cNA" firstAttribute="leading" secondItem="XoM-dx-AwO" secondAttribute="leadingMargin" constant="12" id="zEj-iP-fAl"/>
+                                            <constraint firstItem="Gc7-7V-cNA" firstAttribute="leading" secondItem="XoM-dx-AwO" secondAttribute="leadingMargin" id="zEj-iP-fAl"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="BuckitName" destination="Gc7-7V-cNA" id="JWH-Iy-56d"/>

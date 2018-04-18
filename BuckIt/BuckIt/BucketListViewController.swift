@@ -113,11 +113,9 @@ class BucketListViewController: UIViewController, UITableViewDelegate, UITableVi
             
             let addAction = SwipeAction(style: .default , title: "Complete") { action, indexPath in
                 print("Complete")
-                
                 // Prepare the popup assets
                 let title = "Completed!"
-                let message = "Visit the North Pole"
-//                let message = self.activities[indexPath.row].title
+                let message = self.activities[indexPath.row].title
                 let image = UIImage(named: "pexels-photo-103290")
                 
                 // Create the dialog
@@ -127,15 +125,12 @@ class BucketListViewController: UIViewController, UITableViewDelegate, UITableVi
                 let buttonOne = CancelButton(title: "Share it!") {
                     print("You canceled the car dialog.")
                 }
-                let buttonTwo = DefaultButton(title: "  ", height: 60) {
-                    print("Ah, maybe next time :)")
-                }
-                let buttonThree = DefaultButton(title: "OK", height: 60) {
+                let buttonTwo = DefaultButton(title: "OK", height: 60) {
                     print("Ah, maybe next time :)")
                 }
                 
 //              Add buttons to dialog
-                popup.addButtons([buttonOne, buttonTwo, buttonThree])
+                popup.addButtons([buttonOne, buttonTwo])
                 
 //              Present dialog
                 self.present(popup, animated: true, completion: nil)
