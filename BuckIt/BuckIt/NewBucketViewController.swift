@@ -47,6 +47,43 @@ class NewBucketViewController: UIViewController, UIImagePickerControllerDelegate
     }
     
     @IBAction func createBuckit(_ sender: Any) {
+        var emptyText: UIAlertController
+        guard titleText.text != "", descriptionText.text != "", imageView.image != nil
+            else {
+                // alert the user when fields are empty
+                if( (titleText.text?.isEmpty)! && (descriptionText.text?.isEmpty)! && imageView.image == nil ) {
+                    emptyText = UIAlertController(title: "Error",
+                                                      message: "Please fill in all the fields",
+                                                      preferredStyle: UIAlertControllerStyle.alert)
+                    emptyText.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+                    self.present(emptyText, animated: true)
+                } else if ((titleText.text?.isEmpty)!)
+                {
+                    emptyText = UIAlertController(title: "Error",
+                                                      message: "Please fill out the Buckit title",
+                                                      preferredStyle: UIAlertControllerStyle.alert)
+                    emptyText.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+                    self.present(emptyText, animated: true)
+                } else if((descriptionText.text?.isEmpty)!)
+                {
+                    emptyText = UIAlertController(title: "Error",
+                                                      message: "Please fill out the description",
+                                                      preferredStyle: UIAlertControllerStyle.alert)
+                    emptyText.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+                    self.present(emptyText, animated: true)
+
+                } else
+                {
+                    emptyText = UIAlertController(title: "Error",
+                                                      message: "Please upload the picture",
+                                                      preferredStyle: UIAlertControllerStyle.alert)
+                    emptyText.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+                    self.present(emptyText, animated: true)
+
+                }
+                return
+        }
+
         let uid = Auth.auth().currentUser!.uid
         ref = Database.database().reference()
         let storage = Storage.storage().reference(forURL: "gs://buckit-ed26f.appspot.com")
