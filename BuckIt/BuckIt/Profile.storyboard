@@ -621,11 +621,20 @@
                         <outlet property="buckitTitle" destination="Bbw-8H-sXC" id="BPB-BG-5wJ"/>
                         <outlet property="tableView" destination="05A-o8-Ry4" id="b2s-bB-pdN"/>
                         <segue destination="WM1-HD-vIt" kind="show" identifier="editBuckit" id="fDp-vh-TKM"/>
+                        <segue destination="Fw9-6r-eky" kind="show" identifier="activityProfile" id="wPY-4v-slt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G3I-83-UxX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1572" y="904"/>
+        </scene>
+        <!--activityProfilePage-->
+        <scene sceneID="ozL-du-cFv">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Trending" referencedIdentifier="activityProfilePage" id="Fw9-6r-eky" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ckf-Km-0nL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2149" y="447"/>
         </scene>
         <!--Edit BuckIt-->
         <scene sceneID="Ugp-zH-IuD">

@@ -149,7 +149,7 @@
         <!--Activity-->
         <scene sceneID="qPw-gd-4rH">
             <objects>
-                <viewController id="VpB-LJ-32i" customClass="ActivityProfileViewController" customModule="BuckIt" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="activityProfilePage" id="VpB-LJ-32i" customClass="ActivityProfileViewController" customModule="BuckIt" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bpQ-vZ-W5B">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

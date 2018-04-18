@@ -12,6 +12,7 @@ import Firebase
 
 class ActivityProfileViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
+    //activity that is passed to this VC
     var activity = Activity()
     
     @IBOutlet weak var activityTitle: UILabel!

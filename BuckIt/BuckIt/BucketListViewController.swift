@@ -51,11 +51,20 @@ class BucketListViewController: UIViewController, UITableViewDelegate, UITableVi
     
     //Go to edit Buckit
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        //if youre going to segue to the buckitListVC, do this
         if let destination = segue.destination as? BuckitEditViewController{
             if let buckit = sender as? BuckIt{
                 //send the selected post to the editBuckit
                 print("SENT")
                 destination.buckit = buckit
+            }
+        }
+        //if youre going to segue to the activityProfile, do this
+        if let destination = segue.destination as? ActivityProfileViewController{
+            if let activity = sender as? Activity{
+                //send the selected activity to the activityProfile
+                destination.activity = activity
             }
         }
     }
@@ -68,6 +77,11 @@ class BucketListViewController: UIViewController, UITableViewDelegate, UITableVi
     //makes the row able to be edited
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true;
+    }
+    
+    //got to activity profile when clicked
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "activityProfile", sender: self.activities[indexPath.row])
     }
     
     //creating the list items
@@ -145,6 +159,9 @@ class BucketListViewController: UIViewController, UITableViewDelegate, UITableVi
         
         return options
     }
+    
+
+
 
     func fetchActivities(){
         let ref = FirebaseDataContoller.sharedInstance.refToFirebase
