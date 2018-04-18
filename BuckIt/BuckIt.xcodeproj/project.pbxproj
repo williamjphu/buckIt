@@ -42,7 +42,6 @@
 		C3B95C2F2022CE1000836918 /* CompletedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B95C2E2022CE1000836918 /* CompletedViewController.swift */; };
 		C3B95C312022CEC600836918 /* TabController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3B95C302022CEC600836918 /* TabController.storyboard */; };
 		C3E2A5C72072CEC700818CE1 /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E2A5C62072CEC700818CE1 /* ActivityTableViewCell.swift */; };
-		DAF499CD2083D03C001D2FDD /* NewActivityMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF499CC2083D03C001D2FDD /* NewActivityMapViewController.swift */; };
 		E084A47A20755D860099CCCD /* BuckitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E084A47920755D860099CCCD /* BuckitCell.swift */; };
 		E084A48A207745990099CCCD /* BuckitEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E084A489207745990099CCCD /* BuckitEditViewController.swift */; };
 		E0D6C3232022EC8900721FCE /* SignUpProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D6C3222022EC8900721FCE /* SignUpProfileController.swift */; };
@@ -91,7 +90,6 @@
 		C3B95C2E2022CE1000836918 /* CompletedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedViewController.swift; sourceTree = "<group>"; };
 		C3B95C302022CEC600836918 /* TabController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TabController.storyboard; sourceTree = "<group>"; };
 		C3E2A5C62072CEC700818CE1 /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
-		DAF499CC2083D03C001D2FDD /* NewActivityMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewActivityMapViewController.swift; sourceTree = "<group>"; };
 		E084A47920755D860099CCCD /* BuckitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuckitCell.swift; sourceTree = "<group>"; };
 		E084A489207745990099CCCD /* BuckitEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuckitEditViewController.swift; sourceTree = "<group>"; };
 		E0D6C3222022EC8900721FCE /* SignUpProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpProfileController.swift; sourceTree = "<group>"; };
@@ -243,7 +241,6 @@
 			children = (
 				C3B95C262022CD8300836918 /* NewActivity.storyboard */,
 				C3B95C2C2022CDFC00836918 /* NewActivityViewController.swift */,
-				DAF499CC2083D03C001D2FDD /* NewActivityMapViewController.swift */,
 				AE260AE120869363008D8960 /* LocationSearchTable.swift */,
 			);
 			name = "New Activity";
@@ -444,7 +441,6 @@
 				C3B95C2B2022CDE000836918 /* TrendingViewController.swift in Sources */,
 				AE260AE220869364008D8960 /* LocationSearchTable.swift in Sources */,
 				AE7F9C18201986AF00420457 /* BucketListViewController.swift in Sources */,
-				DAF499CD2083D03C001D2FDD /* NewActivityMapViewController.swift in Sources */,
 				C3E2A5C72072CEC700818CE1 /* ActivityTableViewCell.swift in Sources */,
 				AE7F9BFE20182E4E00420457 /* MapViewController.swift in Sources */,
 				AE7F9C2320198AFE00420457 /* User.swift in Sources */,
