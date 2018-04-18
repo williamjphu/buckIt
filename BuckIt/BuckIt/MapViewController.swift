@@ -79,7 +79,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     // This helper method fetches of one category from Firebase
     func fetchActivities() {
         let ref = FirebaseDataContoller.sharedInstance.refToFirebase
-        ref.child("activities").child("Food").observeSingleEvent(of: .value, with: { (snap) in
+        ref.child("Activities").observeSingleEvent(of: .value, with: { (snap) in
             if snap.exists() {
                 let activitySnap = snap.value as! [String: AnyObject]
                 for (_,activity) in activitySnap {

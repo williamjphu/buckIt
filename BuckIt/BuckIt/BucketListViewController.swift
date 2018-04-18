@@ -167,9 +167,8 @@ class BucketListViewController: UIViewController, UITableViewDelegate, UITableVi
                                 let theActivity = Activity()
                                 if let description = activity["description"] as? String,
                                     let category = activity["category"] as? String,
-                                    //commented out for now, need to add later
-    //                                let latitude = activity["latitude"] as? String,
-    //                                let longitude = activity["longitude"] as? String,
+                                    let latitude = activity["latitude"] as? String,
+                                    let longitude = activity["longitude"] as? String,
                                     let activityID = activity["activityID"] as? String,
                                     let pathToImage = activity["pathToImage"] as? String,
                                     let title = activity["activityName"] as? String,

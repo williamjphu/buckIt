@@ -2,15 +2,13 @@
 //  NewActivityViewController.swift
 //  BuckIt
 //
-//  Created by Michael Hyun on 1/31/18.
+//  Created by WilliamH/Josh on 4/1/18.
 //  Copyright © 2018 Samnang Sok. All rights reserved.
 //
 
 import UIKit
 import MapKit
 import CoreLocation
-import FirebaseDatabase
-import FirebaseStorage
 import Firebase
 import UITextView_Placeholder
 
@@ -20,70 +18,33 @@ protocol HandleMapSearch: class {
 
 class NewActivityViewController: UIViewController, UINavigationControllerDelegate,UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
-    var selectedPin: MKPlacemark?
-    var resultSearchController: UISearchController!
-    
-    @IBOutlet weak var titleText: UITextField!
-    @IBOutlet weak var descriptionText: UITextView!     /* text view for description box */
-    @IBOutlet weak var activityPic: UIImageView!
-    @IBOutlet weak var locationText: UITextField!           /* textfield for the location */
-    @IBOutlet weak var categoryTextfield: UITextField!      /* textfield for the category picker */
-    @IBOutlet weak var mapView: MKMapView!
-    
     var manager: CLLocationManager!
     var theCoordinates: CLLocationCoordinate2D?
     var selection: String?
+    var selectedPin: MKPlacemark?
+    var resultSearchController: UISearchController!
+    var coordinateFromMap: CLLocationCoordinate2D?
+    var locationNameFromMap: String?
+    var succesfulAlert: UIAlertController?
+    var categories = [String]()
     
-    /* categories for the picker view */
-    let categories = [ "Food",
-                       "Music",
-                       "Meet-up",
-                       "Recreation",
-                       "Fundraiser"]
+    @IBOutlet weak var titleText: UITextField!
+    @IBOutlet weak var descriptionText: UITextView!
+    @IBOutlet weak var activityPic: UIImageView!
+    @IBOutlet weak var categoryTextfield: UITextField!
+    @IBOutlet weak var mapView: MKMapView!
     
-    var nameFromMapController: String?
-    
-//    var fromVC: NewActivityMapViewController = NewActivityMapViewController()
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        locationText.delegate = self
+        setupSearchBar()
         setupDescriptionTextArea()
         createPicker()
         pickerToolbar()
-//
-        let locationSearchTable = storyboard!.instantiateViewController(withIdentifier: "LocationSearchTable") as! LocationSearchTable
-        resultSearchController = UISearchController(searchResultsController: locationSearchTable)
-        resultSearchController.searchResultsUpdater = locationSearchTable
-        
-        let searchBar = resultSearchController!.searchBar
-        searchBar.sizeToFit()
-        searchBar.placeholder = "Search for places"
-        navigationItem.titleView = resultSearchController?.searchBar
-        resultSearchController.hidesNavigationBarDuringPresentation = false
-        resultSearchController.dimsBackgroundDuringPresentation = true
-        definesPresentationContext = true
-        locationSearchTable.mapView = mapView
-        locationSearchTable.handleMapSearchDelegate = self
-        
-        //listen for keyboard events
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+        populateCategoriesArray()
+        keyboardListener()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        print("VALUE RETRIEVED: \(String(describing: nameFromMapController))")
-    }
-    
-    /* triggers a segue to the next view */
-//    func textFieldDidBeginEditing(_ locationText: UITextField) {
-//        performSegue(withIdentifier: "setLocationSegue", sender: self)
-        
-//        locationText.resignFirstResponder()
-//    }
-    
+    // Setup UIPickerVIew components
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -101,15 +62,39 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
         categoryTextfield.text = selection
     }
     
+    private func setupSearchBar() {
+        let locationSearchTable = storyboard!.instantiateViewController(withIdentifier: "LocationSearchTable") as! LocationSearchTable
+        resultSearchController = UISearchController(searchResultsController: locationSearchTable)
+        resultSearchController.searchResultsUpdater = locationSearchTable
+        
+        let searchBar = resultSearchController!.searchBar
+        searchBar.sizeToFit()
+        searchBar.placeholder = "Search for places"
+        navigationItem.titleView = resultSearchController?.searchBar
+        resultSearchController.hidesNavigationBarDuringPresentation = false
+        resultSearchController.dimsBackgroundDuringPresentation = true
+        definesPresentationContext = true
+        locationSearchTable.mapView = mapView
+        locationSearchTable.handleMapSearchDelegate = self
+    }
+    
+    // Setup Picker for Categories
+    private func populateCategoriesArray() {
+        let categoryDictionary = FirebaseDataContoller.sharedInstance.categoriesDictionary
+        for (key, _) in categoryDictionary {
+            self.categories.append("\(key)")
+        }
+    }
+    
     /* the scrolling screen for picker */
-    func createPicker() {
+    private func createPicker() {
         let categoryPicker = UIPickerView()
         categoryPicker.delegate = self
         categoryTextfield.inputView = categoryPicker
-    }
+    } /* end createPicker() */
     
     /* create toolbar for the picker */
-    func pickerToolbar() {
+    private func pickerToolbar() {
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         
@@ -125,14 +110,11 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
         view.endEditing(true)
     }
     
-    
-    /*
-     *  setup description text view
-     */
-    func setupDescriptionTextArea() {
+    // Setup text area
+    private func setupDescriptionTextArea() {
         descriptionText.delegate = self
-        descriptionText.placeholder = "Describe event..."
-        descriptionText.textColor = UIColor.lightGray
+        descriptionText.placeholder = "Describe your activity..."
+        descriptionText.textColor = UIColor.black
         descriptionText.layer.borderWidth = 3.0
         descriptionText.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0).cgColor
     }
@@ -162,60 +144,16 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
         self.dismiss(animated: true, completion: nil)
     }
     
-    
-    //NEED FOR FUTURE REFERENCE
-    //locates the address specified in the location text and finds it on the mapview
-//    @IBAction func getLocation(_ sender: Any) {
-//        let location = self.locationText.text
-//        let geocoder = CLGeocoder()
-//        geocoder.geocodeAddressString(location! as String) { (placemarks, error) in
-//            if let placemarks = placemarks {
-//                if placemarks.count != 0 {
-//                    let annotation = MKPlacemark(placemark: placemarks.first!)
-//                    let location = MKPlacemark(placemark: placemarks.first!).location
-//                    self.theCoordinates = location!.coordinate
-//
-//                    self.mapView.setRegion(MKCoordinateRegionMakeWithDistance(self.theCoordinates!, 2000, 2000), animated: true)
-//
-//                    self.mapView.addAnnotation(annotation)
-//                }
-//            }
-//
-//        }
-//    }
-    
-    //NEED TO DO THIS
-    /* get the location of the user to store into DB */
-    func fetchLocation() {
-        let ref = Database.database().reference()
-    }
-    
     /* creates new activity and stores it in the database */
     @IBAction func createActivity(_ sender: Any) {
-    
         let uid = Auth.auth().currentUser!.uid
-        var ref = FirebaseDataContoller.sharedInstance.refToFirebase  /* reference to the database */
-        let geoRef = FirebaseDataContoller.sharedInstance.refToStorage  /* reference to the database for location */
+        let ref = FirebaseDataContoller.sharedInstance.refToFirebase  /* reference to the database */
         let storage = FirebaseDataContoller.sharedInstance.refToStorage
         
         let key = ref.child("Activities").child(categoryTextfield.text!).childByAutoId().key /* stores key by category */
         let imageRef = storage.child("Activities").child(uid).child("\(key).jpeg") /* store images in "Activities" DB */
         let data = UIImageJPEGRepresentation(self.activityPic.image!, 0.6)
-        
-        /* get location of the address by taking the coordinates. this will take the location from the locationText
-           input field find use the address to pinpoint to the MKMapView */
-        let address = locationText.text!    /* the location address */
-        let geocoder = CLGeocoder()
-        
-        geocoder.geocodeAddressString(address, completionHandler: {(placemarks, error) -> Void in
-            if((error) != nil){
-                print("Error", error)
-            }
-            if let placemark = placemarks?.first {
-                self.theCoordinates = placemark.location!.coordinate       /* place the point on the map */
-            }
-        })
-        
+    
         let uploadTask = imageRef.putData(data!, metadata: nil) { (metadata, error) in
             if error != nil {
                 print(error!.localizedDescription)
@@ -227,29 +165,41 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
                                 "pathToImage" : url.absoluteString,
                                 "activityName" : self.titleText.text!,
                                 "description": self.descriptionText.text!,
-                                "locationName": self.locationText.text!,
-                                "latitude": self.theCoordinates?.latitude,      /* location latitude */
-                                "longitude": self.theCoordinates?.longitude,    /* location longitude */
+                                "locationName": self.locationNameFromMap ?? "N/A",
+                                "latitude": self.coordinateFromMap?.latitude ?? "N/A",
+                                "longitude": self.coordinateFromMap?.longitude ?? "N/A",
                                 "category": self.categoryTextfield.text!,
+                                "startDate": "00/00/0000",
+                                "endDate": "00/00/0000",
                                 "activityID" : key] as [String : Any]
-                    
                     let activityFeed = ["\(key)" : feed]
                     
                     /* update child value in category field */
                     ref.child("Activities").updateChildValues(activityFeed)
-                    
                 }
             })
             
-            let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
-            self.present(vc, animated: true, completion: nil)
-            
+            self.succesfulAlert = UIAlertController(title: "Congratulation!", message: "Your activity was succesfully added", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "Let's keep BuckIting!", style: .cancel) { (action) in
+                print("Activity added to Firebase")
+                self.succesfulAlert=nil;
+                // Show the main profile when this is completed
+                let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
+                self.present(vc, animated: true, completion: nil)
+            }
+            self.succesfulAlert!.addAction(cancelAction)
+            self.present(self.succesfulAlert!, animated: true, completion: nil)
         }
-
         uploadTask.resume()
-        
     } /* end createActivity() */
 
+    //listen for keyboard events
+    private func keyboardListener() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+    }
+    
     //needed to dismiss the keyboard
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         titleText.endEditing(true)
@@ -257,16 +207,9 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
     }
     
     //hide the keyboard function
-    func hideKeyBoard()
-    {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         descriptionText.resignFirstResponder()
         titleText.resignFirstResponder()
-    }
-    
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        hideKeyBoard()
-        
         return true
     }
     
@@ -283,33 +226,26 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
             view.frame.origin.y = 0
         }
     }
-} // end class
+}
 
+// Use extension for protocol and delegate dropPinZoomI()
 extension NewActivityViewController: HandleMapSearch {
-    
     func dropPinZoomIn(_ placemark: MKPlacemark){
-        // cache the pin
-        selectedPin = placemark
         // clear existing pins
         mapView.removeAnnotations(mapView.annotations)
+        // Create a new pin
         let annotation = MKPointAnnotation()
         annotation.coordinate = placemark.coordinate
         annotation.title = placemark.name
-        
+        // Setup the subtitle on the annotation
         if let city = placemark.locality,
             let state = placemark.administrativeArea {
             annotation.subtitle = "\(city) \(state)"
         }
-        
-//        locationLabel.text = placemark.name
-//        self.testLocatioName = placemark.name!
-//        let coordinate = placemark.coordinate
-//        let latitude : Double = coordinate.latitude
-//        let longitude : Double = coordinate.longitude
-        
-//        latitudeLabel.text = "\(latitude)"
-//        longitudeLabel.text = "\(longitude)"
-        
+        // Update values for variable
+        coordinateFromMap = placemark.coordinate
+        locationNameFromMap = placemark.name
+        // Add annotation to the map within the defined region
         mapView.addAnnotation(annotation)
         let span = MKCoordinateSpanMake(0.05, 0.05)
         let region = MKCoordinateRegionMake(placemark.coordinate, span)
