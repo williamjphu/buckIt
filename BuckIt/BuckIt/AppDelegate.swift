@@ -56,45 +56,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
              
             guard let uid = user?.uid else {return}
             
-            let ref = Database.database().reference()
+            let ref = FirebaseDataContoller.sharedInstance.refToFirebase
             let theUserUID = Auth.auth().currentUser?.uid
 
             ref.child("users").observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
                 if !snapshot.hasChild(theUserUID!)
                 {
-            let usersReference = ref.child("users").child(uid)
-            let values = ["uid": user?.uid,
-                          "name": user?.displayName,
-                          "email": user?.email,]
-            usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
-                if let err = err {
-                    print(err)
-                    return
-                }
-            })
+                    let usersReference = ref.child("users").child(uid)
+                    let values = ["uid": user?.uid,
+                                  "name": user?.displayName,
+                                  "email": user?.email,]
+                    usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
+                        if let err = err {
+                            print(err)
+                            return
+                        }
+                    })
             
-            print("Sucessfully logging to Firebase with Google" , uid)
-            let newViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "username")
-            UIApplication.topViewController()?.present(newViewController, animated: true, completion: nil)
-                }else
-                {
+                    print("Sucessfully logging to Firebase with Google" , uid)
+                    let newViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "username")
+                    UIApplication.topViewController()?.present(newViewController, animated: true, completion: nil)
+                }
+                else{
                     let newViewController = UIStoryboard(name: "TabController", bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
                     UIApplication.topViewController()?.present(newViewController, animated: true, completion: nil)
-                    }
+                }
             })
-        
-            })
-        
+        })
     }
     
     
     //For Facebook Integration
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         
-        let handled =  FBSDKApplicationDelegate.sharedInstance().application(app, open: url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String!, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+        let handled =  FBSDKApplicationDelegate.sharedInstance().application(app, open: url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String?, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
         
         //For Google Integration
-        GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String!, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+        GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String?, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
         
         return handled
     }

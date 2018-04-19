@@ -92,6 +92,8 @@
 		C3B95C2E2022CE1000836918 /* CompletedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedViewController.swift; sourceTree = "<group>"; };
 		C3B95C302022CEC600836918 /* TabController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TabController.storyboard; sourceTree = "<group>"; };
 		C3E2A5C62072CEC700818CE1 /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
+		C3E5A1D720891A1B00CE4EB0 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3E5A1D920891A2F00CE4EB0 /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GoogleToolboxForMac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E084A47920755D860099CCCD /* BuckitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuckitCell.swift; sourceTree = "<group>"; };
 		E084A489207745990099CCCD /* BuckitEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuckitEditViewController.swift; sourceTree = "<group>"; };
 		E0D6C3222022EC8900721FCE /* SignUpProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpProfileController.swift; sourceTree = "<group>"; };
@@ -148,14 +150,9 @@
 				AE7F9C1920198ADB00420457 /* profile */,
 				AE7F9C122019865C00420457 /* bucket-page */,
 				AE7F9C0F2019812800420457 /* map-view */,
-				77D45FBD1FAE96EB0034DDBA /* AppDelegate.swift */,
-				77D45FC11FAE96EB0034DDBA /* Main.storyboard */,
 				77D45FC41FAE96EB0034DDBA /* Assets.xcassets */,
-				77D45FC61FAE96EB0034DDBA /* LaunchScreen.storyboard */,
 				77D45FC91FAE96EB0034DDBA /* Info.plist */,
 				C397DF2E1FB5B19000D6C0AF /* GoogleService-Info.plist */,
-				C3B95C222022C8D100836918 /* TabBarViewController.swift */,
-				C3B95C302022CEC600836918 /* TabController.storyboard */,
 				AE34420B2082EBF400126452 /* FirebaseDataController.swift */,
 			);
 			path = BuckIt;
@@ -164,6 +161,8 @@
 		9A8B634F22CBA66DCA32FBC7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C3E5A1D920891A2F00CE4EB0 /* GoogleToolboxForMac.framework */,
+				C3E5A1D720891A1B00CE4EB0 /* FBSDKLoginKit.framework */,
 				C397DF2D1FB5B08A00D6C0AF /* Pods_BuckIt.framework */,
 				C397DF2B1FB5B06500D6C0AF /* FBSDKLoginKit.framework */,
 				C397DF291FB5B05F00D6C0AF /* FBSDKCoreKit.framework */,
@@ -207,6 +206,11 @@
 		AE7F9C2420198BA400420457 /* login-homepage */ = {
 			isa = PBXGroup;
 			children = (
+				77D45FC61FAE96EB0034DDBA /* LaunchScreen.storyboard */,
+				77D45FC11FAE96EB0034DDBA /* Main.storyboard */,
+				C3B95C302022CEC600836918 /* TabController.storyboard */,
+				C3B95C222022C8D100836918 /* TabBarViewController.swift */,
+				77D45FBD1FAE96EB0034DDBA /* AppDelegate.swift */,
 				AE7F9C2820198CAE00420457 /* LoginController.swift */,
 				AE7F9C2920198CAE00420457 /* SignUpController.swift */,
 				E0D6C3222022EC8900721FCE /* SignUpProfileController.swift */,
@@ -374,7 +378,7 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

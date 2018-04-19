@@ -11,6 +11,7 @@ import Firebase
 class BuckitEditViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
     var ref = FirebaseDataContoller.sharedInstance.refToFirebase
+    let store = FirebaseDataContoller.sharedInstance.refToStorage
     var userStorage = StorageReference()
     
     var buckit = BuckIt()
@@ -44,8 +45,8 @@ class BuckitEditViewController: UIViewController, UIImagePickerControllerDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         picker.delegate = self
-        let store = FirebaseDataContoller.sharedInstance.refToStorage
-        userStorage = store.child("BuckIts")
+        
+        userStorage = self.store.child("BuckIts")
         
         //maximize text input to 80 character
         descriptionText.delegate = self
@@ -93,7 +94,7 @@ class BuckitEditViewController: UIViewController, UIImagePickerControllerDelegat
     //maximize text input to 80 character
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let text = textField.text else { return true }
-        let newLength = text.characters.count + string.characters.count - range.length
+        let newLength = text.count + string.count - range.length
         return newLength <= 45 // Bool
     }
     
@@ -127,7 +128,7 @@ class BuckitEditViewController: UIViewController, UIImagePickerControllerDelegat
                 {
                     let picture = ["pathToImage": url.absoluteString]
                     let values = ["title": self.nameText.text,
-                                  "description": self.descriptionText.text]
+                    "description": self.descriptionText.text]
                     usersReference.updateChildValues(picture)
                     usersReference.updateChildValues(values)
                     

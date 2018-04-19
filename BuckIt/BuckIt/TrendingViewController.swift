@@ -150,7 +150,8 @@ class addToBucketViewController: UIViewController, UITableViewDelegate, UITableV
             let activityFeed = [ self.activity.activityID! : true] as [String: Any]
             
             //add to buckit
-            let ref = Database.database().reference().child("BuckIts").child(selectedBuckit.buckitId).child("Activities")
+            let ref = FirebaseDataContoller.sharedInstance.refToFirebase
+            ref.child("BuckIts").child(selectedBuckit.buckitId).child("Activities")
             ref.updateChildValues(activityFeed)
             
             //go back to trending page

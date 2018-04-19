@@ -10,8 +10,8 @@ import Firebase
 
 class EditProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
-    var ref: DatabaseReference!
-    
+    let ref = FirebaseDataContoller.sharedInstance.refToFirebase
+    let store = FirebaseDataContoller.sharedInstance.refToStorage
     let picker = UIImagePickerController()
     
     @IBOutlet weak var imageView: UIImageView!
@@ -51,8 +51,6 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         picker.delegate = self
-        let store = FirebaseDataContoller.sharedInstance.refToStorage
-        userStorage = store.child("profile")
         
         
         //listen for keyboard events
@@ -123,10 +121,10 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     //maximize text input to 80 character
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let text = textField.text else { return true }
-        let newLength = text.characters.count + string.characters.count - range.length
+        let newLength = text.count + string.count - range.length
         return newLength <= 45 // Bool
     }
-    var userStorage = StorageReference()
+
     
     
     //Override the edit data to the database
@@ -145,13 +143,13 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                 }
                 return
         }
-        ref = FirebaseDataContoller.sharedInstance.refToFirebase
+        
         
         let uid = Firebase.Auth.auth().currentUser!.uid
         
-        let imageRef = self.userStorage.child("\(uid).jpg")
+        let imageRef = self.store.child("profile").child("\(uid).jpg")
         let data = UIImageJPEGRepresentation(self.imageView.image!, 0.5)
-        let usersReference = ref.child("users").child(uid)
+        let usersReference = self.ref.child("users").child(uid)
         
         let uploadTask = imageRef.putData(data!, metadata: nil, completion: { (metadata, err) in
             imageRef.downloadURL(completion: { (url, er) in

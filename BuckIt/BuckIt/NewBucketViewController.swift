@@ -15,7 +15,8 @@ class NewBucketViewController: UIViewController, UIImagePickerControllerDelegate
     @IBOutlet weak var titleText: UITextField!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var descriptionText: UITextView!
-    var ref : DatabaseReference!
+    let ref = FirebaseDataContoller.sharedInstance.refToFirebase
+    let store = FirebaseDataContoller.sharedInstance.refToStorage
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,10 +77,9 @@ class NewBucketViewController: UIViewController, UIImagePickerControllerDelegate
         }
 
         let uid = Auth.auth().currentUser!.uid
-        ref = Database.database().reference()
-        let storage = Storage.storage().reference(forURL: "gs://buckit-ed26f.appspot.com")
-        let key = ref.child("BuckIts").childByAutoId().key
-        let imageRef = storage.child("BuckIts").child(uid).child("\(key).jpeg")
+        
+        let key = self.ref.child("BuckIts").childByAutoId().key
+        let imageRef = self.store.child("BuckIts").child(uid).child("\(key).jpeg")
         let data = UIImageJPEGRepresentation(self.imageView.image!, 0.6)
         
         let title = "Created BuckIt!"
