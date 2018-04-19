@@ -132,7 +132,19 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     //Override the edit data to the database
     @IBAction func saveChange(_ sender: Any) {
         hideKeyBoard()
-        
+        var emptyText: UIAlertController
+        guard userNameText.text != ""
+            else {
+                // alert the user when fields are empty
+                if( (userNameText.text?.isEmpty)!) {
+                    emptyText = UIAlertController(title: "Error",
+                                                  message: "Please fill in the username",
+                                                  preferredStyle: UIAlertControllerStyle.alert)
+                    emptyText.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+                    self.present(emptyText, animated: true)
+                }
+                return
+        }
         ref = FirebaseDataContoller.sharedInstance.refToFirebase
         
         let uid = Firebase.Auth.auth().currentUser!.uid
