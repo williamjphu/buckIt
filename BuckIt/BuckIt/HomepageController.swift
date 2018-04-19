@@ -18,12 +18,18 @@ class HomepageController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInU
         loginButton.delegate = self
         setupGoogleButton()
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+    }
     @IBAction func signUpClicked(_ sender: Any) {
         performSegue(withIdentifier: "signUp", sender: self)
     }
     
     //if users already login through facebook. Take to profile
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+
         super.viewWillAppear(animated)
         let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
         if FBSDKAccessToken.current() != nil {

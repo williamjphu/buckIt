@@ -18,12 +18,19 @@ class TrendingViewController: UIViewController, UITableViewDelegate, UITableView
     //array of activities that are displayed on the page
     var activities = [Activity]()
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
     override func viewDidLoad() {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         fetchAllActivities()
     }
   
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+
+    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "activityProfile", sender: self.activities[indexPath.row])
     }

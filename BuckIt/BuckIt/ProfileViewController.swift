@@ -16,12 +16,16 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
     var buckits = [BuckIt]()
 
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         super.viewWillAppear(true)
         buckits.removeAll()
         fetchUsers()
         fetchUserBuckIts()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+    }
     
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var username: UILabel!
