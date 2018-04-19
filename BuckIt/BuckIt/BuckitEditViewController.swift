@@ -99,6 +99,19 @@ class BuckitEditViewController: UIViewController, UIImagePickerControllerDelegat
     
     //Override the edit data to the database
     @IBAction func saveChange(_ sender: Any) {
+        var emptyText: UIAlertController
+        guard nameText.text != ""
+            else {
+                // alert the user when fields are empty
+                if( (nameText.text?.isEmpty)!) {
+                    emptyText = UIAlertController(title: "Error",
+                                                  message: "Please fill in the Buckit name",
+                                                  preferredStyle: UIAlertControllerStyle.alert)
+                    emptyText.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+                    self.present(emptyText, animated: true)
+                }
+                return
+        }
         let buid = buckit.buckitId
         let imageRef = self.userStorage.child("\(buid).jpg")
         let data = UIImageJPEGRepresentation(self.imageView.image!, 0.5)

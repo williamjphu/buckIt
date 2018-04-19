@@ -148,6 +148,43 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
     
     /* creates new activity and stores it in the database */
     @IBAction func createActivity(_ sender: Any) {
+        var emptyText: UIAlertController
+        guard titleText.text != "", activityPic.image != nil, categoryTextfield.text != nil
+            else {
+                // alert the user when fields are empty
+                if( (titleText.text?.isEmpty)! && (activityPic.image == nil) && (categoryTextfield.text?.isEmpty)!) {
+                    emptyText = UIAlertController(title: "Error",
+                                                  message: "Please fill in all the fields",
+                                                  preferredStyle: UIAlertControllerStyle.alert)
+                    emptyText.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+                    self.present(emptyText, animated: true)
+                } else if ((titleText.text?.isEmpty)!)
+                {
+                    emptyText = UIAlertController(title: "Error",
+                                                  message: "Please fill out the event name",
+                                                  preferredStyle: UIAlertControllerStyle.alert)
+                    emptyText.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+                    self.present(emptyText, animated: true)
+                }
+                else if (activityPic.image == nil)
+                {
+                    emptyText = UIAlertController(title: "Error",
+                                                  message: "Please upload the picture",
+                                                  preferredStyle: UIAlertControllerStyle.alert)
+                    emptyText.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+                    self.present(emptyText, animated: true)
+                }else if ((categoryTextfield.text?.isEmpty)!)
+                {
+                    emptyText = UIAlertController(title: "Error",
+                                                  message: "Please select the category",
+                                                  preferredStyle: UIAlertControllerStyle.alert)
+                    emptyText.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+                    self.present(emptyText, animated: true)
+                }
+                // NEED TO CHECK FOR MAP PINPOINT
+                return
+        }
+
         let uid = Auth.auth().currentUser!.uid
         let ref = FirebaseDataContoller.sharedInstance.refToFirebase  /* reference to the database */
         let storage = FirebaseDataContoller.sharedInstance.refToStorage
