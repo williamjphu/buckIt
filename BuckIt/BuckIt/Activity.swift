@@ -16,8 +16,8 @@ class Activity : NSObject {
     var title : String?
     var userID : String?
     var locationName : String?
-    var latitude : String?
-    var longitude : String?
+    var latitude : Double?
+    var longitude : Double?
     var category : String?
     
 //    init(title: String?="", description: String?="", category: String?="", pathToImage: String?="", activityID: String?="", userID: String?="", locationName: String?="") {

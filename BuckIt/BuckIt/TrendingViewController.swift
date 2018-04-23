@@ -67,7 +67,9 @@ class TrendingViewController: UIViewController, UITableViewDelegate, UITableView
                         let uid = activity["userID"] as? String,
                         let pathToImage = activity["pathToImage"] as? String,
                         let location = activity["locationName"] as? String,
-                        let title = activity["activityName"] as? String {
+                        let title = activity["activityName"] as? String,
+                        let longitude = activity["longitude"] as? Double,
+                        let latitude = activity["latitude"] as? Double {
 
                         theActivity.locationName = location
                         theActivity.theDescription = description
@@ -75,7 +77,9 @@ class TrendingViewController: UIViewController, UITableViewDelegate, UITableView
                         theActivity.pathToImage = pathToImage
                         theActivity.title = title
                         theActivity.userID = uid
-
+                        theActivity.latitude = latitude
+                        theActivity.longitude = longitude
+                        print("\n\n\tLong: \(longitude)")
                         self.activities.append(theActivity)
                     }
                     self.tableView.reloadData()
@@ -105,7 +109,6 @@ class addToBucketViewController: UIViewController, UITableViewDelegate, UITableV
     var buckits = [BuckIt]()
     
     func fetchAllBuckets(){
-//        let ref = FirebaseDataContoller.sharedInstance.refToBuckits
         let ref = FirebaseDataContoller.sharedInstance.refToFirebase
         ref.child("BuckIts").queryOrderedByKey().observeSingleEvent(of: .value, with: { (snap) in
             let buckitSnap = snap.value as! [String: AnyObject]

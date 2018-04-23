@@ -30,11 +30,11 @@ class ActivityProfileViewController: UIViewController, UICollectionViewDelegate,
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewWillAppear(_ animated: Bool) {
-        fillActivityData()
         loadUserData()
     }
     
     override func viewDidLoad() {
+        fillActivityData()
         super.viewDidLoad()
     }
     
@@ -45,6 +45,9 @@ class ActivityProfileViewController: UIViewController, UICollectionViewDelegate,
         activityImage.downloadImage(from: activity.pathToImage)
         locationLabel.text = activity.locationName
         //load location and pin on map
+        print("\n\nName: \(activity.longitude)")
+        print("\n\nName: \(activity.latitude)")
+//        addAnnotation()
     }
     
     //fetch for the current_user to display their picture on the tips section
@@ -96,4 +99,18 @@ class ActivityProfileViewController: UIViewController, UICollectionViewDelegate,
         }
     }
 
+    func addAnnotation() {
+//        let span = MKCoordinateSpanMake(0.05, 0.05)
+//        let lon: Double = activity.longitude!
+//        let lat: Double = activity.latitude!
+//        let activityLocation: CLLocationCoordinate2D = CLLocationCoordinate2DMake(lon, lat)
+//        let region = MKCoordinateRegionMake(activityLocation, span)
+//        mapView.setRegion(region, animated: true)
+//
+//        let annotation = MKPointAnnotation()
+//        annotation.coordinate = activityLocation
+//        annotation.title = activity.title
+//        annotation.subtitle = activity.theDescription
+//        mapView.addAnnotation(annotation)
+    }
 }

@@ -254,9 +254,9 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         descriptionText.resignFirstResponder()
         titleText.resignFirstResponder()
+        self.categoryTextfield.resignFirstResponder()
         return true
     }
-    
     //push the UI up the keyboard is out
     @objc func keyboardWillChange(notification: Notification){
         //get the keyboard length
@@ -264,7 +264,7 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
             return
         }
         if notification.name == Notification.Name.UIKeyboardWillShow || notification.name == Notification.Name.UIKeyboardWillChangeFrame{
-            view.frame.origin.y = -keyboardRect.height + 100
+            view.frame.origin.y = -keyboardRect.height + 48
         } else
         {
             view.frame.origin.y = 0

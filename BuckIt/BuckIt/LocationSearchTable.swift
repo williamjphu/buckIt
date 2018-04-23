@@ -72,6 +72,7 @@ extension LocationSearchTable {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        self.tableView.contentInset = UIEdgeInsetsMake(130, 0, 0, 0)
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")!
         let selectedItem = matchingItems[(indexPath as NSIndexPath).row].placemark
         cell.textLabel?.text = selectedItem.name
