@@ -35,12 +35,18 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
     @IBOutlet weak var activityPic: UIImageView!
     @IBOutlet weak var categoryTextfield: UITextField!
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var startDateField: UITextField!
+    @IBOutlet weak var endDateField: UITextField!
+    
+    let datePicker = UIDatePicker()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSearchBar()
         setupDescriptionTextArea()
         createPicker()
+        createDatePicker(pickerObject: datePicker, pickerField: startDateField, objCall: #selector(starDonePressed))
+        createDatePicker(pickerObject: datePicker, pickerField: endDateField, objCall: #selector(endDonePressed))
         pickerToolbar()
         populateCategoriesArray()
         keyboardListener()
@@ -110,6 +116,39 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
     
     @objc func dismissPicker() {
         view.endEditing(true)
+    }
+    
+    private func createDatePicker(pickerObject: UIDatePicker, pickerField: UITextField, objCall: Any) {
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        // done button for Toolbar
+        let done = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: objCall as! Selector)
+        toolbar.setItems([done], animated: false)
+        
+        pickerField.inputAccessoryView = toolbar
+        pickerField.inputView = pickerObject
+        
+        // Format picker for date
+        pickerObject.datePickerMode = .dateAndTime
+    }
+    
+    @objc func starDonePressed() {
+        startDateDonePressed(pickerObject: datePicker, pickerField: startDateField)
+    }
+    
+    @objc func endDonePressed() {
+        startDateDonePressed(pickerObject: datePicker, pickerField: endDateField)
+    }
+    
+    private func startDateDonePressed(pickerObject: UIDatePicker, pickerField: UITextField) {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .short
+        let dateString = formatter.string(from: pickerObject.date)
+        
+        pickerField.text = "\(dateString)"
+        self.view.endEditing(true)
     }
     
     // Setup text area
@@ -208,8 +247,8 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
                                 "latitude": self.coordinateFromMap?.latitude ?? "N/A",
                                 "longitude": self.coordinateFromMap?.longitude ?? "N/A",
                                 "category": self.categoryTextfield.text!,
-                                "startDate": "00/00/0000",
-                                "endDate": "00/00/0000",
+                                "startDate": self.startDateField.text!,
+                                "endDate": self.endDateField.text!,
                                 "activityID" : key] as [String : Any]
                     let activityFeed = ["\(key)" : feed]
                     

@@ -192,7 +192,9 @@
                         <outlet property="activityPic" destination="rdf-OL-sus" id="Vdv-SG-Y37"/>
                         <outlet property="categoryTextfield" destination="cnF-WS-uBI" id="Zfb-k4-TbG"/>
                         <outlet property="descriptionText" destination="6Xu-Cu-CpO" id="YK1-Vr-jfY"/>
+                        <outlet property="endDateField" destination="0bq-48-wHN" id="HlB-SS-aL3"/>
                         <outlet property="mapView" destination="eIt-ax-H1g" id="0dq-n4-DRD"/>
+                        <outlet property="startDateField" destination="wJ6-SD-q5f" id="8Xj-Og-fzB"/>
                         <outlet property="titleText" destination="eW9-JZ-YEI" id="d9K-Xb-Z8a"/>
                     </connections>
                 </viewController>
