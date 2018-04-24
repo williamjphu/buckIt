@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import Firebase
 
-class ActivityProfileViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class ActivityProfileViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITextFieldDelegate {
     
     //activity that is passed to this VC
     var activity = Activity()
@@ -26,7 +26,7 @@ class ActivityProfileViewController: UIViewController, UICollectionViewDelegate,
     @IBOutlet weak var userProfilePic: UIImageView!
     @IBOutlet weak var userName: UILabel!
     
-    @IBOutlet weak var addATipTextField: UITextView!
+    @IBOutlet var addTipTextField: UITextField!
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewWillAppear(_ animated: Bool) {
@@ -35,6 +35,7 @@ class ActivityProfileViewController: UIViewController, UICollectionViewDelegate,
     
     override func viewDidLoad() {
         fillActivityData()
+        addTipTextField.delegate = self
         super.viewDidLoad()
     }
     
@@ -59,6 +60,10 @@ class ActivityProfileViewController: UIViewController, UICollectionViewDelegate,
             self.userProfilePic.downloadImage(from: user["picture"] as! String)
             self.userName.text = user["name"] as? String
         }
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        performSegue(withIdentifier: "addTip", sender: self.activity)
     }
     
     func loadTips(){
@@ -97,6 +102,12 @@ class ActivityProfileViewController: UIViewController, UICollectionViewDelegate,
                 destination.activity = activity
             }
         }
+        else if let destination = segue.destination as? createTipViewController{
+            if let activity = sender as? Activity{
+                //send the selected buckit to the buckitlistview
+                destination.activity = activity
+            }
+        }
     }
 
     func addAnnotation() {
@@ -112,5 +123,36 @@ class ActivityProfileViewController: UIViewController, UICollectionViewDelegate,
 //        annotation.title = activity.title
 //        annotation.subtitle = activity.theDescription
 //        mapView.addAnnotation(annotation)
+    }
+}
+
+class createTipViewController : UIViewController{
+    
+    let ref = FirebaseDataContoller.sharedInstance.refToFirebase
+    let store = FirebaseDataContoller.sharedInstance.refToStorage
+    
+    var activity = Activity()
+    @IBOutlet var tipText: UITextView!
+    
+    @IBAction func backPressed(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
+    @IBAction func postTipPressed(_ sender: Any) {
+        //create a Tip Node in the Database
+        let uid = Auth.auth().currentUser!.uid
+        let key = self.ref.child("Tips").childByAutoId().key
+        let tip = ["title" : tipText.text,
+                   "tipID" : key,
+                   "userID" : uid] as [String : Any]
+        let tipFeed = ["\(key)" : tip]
+        self.ref.child("Tips").setValue(tipFeed)
+        
+        //need to add it to the specific Activity
+        let tipID = [ key : "true" ] as [String : Any]
+        let ref = self.ref.child("Activities").child(activity.activityID!).child("Tips")
+        ref.updateChildValues(tipID)
+        
+        
+        self.dismiss(animated: true)
     }
 }
