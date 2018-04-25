@@ -14,6 +14,7 @@ class ActivityProfileViewController: UIViewController, UICollectionViewDelegate,
     
     //activity that is passed to this VC
     var activity = Activity()
+    var tips = [Tip]()
     
     @IBOutlet weak var activityTitle: UILabel!
     @IBOutlet weak var activityDescription: UILabel!
@@ -31,12 +32,15 @@ class ActivityProfileViewController: UIViewController, UICollectionViewDelegate,
     
     override func viewWillAppear(_ animated: Bool) {
         loadUserData()
+        tips.removeAll()
+        loadTips()
     }
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         fillActivityData()
         addTipTextField.delegate = self
-        super.viewDidLoad()
+       
     }
     
     //load the specific activity clicked
@@ -64,30 +68,67 @@ class ActivityProfileViewController: UIViewController, UICollectionViewDelegate,
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         performSegue(withIdentifier: "addTip", sender: self.activity)
+        addTipTextField.resignFirstResponder()
     }
     
     func loadTips(){
         //fetch all tips here
+        let ref = FirebaseDataContoller.sharedInstance.refToFirebase
+        ref.child("Activities").child(activity.activityID!).child("Tips").observeSingleEvent(of: .value, with: {(snap) in
+            //if snap.value is nil, the Activity has no Tips
+            if(snap.exists()){
+                let mysnap = snap.value as! [String: AnyObject]
+                //for each Tip inside this Activity
+                for key in mysnap.keys {
+                    print(key)
+                    ref.child("Tips").observeSingleEvent(of: .value, with: {(tipSnap) in
+                        let snapshot = tipSnap.value as! [String: AnyObject]
+                        
+                        for (_,tip) in snapshot{
+                            //If the current Tip matches the key from the Activity, add it
+                            if tip["tipID"] as? String == key {
+                                let theTip = Tip()
+                                if let desc = tip["desc"] as? String,
+                                    let userID = tip["userID"] as? String,
+                                    let tipID = tip["tipID"] as? String{
+                                    
+                                    theTip.desc = desc
+                                    theTip.tipId = tipID
+                                    theTip.userId = userID
+                                    //add Tip to the list
+                                    self.tips.append(theTip)
+                                }
+                                self.collectionView.reloadData()
+                            }
+                        }
+                    })
+                }
+            }
+        })
+        ref.removeAllObservers()
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return self.tips.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        print("HELLO")
-        //dequeue cell with identifier: tip cell
         let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "tipCell", for: indexPath) as! TipCollectionViewCell
+        //set the text of the tip Cell
+        cell.tipDescription.text = self.tips[indexPath.row].desc
+        //get the image and name of the person who posted the tip
+        let ref  = FirebaseDataContoller.sharedInstance.refToFirebase
+        ref.child("users").child(self.tips[indexPath.row].userId).observeSingleEvent(of: .value) { (snap) in
+            let user = snap.value as! [String: AnyObject]
+            cell.tipImage.downloadImage(from: user["picture"] as! String)
+            cell.tipOwnerName.text = user["name"] as? String
+        }
         
-        //        cell.tipDescription.text = "Description"
-        //        cell.tipOwnerName.text = "Username"
-        //        cell.tipTitle.text = "Try In-n-Out"
         return cell
     }
-
 
     //segue to choose a buckit to add the activity to
     @IBAction func addToBucketPressed(_ sender: Any) {
@@ -132,27 +173,51 @@ class createTipViewController : UIViewController{
     let store = FirebaseDataContoller.sharedInstance.refToStorage
     
     var activity = Activity()
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+    //textbox for the creating the tip
     @IBOutlet var tipText: UITextView!
+    var alert: UIAlertController!
     
     @IBAction func backPressed(_ sender: Any) {
-        self.dismiss(animated: true)
+        self.navigationController?.popViewController(animated: true)
     }
+    
+    //Need to post the tip under the Tip Node and also under the activity Node
     @IBAction func postTipPressed(_ sender: Any) {
-        //create a Tip Node in the Database
-        let uid = Auth.auth().currentUser!.uid
-        let key = self.ref.child("Tips").childByAutoId().key
-        let tip = ["title" : tipText.text,
-                   "tipID" : key,
-                   "userID" : uid] as [String : Any]
-        let tipFeed = ["\(key)" : tip]
-        self.ref.child("Tips").setValue(tipFeed)
+        //if there is a tip written, add the tip
+        if(tipText.text != ""){
+            print(tipText.text)
+            //create a Tip Node in the Database
+            let uid = Auth.auth().currentUser!.uid
+            let key = self.ref.child("Tips").childByAutoId().key
+            let tip = ["desc" : tipText.text,
+                       "tipID" : key,
+                       "userID" : uid] as [String : Any]
+            let tipFeed = ["\(key)" : tip]
+            self.ref.child("Tips").updateChildValues(tipFeed)
+            
+            //need to add it to the specific Activity
+            let tipID = [ key : "true" ] as [String : Any]
+            let ref = self.ref.child("Activities").child(activity.activityID!).child("Tips")
+            ref.updateChildValues(tipID)
         
-        //need to add it to the specific Activity
-        let tipID = [ key : "true" ] as [String : Any]
-        let ref = self.ref.child("Activities").child(activity.activityID!).child("Tips")
-        ref.updateChildValues(tipID)
-        
-        
-        self.dismiss(animated: true)
+            self.navigationController?.popViewController(animated: true)
+        }
+        else{
+            
+            //otherwise, throw an error
+            alert = UIAlertController(title: "Error",
+                                          message: "Please write a Tip",
+                                          preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+            self.present(alert, animated: true)
+        }
     }
 }
