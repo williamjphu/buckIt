@@ -11,28 +11,24 @@ import FirebaseDatabase
 import Firebase
 import PopupDialog
 
-class TrendingViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class TrendingViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet var collectionView: UICollectionView!
     
     //array of activities that are displayed on the page
     var activities = [Activity]()
     
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        //This makes the status bar WHITE
+//        UIApplication.shared.statusBarStyle = .lightContent
     }
+    
     override func viewDidLoad() {
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
         fetchAllActivities()
+        self.navigationItem.title = "Trending"
     }
   
     override func viewWillDisappear(_ animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
-
-    }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "activityProfile", sender: self.activities[indexPath.row])
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -43,15 +39,35 @@ class TrendingViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.activities.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let tableCell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! ActivityTableViewCell
-        tableCell.activityTitle.text = self.activities[indexPath.row].title
-        tableCell.activityDescription.text = self.activities[indexPath.row].theDescription
-        return tableCell
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "activityCell", for: indexPath) as! ActivityCollectionViewCell
+        cell.activityTitle.text = self.activities[indexPath.row].title
+        cell.activityDescription.text = self.activities[indexPath.row].theDescription
+        cell.activityPicture.downloadImage(from: self.activities[indexPath.row].pathToImage)
+        cell.locationLabel.text = self.activities[indexPath.row].locationName
+     
+        //need to change these two
+        cell.username.text = "Michael"
+        cell.userPicture.downloadImage(from: self.activities[indexPath.row].pathToImage)
+        
+        //make the picture a circle
+        cell.userPicture.layer.cornerRadius = cell.userPicture.bounds.width / 2.0
+        cell.userPicture.layer.masksToBounds = true
+        cell.userPicture.layer.shadowColor = UIColor.red.cgColor
+        cell.userPicture.layer.shadowRadius = 2
+        cell.userPicture.layer.shadowOpacity = 0.5
+        cell.userPicture.layer.shadowOffset = CGSize(width: 1, height: 1)
+        cell.userPicture.layer.shadowPath = UIBezierPath(roundedRect: cell.activityPicture.bounds, cornerRadius: 10).cgPath
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "activityProfile", sender: self.activities[indexPath.row])
     }
     
     //this gets all the activities and puts it in activity array
@@ -82,7 +98,7 @@ class TrendingViewController: UIViewController, UITableViewDelegate, UITableView
                         print("\n\n\tLong: \(longitude)")
                         self.activities.append(theActivity)
                     }
-                    self.tableView.reloadData()
+                    self.collectionView.reloadData()
             }
         }
         ref.removeAllObservers()
