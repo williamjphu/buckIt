@@ -19,39 +19,16 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet weak var descriptionText: UITextField!
     @IBOutlet weak var nameText: UITextField!
     @IBOutlet weak var userNameText: UITextField!
-    
-    //draw line for the input field
-    override func viewDidLayoutSubviews() {
-        let border = CALayer()
-        let border1 = CALayer()
-        let border2 = CALayer()
-        
-        let width = CGFloat(2.0)
-        border.borderColor = UIColor.darkGray.cgColor
-        border1.borderColor = UIColor.darkGray.cgColor
-        border2.borderColor = UIColor.darkGray.cgColor
-        
-        //line for name
-        border.frame = CGRect(x: 0, y: nameText.frame.size.height - width, width:   nameText.frame.size.width, height: nameText.frame.size.height)
-        
-        border.borderWidth = width
-        nameText.layer.addSublayer(border)
-        nameText.layer.masksToBounds = true
-        
-        //line for userName
-        border1.frame = CGRect(x: 0, y: userNameText.frame.size.height - width, width:   userNameText.frame.size.width, height: userNameText.frame.size.height)
-        
-        border1.borderWidth = width
-        userNameText.layer.addSublayer(border1)
-        userNameText.layer.masksToBounds = true
-        
-        
-    }
+    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var formView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         picker.delegate = self
         
+        //round edges for the save button
+        saveButton.layer.cornerRadius = 5
+        formView.layer.cornerRadius = 5
         
         //listen for keyboard events
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
@@ -76,9 +53,9 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                         self.nameText.text = value["name"] as? String
                         self.userNameText.text = value["username"] as? String
                         self.descriptionText.text = value["description"] as? String
-                        let databaseProfilePic = value["picture"] as? String
-                        let data = NSData(contentsOf: NSURL(string: databaseProfilePic!)! as URL)
-                        self.setProfilePicture(imageView: self.imageView, imageToSet: UIImage(data:data! as Data)!)
+                        self.imageView.downloadImage(from: value["picture"] as! String)
+                        self.imageView.layer.cornerRadius = self.imageView.bounds.width / 2.0
+                        self.imageView.layer.masksToBounds = true
                     }
                 }
             }
@@ -93,12 +70,6 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
     }
     
-    func setProfilePicture(imageView: UIImageView, imageToSet: UIImage){
-        
-        imageView.image = imageToSet
-        imageView.layer.cornerRadius = imageView.bounds.width / 2.0
-        imageView.layer.masksToBounds = true
-    }
     
     //change image
     @IBAction func changeImagePressed(_ sender: Any) {
@@ -131,6 +102,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     @IBAction func saveChange(_ sender: Any) {
         hideKeyBoard()
         var emptyText: UIAlertController
+        //alert user if username is empty
         guard userNameText.text != ""
             else {
                 // alert the user when fields are empty
@@ -146,7 +118,6 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         
         
         let uid = Firebase.Auth.auth().currentUser!.uid
-        
         let imageRef = self.store.child("profile").child("\(uid).jpg")
         let data = UIImageJPEGRepresentation(self.imageView.image!, 0.5)
         let usersReference = self.ref.child("users").child(uid)
@@ -159,17 +130,12 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                 }
                 if let url = url
                 {
-                    let picture = ["picture": url.absoluteString]
                     let values = ["username": self.userNameText.text,
+                                  "picture": url.absoluteString,
                                   "name": self.nameText.text,
-                                  "description": self.descriptionText.text]
-                    usersReference.updateChildValues(picture)
+                    "description": self.descriptionText.text] as [String : Any]
                     usersReference.updateChildValues(values)
-                    
-                    let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
-                    
-                    self.present(vc, animated: true, completion: nil)
-                    
+                    self.navigationController?.popToRootViewController(animated: true)
                 }
             })
         })
