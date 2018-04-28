@@ -18,35 +18,22 @@ class BuckitEditViewController: UIViewController, UIImagePickerControllerDelegat
     let picker = UIImagePickerController()
     
     @IBOutlet weak var imageView: UIImageView!
-    
-    
     @IBOutlet weak var descriptionText: UITextField!
     @IBOutlet weak var nameText: UITextField!
+    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var selectButton: UIButton!
     
-    //draw line for the input field
-    override func viewDidLayoutSubviews() {
-        let border = CALayer()
-        let border1 = CALayer()
-        let border2 = CALayer()
-        
-        let width = CGFloat(2.0)
-        border.borderColor = UIColor.darkGray.cgColor
-        border1.borderColor = UIColor.darkGray.cgColor
-        border2.borderColor = UIColor.darkGray.cgColor
-        
-        //line for name
-        border.frame = CGRect(x: 0, y: nameText.frame.size.height - width, width:   nameText.frame.size.width, height: nameText.frame.size.height)
-        border.borderWidth = width
-        nameText.layer.addSublayer(border)
-        nameText.layer.masksToBounds = true
-        
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         picker.delegate = self
-        
         userStorage = self.store.child("BuckIts")
+    
+        //round corners of buttons
+        saveButton.layer.cornerRadius = 5
+        deleteButton.layer.cornerRadius = 5
+        selectButton.layer.cornerRadius = 3
         
         //maximize text input to 80 character
         descriptionText.delegate = self
@@ -55,7 +42,6 @@ class BuckitEditViewController: UIViewController, UIImagePickerControllerDelegat
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
     }
     
@@ -71,10 +57,7 @@ class BuckitEditViewController: UIViewController, UIImagePickerControllerDelegat
         descriptionText.text! = buckit.desc!
         imageView.downloadImage(from: buckit.pathToImage!)
     }
-    
-    func setProfilePicture(imageView: UIImageView, imageToSet: UIImage){
-        imageView.image = imageToSet
-    }
+
     
     //change image
     @IBAction func changeImagePressed(_ sender: Any) {
@@ -126,16 +109,12 @@ class BuckitEditViewController: UIViewController, UIImagePickerControllerDelegat
                 }
                 if let url = url
                 {
-                    let picture = ["pathToImage": url.absoluteString]
+                    
                     let values = ["title": self.nameText.text,
-                    "description": self.descriptionText.text]
-                    usersReference.updateChildValues(picture)
+                                  "pathToImage": url.absoluteString,
+                    "description": self.descriptionText.text] as [String : Any]
                     usersReference.updateChildValues(values)
-                    
-                    let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
-                    
-                    self.present(vc, animated: true, completion: nil)
-                    
+                    self.navigationController?.popToRootViewController(animated: true)
                 }
             })
         })
