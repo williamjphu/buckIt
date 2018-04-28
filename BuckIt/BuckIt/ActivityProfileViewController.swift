@@ -19,8 +19,6 @@ class ActivityProfileViewController: UIViewController, UICollectionViewDelegate,
     @IBOutlet weak var activityTitle: UILabel!
     @IBOutlet weak var activityDescription: UILabel!
     @IBOutlet weak var activityImage: UIImageView!
-    @IBOutlet weak var upVoteCount: UILabel!
-    @IBOutlet weak var downVoteCount: UILabel!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var locationLabel: UILabel!
     
@@ -41,6 +39,9 @@ class ActivityProfileViewController: UIViewController, UICollectionViewDelegate,
         fillActivityData()
         addTipTextField.delegate = self
        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
     }
     
     //load the specific activity clicked
@@ -119,6 +120,7 @@ class ActivityProfileViewController: UIViewController, UICollectionViewDelegate,
         let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "tipCell", for: indexPath) as! TipCollectionViewCell
         //set the text of the tip Cell
         cell.tipDescription.text = self.tips[indexPath.row].desc
+        
         //get the image and name of the person who posted the tip
         let ref  = FirebaseDataContoller.sharedInstance.refToFirebase
         ref.child("users").child(self.tips[indexPath.row].userId).observeSingleEvent(of: .value) { (snap) in

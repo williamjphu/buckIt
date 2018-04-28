@@ -25,7 +25,6 @@ class TrendingViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     override func viewDidLoad() {
         fetchAllActivities()
-        self.navigationItem.title = "Trending"
     }
 
     
@@ -43,15 +42,19 @@ class TrendingViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let ref  = FirebaseDataContoller.sharedInstance.refToFirebase
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "activityCell", for: indexPath) as! ActivityCollectionViewCell
         cell.activityTitle.text = self.activities[indexPath.row].title
         cell.activityDescription.text = self.activities[indexPath.row].theDescription
         cell.activityPicture.downloadImage(from: self.activities[indexPath.row].pathToImage)
         cell.locationLabel.text = self.activities[indexPath.row].locationName
      
-        //need to change these two
-        cell.username.text = "Michael"
-        cell.userPicture.downloadImage(from: self.activities[indexPath.row].pathToImage)
+        //get the image and name of the person who posted the activity
+        ref.child("users").child(self.activities[indexPath.row].userID!).observeSingleEvent(of: .value) { (snap) in
+            let user = snap.value as! [String: AnyObject]
+            cell.userPicture.downloadImage(from: user["picture"] as! String)
+            cell.username.text = user["name"] as? String
+        }
         
         //make the picture a circle
         cell.userPicture.layer.cornerRadius = cell.userPicture.bounds.width / 2.0
