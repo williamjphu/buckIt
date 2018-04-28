@@ -508,9 +508,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" bounces="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ldq-gv-y7g">
-                                <rect key="frame" x="4" y="146" width="367" height="276"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ldq-gv-y7g">
+                                <rect key="frame" x="16" y="74" width="343" height="316"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -523,10 +522,23 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="avB-8O-qtJ">
-                                <rect key="frame" x="133" y="430" width="109" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create a Tip:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R0h-mg-nkU">
+                                <rect key="frame" x="16" y="45" width="215" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qc0-p8-4KO">
+                                <rect key="frame" x="325" y="40" width="34" height="30"/>
+                                <state key="normal" title="Back"/>
+                                <connections>
+                                    <action selector="backPressed:" destination="1eb-Ml-TOu" eventType="touchUpInside" id="Jce-e7-ChF"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="avB-8O-qtJ">
+                                <rect key="frame" x="39" y="398" width="297" height="34"/>
                                 <color key="backgroundColor" red="0.93448895219999994" green="0.64596247470000001" blue="0.37784552910000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="Post Tip">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -534,26 +546,28 @@
                                     <action selector="postTipPressed:" destination="1eb-Ml-TOu" eventType="touchUpInside" id="Krq-GS-ONe"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qc0-p8-4KO">
-                                <rect key="frame" x="325" y="118" width="34" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Back"/>
-                                <connections>
-                                    <action selector="backPressed:" destination="1eb-Ml-TOu" eventType="touchUpInside" id="Jce-e7-ChF"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Create a Tip:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R0h-mg-nkU">
-                                <rect key="frame" x="16" y="117" width="215" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ar3-fX-jUm" firstAttribute="trailing" secondItem="ldq-gv-y7g" secondAttribute="trailing" constant="16" id="DAp-IK-rVH"/>
+                            <constraint firstItem="ar3-fX-jUm" firstAttribute="trailing" secondItem="Qc0-p8-4KO" secondAttribute="trailing" constant="16" id="OJY-Oi-ah3"/>
+                            <constraint firstItem="ar3-fX-jUm" firstAttribute="bottom" secondItem="R0h-mg-nkU" secondAttribute="bottom" constant="552" id="PPS-Gr-qsU"/>
+                            <constraint firstItem="R0h-mg-nkU" firstAttribute="leading" secondItem="ar3-fX-jUm" secondAttribute="leading" constant="16" id="QZJ-SW-TRH"/>
+                            <constraint firstItem="avB-8O-qtJ" firstAttribute="top" secondItem="ldq-gv-y7g" secondAttribute="bottom" constant="8" id="YQ5-Lo-htC"/>
+                            <constraint firstItem="avB-8O-qtJ" firstAttribute="leading" secondItem="ar3-fX-jUm" secondAttribute="leading" constant="39" id="e9v-OV-000"/>
+                            <constraint firstItem="ar3-fX-jUm" firstAttribute="trailing" secondItem="R0h-mg-nkU" secondAttribute="trailing" constant="144" id="eAa-4Q-D8V"/>
+                            <constraint firstItem="ldq-gv-y7g" firstAttribute="top" secondItem="R0h-mg-nkU" secondAttribute="bottom" constant="8" id="fvm-l0-hUi"/>
+                            <constraint firstItem="ldq-gv-y7g" firstAttribute="leading" secondItem="ar3-fX-jUm" secondAttribute="leading" constant="16" id="lQW-cX-WB9"/>
+                            <constraint firstItem="ar3-fX-jUm" firstAttribute="trailing" secondItem="avB-8O-qtJ" secondAttribute="trailing" constant="39" id="ruY-fw-e6w"/>
+                            <constraint firstItem="R0h-mg-nkU" firstAttribute="top" secondItem="ar3-fX-jUm" secondAttribute="top" constant="25" id="vM2-AE-Dfq"/>
+                            <constraint firstItem="Qc0-p8-4KO" firstAttribute="top" secondItem="ar3-fX-jUm" secondAttribute="top" constant="20" id="xT4-ar-s9r"/>
+                            <constraint firstItem="ar3-fX-jUm" firstAttribute="bottom" secondItem="ldq-gv-y7g" secondAttribute="bottom" constant="228" id="yaO-FL-ydK"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="ar3-fX-jUm"/>
                     </view>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="postButton" destination="avB-8O-qtJ" id="qwJ-Tw-T5e"/>
                         <outlet property="tipText" destination="ldq-gv-y7g" id="jXW-YW-Aye"/>
                     </connections>
                 </viewController>

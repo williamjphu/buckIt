@@ -27,9 +27,7 @@ class TrendingViewController: UIViewController, UICollectionViewDelegate, UIColl
         fetchAllActivities()
         self.navigationItem.title = "Trending"
     }
-  
-    override func viewWillDisappear(_ animated: Bool) {
-    }
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? ActivityProfileViewController{
@@ -177,8 +175,7 @@ class addToBucketViewController: UIViewController, UITableViewDelegate, UITableV
             
             //add to buckit
             let ref = FirebaseDataContoller.sharedInstance.refToFirebase
-            ref.child("BuckIts").child(selectedBuckit.buckitId).child("Activities")
-            ref.updateChildValues(activityFeed)
+            ref.child("BuckIts").child(selectedBuckit.buckitId).child("Activities").updateChildValues(activityFeed)
             
             //go back to trending page
             _ = self.navigationController?.popViewController(animated: true)

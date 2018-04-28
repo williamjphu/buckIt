@@ -172,10 +172,14 @@ class createTipViewController : UIViewController{
     let ref = FirebaseDataContoller.sharedInstance.refToFirebase
     let store = FirebaseDataContoller.sharedInstance.refToStorage
     
+    @IBOutlet weak var postButton: UIButton!
     var activity = Activity()
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
+    }
+    override func viewDidLoad() {
+        postButton.layer.cornerRadius = postButton.bounds.height/2
     }
     
     override func viewWillDisappear(_ animated: Bool) {
