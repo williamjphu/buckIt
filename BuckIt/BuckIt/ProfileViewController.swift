@@ -23,6 +23,9 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
         fetchUserBuckIts()
     }
     
+    override func viewDidLoad() {
+        
+    }
     override func viewWillDisappear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
@@ -94,7 +97,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
     
     //section number
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+        return 1
     }
     
     //return the number of buckit
