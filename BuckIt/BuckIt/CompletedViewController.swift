@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Firebase
 class CompletedViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource{
  
     
@@ -15,41 +15,71 @@ class CompletedViewController: UIViewController, UICollectionViewDelegate, UICol
     @IBOutlet weak var emptyView: UIView!
     @IBOutlet weak var tableView: UICollectionView!
 
-    var activities = [Activity]()
+    var activities = [Complete]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        fetchAllActivities()
-//        fetchActivities()
+        
     }
-
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        activities.removeAll()
+        fetchAllCompleted()
+    }
     
     
     
     //this gets all the activities and puts it in activity array
-    func fetchAllActivities(){
-        let ref = FirebaseDataContoller.sharedInstance.refToFirebase
-        ref.child("Completed").observe(.value) { (snap) in
-            let activitySnap = snap.value as? [String: AnyObject]
-
+    func fetchAllCompleted(){
+//        let ref = FirebaseDataContoller.sharedInstance.refToFirebase
+//        ref.child("Complete").observe(.value) { (snap) in
+//            let activitySnap = snap.value as? [String: AnyObject]
+//
 //            for(_,activity) in activitySnap! {
-//                let theActivity = Activity()
-//                if let title = activity["activityTitle"] as? String
+//                let theActivity = Complete()
+//                print(activity)
+//                if let title = activity as? String
 //                {
 //                    theActivity.title = title
+//                self.activities.append(theActivity)
 //                }
 //                self.tableView.reloadData()
 //            }
-        }
+//        }
+//        ref.removeAllObservers()
+        
+        let ref = FirebaseDataContoller.sharedInstance.refToFirebase
+        ref.child("Complete").queryOrderedByKey().observeSingleEvent(of: .value, with: { (snap) in
+            let completeSnap = snap.value as! [String: AnyObject]
+            
+            for (_,completed) in completeSnap {
+                if let uid = completed["userId"] as? String{
+                    if uid == Auth.auth().currentUser?.uid{
+                        let completeItem = Complete()
+                    
+                        if let title = completed["activityTitle"] as? String {
+                            
+                            completeItem.title = title
+                            
+                            self.activities.append(completeItem)
+                        }
+                        self.tableView.reloadData()
+                    }
+                }
+            }
+        })
         ref.removeAllObservers()
+
     }
 
     
     //section number
     func numberOfSections(in tableView: UICollectionView) -> Int {
         if activities.count > 0 {
+            print("IT WORKS")
             tableView.backgroundView = nil
             return 1
         } else {

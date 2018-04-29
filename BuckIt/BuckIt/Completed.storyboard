@@ -87,10 +87,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="108"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="check" translatesAutoresizingMaskIntoConstraints="NO" id="9n7-NT-B7D">
-                                                    <rect key="frame" x="20" y="29" width="50" height="50"/>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Activity Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f3c-In-QKn">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activity Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f3c-In-QKn">
                                                     <rect key="frame" x="86" y="29" width="269" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="269" id="B78-K4-XPH"/>
@@ -99,14 +96,21 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="check" translatesAutoresizingMaskIntoConstraints="NO" id="9n7-NT-B7D">
+                                                    <rect key="frame" x="28" y="29" width="50" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="50" id="faO-aw-zsq"/>
+                                                        <constraint firstAttribute="height" constant="50" id="kVs-zr-bC8"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                         </view>
                                         <constraints>
-                                            <constraint firstAttribute="trailingMargin" secondItem="f3c-In-QKn" secondAttribute="trailing" constant="4" id="Cvo-z1-9vh"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="f3c-In-QKn" secondAttribute="trailing" constant="12" id="Cvo-z1-9vh"/>
                                             <constraint firstItem="f3c-In-QKn" firstAttribute="centerY" secondItem="obl-k4-tqn" secondAttribute="centerY" id="LFO-gX-k0O"/>
-                                            <constraint firstItem="f3c-In-QKn" firstAttribute="top" secondItem="obl-k4-tqn" secondAttribute="topMargin" constant="9" id="XN7-J2-eqB"/>
+                                            <constraint firstItem="f3c-In-QKn" firstAttribute="top" secondItem="obl-k4-tqn" secondAttribute="topMargin" constant="21" id="XN7-J2-eqB"/>
                                             <constraint firstItem="f3c-In-QKn" firstAttribute="top" secondItem="9n7-NT-B7D" secondAttribute="top" id="cA7-YR-XBa"/>
-                                            <constraint firstItem="f3c-In-QKn" firstAttribute="leading" secondItem="9n7-NT-B7D" secondAttribute="trailing" constant="16" id="yoR-3m-SnH"/>
+                                            <constraint firstItem="f3c-In-QKn" firstAttribute="leading" secondItem="9n7-NT-B7D" secondAttribute="trailing" constant="8" id="yoR-3m-SnH"/>
                                             <constraint firstItem="f3c-In-QKn" firstAttribute="bottom" secondItem="9n7-NT-B7D" secondAttribute="bottom" id="zZb-E0-YMs"/>
                                         </constraints>
                                         <connections>
