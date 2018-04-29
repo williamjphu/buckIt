@@ -21,6 +21,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
         buckits.removeAll()
         fetchUsers()
         fetchUserBuckIts()
+        
+        
     }
     
     override func viewDidLoad() {

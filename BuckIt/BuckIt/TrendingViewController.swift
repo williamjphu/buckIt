@@ -19,8 +19,9 @@ class TrendingViewController: UIViewController, UICollectionViewDelegate, UIColl
     var activities = [Activity]()
     
     override func viewWillAppear(_ animated: Bool) {
-        //This makes the status bar WHITE
-//        UIApplication.shared.statusBarStyle = .lightContent
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
+        self.navigationController?.navigationBar.shadowImage = nil
     }
     
     override func viewDidLoad() {
@@ -114,6 +115,9 @@ class addToBucketViewController: UIViewController, UITableViewDelegate, UITableV
     var activity = Activity()
     override func viewWillAppear(_ animated: Bool) {
         buckits.removeAll()
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
+        self.navigationController?.navigationBar.shadowImage = nil
     }
     
     override func viewDidLoad() {

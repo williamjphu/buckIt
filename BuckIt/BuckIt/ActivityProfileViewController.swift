@@ -32,6 +32,9 @@ class ActivityProfileViewController: UIViewController, UICollectionViewDelegate,
         loadUserData()
         tips.removeAll()
         loadTips()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     override func viewDidLoad() {

@@ -23,6 +23,15 @@ class BucketListViewController: UIViewController, UITableViewDelegate, UITableVi
 
     var activities = [Activity]()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        activities.removeAll()
+        fetchActivities()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         fillActivityInfo()
@@ -32,6 +41,10 @@ class BucketListViewController: UIViewController, UITableViewDelegate, UITableVi
         self.tableView.register(SwipeTableViewCell.self, forCellReuseIdentifier: "cell")
 
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+
+    }
     //Retrieve the title,desc,image from BuckitCell class
     func fillActivityInfo(){
         buckitTitle.text! = buckit.title!
@@ -39,11 +52,7 @@ class BucketListViewController: UIViewController, UITableViewDelegate, UITableVi
         buckitImage.downloadImage(from: buckit.pathToImage!)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        activities.removeAll()
-        fetchActivities()
-    }
+
     //send data and delegate to edit buckit
     @IBAction func editBuckitPressed(_ sender: Any) {
         performSegue(withIdentifier: "editBuckit", sender: self.buckit)
