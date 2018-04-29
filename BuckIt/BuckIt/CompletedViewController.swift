@@ -8,18 +8,12 @@
 
 import UIKit
 
-//sub class to prevent outlets cannot be connected
-class ActCell: UITableViewCell
-{
-    @IBOutlet weak var checkBoxImage: UIImageView!
+class CompletedViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource{
+ 
     
-    @IBOutlet weak var activityTitle: UILabel!
-}
-
-class CompletedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
 
     @IBOutlet weak var emptyView: UIView!
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: UICollectionView!
 
     var activities = [Activity]()
     
@@ -28,6 +22,7 @@ class CompletedViewController: UIViewController, UITableViewDelegate, UITableVie
         self.tableView.delegate = self
         self.tableView.dataSource = self
         fetchAllActivities()
+//        fetchActivities()
     }
 
     
@@ -36,25 +31,24 @@ class CompletedViewController: UIViewController, UITableViewDelegate, UITableVie
     //this gets all the activities and puts it in activity array
     func fetchAllActivities(){
         let ref = FirebaseDataContoller.sharedInstance.refToFirebase
-        ref.child("Activities").observe(.value) { (snap) in
+        ref.child("Completed").observe(.value) { (snap) in
             let activitySnap = snap.value as? [String: AnyObject]
-            
-            for(_,activity) in activitySnap! {
-                let theActivity = Activity()
-                if let activityID = activity["activityID"] as? String,
-                let title = activity["activityName"] as? String
-                {
-                    theActivity.activityID = activityID
-                    theActivity.title = title
-                }
-                self.tableView.reloadData()
-            }
+
+//            for(_,activity) in activitySnap! {
+//                let theActivity = Activity()
+//                if let title = activity["activityTitle"] as? String
+//                {
+//                    theActivity.title = title
+//                }
+//                self.tableView.reloadData()
+//            }
         }
         ref.removeAllObservers()
     }
 
+    
     //section number
-    func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UICollectionView) -> Int {
         if activities.count > 0 {
             tableView.backgroundView = nil
             return 1
@@ -65,16 +59,15 @@ class CompletedViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     //return the number of buckit
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.activities.count
     }
-    //
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let tCell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! ActivityCell
-        tCell.activityName.text = self.activities[indexPath.row].title
-        
-        return tCell
-    }
     
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "activityCell", for: indexPath) as! ActivityCell
+        cell.activityName.text = self.activities[indexPath.row].title
+        
+        return cell
+    }
     
 }

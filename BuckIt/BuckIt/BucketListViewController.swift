@@ -137,6 +137,14 @@ class BucketListViewController: UIViewController, UITableViewDelegate, UITableVi
                 let buttonTwo = DefaultButton(title: "OK", height: 60) {
                     print("Ah, maybe next time :)")
                 }
+               
+                
+                let ref = FirebaseDataContoller.sharedInstance.refToFirebase
+              
+                let selectedBuckit = self.activities[indexPath.row]
+                let activityFeed = ["activityTitle" : selectedBuckit.title!]
+
+                ref.child("Complete").updateChildValues(activityFeed)
                 
 //              Add buttons to dialog
                 popup.addButtons([buttonOne, buttonTwo])
