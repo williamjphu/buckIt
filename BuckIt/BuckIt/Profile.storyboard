@@ -551,7 +551,7 @@
             </objects>
             <point key="canvasLocation" x="293.60000000000002" y="1670.9145427286358"/>
         </scene>
-        <!--List-->
+        <!--Item-->
         <scene sceneID="sAq-mX-hrf">
             <objects>
                 <viewController storyboardIdentifier="BuckitList" id="ssY-Qd-Fgg" customClass="BucketListViewController" customModule="BuckIt" customModuleProvider="target" sceneMemberID="viewController">
@@ -623,7 +623,7 @@
                     <toolbarItems>
                         <barButtonItem title="Item" id="PO6-dB-abT"/>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" title="List" id="qxf-Ve-5nf">
+                    <navigationItem key="navigationItem" id="qxf-Ve-5nf">
                         <barButtonItem key="rightBarButtonItem" title="Edit" id="3QI-zn-inK">
                             <connections>
                                 <action selector="editBuckitPressed:" destination="ssY-Qd-Fgg" id="Jfb-JZ-dJs"/>

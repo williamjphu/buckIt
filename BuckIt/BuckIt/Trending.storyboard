@@ -18,6 +18,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="sez-ih-eVj">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="1" green="0.61952039930555558" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="barTintColor" red="0.92163705579999999" green="0.47699166180000002" blue="0.040218067179999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
@@ -199,11 +200,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7zc-Ma-o7I">
+                            <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7zc-Ma-o7I">
                                 <rect key="frame" x="0.0" y="64" width="375" height="887"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z4x-Ab-zPj" userLabel="accountView">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="400.5"/>
+                                        <rect key="frame" x="0.0" y="-64" width="375" height="400.5"/>
                                         <subviews>
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hrx-OL-fxb" customClass="CustomView" customModule="BuckIt" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="231"/>
@@ -250,6 +251,7 @@
                                             </mapView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lVZ-Qu-8qo">
                                                 <rect key="frame" x="8" y="234" width="351" height="54.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -280,7 +282,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KP8-Pa-qyy" userLabel="tipView">
-                                        <rect key="frame" x="0.0" y="400.5" width="375" height="410"/>
+                                        <rect key="frame" x="0.0" y="336.5" width="375" height="410"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q4x-Wa-aiS">
                                                 <rect key="frame" x="0.0" y="24" width="375" height="90"/>
@@ -428,7 +430,7 @@
                                     <constraint firstAttribute="trailing" secondItem="Z4x-Ab-zPj" secondAttribute="trailing" id="Szh-E6-7vm"/>
                                     <constraint firstItem="KP8-Pa-qyy" firstAttribute="top" secondItem="Z4x-Ab-zPj" secondAttribute="bottom" id="b7F-kk-Ur5"/>
                                     <constraint firstAttribute="bottom" secondItem="KP8-Pa-qyy" secondAttribute="bottom" constant="76.5" id="k1T-8H-6If"/>
-                                    <constraint firstItem="Z4x-Ab-zPj" firstAttribute="top" secondItem="7zc-Ma-o7I" secondAttribute="top" id="tcc-9s-dmo"/>
+                                    <constraint firstItem="Z4x-Ab-zPj" firstAttribute="top" secondItem="7zc-Ma-o7I" secondAttribute="top" constant="-64" id="tcc-9s-dmo"/>
                                     <constraint firstItem="Z4x-Ab-zPj" firstAttribute="leading" secondItem="7zc-Ma-o7I" secondAttribute="leading" id="zbJ-Rm-yQ4"/>
                                 </constraints>
                             </scrollView>
