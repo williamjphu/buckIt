@@ -47,6 +47,7 @@
 		E084A47A20755D860099CCCD /* BuckitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E084A47920755D860099CCCD /* BuckitCell.swift */; };
 		E084A48A207745990099CCCD /* BuckitEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E084A489207745990099CCCD /* BuckitEditViewController.swift */; };
 		E0D6C3232022EC8900721FCE /* SignUpProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D6C3222022EC8900721FCE /* SignUpProfileController.swift */; };
+		E0DEF3C320940A5800BA2D8B /* ActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0DEF3C220940A5800BA2D8B /* ActivityCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,6 +100,7 @@
 		E084A47920755D860099CCCD /* BuckitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuckitCell.swift; sourceTree = "<group>"; };
 		E084A489207745990099CCCD /* BuckitEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuckitEditViewController.swift; sourceTree = "<group>"; };
 		E0D6C3222022EC8900721FCE /* SignUpProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpProfileController.swift; sourceTree = "<group>"; };
+		E0DEF3C220940A5800BA2D8B /* ActivityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -261,6 +263,7 @@
 			children = (
 				C3B95C282022CDA800836918 /* Completed.storyboard */,
 				C3B95C2E2022CE1000836918 /* CompletedViewController.swift */,
+				E0DEF3C220940A5800BA2D8B /* ActivityCell.swift */,
 			);
 			name = Completed;
 			sourceTree = "<group>";
@@ -381,7 +384,7 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -453,6 +456,7 @@
 				AE260AE220869364008D8960 /* LocationSearchTable.swift in Sources */,
 				AE7F9C18201986AF00420457 /* BucketListViewController.swift in Sources */,
 				C3E2A5C72072CEC700818CE1 /* ActivityTableViewCell.swift in Sources */,
+				E0DEF3C320940A5800BA2D8B /* ActivityCell.swift in Sources */,
 				AE7F9BFE20182E4E00420457 /* MapViewController.swift in Sources */,
 				C3DABFD0208FC0C0004E71CD /* Tip.swift in Sources */,
 				AE7F9C2320198AFE00420457 /* User.swift in Sources */,
