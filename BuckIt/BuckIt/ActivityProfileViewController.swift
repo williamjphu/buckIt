@@ -19,8 +19,6 @@ class ActivityProfileViewController: UIViewController, UICollectionViewDelegate,
     @IBOutlet weak var activityTitle: UILabel!
     @IBOutlet weak var activityDescription: UILabel!
     @IBOutlet weak var activityImage: UIImageView!
-    @IBOutlet weak var upVoteCount: UILabel!
-    @IBOutlet weak var downVoteCount: UILabel!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var locationLabel: UILabel!
     
@@ -41,6 +39,9 @@ class ActivityProfileViewController: UIViewController, UICollectionViewDelegate,
         fillActivityData()
         addTipTextField.delegate = self
        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
     }
     
     //load the specific activity clicked
@@ -119,6 +120,7 @@ class ActivityProfileViewController: UIViewController, UICollectionViewDelegate,
         let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "tipCell", for: indexPath) as! TipCollectionViewCell
         //set the text of the tip Cell
         cell.tipDescription.text = self.tips[indexPath.row].desc
+        
         //get the image and name of the person who posted the tip
         let ref  = FirebaseDataContoller.sharedInstance.refToFirebase
         ref.child("users").child(self.tips[indexPath.row].userId).observeSingleEvent(of: .value) { (snap) in
@@ -172,10 +174,14 @@ class createTipViewController : UIViewController{
     let ref = FirebaseDataContoller.sharedInstance.refToFirebase
     let store = FirebaseDataContoller.sharedInstance.refToStorage
     
+    @IBOutlet weak var postButton: UIButton!
     var activity = Activity()
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
+    }
+    override func viewDidLoad() {
+        postButton.layer.cornerRadius = postButton.bounds.height/2
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -219,5 +225,34 @@ class createTipViewController : UIViewController{
             alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
             self.present(alert, animated: true)
         }
+    }
+}
+
+class CustomView: UIView {
+    
+    // Only override draw() if you perform custom drawing.
+    // An empty implementation adversely affects performance during animation.
+    override func draw(_ rect: CGRect) {
+        // Drawing code
+        // Get Height and Width
+        let layerHeight = layer.frame.height
+        let layerWidth = layer.frame.width
+        // Create Path
+        let bezierPath = UIBezierPath()
+        //  Points
+        let pointA = CGPoint(x: 0, y: 0)
+        let pointB = CGPoint(x: layerWidth, y: 0)
+        let pointC = CGPoint(x: layerWidth, y: layerHeight*9/10)
+        let pointD = CGPoint(x: 0, y: layerHeight)
+        // Draw the path
+        bezierPath.move(to: pointA)
+        bezierPath.addLine(to: pointB)
+        bezierPath.addLine(to: pointC)
+        bezierPath.addLine(to: pointD)
+        bezierPath.close()
+        // Mask to Path
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.path = bezierPath.cgPath
+        layer.mask = shapeLayer
     }
 }
