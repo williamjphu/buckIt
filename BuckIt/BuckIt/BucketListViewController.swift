@@ -113,6 +113,14 @@ class BucketListViewController: UIViewController, UITableViewDelegate, UITableVi
         if orientation == .right{
             let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
                 print("Deleted")
+                let ref = FirebaseDataContoller.sharedInstance.refToFirebase
+
+                let selectedBuckit = self.activities[indexPath.row]
+//                self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                ref.child("BuckIts").child(self.buckit.buckitId).child("Activities").child(selectedBuckit.activityID!).removeValue()
+                self.activities.remove(at: indexPath.row)
+                self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                
             }
             return [deleteAction]
         }
@@ -137,6 +145,22 @@ class BucketListViewController: UIViewController, UITableViewDelegate, UITableVi
                 let buttonTwo = DefaultButton(title: "OK", height: 60) {
                     print("Ah, maybe next time :)")
                 }
+               
+                //store the values for complete page
+                let ref = FirebaseDataContoller.sharedInstance.refToFirebase
+                let key = ref.child("Complete").childByAutoId().key
+                let uid = Auth.auth().currentUser!.uid
+                let selectedBuckit = self.activities[indexPath.row]
+                let completeActivity = ["activityTitle" : selectedBuckit.title!,
+                                        "userId": uid,
+                                        "activityID": selectedBuckit.activityID!,
+                                        "completeID" : key] as [String : Any]
+                let completeAct = ["\(key)" : completeActivity]
+                ref.child("Complete").updateChildValues(completeAct)
+                
+                ref.child("BuckIts").child(self.buckit.buckitId).child("Activities").child(selectedBuckit.activityID!).removeValue()
+                self.activities.remove(at: indexPath.row)
+                self.tableView.deleteRows(at: [indexPath], with: .automatic)
                 
 //              Add buttons to dialog
                 popup.addButtons([buttonOne, buttonTwo])
