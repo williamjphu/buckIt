@@ -264,6 +264,7 @@
                     <connections>
                         <outlet property="collectionview" destination="Qio-tP-w2V" id="fFL-jx-93t"/>
                         <outlet property="name" destination="MSP-Kc-2HF" id="d9y-m6-CW4"/>
+                        <outlet property="numOfBuckIt" destination="k9r-0V-fRM" id="tS5-fr-bbz"/>
                         <outlet property="profileImage" destination="R1v-QO-HCY" id="gt6-EV-3hw"/>
                         <outlet property="quote" destination="nje-Vt-cbP" id="wlD-E6-dSb"/>
                         <outlet property="username" destination="oz4-fC-MPW" id="Z5R-wG-1Fw"/>
@@ -272,7 +273,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FUb-aX-Tej" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="680.79999999999995" y="903.59820089955031"/>
+            <point key="canvasLocation" x="742" y="904"/>
         </scene>
         <!--newBucket-->
         <scene sceneID="jE6-KM-ltx">

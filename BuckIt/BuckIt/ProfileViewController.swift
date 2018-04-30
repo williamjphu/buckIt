@@ -36,6 +36,9 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var quote: UILabel!
+    
+    @IBOutlet weak var numOfBuckIt: UILabel!
+    var totalBuckit = 0;
     //retrieve users data
     func fetchUsers() {
         let ref  = FirebaseDataContoller.sharedInstance.refToFirebase
@@ -104,7 +107,9 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
     
     //return the number of buckit
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.buckits.count
+        totalBuckit = self.buckits.count
+        numOfBuckIt.text = String(totalBuckit)
+        return totalBuckit
     }
     
     //create each cell for each buckit being added
