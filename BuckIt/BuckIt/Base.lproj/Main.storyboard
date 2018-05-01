@@ -99,11 +99,20 @@
                         <outlet property="loginButton" destination="XKI-n5-5WY" id="Lpt-A9-G8a"/>
                         <outlet property="passwordTextField" destination="zcQ-i8-McS" id="bPA-vk-xIN"/>
                         <segue destination="NVk-xs-HKS" kind="show" identifier="signUp" id="nUo-9A-M4e"/>
+                        <segue destination="XVw-mb-rbZ" kind="show" identifier="homepage" id="3Ez-eL-dIN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="32.799999999999997" y="75.112443778110944"/>
+            <point key="canvasLocation" x="-17" y="84"/>
+        </scene>
+        <!--TabController-->
+        <scene sceneID="iAt-l0-el5">
+            <objects>
+                <viewControllerPlaceholder storyboardName="TabController" id="XVw-mb-rbZ" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3DO-O6-5h0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="452" y="639"/>
         </scene>
         <!--Create an Account-->
         <scene sceneID="m18-3m-Vew">
@@ -332,6 +341,7 @@
                         <outlet property="passwordTextField" destination="f9f-MM-Uue" id="3Lc-N2-l4F"/>
                         <outlet property="profilePicture" destination="hEG-hM-qsL" id="eKe-k2-Irm"/>
                         <outlet property="usernameTextField" destination="wpB-tH-zAx" id="Cod-EH-oWM"/>
+                        <segue destination="XVw-mb-rbZ" kind="show" identifier="homepage" id="ewp-K6-edX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WGf-6M-6pt" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -343,4 +353,7 @@
         <image name="Buckit" width="901" height="377"/>
         <image name="add" width="50" height="50"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="ewp-K6-edX"/>
+    </inferredMetricsTieBreakers>
 </document>

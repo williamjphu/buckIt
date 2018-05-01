@@ -139,7 +139,8 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
                                                            "name": self.nameTextField.text!,
                                                            "email": self.emailTextField.text!,
                                                            "username": self.usernameTextField.text!,
-                                                           "picture": profilePicture]
+                                                           "picture": profilePicture,
+                                                           "description" : ""]
                             let userReference = self.ref.child("users").child(uid)
                             userReference.updateChildValues(userInfo) { (error, ref) in
                                 if error != nil{
