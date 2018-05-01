@@ -15,13 +15,13 @@ class CompletedViewController: UIViewController, UICollectionViewDelegate, UICol
     @IBOutlet weak var emptyView: UIView!
     @IBOutlet weak var tableView: UICollectionView!
 
+    var completeCount = 0
     var activities = [Activity]()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -30,33 +30,8 @@ class CompletedViewController: UIViewController, UICollectionViewDelegate, UICol
         fetchAllCompleted()
     }
     
-    
-    
     //this gets all the activities and puts it in activity array
     func fetchAllCompleted(){
-
-//        let ref = FirebaseDataContoller.sharedInstance.refToFirebase
-//        ref.child("Complete").queryOrderedByKey().observeSingleEvent(of: .value, with: { (snap) in
-//
-//            let completeSnap = snap.value as! [String: AnyObject]
-//
-//            for (_,completed) in completeSnap {
-//                if let uid = completed["userId"] as? String{
-//                    if uid == Auth.auth().currentUser?.uid{
-//                        let completeItem = Complete()
-//
-//                        if let title = completed["activityTitle"] as? String {
-//
-//                            completeItem.title = title
-//
-//                            self.activities.append(completeItem)
-//                        }
-//                        self.tableView.reloadData()
-//                    }
-//                }
-//            }
-//        })
-//        ref.removeAllObservers()
 
         let ref = FirebaseDataContoller.sharedInstance.refToFirebase
         //Loop through the Activity array inside each Buckit and find the ActivityID's --> key
@@ -106,7 +81,7 @@ class CompletedViewController: UIViewController, UICollectionViewDelegate, UICol
         ref.removeAllObservers()
     }
 
-    
+
     //section number
     func numberOfSections(in tableView: UICollectionView) -> Int {
         if activities.count > 0 {
@@ -121,7 +96,8 @@ class CompletedViewController: UIViewController, UICollectionViewDelegate, UICol
     
     //return the number of buckit
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.activities.count
+        completeCount = self.activities.count
+        return completeCount
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

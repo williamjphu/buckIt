@@ -96,7 +96,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="check" translatesAutoresizingMaskIntoConstraints="NO" id="9n7-NT-B7D">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="complete-icon" translatesAutoresizingMaskIntoConstraints="NO" id="9n7-NT-B7D">
                                                     <rect key="frame" x="28" y="29" width="50" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="50" id="faO-aw-zsq"/>
@@ -193,7 +193,7 @@
     </scenes>
     <resources>
         <image name="Complete" width="32" height="32"/>
-        <image name="check" width="512" height="512"/>
+        <image name="complete-icon" width="75" height="75"/>
         <image name="sad face" width="512" height="512"/>
     </resources>
 </document>

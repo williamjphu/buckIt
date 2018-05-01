@@ -15,6 +15,8 @@ class BucketListViewController: UIViewController, UITableViewDelegate, UITableVi
 
     //call the buckit model
     var buckit = BuckIt()
+    
+    var match = [String]()
     @IBOutlet weak var buckitTitle: UILabel!
     @IBOutlet weak var buckitDescription: UILabel!
     @IBOutlet weak var tableView: UITableView!
@@ -33,6 +35,7 @@ class BucketListViewController: UIViewController, UITableViewDelegate, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         fillActivityInfo()
+        fetchComplete()
 
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -95,7 +98,16 @@ class BucketListViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SwipeTableViewCell
         row.delegate = self
-        
+
+        //check to see if the table have user completed firebase then do a checkmark
+        let selectedBuckit = self.activities[indexPath.row]
+        for i in match{
+
+            if i == selectedBuckit.activityID!
+            {
+                row.accessoryType = .checkmark
+            }
+        }
         //create label from database
         let label = UILabel(frame: CGRect(x: 140.0, y: 14.0, width: 200.0, height: 30.0))
         label.text = self.activities[indexPath.row].title
@@ -105,9 +117,11 @@ class BucketListViewController: UIViewController, UITableViewDelegate, UITableVi
         return row
     }
     
-
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+    
+        if (tableView.cellForRow(at: indexPath)?.accessoryType != UITableViewCellAccessoryType.checkmark)
+        {
 //        delete functionality
         if orientation == .right{
             let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
@@ -123,7 +137,8 @@ class BucketListViewController: UIViewController, UITableViewDelegate, UITableVi
             }
             return [deleteAction]
         }
-            
+
+       
 //        completed the activity, shows a popup dialogue
         else if orientation == .left {
             
@@ -154,9 +169,10 @@ class BucketListViewController: UIViewController, UITableViewDelegate, UITableVi
                 
                 //add to buckit
                 ref.child("users").child(uid).child("Completed").updateChildValues(activityFeed)
-
                 let cell = tableView.cellForRow(at: indexPath)
                 cell?.accessoryType = .checkmark
+
+                
 //              Add buttons to dialog
                 popup.addButtons([buttonOne, buttonTwo])
                 
@@ -167,6 +183,7 @@ class BucketListViewController: UIViewController, UITableViewDelegate, UITableVi
             
             addAction.backgroundColor = UIColor.green
             return [addAction]
+        }
         }
         return nil
     }
@@ -185,7 +202,18 @@ class BucketListViewController: UIViewController, UITableViewDelegate, UITableVi
         return options
     }
     
-
+    func fetchComplete(){
+        let ref = FirebaseDataContoller.sharedInstance.refToFirebase
+        let uid = Auth.auth().currentUser?.uid
+       ref.child("users").child(uid!).child("Completed").observeSingleEvent(of: .value, with: {(snap) in
+        if(snap.exists()){
+            let completeSnap = snap.value as! [String: AnyObject]
+             for key in completeSnap.keys {
+                self.match.append(key)
+            }
+        }
+        })
+    }
 
     func fetchActivities(){
         let ref = FirebaseDataContoller.sharedInstance.refToFirebase
