@@ -7,28 +7,48 @@
 //
 
 import UIKit
+import FirebaseAuth
 import Firebase
 import FBSDKLoginKit
 import GoogleSignIn
 
-class SignUpController: UIViewController {
+
+
+class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     //firebase storing
     let ref = FirebaseDataContoller.sharedInstance.refToFirebase
+    let picker = UIImagePickerController()
+    var store = FirebaseDataContoller.sharedInstance.refToStorage
     
+    @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet var nameTextField: UITextField!
+    @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet var emailTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
     @IBOutlet var confirmTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        profilePicture.layer.cornerRadius = profilePicture.bounds.width / 2.0
+        picker.delegate = self
     }
     
-
+    @IBAction func choosePicturePressed(_ sender: Any) {
+        picker.allowsEditing = true
+        picker.sourceType = .photoLibrary
+        
+        present(picker, animated: true, completion: nil)
+    }
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let image = info[UIImagePickerControllerEditedImage] as? UIImage{
+            self.profilePicture.image = image
+        }
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func createAccountPressed(_ sender: Any) {
         //if all fields are not filled out, display an alert
-        if(nameTextField.text == "" || emailTextField.text == "" || passwordTextField.text == "" || confirmTextField.text == ""){
+        if(nameTextField.text == "" || emailTextField.text == "" || passwordTextField.text == "" || confirmTextField.text == "" || usernameTextField.text == ""){
             // alert the user when fields are empty
             let emptyText = UIAlertController(title: "Error",
                                               message: "Please fill in all the fields",
@@ -48,37 +68,103 @@ class SignUpController: UIViewController {
             self.present(emptyText, animated: true)
             return
             
-        } else{
-            //CREATE A USER
-            Firebase.Auth.auth().createUser(withEmail: emailTextField.text!, password: passwordTextField.text!, completion: { (user, error) in
-                if let user = user{
-                    let userInfo: [String: Any] = ["uid": user.uid,
-                                                   "name": self.nameTextField.text!,
-                                                   "email": self.emailTextField.text!]
-                    self.ref.child("users").child(user.uid).setValue(userInfo)
-                }
-            })
-            performSegue(withIdentifier: "choosePicture", sender: self)
         }
-        
-    }
-    
-    
-    @objc func handleRegister() {
-        
+        else if profilePicture.image == nil
+        {
+            // alert the user when fields are empty
+            let alert = UIAlertController(title: "Error",
+                                          message: "Please choose a profile picture",
+                                          preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+            self.present(alert, animated: true)
+            return
+        }
+        else{
+            Auth.auth().createUser(withEmail: emailTextField.text!, password: passwordTextField.text!) { (user, error) in
+                if error != nil {
+                    // alert the user when fields are empty
+                    let alert = UIAlertController(title: "Error",
+                                                  message: error!.localizedDescription,
+                                                  preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+                    self.present(alert, animated: true)
+                    return
+                }
+                print("You have successfully signed up")
+                guard let uid = user?.uid else {
+                    return
+                }
+                let imageName = NSUUID().uuidString
+                let storage = Storage.storage().reference().child("ProfilePictures").child("\(imageName).png")
+                
+                if let uploadData = UIImagePNGRepresentation(self.profilePicture.image!){
+                    storage.putData(uploadData, metadata: nil, completion: { (metadata, error) in
+                        if error != nil{
+                            print(error ?? "")
+                            return
+                        }
+                        
+                        if let profilePicture = metadata?.downloadURL()?.absoluteString{
+                            let userInfo: [String: Any] = ["uid": user!.uid,
+                                                           "name": self.nameTextField.text!,
+                                                           "email": self.emailTextField.text!,
+                                                           "username": self.usernameTextField.text!,
+                                                           "picture": profilePicture,
+                                                           "description" : ""]
+                            let userReference = self.ref.child("users").child(uid)
+                            userReference.updateChildValues(userInfo) { (error, ref) in
+                                if error != nil{
+                                    print(error ?? "")
+                                    return
+                                }
+                            }
+                            
+                            let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
+                            self.present(vc, animated: true, completion: nil)                        }
+                        
+                        
+                    })
+                }
+                
+            }
 
+        }
     }
     
     
-    //needed to dismiss the keyboard
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        nameTextField.endEditing(true)
-        emailTextField.endEditing(true)
-        passwordTextField.endEditing(true)
-        confirmTextField.endEditing(true)
+}
+
+@IBDesignable
+extension UIButton {
+    
+    @IBInspectable var borderWidth: CGFloat {
+        set {
+            layer.borderWidth = newValue
+        }
+        get {
+            return layer.borderWidth
+        }
     }
     
+    @IBInspectable var cornerRadius: CGFloat {
+        set {
+            layer.cornerRadius = newValue
+        }
+        get {
+            return layer.cornerRadius
+        }
+    }
     
+    @IBInspectable var borderColor: UIColor? {
+        set {
+            guard let uiColor = newValue else { return }
+            layer.borderColor = uiColor.cgColor
+        }
+        get {
+            guard let color = layer.borderColor else { return nil }
+            return UIColor(cgColor: color)
+        }
+    }
     
 }
 

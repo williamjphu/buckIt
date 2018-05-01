@@ -25,7 +25,6 @@
 		AE7F9C2120198AFE00420457 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE7F9C1C20198AFE00420457 /* Profile.storyboard */; };
 		AE7F9C2220198AFE00420457 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F9C1D20198AFE00420457 /* EditProfileViewController.swift */; };
 		AE7F9C2320198AFE00420457 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F9C1E20198AFE00420457 /* User.swift */; };
-		AE7F9C2A20198CAE00420457 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F9C2820198CAE00420457 /* LoginController.swift */; };
 		AE7F9C2B20198CAE00420457 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F9C2920198CAE00420457 /* SignUpController.swift */; };
 		C342B2322044BA6E00A81EAA /* BuckIt.swift in Sources */ = {isa = PBXBuildFile; fileRef = C342B2312044BA6E00A81EAA /* BuckIt.swift */; };
 		C36DBBD320352A1600776F2B /* NewBucketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36DBBD220352A1600776F2B /* NewBucketViewController.swift */; };
@@ -46,7 +45,6 @@
 		C3E2A5C72072CEC700818CE1 /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E2A5C62072CEC700818CE1 /* ActivityTableViewCell.swift */; };
 		E084A47A20755D860099CCCD /* BuckitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E084A47920755D860099CCCD /* BuckitCell.swift */; };
 		E084A48A207745990099CCCD /* BuckitEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E084A489207745990099CCCD /* BuckitEditViewController.swift */; };
-		E0D6C3232022EC8900721FCE /* SignUpProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D6C3222022EC8900721FCE /* SignUpProfileController.swift */; };
 		E0DEF3C520959A1A00BA2D8B /* ActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0DEF3C420959A1A00BA2D8B /* ActivityCell.swift */; };
 		E0E1226320965708001FD9AB /* Complete.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E1226220965708001FD9AB /* Complete.swift */; };
 /* End PBXBuildFile section */
@@ -74,7 +72,6 @@
 		AE7F9C1C20198AFE00420457 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		AE7F9C1D20198AFE00420457 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		AE7F9C1E20198AFE00420457 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		AE7F9C2820198CAE00420457 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		AE7F9C2920198CAE00420457 /* SignUpController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
 		B29BF32C00461D384F3C4620 /* Pods-BuckIt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuckIt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BuckIt/Pods-BuckIt.debug.xcconfig"; sourceTree = "<group>"; };
 		C342B2312044BA6E00A81EAA /* BuckIt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuckIt.swift; sourceTree = "<group>"; };
@@ -100,7 +97,6 @@
 		C3E5A1D920891A2F00CE4EB0 /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GoogleToolboxForMac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E084A47920755D860099CCCD /* BuckitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuckitCell.swift; sourceTree = "<group>"; };
 		E084A489207745990099CCCD /* BuckitEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuckitEditViewController.swift; sourceTree = "<group>"; };
-		E0D6C3222022EC8900721FCE /* SignUpProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpProfileController.swift; sourceTree = "<group>"; };
 		E0DEF3C420959A1A00BA2D8B /* ActivityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCell.swift; sourceTree = "<group>"; };
 		E0E1226220965708001FD9AB /* Complete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Complete.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -217,9 +213,7 @@
 				C3B95C302022CEC600836918 /* TabController.storyboard */,
 				C3B95C222022C8D100836918 /* TabBarViewController.swift */,
 				77D45FBD1FAE96EB0034DDBA /* AppDelegate.swift */,
-				AE7F9C2820198CAE00420457 /* LoginController.swift */,
 				AE7F9C2920198CAE00420457 /* SignUpController.swift */,
-				E0D6C3222022EC8900721FCE /* SignUpProfileController.swift */,
 				77D45FBF1FAE96EB0034DDBA /* HomepageController.swift */,
 			);
 			name = "login-homepage";
@@ -387,7 +381,7 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -445,7 +439,6 @@
 			files = (
 				E0E1226320965708001FD9AB /* Complete.swift in Sources */,
 				C39D94352083E0CC006093B7 /* ActivityProfileViewController.swift in Sources */,
-				AE7F9C2A20198CAE00420457 /* LoginController.swift in Sources */,
 				AE7F9C17201986AF00420457 /* Activity.swift in Sources */,
 				77D45FC01FAE96EB0034DDBA /* HomepageController.swift in Sources */,
 				C3A3E473207763F60081C8D6 /* chooseBuckitTableViewCell.swift in Sources */,
@@ -455,7 +448,6 @@
 				7770EC591FAEB054003F3B11 /* SettingsController.swift in Sources */,
 				AE7F9C1F20198AFE00420457 /* ProfileViewController.swift in Sources */,
 				C37100FF2086D82F0010C462 /* TipCollectionViewCell.swift in Sources */,
-				E0D6C3232022EC8900721FCE /* SignUpProfileController.swift in Sources */,
 				C3B95C2B2022CDE000836918 /* TrendingViewController.swift in Sources */,
 				AE260AE220869364008D8960 /* LocationSearchTable.swift in Sources */,
 				AE7F9C18201986AF00420457 /* BucketListViewController.swift in Sources */,

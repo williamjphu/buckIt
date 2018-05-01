@@ -19,13 +19,19 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         super.viewWillAppear(true)
         buckits.removeAll()
-        fetchUsers()
+        
         fetchUserBuckIts()
-        
-        
     }
     
     override func viewDidLoad() {
+        Auth.auth().addStateDidChangeListener { (auth, user) in
+            if user != nil {
+                self.fetchUsers()
+            }
+            else{
+                print("NO USER YET")
+            }
+        }
         
     }
     override func viewWillDisappear(_ animated: Bool) {
@@ -42,19 +48,21 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
     //retrieve users data
     func fetchUsers() {
         let ref  = FirebaseDataContoller.sharedInstance.refToFirebase
-        ref.child("users").queryOrderedByKey().observeSingleEvent(of: .value, with: {snapshot in
+        ref.child("users").observeSingleEvent(of: .value, with: {snapshot in
             let users = snapshot.value as! [String: AnyObject]
             
             for(_, value) in users {
                 if let uid = value["uid"] as? String {
                     if uid == Firebase.Auth.auth().currentUser!.uid{
-
                         self.name.text = value["name"] as? String
                         self.username.text = value["username"] as? String
-                        self.quote.text = value["description"] as? String
-                        let databaseProfilePic = value["picture"] as? String
-                        let data = NSData(contentsOf: (NSURL(string: databaseProfilePic!)! as URL))
-                        self.setProfilePicture(imageView: self.profileImage, imageToSet: UIImage(data:data! as Data)!)
+                        if let descrip = value["description"] as? String {
+                            self.quote.text = descrip
+                        }
+                        if let databaseProfilePic = value["picture"] as? String {
+                            let data = NSData(contentsOf: (NSURL(string: databaseProfilePic)! as URL))
+                            self.setProfilePicture(imageView: self.profileImage, imageToSet: UIImage(data:data! as Data)!)
+                        }
                     }
                 }
             }

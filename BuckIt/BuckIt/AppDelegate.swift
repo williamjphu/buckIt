@@ -13,7 +13,7 @@ import Firebase
 import GoogleSignIn
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
+class AppDelegate: UIResponder, UIApplicationDelegate{
     
     var window: UIWindow?
     
@@ -21,10 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
         
         //Firebase
         FirebaseApp.configure()
-        
-        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
-        GIDSignIn.sharedInstance().delegate = self
-        
        
         //Facebook
         let bool = FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
@@ -33,57 +29,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
         return bool
     }
     
-    //Google sign in
-    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        
-        
-        if let err = error {
-            print("Failed to log into Google: ", err)
-            return
-        }
-        print("Successfully logged in to Google", user)
-        
-        
-        guard let idToken = user.authentication.idToken else { return }
-        guard let accessToken = user.authentication.accessToken else { return }
-        let credentials = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: accessToken)
-        
-        Auth.auth().signIn(with: credentials, completion: {(user , error) in
-            if let err = error {
-                print("Failed to create a Firebase User with Google Account: " , err)
-                return
-            }
-             
-            guard let uid = user?.uid else {return}
-            
-            let ref = FirebaseDataContoller.sharedInstance.refToFirebase
-            let theUserUID = Auth.auth().currentUser?.uid
-
-            ref.child("users").observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
-                if !snapshot.hasChild(theUserUID!)
-                {
-                    let usersReference = ref.child("users").child(uid)
-                    let values = ["uid": user?.uid,
-                                  "name": user?.displayName,
-                                  "email": user?.email,]
-                    usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
-                        if let err = err {
-                            print(err)
-                            return
-                        }
-                    })
-            
-                    print("Sucessfully logging to Firebase with Google" , uid)
-                    let newViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "username")
-                    UIApplication.topViewController()?.present(newViewController, animated: true, completion: nil)
-                }
-                else{
-                    let newViewController = UIStoryboard(name: "TabController", bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
-                    UIApplication.topViewController()?.present(newViewController, animated: true, completion: nil)
-                }
-            })
-        })
-    }
     
     
     //For Facebook Integration
