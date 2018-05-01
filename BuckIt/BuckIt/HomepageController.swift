@@ -148,7 +148,7 @@ class HomepageController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInU
         
         //Draw Google sign in button
         let googleButton = GIDSignInButton()
-        googleButton.frame = CGRect(x: 58, y: 470, width: 258, height: 30)
+        googleButton.frame = CGRect(x: 55, y: 525, width: 265, height: 30)
         GIDSignIn.sharedInstance().uiDelegate = self
         view.addSubview(googleButton)
     }
