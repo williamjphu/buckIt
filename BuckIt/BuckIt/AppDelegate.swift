@@ -35,14 +35,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
     
     //Google sign in
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        
-        
         if let err = error {
             print("Failed to log into Google: ", err)
             return
         }
-        print("Successfully logged in to Google", user)
-        
         
         guard let idToken = user.authentication.idToken else { return }
         guard let accessToken = user.authentication.accessToken else { return }
@@ -53,7 +49,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
                 print("Failed to create a Firebase User with Google Account: " , err)
                 return
             }
-             
             guard let uid = user?.uid else {return}
             
             let ref = FirebaseDataContoller.sharedInstance.refToFirebase
@@ -63,9 +58,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
                 if !snapshot.hasChild(theUserUID!)
                 {
                     let usersReference = ref.child("users").child(uid)
-                    let values = ["uid": user?.uid,
-                                  "name": user?.displayName,
-                                  "email": user?.email,]
+                    let values : [String : Any] = ["uid": user!.uid,
+                                                   "name": user!.displayName,
+                                                   "email": user!.email,
+                                                   "picture" : user!.photoURL?.absoluteString,
+                                                   "username" : ""]
                     usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
                         if let err = err {
                             print(err)
@@ -74,13 +71,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
                     })
             
                     print("Sucessfully logging to Firebase with Google" , uid)
-                    let newViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "username")
-                    UIApplication.topViewController()?.present(newViewController, animated: true, completion: nil)
-                }
-                else{
                     let newViewController = UIStoryboard(name: "TabController", bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
                     UIApplication.topViewController()?.present(newViewController, animated: true, completion: nil)
                 }
+                    let newViewController = UIStoryboard(name: "TabController", bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
+                    UIApplication.topViewController()?.present(newViewController, animated: true, completion: nil)
             })
         })
     }

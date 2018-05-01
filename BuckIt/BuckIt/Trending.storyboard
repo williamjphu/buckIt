@@ -94,13 +94,13 @@
                                                                     <rect key="frame" x="0.0" y="62" width="374" height="109"/>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="AOE-r9-5ue">
-                                                                    <rect key="frame" x="208" y="19" width="138" height="21"/>
+                                                                    <rect key="frame" x="208" y="19" width="133" height="21"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="current_user" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ldC-V0-HOy">
-                                                                    <rect key="frame" x="349" y="19" width="21" height="21"/>
+                                                                <imageView opaque="NO" multipleTouchEnabled="YES" contentMode="scaleAspectFill" insetsLayoutMarginsFromSafeArea="NO" image="pinpoin-icon" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ldC-V0-HOy">
+                                                                    <rect key="frame" x="344" y="19" width="26" height="26"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="ldC-V0-HOy" secondAttribute="height" multiplier="1:1" id="wBx-WV-CvO"/>
                                                                     </constraints>
@@ -115,7 +115,7 @@
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstItem="nte-4c-1GT" firstAttribute="top" secondItem="bhO-DT-fu3" secondAttribute="top" id="349-C8-PAy"/>
-                                                                <constraint firstAttribute="bottom" secondItem="ldC-V0-HOy" secondAttribute="bottom" constant="169" id="7U1-ZP-DLP"/>
+                                                                <constraint firstAttribute="bottom" secondItem="ldC-V0-HOy" secondAttribute="bottom" constant="164" id="7U1-ZP-DLP"/>
                                                                 <constraint firstItem="iab-6o-Sur" firstAttribute="top" secondItem="XtD-3k-z6M" secondAttribute="bottom" constant="4" id="Dpt-BM-gdp"/>
                                                                 <constraint firstItem="XtD-3k-z6M" firstAttribute="top" secondItem="4Hb-or-rw2" secondAttribute="top" constant="62" id="FBl-4P-Ewh"/>
                                                                 <constraint firstAttribute="bottom" secondItem="nte-4c-1GT" secondAttribute="bottom" constant="180" id="FgZ-NR-BZV"/>
@@ -236,6 +236,14 @@
                                                         <color key="shadowColor" white="0.069525824649999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <size key="shadowOffset" width="1" height="1"/>
                                                     </label>
+                                                    <button opaque="NO" contentMode="scaleAspectFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qbD-VQ-hRw">
+                                                        <rect key="frame" x="314" y="194" width="53" height="42"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <state key="normal" image="addBucket-icon"/>
+                                                        <connections>
+                                                            <action selector="addToBucketPressed:" destination="VpB-LJ-32i" eventType="touchUpInside" id="2DM-8p-mI8"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -255,14 +263,6 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleAspectFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qbD-VQ-hRw">
-                                                <rect key="frame" x="296" y="180" width="70" height="70"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" image="add"/>
-                                                <connections>
-                                                    <action selector="addToBucketPressed:" destination="VpB-LJ-32i" eventType="touchUpInside" id="2DM-8p-mI8"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -627,7 +627,7 @@
     <resources>
         <image name="Profile" width="32" height="32"/>
         <image name="Trending" width="32" height="32"/>
-        <image name="add" width="50" height="50"/>
-        <image name="current_user" width="32" height="32"/>
+        <image name="addBucket-icon" width="168" height="120"/>
+        <image name="pinpoin-icon" width="504" height="360"/>
     </resources>
 </document>
