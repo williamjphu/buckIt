@@ -29,6 +29,7 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        profilePicture.layer.cornerRadius = profilePicture.bounds.width / 2.0
         picker.delegate = self
     }
     

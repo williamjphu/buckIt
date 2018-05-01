@@ -190,12 +190,13 @@
                                             <segue destination="7pC-uw-Ekz" kind="show" id="IYA-mE-A4o"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mAB-Vt-JVj">
-                                        <rect key="frame" x="214" y="5" width="45" height="28"/>
+                                    <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mAB-Vt-JVj">
+                                        <rect key="frame" x="224" y="8" width="35" height="35"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="45" id="mmi-aA-iga"/>
+                                            <constraint firstAttribute="height" constant="35" id="G3K-Sl-fHg"/>
+                                            <constraint firstAttribute="width" constant="35" id="Y1V-F0-tM2"/>
                                         </constraints>
-                                        <state key="normal" image="Image_8"/>
+                                        <state key="normal" image="gear-icon (1)"/>
                                         <connections>
                                             <segue destination="BmH-G5-bd0" kind="show" id="hbO-DA-28s"/>
                                         </connections>
@@ -207,9 +208,9 @@
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jOI-o6-8tH">
-                                        <rect key="frame" x="324" y="108" width="32" height="32"/>
+                                        <rect key="frame" x="314" y="126" width="52" height="52"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="001-plus"/>
+                                        <state key="normal" image="addBucket Icon"/>
                                         <connections>
                                             <segue destination="jGl-7V-PQY" kind="show" id="6SC-vb-ENa"/>
                                         </connections>
@@ -218,8 +219,8 @@
                                 <color key="backgroundColor" red="0.92163705579999999" green="0.47699166180000002" blue="0.040218067179999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="R1v-QO-HCY" firstAttribute="leading" secondItem="uuF-MC-Jay" secondAttribute="leading" constant="21" id="3zm-JE-uMi"/>
+                                    <constraint firstItem="mAB-Vt-JVj" firstAttribute="leading" secondItem="R1v-QO-HCY" secondAttribute="trailing" constant="132" id="5PE-i5-sYN"/>
                                     <constraint firstAttribute="bottom" secondItem="oz4-fC-MPW" secondAttribute="bottom" constant="20" id="93d-ob-aoN"/>
-                                    <constraint firstItem="mAB-Vt-JVj" firstAttribute="top" secondItem="uuF-MC-Jay" secondAttribute="top" constant="5" id="EzU-dx-OF6"/>
                                     <constraint firstAttribute="bottom" secondItem="plI-MG-Ime" secondAttribute="bottom" constant="120" id="J5n-aR-5LC"/>
                                     <constraint firstAttribute="bottom" secondItem="R1v-QO-HCY" secondAttribute="bottom" constant="70" id="Jcc-Hm-qS0"/>
                                     <constraint firstAttribute="bottom" secondItem="MSP-Kc-2HF" secondAttribute="bottom" constant="45" id="Wc8-Gd-467"/>
@@ -231,16 +232,17 @@
                                     <constraint firstItem="MSP-Kc-2HF" firstAttribute="top" secondItem="R1v-QO-HCY" secondAttribute="bottom" constant="8" id="buj-yu-FRE"/>
                                     <constraint firstItem="6Pc-QX-KFv" firstAttribute="leading" secondItem="kfp-fB-JtB" secondAttribute="trailing" constant="8" id="eEJ-sp-iQ2"/>
                                     <constraint firstAttribute="height" constant="153" id="eZv-kV-vqf"/>
-                                    <constraint firstItem="plI-MG-Ime" firstAttribute="leading" secondItem="mAB-Vt-JVj" secondAttribute="trailing" constant="8" id="gDb-Yr-LlW"/>
                                     <constraint firstItem="B13-qP-RjU" firstAttribute="centerX" secondItem="6Pc-QX-KFv" secondAttribute="centerX" id="h97-UH-U1r"/>
                                     <constraint firstItem="kfp-fB-JtB" firstAttribute="bottom" secondItem="R1v-QO-HCY" secondAttribute="bottom" id="hJn-tm-3ZF"/>
+                                    <constraint firstItem="mAB-Vt-JVj" firstAttribute="top" secondItem="uuF-MC-Jay" secondAttribute="top" constant="8" id="ig5-yj-A5D"/>
                                     <constraint firstItem="R1v-QO-HCY" firstAttribute="top" secondItem="uuF-MC-Jay" secondAttribute="top" constant="12" id="m0Z-pJ-pRM"/>
                                     <constraint firstItem="6Pc-QX-KFv" firstAttribute="bottom" secondItem="R1v-QO-HCY" secondAttribute="bottom" id="pTo-gp-uh3"/>
                                     <constraint firstItem="6Pc-QX-KFv" firstAttribute="top" secondItem="B13-qP-RjU" secondAttribute="bottom" constant="-8" id="qVe-pa-6pq"/>
                                     <constraint firstAttribute="trailing" secondItem="plI-MG-Ime" secondAttribute="trailing" constant="8" id="tJp-vP-dix"/>
-                                    <constraint firstAttribute="bottom" secondItem="mAB-Vt-JVj" secondAttribute="bottom" constant="120" id="u9R-nn-f0x"/>
+                                    <constraint firstItem="plI-MG-Ime" firstAttribute="leading" secondItem="mAB-Vt-JVj" secondAttribute="trailing" constant="8" id="xJb-Tj-dQJ"/>
                                     <constraint firstItem="kfp-fB-JtB" firstAttribute="top" secondItem="k9r-0V-fRM" secondAttribute="bottom" constant="-8" id="xN0-aT-vu6"/>
                                     <constraint firstItem="kfp-fB-JtB" firstAttribute="leading" secondItem="R1v-QO-HCY" secondAttribute="trailing" constant="26" id="xnh-I9-dY8"/>
+                                    <constraint firstItem="6Pc-QX-KFv" firstAttribute="top" secondItem="mAB-Vt-JVj" secondAttribute="bottom" constant="15" id="yVS-AC-pb8"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -273,7 +275,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FUb-aX-Tej" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="742" y="904"/>
+            <point key="canvasLocation" x="741.60000000000002" y="903.59820089955031"/>
         </scene>
         <!--newBucket-->
         <scene sceneID="jE6-KM-ltx">
@@ -801,10 +803,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="001-plus" width="32" height="32"/>
-        <image name="Image_8" width="28" height="28"/>
         <image name="Profile" width="32" height="32"/>
         <image name="add" width="50" height="50"/>
+        <image name="addBucket Icon" width="69" height="69"/>
+        <image name="gear-icon (1)" width="69" height="69"/>
         <image name="profile-icon-9" width="512" height="512"/>
     </resources>
 </document>
