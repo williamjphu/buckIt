@@ -127,9 +127,11 @@ class ActivityProfileViewController: UIViewController, UICollectionViewDelegate,
         //get the image and name of the person who posted the tip
         let ref  = FirebaseDataContoller.sharedInstance.refToFirebase
         ref.child("users").child(self.tips[indexPath.row].userId).observeSingleEvent(of: .value) { (snap) in
-            let user = snap.value as! [String: AnyObject]
-            cell.tipImage.downloadImage(from: user["picture"] as! String)
-            cell.tipOwnerName.text = user["name"] as? String
+            if(snap.exists()){
+                let user = snap.value as! [String: AnyObject]
+                cell.tipImage.downloadImage(from: user["picture"] as! String)
+                cell.tipOwnerName.text = user["name"] as? String
+            }
         }
         
         return cell
