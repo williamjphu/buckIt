@@ -15,7 +15,7 @@ class CompletedViewController: UIViewController, UICollectionViewDelegate, UICol
     @IBOutlet weak var emptyView: UIView!
     @IBOutlet weak var tableView: UICollectionView!
 
-    var activities = [Complete]()
+    var activities = [Activity]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,45 +34,76 @@ class CompletedViewController: UIViewController, UICollectionViewDelegate, UICol
     
     //this gets all the activities and puts it in activity array
     func fetchAllCompleted(){
+
 //        let ref = FirebaseDataContoller.sharedInstance.refToFirebase
-//        ref.child("Complete").observe(.value) { (snap) in
-//            let activitySnap = snap.value as? [String: AnyObject]
+//        ref.child("Complete").queryOrderedByKey().observeSingleEvent(of: .value, with: { (snap) in
 //
-//            for(_,activity) in activitySnap! {
-//                let theActivity = Complete()
-//                print(activity)
-//                if let title = activity as? String
-//                {
-//                    theActivity.title = title
-//                self.activities.append(theActivity)
+//            let completeSnap = snap.value as! [String: AnyObject]
+//
+//            for (_,completed) in completeSnap {
+//                if let uid = completed["userId"] as? String{
+//                    if uid == Auth.auth().currentUser?.uid{
+//                        let completeItem = Complete()
+//
+//                        if let title = completed["activityTitle"] as? String {
+//
+//                            completeItem.title = title
+//
+//                            self.activities.append(completeItem)
+//                        }
+//                        self.tableView.reloadData()
+//                    }
 //                }
-//                self.tableView.reloadData()
 //            }
-//        }
+//        })
 //        ref.removeAllObservers()
-        
+
         let ref = FirebaseDataContoller.sharedInstance.refToFirebase
-        ref.child("Complete").queryOrderedByKey().observeSingleEvent(of: .value, with: { (snap) in
-            let completeSnap = snap.value as! [String: AnyObject]
-            
-            for (_,completed) in completeSnap {
-                if let uid = completed["userId"] as? String{
-                    if uid == Auth.auth().currentUser?.uid{
-                        let completeItem = Complete()
+        //Loop through the Activity array inside each Buckit and find the ActivityID's --> key
+            let uid = Auth.auth().currentUser?.uid
+        ref.child("users").child(uid!).child("Completed").observeSingleEvent(of: .value, with: {(snap) in
+            //if snap.value is nil, the buckit has no activities
+            if(snap.exists()){
+                let completeSnap = snap.value as! [String: AnyObject]
+                //for each activity inside this buckit
+                for key in completeSnap.keys {
                     
-                        if let title = completed["activityTitle"] as? String {
-                            
-                            completeItem.title = title
-                            
-                            self.activities.append(completeItem)
+                    ref.child("Activities").observeSingleEvent(of: .value, with: {(activitySnap) in
+                        let snapshot = activitySnap.value as! [String: AnyObject]
+                        
+                        //Loop through the Activity Node and add the activities that has an activityID == key
+                        for (_,activity) in snapshot{
+                            //If the current Activity matches the key from the Buckit, add it
+                            if activity["activityID"] as? String == key {
+                                let theActivity = Activity()
+                                if let description = activity["description"] as? String,
+                                    //                                    let category = activity["category"] as? String,
+                                    //                                    let latitude = activity["latitude"] as? String,
+                                    //                                    let longitude = activity["longitude"] as? String,
+                                    let activityID = activity["activityID"] as? String,
+                                    let pathToImage = activity["pathToImage"] as? String,
+                                    let title = activity["activityName"] as? String,
+                                    let uid = activity["userID"] as? String,
+                                    let location = activity["locationName"] as? String{
+                                    
+                                    theActivity.theDescription = description
+                                    theActivity.activityID = activityID
+                                    theActivity.pathToImage = pathToImage
+                                    theActivity.title = title
+                                    theActivity.userID = uid
+                                    theActivity.locationName = location
+                                    
+                                    //add activity to the list
+                                    self.activities.append(theActivity)
+                                }
+                                self.tableView.reloadData()
+                            }
                         }
-                        self.tableView.reloadData()
-                    }
+                    })
                 }
             }
         })
         ref.removeAllObservers()
-
     }
 
     
@@ -100,4 +131,21 @@ class CompletedViewController: UIViewController, UICollectionViewDelegate, UICol
         return cell
     }
     
+    //got to activity profile when clicked
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+   
+        performSegue(withIdentifier: "activityProfile", sender: self.activities[indexPath.row])
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        //if youre going to segue to the activityProfile, do this
+        if let destination = segue.destination as? ActivityProfileViewController{
+            if let activity = sender as? Activity{
+                //send the selected activity to the activityProfile
+                destination.activity = activity
+            }
+        }
+    }
+
 }

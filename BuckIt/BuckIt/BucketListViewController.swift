@@ -15,14 +15,12 @@ class BucketListViewController: UIViewController, UITableViewDelegate, UITableVi
 
     //call the buckit model
     var buckit = BuckIt()
-    
     @IBOutlet weak var buckitTitle: UILabel!
     @IBOutlet weak var buckitDescription: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var buckitImage: UIImageView!
 
     var activities = [Activity]()
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         activities.removeAll()
@@ -107,6 +105,7 @@ class BucketListViewController: UIViewController, UITableViewDelegate, UITableVi
         return row
     }
     
+
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
 //        delete functionality
@@ -146,22 +145,18 @@ class BucketListViewController: UIViewController, UITableViewDelegate, UITableVi
                     print("Ah, maybe next time :)")
                 }
                
-                //store the values for complete page
+                //store the complete in the users database
                 let ref = FirebaseDataContoller.sharedInstance.refToFirebase
-                let key = ref.child("Complete").childByAutoId().key
                 let uid = Auth.auth().currentUser!.uid
                 let selectedBuckit = self.activities[indexPath.row]
-                let completeActivity = ["activityTitle" : selectedBuckit.title!,
-                                        "userId": uid,
-                                        "activityID": selectedBuckit.activityID!,
-                                        "completeID" : key] as [String : Any]
-                let completeAct = ["\(key)" : completeActivity]
-                ref.child("Complete").updateChildValues(completeAct)
+
+                let activityFeed = [ selectedBuckit.activityID! : true] as [String: Any]
                 
-                ref.child("BuckIts").child(self.buckit.buckitId).child("Activities").child(selectedBuckit.activityID!).removeValue()
-                self.activities.remove(at: indexPath.row)
-                self.tableView.deleteRows(at: [indexPath], with: .automatic)
-                
+                //add to buckit
+                ref.child("users").child(uid).child("Completed").updateChildValues(activityFeed)
+
+                let cell = tableView.cellForRow(at: indexPath)
+                cell?.accessoryType = .checkmark
 //              Add buttons to dialog
                 popup.addButtons([buttonOne, buttonTwo])
                 
@@ -169,11 +164,13 @@ class BucketListViewController: UIViewController, UITableViewDelegate, UITableVi
                 self.present(popup, animated: true, completion: nil)
                 
             }
+            
             addAction.backgroundColor = UIColor.green
             return [addAction]
         }
         return nil
     }
+    
     
     //This function details how the delete tab expands
     func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeTableOptions {
@@ -188,7 +185,6 @@ class BucketListViewController: UIViewController, UITableViewDelegate, UITableVi
         return options
     }
     
-
 
 
     func fetchActivities(){
