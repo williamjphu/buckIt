@@ -22,7 +22,6 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        fetchComplete()
         fetchUserBuckIts()
     }
     
@@ -30,6 +29,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
         Auth.auth().addStateDidChangeListener { (auth, user) in
             if user != nil {
                 self.fetchUsers()
+                self.fetchComplete()
             }
             else{
                 print("NO USER YET")
@@ -38,6 +38,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
         
     }
     
+    @IBOutlet weak var emptyBuckit: UIView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
@@ -128,7 +129,13 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
     
     //section number
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        if buckits.count > 0 {
+            collectionview.backgroundView = nil
+            return 1
+        } else {
+            collectionview.backgroundView = emptyBuckit
+            return 0
+        }
     }
     
     //return the number of buckit
