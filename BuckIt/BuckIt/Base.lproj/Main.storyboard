@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y1J-eZ-DK0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y1J-eZ-DK0">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -43,21 +43,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lxdzfemy" translatesAutoresizingMaskIntoConstraints="NO" id="sv6-RT-gGP">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O2Z-Rq-to0">
                                 <rect key="frame" x="58" y="356" width="258" height="30"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Sign Up">
-                                    <color key="titleColor" red="1" green="0.60174994179999997" blue="0.042323187339999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" red="0.92804503439999997" green="0.11066731069999999" blue="0.13898086549999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Sign up">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                        <real key="value" value="0.5"/>
+                                        <real key="value" value="1"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" red="1" green="0.60174994179999997" blue="0.042323187339999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="value" red="0.92804503439999997" green="0.11066731069999999" blue="0.13898086549999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -78,19 +81,19 @@
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p9s-7r-1Pr">
                                 <rect key="frame" x="58" y="318" width="258" height="30"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Login">
-                                    <color key="titleColor" red="1" green="0.60174994179999997" blue="0.042323187339999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" red="0.92804503439999997" green="0.11066731069999999" blue="0.13898086549999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Sign in">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" red="1" green="0.60174994179999997" blue="0.042323187339999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="value" red="0.90546016765730031" green="0.11460425059611216" blue="0.14852352656575862" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                        <real key="value" value="0.5"/>
+                                        <real key="value" value="1"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -109,7 +112,7 @@
                                 <state key="normal" title="Login with Facebook"/>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Buckit" translatesAutoresizingMaskIntoConstraints="NO" id="JKz-6w-aa8">
-                                <rect key="frame" x="32" y="80" width="303" height="148"/>
+                                <rect key="frame" x="32" y="123" width="303" height="105"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -119,7 +122,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="zcQ-i8-McS" secondAttribute="trailing" constant="59" id="ECf-oW-r2B"/>
                             <constraint firstItem="ie7-Iy-n2j" firstAttribute="top" secondItem="JKz-6w-aa8" secondAttribute="bottom" constant="8" id="Er9-jS-uR7"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ZwP-Ww-YBo" secondAttribute="trailing" constant="184" id="FsT-Jq-m1L"/>
-                            <constraint firstItem="JKz-6w-aa8" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="80" id="GAE-rP-5pU"/>
+                            <constraint firstItem="JKz-6w-aa8" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="123" id="GAE-rP-5pU"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="JKz-6w-aa8" secondAttribute="bottom" constant="375" id="GoQ-1o-ObC"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="p9s-7r-1Pr" secondAttribute="trailing" constant="59" id="Hhy-bN-pqj"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="XKI-n5-5WY" secondAttribute="trailing" constant="59" id="JJc-uV-I9g"/>
@@ -127,8 +130,11 @@
                             <constraint firstItem="zcQ-i8-McS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="58" id="SMQ-0d-Ytr"/>
                             <constraint firstItem="zcQ-i8-McS" firstAttribute="top" secondItem="JKz-6w-aa8" secondAttribute="bottom" constant="46" id="Scq-P7-Rbl"/>
                             <constraint firstItem="JKz-6w-aa8" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="TpH-nE-FQ9"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="sv6-RT-gGP" secondAttribute="bottom" id="VEe-mv-uPx"/>
+                            <constraint firstItem="sv6-RT-gGP" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Xwz-Jo-fBd"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="O2Z-Rq-to0" secondAttribute="trailing" constant="59" id="aw8-gT-ZcI"/>
                             <constraint firstItem="ZwP-Ww-YBo" firstAttribute="top" secondItem="O2Z-Rq-to0" secondAttribute="bottom" constant="8" id="cbR-Z1-LHq"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="sv6-RT-gGP" secondAttribute="trailing" id="eD9-Aj-OVh"/>
                             <constraint firstItem="O2Z-Rq-to0" firstAttribute="top" secondItem="p9s-7r-1Pr" secondAttribute="bottom" constant="8" id="eqq-d3-zcg"/>
                             <constraint firstItem="ie7-Iy-n2j" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="58" id="k7s-tv-aIq"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ie7-Iy-n2j" secondAttribute="trailing" constant="59" id="kGZ-4u-7QT"/>
@@ -136,6 +142,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="JKz-6w-aa8" secondAttribute="trailing" constant="40" id="oUa-aM-GDw"/>
                             <constraint firstItem="ZwP-Ww-YBo" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="175" id="pIF-Ew-cD4"/>
                             <constraint firstItem="XKI-n5-5WY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="58" id="wca-Ne-WBo"/>
+                            <constraint firstItem="sv6-RT-gGP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ygr-vz-qfQ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -406,6 +413,7 @@
     <resources>
         <image name="Buckit" width="901" height="377"/>
         <image name="add" width="50" height="50"/>
+        <image name="lxdzfemy" width="200" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="3Ez-eL-dIN"/>

@@ -12,6 +12,7 @@ import Firebase
 
 class HomepageController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDelegate, GIDSignInDelegate{
     
+    @IBOutlet weak var googleButton: GIDSignInButton!
     @IBOutlet var loginButton: FBSDKLoginButton!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -148,13 +149,15 @@ class HomepageController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInU
     }
     
     /****
-     ** Login button for Gmail login
+     ** Setup login button for Gmail login
      ****/
     fileprivate func setupGoogleButton(){
         
         //Draw Google sign in button
         let googleButton = GIDSignInButton()
-        googleButton.frame = CGRect(x: 55, y: 525, width: 265, height: 30)
+        googleButton.frame = CGRect(x: 55, y: 523, width: 265, height: 30)
+        googleButton.style = .wide
+        googleButton.colorScheme = .dark
         GIDSignIn.sharedInstance().uiDelegate = self
         view.addSubview(googleButton)
     }
