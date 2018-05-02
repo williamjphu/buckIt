@@ -15,7 +15,8 @@ class NewBucketViewController: UIViewController, UIImagePickerControllerDelegate
     @IBOutlet weak var titleText: UITextField!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var descriptionText: UITextView!
-    var ref : DatabaseReference!
+    let ref = FirebaseDataContoller.sharedInstance.refToFirebase
+    let store = FirebaseDataContoller.sharedInstance.refToStorage
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,8 +34,6 @@ class NewBucketViewController: UIViewController, UIImagePickerControllerDelegate
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage{
-            imageView.layer.cornerRadius = 10.0
-            imageView.layer.borderColor = UIColor.white.cgColor
             imageView.translatesAutoresizingMaskIntoConstraints = false
             imageView.layer.masksToBounds = true
             imageView.image = image
@@ -47,11 +46,38 @@ class NewBucketViewController: UIViewController, UIImagePickerControllerDelegate
     }
     
     @IBAction func createBuckit(_ sender: Any) {
+        var emptyText: UIAlertController
+        guard titleText.text != "", imageView.image != nil
+            else {
+                // alert the user when fields are empty
+                if( (titleText.text?.isEmpty)! && (descriptionText.text?.isEmpty)! && imageView.image == nil ) {
+                    emptyText = UIAlertController(title: "Error",
+                                                      message: "Please fill in all the fields",
+                                                      preferredStyle: UIAlertControllerStyle.alert)
+                    emptyText.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+                    self.present(emptyText, animated: true)
+                } else if ((titleText.text?.isEmpty)!)
+                {
+                    emptyText = UIAlertController(title: "Error",
+                                                      message: "Please fill out the Buckit title",
+                                                      preferredStyle: UIAlertControllerStyle.alert)
+                    emptyText.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+                    self.present(emptyText, animated: true)
+                } else
+                {
+                    emptyText = UIAlertController(title: "Error",
+                                                      message: "Please upload the picture",
+                                                      preferredStyle: UIAlertControllerStyle.alert)
+                    emptyText.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+                    self.present(emptyText, animated: true)
+                }
+                return
+        }
+
         let uid = Auth.auth().currentUser!.uid
-        ref = Database.database().reference()
-        let storage = Storage.storage().reference(forURL: "gs://buckit-ed26f.appspot.com")
-        let key = ref.child("BuckIts").childByAutoId().key
-        let imageRef = storage.child("BuckIts").child(uid).child("\(key).jpeg")
+        
+        let key = self.ref.child("BuckIts").childByAutoId().key
+        let imageRef = self.store.child("BuckIts").child(uid).child("\(key).jpeg")
         let data = UIImageJPEGRepresentation(self.imageView.image!, 0.6)
         
         let title = "Created BuckIt!"
@@ -93,5 +119,11 @@ class NewBucketViewController: UIViewController, UIImagePickerControllerDelegate
         //              Present dialog
         self.present(popup, animated: true, completion: nil)
 
+    }
+    
+    //needed to dismiss the keyboard
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        titleText.endEditing(true)
+        descriptionText.endEditing(true)
     }
 }

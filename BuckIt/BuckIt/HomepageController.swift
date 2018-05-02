@@ -10,191 +10,161 @@ import FBSDKLoginKit
 import GoogleSignIn
 import Firebase
 
-class HomepageController: UIViewController , FBSDKLoginButtonDelegate, GIDSignInUIDelegate{
+class HomepageController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDelegate, GIDSignInDelegate{
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // back button.. this works
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(handleBackButton))
-        
-        // change background color
-        view.backgroundColor = UIColor(r: 255, g: 255, b: 255)
-        
-        view.addSubview(registerButton)
-        view.addSubview(alreadyUserButton)
-        view.addSubview(logoImage)
-        
-        
-        // layout UI
-        setupBuckitLogo()
-        setupRegisterButton()
-        setupAlreadyUserButton()
-        
-        // setupFacebookButton()
-        
-        // setupGoogleButton()
-        
-    }
-    
-    /**
-     *  Draw the BuckIt Logo
-     **/
-    let logoImage: UIImageView = {
-        let logo = UIImageView()
-        logo.image = UIImage(named: "Buckit")
-        logo.translatesAutoresizingMaskIntoConstraints = false
-        return logo
-    }()
-    
-    /**
-     *  Draw the Register button
-     **/
-    let registerButton: UIButton = {
-        
-        let signUpButton = UIButton(type: .system)
-        signUpButton.backgroundColor = UIColor(r: 247, g: 146, b: 30)
-        signUpButton.setTitle("SIGNUP", for: [])
-        signUpButton.translatesAutoresizingMaskIntoConstraints = false
-        signUpButton.setTitleColor(UIColor.white, for: [])
-        signUpButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
-        signUpButton.layer.borderWidth = 1
-        signUpButton.layer.borderColor = UIColor.clear.cgColor
-        signUpButton.layer.cornerRadius = 5
-        signUpButton.addTarget(self, action: #selector(handleRegister),
-                               for: .touchUpInside)
-        
-        return signUpButton
-    }()
-    
-    @objc func handleRegister(sender: UIButton!) {
-        let signUpController = SignUpController()
-        present(signUpController, animated: true, completion: nil)
-    }
-    
-    /**
-     *  Draw Already Member button
-     **/
-    let alreadyUserButton: UIButton = {
-        
-        let registered = UIButton(type: .system)
-        registered.backgroundColor = UIColor(r: 255, g: 255, b: 255)
-        registered.setTitle("ALREADY A MEMBER? LOGIN", for: [])
-        registered.translatesAutoresizingMaskIntoConstraints = false
-        registered.setTitleColor(UIColor.orange, for: [])
-        registered.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-        registered.layer.borderWidth = 1
-        registered.layer.borderColor = UIColor.clear.cgColor
-        registered.layer.cornerRadius = 5
-        registered.addTarget(self, action: #selector(handleSignIn), for: .touchUpInside)
-        
-        return registered
-    }()
-    
-    @objc func handleSignIn(sender: UIButton!) {
-        let loginController = LoginController()
-        present(loginController, animated: true, completion: nil)
-    }
-    
-    /**
-     *  Layout for the logo
-     **/
-    func setupBuckitLogo() {
-        
-        logoImage.centerXAnchor.constraint(equalTo:
-            view.centerXAnchor).isActive = true
-        logoImage.topAnchor.constraint(equalTo:
-            view.topAnchor, constant: 158).isActive = true
-        logoImage.widthAnchor.constraint(equalTo:
-            view.widthAnchor, constant: -24).isActive = true
-        logoImage.heightAnchor.constraint(equalToConstant: 150).isActive
-            = true
-        
-    }
-    
-    /**
-     *  Layout for the "REGISTER" button
-     **/
-    func setupRegisterButton() {
-        
-        // set x, y, width, height constraints
-        registerButton.centerXAnchor.constraint(equalTo:
-            view.centerXAnchor).isActive = true
-        registerButton.bottomAnchor.constraint(equalTo:
-            view.bottomAnchor, constant: -45).isActive = true
-        registerButton.widthAnchor.constraint(equalTo:
-            view.widthAnchor, constant: -24).isActive = true
-        registerButton.heightAnchor.constraint(equalToConstant: 45).isActive
-            = true
-    }
-    
-    /**
-     *  Layout for the "ALREADY MEMBER" button
-     **/
-    func setupAlreadyUserButton() {
-        
-        // set x, y, width, height constraints
-        alreadyUserButton.centerXAnchor.constraint(equalTo:
-            view.centerXAnchor).isActive = true
-        alreadyUserButton.bottomAnchor.constraint(equalTo:
-            view.bottomAnchor, constant: -95).isActive = true
-        alreadyUserButton.widthAnchor.constraint(equalTo:
-            view.widthAnchor, constant: -24).isActive = true
-        alreadyUserButton.heightAnchor.constraint(equalToConstant: 25).isActive
-            = true
-    }
-    
-    @objc func handleBackButton() {
-        
-        let landing = HomepageController()
-        present(landing, animated: true, completion: nil)
-        
-    }
-    
-    fileprivate func setupFacebookButton(){
-        //Draw Facebook sign in button
-        let loginButton = FBSDKLoginButton()
-        view.addSubview(loginButton)
-        loginButton.frame = CGRect(x: 16, y: 50, width: view.frame.width - 32, height: 50)
-        loginButton.delegate = self
-        loginButton.readPermissions = ["email", "public_profile"]
-    }
-    
-    fileprivate func setupGoogleButton(){
-        //Draw Google sign in button
-        let googleButton = GIDSignInButton()
-        googleButton.frame = CGRect(x: 16, y: 50+66, width: view.frame.width - 32, height: 50)
-        view.addSubview(googleButton)
-        
-        GIDSignIn.sharedInstance().uiDelegate = self
-    }
-    
+    @IBOutlet var loginButton: FBSDKLoginButton!
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
     
     //if users already login through facebook. Take to profile
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
+        GIDSignIn.sharedInstance().delegate = self
+        loginButton.readPermissions = ["email", "public_profile"]
         super.viewWillAppear(animated)
+        let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
         if FBSDKAccessToken.current() != nil {
             DispatchQueue.main.async {
-                
-                let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
-                
                 self.present(vc, animated: true, completion: nil)
-                
             }
         } else if Firebase.Auth.auth().currentUser != nil{
             DispatchQueue.main.async {
-                
-                let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
-                
                 self.present(vc, animated: true, completion: nil)
-                
+            }
+        } else if GIDSignIn.sharedInstance().hasAuthInKeychain(){
+            DispatchQueue.main.async {
+                self.present(vc, animated: true, completion: nil)
             }
         }
-        
-        
     }
-    //facebook authentication login
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        loginButton.delegate = self
+        setupGoogleButton()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+    @IBAction func signUpClicked(_ sender: Any) {
+        performSegue(withIdentifier: "signUp", sender: self)
+    }
+    
+    //Google sign in
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if let err = error {
+            print("Failed to log into Google: ", err)
+            return
+        }
+        
+        guard let idToken = user.authentication.idToken else { return }
+        guard let accessToken = user.authentication.accessToken else { return }
+        let credentials = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: accessToken)
+        
+        Auth.auth().signIn(with: credentials, completion: {(user , error) in
+            if let err = error {
+                print("Failed to create a Firebase User with Google Account: " , err)
+                return
+            }
+            guard let uid = user?.uid else {return}
+            
+            let ref = FirebaseDataContoller.sharedInstance.refToFirebase
+            let theUserUID = Auth.auth().currentUser?.uid
+            
+            ref.child("users").observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
+                if !snapshot.hasChild(theUserUID!)
+                {
+                    let usersReference = ref.child("users").child(uid)
+                    let values : [String : Any] = ["uid": user!.uid,
+                                                   "name": user!.displayName,
+                                                   "email": user!.email,
+                                                   "picture" : user!.photoURL?.absoluteString,
+                                                   "username" : "",
+                                                   "description" : ""]
+                    usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
+                        if let err = err {
+                            print(err)
+                            return
+                        }
+                    })
+                    
+                    print("Sucessfully logging to Firebase with Google" , uid)
+                    let newViewController = UIStoryboard(name: "TabController", bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
+                    UIApplication.topViewController()?.present(newViewController, animated: true, completion: nil)
+                }
+                else{
+                    let newViewController = UIStoryboard(name: "TabController", bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
+                    UIApplication.topViewController()?.present(newViewController, animated: true, completion: nil)
+                }
+            })
+        })
+    }
+    
+    /****
+     ** Handle logging in. Make sure the credentials are correct and
+     ** alerts the user when fields are empty or when credentials are
+     ** incorrect.
+     ****/
+    @IBAction func loginButtonPressed(_ sender: Any) {
+        view.endEditing(true)
+        
+        // alert the user when email or password is empty
+        if( (emailTextField.text?.isEmpty)! || (passwordTextField.text?.isEmpty)! ) {
+            let emptyText = UIAlertController(title: "Error",
+                                              message: "Enter email or password",
+                                              preferredStyle: UIAlertControllerStyle.alert)
+            emptyText.addAction(UIAlertAction(title: "Dismiss",
+                                              style: .default,
+                                              handler: nil))
+            self.present(emptyText, animated: true)
+        }
+        
+        // authenticate the user
+        Auth.auth().signIn(withEmail: emailTextField.text!, password: passwordTextField.text!, completion:
+            { (user, error) in
+                if error == nil {
+                    
+                    let newViewController = UIStoryboard(name: "TabController", bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
+                    UIApplication.topViewController()?.present(newViewController, animated: true, completion: nil)
+                }
+                    
+                    //login FAILED
+                else{
+                    let alert2 = UIAlertController(title: "Error",
+                                                   message: "Incorrect user name or password. Please try again",
+                                                   preferredStyle: UIAlertControllerStyle.alert)
+                    // dismiss alert when pressed
+                    alert2.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+                }
+        })
+    }
+    
+    /****
+     ** Login button for Gmail login
+     ****/
+    fileprivate func setupGoogleButton(){
+        
+        //Draw Google sign in button
+        let googleButton = GIDSignInButton()
+        googleButton.frame = CGRect(x: 55, y: 525, width: 265, height: 30)
+        GIDSignIn.sharedInstance().uiDelegate = self
+        view.addSubview(googleButton)
+    }
+    
+    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
+        print("Logged out of Facebook")
+    }
+    
+    /****
+     ** Login button using Facebook
+     ****/
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
+        
+        let ref = FirebaseDataContoller.sharedInstance.refToFirebase
+        
+        
         if error != nil {
             print(error)
             return
@@ -202,24 +172,45 @@ class HomepageController: UIViewController , FBSDKLoginButtonDelegate, GIDSignIn
             //welcomeMessage.text = "Authentication was canceled"
         }
         else if error == nil {
-            print("Successfully logged in via facebook")
+            let accessToken = FBSDKAccessToken.current()
+            let credentials = FacebookAuthProvider.credential(withAccessToken: (accessToken?.tokenString)!)
             
-            let vc = UIStoryboard(name: "Main" , bundle: nil).instantiateViewController(withIdentifier: "username")
-            
-            self.present(vc, animated: true, completion: nil)        }
-    }
-    
-    
-    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
-        print("Logged out of Facebook")
-    }
-    
-    
-}
+            //Facebook login
+            Auth.auth().signIn(with: credentials, completion: { (user, err) in
+                if err != nil{
+                    print("FB User is wrong", err ?? "")
+                }
+                
+                // check to see if the user is in the database
+                let theUserUID = Auth.auth().currentUser?.uid
+                ref.child("users").observeSingleEvent(of: .value, with: { (snapshot) in
+                    if snapshot.hasChild(theUserUID!)
+                    {
+                        let newViewController = UIStoryboard(name: "TabController", bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
+                        UIApplication.topViewController()?.present(newViewController, animated: true, completion: nil)
+                    } else {
+                        let usersReference = ref.child("users").child(user!.uid)
+                        let values : [String : Any] = ["uid": user!.uid,
+                                                       "name": user!.displayName,
+                                                       "email": user!.email,
+                                                       "picture" : user!.photoURL!.absoluteString,
+                                                       "username" : "",
+                                                       "description" : ""]
+                        usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
+                            if let err = err {
+                                print(err)
+                                return
+                            }
+                            let newViewController = UIStoryboard(name: "TabController", bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
+                            UIApplication.topViewController()?.present(newViewController, animated: true, completion: nil)
+                        })
 
-// Create UIColor RGB object
-extension UIColor {
-    convenience init(r: CGFloat, g: CGFloat, b: CGFloat) {
-        self.init(red: r/255, green: g/255, blue: b/255, alpha: 1)
+                    }
+                })
+                
+            })
+            
+
+        }
     }
 }
