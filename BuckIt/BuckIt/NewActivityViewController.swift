@@ -14,11 +14,8 @@ import UITextView_Placeholder
 import PopupDialog
 
 
-protocol HandleMapSearch: class {
-    func dropPinZoomIn(_ placemark:MKPlacemark)
-}
 
-class NewActivityViewController: UIViewController, UINavigationControllerDelegate,UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+class NewActivityViewController: UIViewController, UINavigationControllerDelegate,UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource, chooseMapViewControllerDelegate {
     
     var manager: CLLocationManager!
     var theCoordinates: CLLocationCoordinate2D?
@@ -37,12 +34,13 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var startDateField: UITextField!
     @IBOutlet weak var endDateField: UITextField!
+    @IBOutlet weak var locationLabel: UITextField!
     
     let datePicker = UIDatePicker()
     
     override func viewDidLoad() {
+        locationLabel.delegate = self
         super.viewDidLoad()
-        setupSearchBar()
         setupDescriptionTextArea()
         createPicker()
         createDatePicker(pickerObject: datePicker, pickerField: startDateField, objCall: #selector(starDonePressed))
@@ -52,54 +50,70 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
         keyboardListener()
     }
     
-    // Setup UIPickerVIew components
+    //THIS IS A DELEGATE FUNCTION TO DROP A PIN WHEN CHOOSEMAPCONTROLLER DROPS A PIN
+    //It also sets the label for locationLabel
+    func dropPinZoom(_ placemark: MKPlacemark){
+        locationLabel.text = placemark.title
+        // clear existing pins
+        mapView.removeAnnotations(mapView.annotations)
+        // Create a new pin
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = placemark.coordinate
+        annotation.title = placemark.name
+        // Setup the subtitle on the annotation
+        if let city = placemark.locality,
+            let state = placemark.administrativeArea {
+            annotation.subtitle = "\(city) \(state)"
+        }
+        // Update values for variable
+        coordinateFromMap = placemark.coordinate
+        locationNameFromMap = placemark.name
+        // Add annotation to the map within the defined region
+        mapView.addAnnotation(annotation)
+        mapView.selectAnnotation(annotation, animated: true)
+        let span = MKCoordinateSpanMake(0.05, 0.05)
+        let region = MKCoordinateRegionMake(placemark.coordinate, span)
+        mapView.setRegion(region, animated: true)
+    }
+    
+    //segue to choose a location
+    func textFieldDidBeginEditing(_ locationLabel: UITextField) {
+        performSegue(withIdentifier: "chooseMap", sender: self)
+        locationLabel.resignFirstResponder()
+    }
+    
+    //set the delegate in order for delegate func to work
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let desination = segue.destination as? chooseMapViewController{
+            desination.delegate = self
+        }
+    }
+    
+    // Setup Categery UIPickerVIew
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
-    
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return categories.count
     }
-    
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return categories[row]
     }
-    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selection = categories[row]
         categoryTextfield.text = selection
     }
-    
-    private func setupSearchBar() {
-        let locationSearchTable = storyboard!.instantiateViewController(withIdentifier: "LocationSearchTable") as! LocationSearchTable
-        resultSearchController = UISearchController(searchResultsController: locationSearchTable)
-        resultSearchController.searchResultsUpdater = locationSearchTable
-        
-        let searchBar = resultSearchController!.searchBar
-        searchBar.sizeToFit()
-        searchBar.placeholder = "Search for places"
-        navigationItem.titleView = resultSearchController?.searchBar
-        resultSearchController.hidesNavigationBarDuringPresentation = false
-        resultSearchController.dimsBackgroundDuringPresentation = true
-        definesPresentationContext = true
-        locationSearchTable.mapView = mapView
-        locationSearchTable.handleMapSearchDelegate = self
-    }
-    
-    // Setup Picker for Categories
     private func populateCategoriesArray() {
         let categoryDictionary = FirebaseDataContoller.sharedInstance.categoriesDictionary
         for (key, _) in categoryDictionary {
             self.categories.append("\(key)")
         }
     }
-    
-    /* the scrolling screen for picker */
     private func createPicker() {
         let categoryPicker = UIPickerView()
         categoryPicker.delegate = self
         categoryTextfield.inputView = categoryPicker
-    } /* end createPicker() */
+    }
     
     /* create toolbar for the picker */
     private func pickerToolbar() {
@@ -160,7 +174,6 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
         descriptionText.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0).cgColor
     }
     
-    //NEED TO CONNECT THIS TO SOMTHING
     //import an image when you click the activity pic
     @IBAction func importImage(_ sender: Any) {
         let image = UIImagePickerController()
@@ -220,7 +233,6 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
                     emptyText.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
                     self.present(emptyText, animated: true)
                 }
-                // NEED TO CHECK FOR MAP PINPOINT
                 return
         }
 
@@ -287,12 +299,14 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         titleText.endEditing(true)
         descriptionText.endEditing(true)
+        locationLabel.endEditing(true)
     }
     
     //hide the keyboard function
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         descriptionText.resignFirstResponder()
         titleText.resignFirstResponder()
+        locationLabel.resignFirstResponder()
         self.categoryTextfield.resignFirstResponder()
         return true
     }
@@ -303,7 +317,7 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
             return
         }
         if notification.name == Notification.Name.UIKeyboardWillShow || notification.name == Notification.Name.UIKeyboardWillChangeFrame{
-            view.frame.origin.y = -keyboardRect.height + 48
+            view.frame.origin.y = -keyboardRect.height + 70
         } else
         {
             view.frame.origin.y = 0
@@ -311,27 +325,6 @@ class NewActivityViewController: UIViewController, UINavigationControllerDelegat
     }
 }
 
-// Use extension for protocol and delegate dropPinZoomI()
-extension NewActivityViewController: HandleMapSearch {
-    func dropPinZoomIn(_ placemark: MKPlacemark){
-        // clear existing pins
-        mapView.removeAnnotations(mapView.annotations)
-        // Create a new pin
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = placemark.coordinate
-        annotation.title = placemark.name
-        // Setup the subtitle on the annotation
-        if let city = placemark.locality,
-            let state = placemark.administrativeArea {
-            annotation.subtitle = "\(city) \(state)"
-        }
-        // Update values for variable
-        coordinateFromMap = placemark.coordinate
-        locationNameFromMap = placemark.name
-        // Add annotation to the map within the defined region
-        mapView.addAnnotation(annotation)
-        let span = MKCoordinateSpanMake(0.05, 0.05)
-        let region = MKCoordinateRegionMake(placemark.coordinate, span)
-        mapView.setRegion(region, animated: true)
-    }
-}
+
+
+

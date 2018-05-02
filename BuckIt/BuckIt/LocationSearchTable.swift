@@ -9,9 +9,13 @@
 import UIKit
 import MapKit
 
+//calls the dropPinZoomIn when you click on an entry (dropPinZoom is different from dropPinZoomIn)
+protocol LocationSearchTableDelegate: class {
+    func dropPinZoomIn(_ placemark: MKPlacemark)
+}
+
 class LocationSearchTable: UITableViewController {
-    
-    weak var handleMapSearchDelegate: HandleMapSearch?
+    weak var delegate: LocationSearchTableDelegate?
     var matchingItems: [MKMapItem] = []
     var mapView: MKMapView?
     
@@ -72,7 +76,6 @@ extension LocationSearchTable {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        self.tableView.contentInset = UIEdgeInsetsMake(130, 0, 0, 0)
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")!
         let selectedItem = matchingItems[(indexPath as NSIndexPath).row].placemark
         cell.textLabel?.text = selectedItem.name
@@ -84,7 +87,7 @@ extension LocationSearchTable {
 extension LocationSearchTable {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedItem = matchingItems[(indexPath as NSIndexPath).row].placemark
-        handleMapSearchDelegate?.dropPinZoomIn(selectedItem)
+        delegate?.dropPinZoomIn(selectedItem)
         dismiss(animated: true, completion: nil)
     }
 }
