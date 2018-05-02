@@ -15,7 +15,6 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
     @IBOutlet weak var collectionview: UICollectionView!
     
     var buckits = [BuckIt]()
-
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         super.viewWillAppear(true)
@@ -23,6 +22,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        fetchComplete()
         fetchUserBuckIts()
     }
     
@@ -46,6 +46,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var quote: UILabel!
     
+ 
+    @IBOutlet weak var numOfComplete: UILabel!
     @IBOutlet weak var numOfBuckIt: UILabel!
     var totalBuckit = 0;
     //retrieve users data
@@ -72,6 +74,18 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
         })
         ref.removeAllObservers()
     }
+    
+    func fetchComplete(){
+        let ref  = FirebaseDataContoller.sharedInstance.refToFirebase
+        let uid = Firebase.Auth.auth().currentUser!.uid
+        ref.child("users").child(uid).child("Completed").observeSingleEvent(of: .value, with: {snapshot in
+            let completed = snapshot.value as! [String: AnyObject]
+            
+            self.numOfComplete.text = String(completed.count)
+        })
+        ref.removeAllObservers()
+    }
+    
     //get the profile picture and make it round
     func setProfilePicture(imageView: UIImageView, imageToSet: UIImage){
         imageView.image = imageToSet

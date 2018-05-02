@@ -15,7 +15,6 @@ class CompletedViewController: UIViewController, UICollectionViewDelegate, UICol
     @IBOutlet weak var emptyView: UIView!
     @IBOutlet weak var tableView: UICollectionView!
 
-    var completeCount = 0
     var activities = [Activity]()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,8 +100,8 @@ class CompletedViewController: UIViewController, UICollectionViewDelegate, UICol
     
     //return the number of buckit
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        completeCount = self.activities.count
-        return completeCount
+
+        return self.activities.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -116,6 +115,7 @@ class CompletedViewController: UIViewController, UICollectionViewDelegate, UICol
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
    
         performSegue(withIdentifier: "activityProfile", sender: self.activities[indexPath.row])
+        
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

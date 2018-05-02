@@ -9,5 +9,5 @@
 import UIKit
 
 class Complete : NSObject {
-    var title : String?
+    var count : String?
 }

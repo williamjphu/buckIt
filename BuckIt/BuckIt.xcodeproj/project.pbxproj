@@ -48,7 +48,6 @@
 		E084A47A20755D860099CCCD /* BuckitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E084A47920755D860099CCCD /* BuckitCell.swift */; };
 		E084A48A207745990099CCCD /* BuckitEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E084A489207745990099CCCD /* BuckitEditViewController.swift */; };
 		E0DEF3C520959A1A00BA2D8B /* ActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0DEF3C420959A1A00BA2D8B /* ActivityCell.swift */; };
-		E0E1226320965708001FD9AB /* Complete.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E1226220965708001FD9AB /* Complete.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -102,7 +101,6 @@
 		E084A47920755D860099CCCD /* BuckitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuckitCell.swift; sourceTree = "<group>"; };
 		E084A489207745990099CCCD /* BuckitEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuckitEditViewController.swift; sourceTree = "<group>"; };
 		E0DEF3C420959A1A00BA2D8B /* ActivityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCell.swift; sourceTree = "<group>"; };
-		E0E1226220965708001FD9AB /* Complete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Complete.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -266,7 +264,6 @@
 				C3B95C282022CDA800836918 /* Completed.storyboard */,
 				C3B95C2E2022CE1000836918 /* CompletedViewController.swift */,
 				E0DEF3C420959A1A00BA2D8B /* ActivityCell.swift */,
-				E0E1226220965708001FD9AB /* Complete.swift */,
 			);
 			name = Completed;
 			sourceTree = "<group>";
@@ -387,7 +384,7 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -443,7 +440,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E0E1226320965708001FD9AB /* Complete.swift in Sources */,
 				C39D94352083E0CC006093B7 /* ActivityProfileViewController.swift in Sources */,
 				AE7F9C17201986AF00420457 /* Activity.swift in Sources */,
 				77D45FC01FAE96EB0034DDBA /* HomepageController.swift in Sources */,
