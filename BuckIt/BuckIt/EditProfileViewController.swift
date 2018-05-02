@@ -8,7 +8,7 @@
 import UIKit
 import Firebase
 
-class EditProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+class EditProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate {
     
     let ref = FirebaseDataContoller.sharedInstance.refToFirebase
     let store = FirebaseDataContoller.sharedInstance.refToStorage
@@ -16,7 +16,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     @IBOutlet weak var imageView: UIImageView!
         
-    @IBOutlet weak var descriptionText: UITextField!
+    @IBOutlet weak var descriptionText: UITextView!
     @IBOutlet weak var nameText: UITextField!
     @IBOutlet weak var userNameText: UITextField!
     @IBOutlet weak var saveButton: UIButton!
@@ -56,7 +56,6 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                         CacheImage.getImage(withURL: URL(string: value["picture"] as! String)!) { image in
                             self.imageView.image = image
                         }
-//                        self.imageView.downloadImage(from: value["picture"] as! String)
                         self.imageView.layer.cornerRadius = self.imageView.bounds.width / 2.0
                         self.imageView.layer.masksToBounds = true
                     }

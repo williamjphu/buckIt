@@ -15,8 +15,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
     @IBOutlet weak var collectionview: UICollectionView!
     
     var buckits = [BuckIt]()
+    
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
         super.viewWillAppear(true)
         buckits.removeAll()
     }
@@ -37,14 +37,12 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
         }
         
     }
-    override func viewWillDisappear(_ animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
-    }
     
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
-    @IBOutlet weak var quote: UILabel!
+    @IBOutlet weak var quote: UITextView!
+    
     
  
     @IBOutlet weak var numOfComplete: UILabel!
@@ -145,6 +143,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
         //creating the cell
         CacheImage.getImage(withURL: URL(string: self.buckits[indexPath.row].pathToImage)!) { image in
             cell.buckitImage.image = image
+            cell.buckitImage.layer.cornerRadius = 10
         }
         cell.BuckitName.text = self.buckits[indexPath.row].title
         return cell
@@ -164,26 +163,3 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
         }
     }
 }
-
-//extension UIImageView {
-//
-//    func downloadImage(from imgURL: String!) {
-//        let url = URLRequest(url: URL(string: imgURL)!)
-//        
-//        let task = URLSession.shared.dataTask(with: url) {
-//            (data, response, error) in
-//
-//            if error != nil {
-//                print(error!)
-//                return
-//            }
-//
-//            DispatchQueue.main.async {
-//                self.image = UIImage(data: data!)
-//            }
-//
-//        }
-//
-//        task.resume()
-//    }
-//}
