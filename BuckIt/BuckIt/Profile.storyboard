@@ -45,6 +45,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qjb-5N-Bn2">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have not add any Buckit yet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PeA-c9-7Eb">
+                                        <rect key="frame" x="0.0" y="266" width="375" height="40"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="PeA-c9-7Eb" firstAttribute="leading" secondItem="Qjb-5N-Bn2" secondAttribute="leading" id="97p-N1-jw0"/>
+                                    <constraint firstItem="PeA-c9-7Eb" firstAttribute="top" secondItem="Qjb-5N-Bn2" secondAttribute="top" constant="266" id="cGx-sr-jGL"/>
+                                    <constraint firstAttribute="bottom" secondItem="PeA-c9-7Eb" secondAttribute="bottom" constant="248" id="fiQ-Jj-jia"/>
+                                    <constraint firstAttribute="trailing" secondItem="PeA-c9-7Eb" secondAttribute="trailing" id="ud0-Vi-j3h"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uuF-MC-Jay">
                                 <rect key="frame" x="0.0" y="44" width="375" height="194"/>
                                 <subviews>
@@ -204,9 +222,13 @@
                             <constraint firstItem="Qio-tP-w2V" firstAttribute="bottom" secondItem="YoK-eP-yNz" secondAttribute="bottom" id="8ts-Hq-ZpN"/>
                             <constraint firstItem="uuF-MC-Jay" firstAttribute="leading" secondItem="YoK-eP-yNz" secondAttribute="leading" id="DLu-os-glp"/>
                             <constraint firstItem="uuF-MC-Jay" firstAttribute="top" secondItem="YoK-eP-yNz" secondAttribute="top" constant="-20" id="Gm1-xu-ItN"/>
+                            <constraint firstItem="Qjb-5N-Bn2" firstAttribute="leading" secondItem="YoK-eP-yNz" secondAttribute="leading" id="JyP-t2-dU8"/>
+                            <constraint firstItem="YoK-eP-yNz" firstAttribute="trailing" secondItem="Qjb-5N-Bn2" secondAttribute="trailing" id="TEN-0y-wj0"/>
                             <constraint firstItem="YoK-eP-yNz" firstAttribute="trailing" secondItem="uuF-MC-Jay" secondAttribute="trailing" id="TlH-fm-v8e"/>
                             <constraint firstItem="Qio-tP-w2V" firstAttribute="leading" secondItem="YoK-eP-yNz" secondAttribute="leading" constant="5" id="TwI-0O-1yB"/>
+                            <constraint firstItem="YoK-eP-yNz" firstAttribute="bottom" secondItem="Qjb-5N-Bn2" secondAttribute="bottom" id="XEC-VA-aZC"/>
                             <constraint firstItem="Qio-tP-w2V" firstAttribute="trailing" secondItem="YoK-eP-yNz" secondAttribute="trailing" constant="-5" id="ZtX-Qa-Wo7"/>
+                            <constraint firstItem="Qjb-5N-Bn2" firstAttribute="top" secondItem="YoK-eP-yNz" secondAttribute="top" id="j9g-XI-dAb"/>
                             <constraint firstItem="Qio-tP-w2V" firstAttribute="top" secondItem="uuF-MC-Jay" secondAttribute="bottom" constant="-60" id="pJs-uw-WXB"/>
                             <constraint firstItem="Qio-tP-w2V" firstAttribute="leading" secondItem="YoK-eP-yNz" secondAttribute="leading" constant="5" id="qmM-GO-TFO"/>
                         </constraints>
@@ -224,6 +246,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="collectionview" destination="Qio-tP-w2V" id="fFL-jx-93t"/>
+                        <outlet property="emptyBuckit" destination="Qjb-5N-Bn2" id="N6v-3H-7Wj"/>
                         <outlet property="name" destination="MSP-Kc-2HF" id="d9y-m6-CW4"/>
                         <outlet property="numOfBuckIt" destination="k9r-0V-fRM" id="tS5-fr-bbz"/>
                         <outlet property="numOfComplete" destination="B13-qP-RjU" id="WxA-Cc-7c3"/>
