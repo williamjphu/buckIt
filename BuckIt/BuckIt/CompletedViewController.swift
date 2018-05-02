@@ -26,6 +26,10 @@ class CompletedViewController: UIViewController, UICollectionViewDelegate, UICol
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
+        self.navigationController?.navigationBar.shadowImage = nil
+
         activities.removeAll()
         fetchAllCompleted()
     }
@@ -89,6 +93,7 @@ class CompletedViewController: UIViewController, UICollectionViewDelegate, UICol
             tableView.backgroundView = nil
             return 1
         } else {
+            print("IT SHOW EMPTY")
             tableView.backgroundView = emptyView
             return 0
         }
