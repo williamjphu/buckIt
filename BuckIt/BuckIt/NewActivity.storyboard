@@ -28,14 +28,19 @@
                                 <state key="normal" title="Select Image ">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="importImage:" destination="hc8-6c-VPp" eventType="touchUpInside" id="zt0-NU-ueO"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ACTIVITY TITLE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3pQ-U5-Ly9">
-                                <rect key="frame" x="16" y="230" width="83" height="15"/>
+                                <rect key="frame" x="16" y="230" width="97" height="15"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="83" id="Kdb-rX-kza"/>
+                                    <constraint firstAttribute="width" constant="97" id="Kdb-rX-kza"/>
                                     <constraint firstAttribute="height" constant="15" id="QXw-OM-1bP"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -178,7 +183,7 @@
                                     <constraint firstAttribute="width" constant="170" id="r4K-cy-gar"/>
                                 </constraints>
                             </view>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="eIt-ax-H1g">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eIt-ax-H1g">
                                 <rect key="frame" x="16" y="484" width="347" height="115"/>
                             </mapView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOCATION" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hVc-43-1qx">
@@ -199,7 +204,7 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no" textContentType="location"/>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i1o-7O-Z24">
                                 <rect key="frame" x="193" y="475" width="170" height="1"/>
@@ -277,14 +282,47 @@
                         <outlet property="categoryTextfield" destination="7xS-Tg-VmB" id="ENF-i6-sVV"/>
                         <outlet property="descriptionText" destination="1cF-hZ-yHp" id="FF0-fD-idC"/>
                         <outlet property="endDateField" destination="V58-Eh-kkv" id="J8x-Pi-L4r"/>
+                        <outlet property="locationLabel" destination="IAO-pL-zcB" id="agL-kY-64p"/>
                         <outlet property="mapView" destination="eIt-ax-H1g" id="0dq-n4-DRD"/>
                         <outlet property="startDateField" destination="1nH-Xc-YWL" id="msQ-0H-0bM"/>
                         <outlet property="titleText" destination="Bql-Fw-y0m" id="KeP-ej-0Ke"/>
+                        <segue destination="Wnq-82-x1P" kind="show" identifier="chooseMap" id="oRH-Zu-kfD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T22-h9-pgR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="21.600000000000001" y="96.7016491754123"/>
+        </scene>
+        <!--Choose Map View Controller-->
+        <scene sceneID="0xY-e2-dPV">
+            <objects>
+                <viewController id="Wnq-82-x1P" customClass="chooseMapViewController" customModule="BuckIt" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7N2-p5-Rdd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="kgB-Zf-7YH">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="kgB-Zf-7YH" firstAttribute="top" secondItem="vbL-XG-pU0" secondAttribute="top" id="DLa-aF-MXe"/>
+                            <constraint firstItem="kgB-Zf-7YH" firstAttribute="bottom" secondItem="vbL-XG-pU0" secondAttribute="bottom" id="Fyu-NI-ivo"/>
+                            <constraint firstItem="kgB-Zf-7YH" firstAttribute="trailing" secondItem="vbL-XG-pU0" secondAttribute="trailing" id="JBR-eQ-sxf"/>
+                            <constraint firstItem="kgB-Zf-7YH" firstAttribute="leading" secondItem="vbL-XG-pU0" secondAttribute="leading" id="Ko8-5Y-OpB"/>
+                            <constraint firstItem="kgB-Zf-7YH" firstAttribute="leading" secondItem="vbL-XG-pU0" secondAttribute="leading" id="e94-DP-gYX"/>
+                            <constraint firstItem="kgB-Zf-7YH" firstAttribute="top" secondItem="vbL-XG-pU0" secondAttribute="top" id="xlW-RF-jLt"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="vbL-XG-pU0"/>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="kgB-Zf-7YH" id="0Z0-ec-Aj8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QzN-ne-fNv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="746.39999999999998" y="96.7016491754123"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="HWU-gI-Ygh">
@@ -352,7 +390,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5XV-BV-xTf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="807" y="97"/>
+            <point key="canvasLocation" x="1444" y="97"/>
         </scene>
     </scenes>
     <resources>
