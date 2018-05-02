@@ -47,13 +47,17 @@ class TrendingViewController: UIViewController, UICollectionViewDelegate, UIColl
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "activityCell", for: indexPath) as! ActivityCollectionViewCell
         cell.activityTitle.text = self.activities[indexPath.row].title
         cell.activityDescription.text = self.activities[indexPath.row].theDescription
-        cell.activityPicture.downloadImage(from: self.activities[indexPath.row].pathToImage)
+        CacheImage.getImage(withURL: URL(string: self.activities[indexPath.row].pathToImage!)!) { image in
+            cell.activityPicture.image = image
+        }
         cell.locationLabel.text = self.activities[indexPath.row].locationName
      
         //get the image and name of the person who posted the activity
         ref.child("users").child(self.activities[indexPath.row].userID!).observeSingleEvent(of: .value) { (snap) in
             let user = snap.value as! [String: AnyObject]
-            cell.userPicture.downloadImage(from: user["picture"] as! String)
+            CacheImage.getImage(withURL: URL(string: user["picture"] as! String)!) { image in
+                cell.userPicture.image = image
+            }
             cell.username.text = user["name"] as? String
         }
         
@@ -168,6 +172,7 @@ class addToBucketViewController: UIViewController, UITableViewDelegate, UITableV
         tableCell.buckitTitle.text = self.buckits[indexPath.row].title
         return tableCell
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedBuckit = self.buckits[indexPath.row]
         let message = selectedBuckit.title
@@ -197,23 +202,4 @@ class addToBucketViewController: UIViewController, UITableViewDelegate, UITableV
         //Present dialog
         self.present(popup, animated: true, completion: nil)
     }
-    
-    
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

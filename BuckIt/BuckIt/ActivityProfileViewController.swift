@@ -51,11 +51,10 @@ class ActivityProfileViewController: UIViewController, UICollectionViewDelegate,
     func fillActivityData(){
         activityTitle.text = activity.title
         activityDescription.text = activity.theDescription
-        activityImage.downloadImage(from: activity.pathToImage)
+        CacheImage.getImage(withURL: URL(string: self.activity.pathToImage!)!) { image in
+            self.activityImage.image = image
+        }
         locationLabel.text = activity.locationName
-        //load location and pin on map
-        print("\n\nName: \(activity.longitude)")
-        print("\n\nName: \(activity.latitude)")
 //        addAnnotation()
     }
     
@@ -65,7 +64,9 @@ class ActivityProfileViewController: UIViewController, UICollectionViewDelegate,
         let uid = Auth.auth().currentUser?.uid
         ref.child("users").child(uid!).observeSingleEvent(of: .value) { (snap) in
             let user = snap.value as! [String: AnyObject]
-            self.userProfilePic.downloadImage(from: user["picture"] as! String)
+            CacheImage.getImage(withURL: URL(string: user["picture"] as! String)!) { image in
+                self.userProfilePic.image = image
+            }
             self.userName.text = user["name"] as? String
         }
     }
@@ -129,7 +130,9 @@ class ActivityProfileViewController: UIViewController, UICollectionViewDelegate,
         ref.child("users").child(self.tips[indexPath.row].userId).observeSingleEvent(of: .value) { (snap) in
             if(snap.exists()){
                 let user = snap.value as! [String: AnyObject]
-                cell.tipImage.downloadImage(from: user["picture"] as! String)
+                CacheImage.getImage(withURL: URL(string: user["picture"] as! String)!) { image in
+                    cell.tipImage.image = image
+                }
                 cell.tipOwnerName.text = user["name"] as? String
             }
         }

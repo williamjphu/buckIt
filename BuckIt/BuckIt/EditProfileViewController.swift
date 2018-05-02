@@ -53,7 +53,10 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                         self.nameText.text = value["name"] as? String
                         self.userNameText.text = value["username"] as? String
                         self.descriptionText.text = value["description"] as? String
-                        self.imageView.downloadImage(from: value["picture"] as! String)
+                        CacheImage.getImage(withURL: URL(string: value["picture"] as! String)!) { image in
+                            self.imageView.image = image
+                        }
+//                        self.imageView.downloadImage(from: value["picture"] as! String)
                         self.imageView.layer.cornerRadius = self.imageView.bounds.width / 2.0
                         self.imageView.layer.masksToBounds = true
                     }
