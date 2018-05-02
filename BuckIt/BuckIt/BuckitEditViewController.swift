@@ -55,7 +55,10 @@ class BuckitEditViewController: UIViewController, UIImagePickerControllerDelegat
     func fillActivityInfo(){
         nameText.text! = buckit.title!
         descriptionText.text! = buckit.desc!
-        imageView.downloadImage(from: buckit.pathToImage!)
+        CacheImage.getImage(withURL: URL(string: buckit.pathToImage!)!) { image in
+            self.imageView.image = image
+        }
+//        imageView.downloadImage(from: buckit.pathToImage!)
     }
 
     

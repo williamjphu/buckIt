@@ -9,7 +9,6 @@
 import UIKit
 import FirebaseDatabase
 import Firebase
-import Kingfisher
 
 class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollectionViewDataSource  {
     
@@ -130,11 +129,10 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "buckItCell", for: indexPath) as! BuckitCell
         
         //creating the cell
-//        cell.buckitImage.downloadImage(from: self.buckits[indexPath.row].pathToImage)
-        let resource = ImageResource(downloadURL: URL(string: self.buckits[indexPath.row].pathToImage)!, cacheKey: self.buckits[indexPath.row].pathToImage)
-        cell.buckitImage.kf.setImage(with: resource)
+        CacheImage.getImage(withURL: URL(string: self.buckits[indexPath.row].pathToImage)!) { image in
+            cell.buckitImage.image = image
+        }
         cell.BuckitName.text = self.buckits[indexPath.row].title
-        
         return cell
     }
     //buckit is clickable
@@ -153,25 +151,25 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
     }
 }
 
-extension UIImageView {
-    
-    func downloadImage(from imgURL: String!) {
-        let url = URLRequest(url: URL(string: imgURL)!)
-        
-        let task = URLSession.shared.dataTask(with: url) {
-            (data, response, error) in
-            
-            if error != nil {
-                print(error!)
-                return
-            }
-            
-            DispatchQueue.main.async {
-                self.image = UIImage(data: data!)
-            }
-            
-        }
-        
-        task.resume()
-    }
-}
+//extension UIImageView {
+//
+//    func downloadImage(from imgURL: String!) {
+//        let url = URLRequest(url: URL(string: imgURL)!)
+//        
+//        let task = URLSession.shared.dataTask(with: url) {
+//            (data, response, error) in
+//
+//            if error != nil {
+//                print(error!)
+//                return
+//            }
+//
+//            DispatchQueue.main.async {
+//                self.image = UIImage(data: data!)
+//            }
+//
+//        }
+//
+//        task.resume()
+//    }
+//}

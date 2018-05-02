@@ -50,7 +50,9 @@ class BucketListViewController: UIViewController, UITableViewDelegate, UITableVi
     func fillActivityInfo(){
         buckitTitle.text! = buckit.title!
         buckitDescription.text! = buckit.desc!
-        buckitImage.downloadImage(from: buckit.pathToImage!)
+        CacheImage.getImage(withURL: URL(string: self.buckit.pathToImage)!) { image in
+            self.buckitImage.image = image
+        }
     }
     
 
