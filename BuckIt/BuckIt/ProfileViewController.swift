@@ -44,7 +44,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
     @IBOutlet weak var quote: UITextView!
     
     
- 
+    
     @IBOutlet weak var numOfComplete: UILabel!
     @IBOutlet weak var numOfBuckIt: UILabel!
     var totalBuckit = 0;
@@ -73,13 +73,16 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
         ref.removeAllObservers()
     }
     
+    //fetch completed to get the count for the complete
     func fetchComplete(){
         let ref  = FirebaseDataContoller.sharedInstance.refToFirebase
         let uid = Firebase.Auth.auth().currentUser!.uid
         ref.child("users").child(uid).child("Completed").observeSingleEvent(of: .value, with: {snapshot in
-            let completed = snapshot.value as! [String: AnyObject]
-            
-            self.numOfComplete.text = String(completed.count)
+            if(snapshot.exists())
+            {
+                let completed = snapshot.value as! [String: AnyObject]
+                self.numOfComplete.text = String(completed.count)
+            }
         })
         ref.removeAllObservers()
     }
@@ -93,10 +96,10 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
     
     //retrieve buckit data
     func fetchUserBuckIts(){
-            let ref = FirebaseDataContoller.sharedInstance.refToFirebase
-            ref.child("BuckIts").queryOrderedByKey().observeSingleEvent(of: .value, with: { (snap) in
+        let ref = FirebaseDataContoller.sharedInstance.refToFirebase
+        ref.child("BuckIts").queryOrderedByKey().observeSingleEvent(of: .value, with: { (snap) in
             let buckitSnap = snap.value as! [String: AnyObject]
-
+            
             for (_,buckit) in buckitSnap {
                 if let uid = buckit["userID"] as? String{
                     if uid == Auth.auth().currentUser?.uid{
@@ -105,13 +108,13 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
                             let buckitID = buckit["buckitID"] as? String,
                             let pathToImage = buckit["pathToImage"] as? String,
                             let title = buckit["title"] as? String {
-
+                            
                             buckitItem.desc = description
                             buckitItem.buckitId = buckitID
                             buckitItem.pathToImage = pathToImage
                             buckitItem.title = title
                             buckitItem.userId = uid
-
+                            
                             self.buckits.append(buckitItem)
                         }
                         self.collectionview.reloadData()
@@ -121,7 +124,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
         })
         ref.removeAllObservers()
     }
-
+    
     
     //section number
     func numberOfSections(in collectionView: UICollectionView) -> Int {
