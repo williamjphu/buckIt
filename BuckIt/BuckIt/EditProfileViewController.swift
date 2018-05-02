@@ -15,7 +15,6 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     let picker = UIImagePickerController()
     
     @IBOutlet weak var imageView: UIImageView!
-        
     @IBOutlet weak var descriptionText: UITextView!
     @IBOutlet weak var nameText: UITextField!
     @IBOutlet weak var userNameText: UITextField!
@@ -80,7 +79,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         
         present(picker, animated: true, completion: nil)
         hideKeyBoard()
-
+        
     }
     
     //change image
@@ -97,7 +96,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         let newLength = text.count + string.count - range.length
         return newLength <= 45 // Bool
     }
-
+    
     
     
     //Override the edit data to the database
@@ -135,7 +134,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                     let values = ["username": self.userNameText.text,
                                   "picture": url.absoluteString,
                                   "name": self.nameText.text,
-                    "description": self.descriptionText.text] as [String : Any]
+                                  "description": self.descriptionText.text] as [String : Any]
                     usersReference.updateChildValues(values)
                     self.navigationController?.popToRootViewController(animated: true)
                 }
@@ -157,14 +156,14 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         nameText.resignFirstResponder()
         userNameText.resignFirstResponder()
     }
-
+    
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         hideKeyBoard()
-
+        
         return true
     }
-
+    
     //push the UI up the keyboard is out
     @objc func keyboardWillChange(notification: Notification){
         //get the keyboard length

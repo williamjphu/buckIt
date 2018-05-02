@@ -19,22 +19,28 @@ class HomepageController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInU
     //if users already login through facebook. Take to profile
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        
+
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
         loginButton.readPermissions = ["email", "public_profile"]
-        super.viewWillAppear(animated)
-        let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
+        reloadPage()
+    }
+    
+    func reloadPage()
+    {
         if FBSDKAccessToken.current() != nil {
             DispatchQueue.main.async {
+                let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
                 self.present(vc, animated: true, completion: nil)
             }
         } else if Firebase.Auth.auth().currentUser != nil{
             DispatchQueue.main.async {
+                  let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
                 self.present(vc, animated: true, completion: nil)
             }
         } else if GIDSignIn.sharedInstance().hasAuthInKeychain(){
             DispatchQueue.main.async {
+                  let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
                 self.present(vc, animated: true, completion: nil)
             }
         }
@@ -186,8 +192,8 @@ class HomepageController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInU
                 ref.child("users").observeSingleEvent(of: .value, with: { (snapshot) in
                     if snapshot.hasChild(theUserUID!)
                     {
-                        let newViewController = UIStoryboard(name: "TabController", bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
-                        UIApplication.topViewController()?.present(newViewController, animated: true, completion: nil)
+//                        let newViewController = UIStoryboard(name: "TabController", bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
+//                        UIApplication.topViewController()?.present(newViewController, animated: true, completion: nil)
                     } else {
                         let usersReference = ref.child("users").child(user!.uid)
                         let values : [String : Any] = ["uid": user!.uid,

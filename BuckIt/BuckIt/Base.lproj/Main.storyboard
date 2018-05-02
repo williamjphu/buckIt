@@ -155,8 +155,8 @@
         <!--TabController-->
         <scene sceneID="iAt-l0-el5">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3DO-O6-5h0" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewControllerPlaceholder storyboardName="TabController" id="XVw-mb-rbZ" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3DO-O6-5h0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="452" y="639"/>
         </scene>

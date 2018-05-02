@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 class BuckitEditViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
-
+    
     var ref = FirebaseDataContoller.sharedInstance.refToFirebase
     let store = FirebaseDataContoller.sharedInstance.refToStorage
     var userStorage = StorageReference()
@@ -29,7 +29,7 @@ class BuckitEditViewController: UIViewController, UIImagePickerControllerDelegat
         super.viewDidLoad()
         picker.delegate = self
         userStorage = self.store.child("BuckIts")
-    
+        
         //round corners of buttons
         saveButton.layer.cornerRadius = 5
         deleteButton.layer.cornerRadius = 5
@@ -58,9 +58,9 @@ class BuckitEditViewController: UIViewController, UIImagePickerControllerDelegat
         CacheImage.getImage(withURL: URL(string: buckit.pathToImage!)!) { image in
             self.imageView.image = image
         }
-//        imageView.downloadImage(from: buckit.pathToImage!)
+        //        imageView.downloadImage(from: buckit.pathToImage!)
     }
-
+    
     
     //change image
     @IBAction func changeImagePressed(_ sender: Any) {
@@ -115,7 +115,7 @@ class BuckitEditViewController: UIViewController, UIImagePickerControllerDelegat
                     
                     let values = ["title": self.nameText.text,
                                   "pathToImage": url.absoluteString,
-                    "description": self.descriptionText.text] as [String : Any]
+                                  "description": self.descriptionText.text] as [String : Any]
                     usersReference.updateChildValues(values)
                     self.navigationController?.popToRootViewController(animated: true)
                 }
@@ -130,7 +130,7 @@ class BuckitEditViewController: UIViewController, UIImagePickerControllerDelegat
         let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
         
         self.present(vc, animated: true, completion: nil)
-
+        
     }
     
     //needed to dismiss the keyboard
