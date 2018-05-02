@@ -8,9 +8,12 @@
 
 import UIKit
 
-class ActivityTableViewCell: UITableViewCell {
+class ActivityCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet weak var username: UILabel!
+    @IBOutlet weak var userPicture: UIImageView!
     @IBOutlet weak var activityTitle: UILabel!
     @IBOutlet weak var activityDescription: UILabel!
-    @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var activityPicture: UIImageView!
 }

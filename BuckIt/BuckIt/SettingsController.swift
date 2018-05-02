@@ -14,8 +14,12 @@ import Firebase
 class SettingsController: UIViewController{
     
     
+    @IBOutlet weak var logoutButton: UIButton!
+    
+    override func viewDidLoad() {
+        logoutButton.layer.cornerRadius = 5
+    }
     @IBAction func didTapSignOut(sender: AnyObject) {
-        
         
         if Auth.auth().currentUser != nil {
             GIDSignIn.sharedInstance().signOut()

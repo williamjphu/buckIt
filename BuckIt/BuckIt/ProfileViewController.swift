@@ -9,47 +9,83 @@
 import UIKit
 import FirebaseDatabase
 import Firebase
+
 class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollectionViewDataSource  {
     
     @IBOutlet weak var collectionview: UICollectionView!
     
     var buckits = [BuckIt]()
-
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         super.viewWillAppear(true)
         buckits.removeAll()
-        fetchUsers()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        fetchComplete()
         fetchUserBuckIts()
     }
     
+    override func viewDidLoad() {
+        Auth.auth().addStateDidChangeListener { (auth, user) in
+            if user != nil {
+                self.fetchUsers()
+            }
+            else{
+                print("NO USER YET")
+            }
+        }
+        
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+    }
     
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var quote: UILabel!
+    
+ 
+    @IBOutlet weak var numOfComplete: UILabel!
+    @IBOutlet weak var numOfBuckIt: UILabel!
+    var totalBuckit = 0;
     //retrieve users data
-    func fetchUsers()
-    {
-        let ref  = Database.database().reference()
-        ref.child("users").queryOrderedByKey().observeSingleEvent(of: .value, with: {snapshot in
+    func fetchUsers() {
+        let ref  = FirebaseDataContoller.sharedInstance.refToFirebase
+        ref.child("users").observeSingleEvent(of: .value, with: {snapshot in
             let users = snapshot.value as! [String: AnyObject]
             
             for(_, value) in users {
                 if let uid = value["uid"] as? String {
                     if uid == Firebase.Auth.auth().currentUser!.uid{
-
                         self.name.text = value["name"] as? String
                         self.username.text = value["username"] as? String
-                        self.quote.text = value["description"] as? String
-                        let databaseProfilePic = value["picture"] as? String
-                        let data = NSData(contentsOf: (NSURL(string: databaseProfilePic!)! as URL))
-                        self.setProfilePicture(imageView: self.profileImage, imageToSet: UIImage(data:data! as Data)!)
+                        if let descrip = value["description"] as? String {
+                            self.quote.text = descrip
+                        }
+                        if let databaseProfilePic = value["picture"] as? String {
+                            let data = NSData(contentsOf: (NSURL(string: databaseProfilePic)! as URL))
+                            self.setProfilePicture(imageView: self.profileImage, imageToSet: UIImage(data:data! as Data)!)
+                        }
                     }
                 }
             }
         })
         ref.removeAllObservers()
     }
+    
+    func fetchComplete(){
+        let ref  = FirebaseDataContoller.sharedInstance.refToFirebase
+        let uid = Firebase.Auth.auth().currentUser!.uid
+        ref.child("users").child(uid).child("Completed").observeSingleEvent(of: .value, with: {snapshot in
+            let completed = snapshot.value as! [String: AnyObject]
+            
+            self.numOfComplete.text = String(completed.count)
+        })
+        ref.removeAllObservers()
+    }
+    
     //get the profile picture and make it round
     func setProfilePicture(imageView: UIImageView, imageToSet: UIImage){
         imageView.image = imageToSet
@@ -59,7 +95,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
     
     //retrieve buckit data
     func fetchUserBuckIts(){
-            let ref  = Database.database().reference()
+            let ref = FirebaseDataContoller.sharedInstance.refToFirebase
             ref.child("BuckIts").queryOrderedByKey().observeSingleEvent(of: .value, with: { (snap) in
             let buckitSnap = snap.value as! [String: AnyObject]
 
@@ -96,7 +132,9 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
     
     //return the number of buckit
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.buckits.count
+        totalBuckit = self.buckits.count
+        numOfBuckIt.text = String(totalBuckit)
+        return totalBuckit
     }
     
     //create each cell for each buckit being added
@@ -105,9 +143,10 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "buckItCell", for: indexPath) as! BuckitCell
         
         //creating the cell
-        cell.buckitImage.downloadImage(from: self.buckits[indexPath.row].pathToImage)
+        CacheImage.getImage(withURL: URL(string: self.buckits[indexPath.row].pathToImage)!) { image in
+            cell.buckitImage.image = image
+        }
         cell.BuckitName.text = self.buckits[indexPath.row].title
-        
         return cell
     }
     //buckit is clickable
@@ -126,25 +165,25 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
     }
 }
 
-extension UIImageView {
-    
-    func downloadImage(from imgURL: String!) {
-        let url = URLRequest(url: URL(string: imgURL)!)
-        
-        let task = URLSession.shared.dataTask(with: url) {
-            (data, response, error) in
-            
-            if error != nil {
-                print(error!)
-                return
-            }
-            
-            DispatchQueue.main.async {
-                self.image = UIImage(data: data!)
-            }
-            
-        }
-        
-        task.resume()
-    }
-}
+//extension UIImageView {
+//
+//    func downloadImage(from imgURL: String!) {
+//        let url = URLRequest(url: URL(string: imgURL)!)
+//        
+//        let task = URLSession.shared.dataTask(with: url) {
+//            (data, response, error) in
+//
+//            if error != nil {
+//                print(error!)
+//                return
+//            }
+//
+//            DispatchQueue.main.async {
+//                self.image = UIImage(data: data!)
+//            }
+//
+//        }
+//
+//        task.resume()
+//    }
+//}
