@@ -2,19 +2,20 @@
 platform :ios, '9.0'
 
 target 'BuckIt' do
-  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
-  use_frameworks!
+  	# Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  	use_frameworks!
 
-  # Pods for BuckIt
-pod ‘FBSDKCoreKit’
-pod ‘FBSDKShareKit’
-pod ‘FBSDKLoginKit’
-pod 'Firebase/Auth’
-pod 'GoogleSignIn'
-pod 'SwipeCellKit'
-pod 'UITextView+Placeholder'
-pod 'PopupDialog', '~> 0.7'
-pod 'Firebase/Core'
-pod 'Firebase/Storage'
-pod 'Firebase/Database'
+ 	 # Pods for BuckIt
+	pod ‘FBSDKCoreKit’
+	pod ‘FBSDKShareKit’
+	pod ‘FBSDKLoginKit’
+	pod 'Firebase/Auth’
+	pod 'GoogleSignIn'
+	pod 'SwipeCellKit'
+	pod 'UITextView+Placeholder'
+	pod 'PopupDialog', '~> 0.7'
+	pod 'Firebase/Core'
+	pod 'Firebase/Storage'
+	pod 'Firebase/Database'
+	pod 'Kingfisher', '~> 4.0'
 end

@@ -9,6 +9,8 @@
 import UIKit
 import FirebaseDatabase
 import Firebase
+import Kingfisher
+
 class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollectionViewDataSource  {
     
     @IBOutlet weak var collectionview: UICollectionView!
@@ -19,7 +21,9 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         super.viewWillAppear(true)
         buckits.removeAll()
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         fetchUserBuckIts()
     }
     
@@ -126,7 +130,9 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "buckItCell", for: indexPath) as! BuckitCell
         
         //creating the cell
-        cell.buckitImage.downloadImage(from: self.buckits[indexPath.row].pathToImage)
+//        cell.buckitImage.downloadImage(from: self.buckits[indexPath.row].pathToImage)
+        let resource = ImageResource(downloadURL: URL(string: self.buckits[indexPath.row].pathToImage)!, cacheKey: self.buckits[indexPath.row].pathToImage)
+        cell.buckitImage.kf.setImage(with: resource)
         cell.BuckitName.text = self.buckits[indexPath.row].title
         
         return cell
