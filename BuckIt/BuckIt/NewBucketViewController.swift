@@ -34,8 +34,6 @@ class NewBucketViewController: UIViewController, UIImagePickerControllerDelegate
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage{
-            imageView.layer.cornerRadius = 10.0
-            imageView.layer.borderColor = UIColor.white.cgColor
             imageView.translatesAutoresizingMaskIntoConstraints = false
             imageView.layer.masksToBounds = true
             imageView.image = image

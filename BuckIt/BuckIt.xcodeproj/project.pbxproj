@@ -27,6 +27,7 @@
 		AE7F9C2320198AFE00420457 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F9C1E20198AFE00420457 /* User.swift */; };
 		AE7F9C2B20198CAE00420457 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F9C2920198CAE00420457 /* SignUpController.swift */; };
 		AE9BCE7A209992A7007F30FC /* CacheImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9BCE79209992A7007F30FC /* CacheImage.swift */; };
+		C325C3E520999455007D5C97 /* chooseMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C325C3E420999455007D5C97 /* chooseMapViewController.swift */; };
 		C342B2322044BA6E00A81EAA /* BuckIt.swift in Sources */ = {isa = PBXBuildFile; fileRef = C342B2312044BA6E00A81EAA /* BuckIt.swift */; };
 		C36DBBD320352A1600776F2B /* NewBucketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36DBBD220352A1600776F2B /* NewBucketViewController.swift */; };
 		C37100FF2086D82F0010C462 /* TipCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37100FE2086D82F0010C462 /* TipCollectionViewCell.swift */; };
@@ -76,6 +77,7 @@
 		AE7F9C2920198CAE00420457 /* SignUpController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
 		AE9BCE79209992A7007F30FC /* CacheImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheImage.swift; sourceTree = "<group>"; };
 		B29BF32C00461D384F3C4620 /* Pods-BuckIt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuckIt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BuckIt/Pods-BuckIt.debug.xcconfig"; sourceTree = "<group>"; };
+		C325C3E420999455007D5C97 /* chooseMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chooseMapViewController.swift; sourceTree = "<group>"; };
 		C342B2312044BA6E00A81EAA /* BuckIt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuckIt.swift; sourceTree = "<group>"; };
 		C36DBBD220352A1600776F2B /* NewBucketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewBucketViewController.swift; sourceTree = "<group>"; };
 		C37100FE2086D82F0010C462 /* TipCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -253,6 +255,7 @@
 				C3B95C262022CD8300836918 /* NewActivity.storyboard */,
 				C3B95C2C2022CDFC00836918 /* NewActivityViewController.swift */,
 				AE260AE120869363008D8960 /* LocationSearchTable.swift */,
+				C325C3E420999455007D5C97 /* chooseMapViewController.swift */,
 			);
 			name = "New Activity";
 			sourceTree = "<group>";
@@ -445,6 +448,7 @@
 				AE7F9C17201986AF00420457 /* Activity.swift in Sources */,
 				77D45FC01FAE96EB0034DDBA /* HomepageController.swift in Sources */,
 				AE9BCE7A209992A7007F30FC /* CacheImage.swift in Sources */,
+				C325C3E520999455007D5C97 /* chooseMapViewController.swift in Sources */,
 				C3A3E473207763F60081C8D6 /* chooseBuckitTableViewCell.swift in Sources */,
 				E084A48A207745990099CCCD /* BuckitEditViewController.swift in Sources */,
 				C3B95C2F2022CE1000836918 /* CompletedViewController.swift in Sources */,
