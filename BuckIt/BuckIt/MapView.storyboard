@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="yP7-1q-uae">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bj5-rH-1Ht">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,52 +10,69 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Map View Controller-->
+        <!--BuckIt!-->
         <scene sceneID="rHf-7W-2nn">
             <objects>
                 <viewController id="yP7-1q-uae" customClass="MapViewController" customModule="BuckIt" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OT3-VT-oXs">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="JY5-El-f4I">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="625"/>
                             </mapView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search for an event ..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="viU-dl-8et">
-                                <rect key="frame" x="30" y="25" width="315" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2XB-zd-ymn">
-                                <rect key="frame" x="315" y="25" width="30" height="30"/>
-                                <state key="normal" title="🕵️‍♂️"/>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="JY5-El-f4I" firstAttribute="trailing" secondItem="5kj-Pj-nBO" secondAttribute="trailing" id="3ad-zL-6us"/>
-                            <constraint firstItem="5kj-Pj-nBO" firstAttribute="trailing" secondItem="2XB-zd-ymn" secondAttribute="trailing" constant="30" id="7YQ-6M-cxh"/>
-                            <constraint firstItem="2XB-zd-ymn" firstAttribute="top" secondItem="5kj-Pj-nBO" secondAttribute="top" constant="5" id="AK7-Wa-ugc"/>
                             <constraint firstItem="JY5-El-f4I" firstAttribute="bottom" secondItem="5kj-Pj-nBO" secondAttribute="bottom" id="AyM-ez-r4Y"/>
-                            <constraint firstItem="viU-dl-8et" firstAttribute="top" secondItem="5kj-Pj-nBO" secondAttribute="top" constant="5" id="RiF-oV-l1m"/>
                             <constraint firstItem="JY5-El-f4I" firstAttribute="top" secondItem="OT3-VT-oXs" secondAttribute="top" id="alH-rE-yiG"/>
-                            <constraint firstItem="5kj-Pj-nBO" firstAttribute="trailing" secondItem="viU-dl-8et" secondAttribute="trailing" constant="30" id="irh-gK-pdL"/>
                             <constraint firstItem="JY5-El-f4I" firstAttribute="leading" secondItem="5kj-Pj-nBO" secondAttribute="leading" id="qyR-YC-dg7"/>
-                            <constraint firstItem="viU-dl-8et" firstAttribute="leading" secondItem="5kj-Pj-nBO" secondAttribute="leading" constant="30" id="w5q-gW-9o9"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5kj-Pj-nBO"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="Globe" id="MMW-Ac-UOF"/>
+                    <navigationItem key="navigationItem" title="BuckIt!" id="m89-9X-zn8"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="mapView" destination="JY5-El-f4I" id="nno-FK-XkT"/>
-                        <outlet property="search" destination="viU-dl-8et" id="NKA-wp-7dN"/>
+                        <segue destination="IcV-Uk-EiW" kind="show" identifier="showActivityProfileVC" id="A7i-e2-gp5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="std-eG-5Xv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-146.40000000000001" y="-216.34182908545728"/>
+            <point key="canvasLocation" x="632.79999999999995" y="-216.34182908545728"/>
+        </scene>
+        <!--trendingVC-->
+        <scene sceneID="vws-ga-ZKe">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Trending" referencedIdentifier="trendingVC" id="IcV-Uk-EiW" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wfj-S3-QpA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1396" y="-285.15742128935534"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="T7s-7M-9dH">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bj5-rH-1Ht" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="Globe" id="MMW-Ac-UOF"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="WPY-el-qAV">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" red="0.92156862745098034" green="0.47843137254901957" blue="0.039215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="yP7-1q-uae" kind="relationship" relationship="rootViewController" id="vvq-pf-86u"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oyg-Yw-eV5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-306.39999999999998" y="-216.34182908545728"/>
         </scene>
     </scenes>
     <resources>

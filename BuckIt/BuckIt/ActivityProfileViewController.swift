@@ -171,7 +171,7 @@ class ActivityProfileViewController: UIViewController, UICollectionViewDelegate,
         
         let placemark = MKPlacemark(coordinate: coordinate)
         let mapItem = MKMapItem(placemark: placemark)
-        mapItem.name = activity.locationName!
+        mapItem.name = activity.locationName
         mapItem.openInMaps(launchOptions: options)
         
     }
@@ -203,7 +203,6 @@ class createTipViewController : UIViewController{
         
     }
     override func viewDidLoad() {
-        postButton.layer.cornerRadius = postButton.bounds.height/2
     }
     
     override func viewWillDisappear(_ animated: Bool) {

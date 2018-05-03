@@ -19,6 +19,10 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         buckits.removeAll()
+        collectionview.layer.cornerRadius = 10
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -35,14 +39,13 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
                 print("NO USER YET")
             }
         }
-        
     }
     
     @IBOutlet weak var emptyBuckit: UIView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
-    @IBOutlet weak var quote: UITextView!
+    @IBOutlet weak var quote: UILabel!
     
     
     
@@ -59,7 +62,10 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
                 if let uid = value["uid"] as? String {
                     if uid == Firebase.Auth.auth().currentUser!.uid{
                         self.name.text = value["name"] as? String
-                        self.username.text = value["username"] as? String
+                        if let uname = value["username"] as? String{
+                            self.username.text = "@\(uname)"
+                        }
+                        
                         if let descrip = value["description"] as? String {
                             self.quote.text = descrip
                         }
@@ -149,11 +155,10 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "buckItCell", for: indexPath) as! BuckitCell
-        
+        cell.layer.cornerRadius = 10
         //creating the cell
         CacheImage.getImage(withURL: URL(string: self.buckits[indexPath.row].pathToImage)!) { image in
             cell.buckitImage.image = image
-            cell.buckitImage.layer.cornerRadius = 10
         }
         cell.BuckitName.text = self.buckits[indexPath.row].title
         return cell
