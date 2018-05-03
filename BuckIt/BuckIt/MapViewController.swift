@@ -15,7 +15,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     private var currentCoordinate: CLLocationCoordinate2D?
     private var activitiesPin = [ActivityPin]()
     private var activities = [Activity]()
-    var selectedActivity = Activity?.self
+    var selectedActivity = Activity()
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -84,8 +84,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         print("Selected annotation: \(String(describing: view.annotation?.title))")
         for item in activities {
-            print("\n\n \(item)")
+            if item.title == view.annotation?.title {
+                self.selectedActivity = item
+            }
         }
+        print("\n\n\t\t SELECTED Object \(self.selectedActivity.title)")
+        print("\n\n\t\t SELECTED Object \(self.selectedActivity.category)")
+        print("\n\n\t\t SELECTED Object \(self.selectedActivity.longitude)")
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
@@ -96,7 +101,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? ActivityProfileViewController{
-//            destination.activity =
+            destination.activity = self.selectedActivity
         }
     }
     
@@ -112,7 +117,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                         let subtitle = activity["description"] as? String,
                         let latitude = activity["latitude"] as? Double,
                         let longitude = activity["longitude"] as? Double,
-                        let category = activity["category"] as? String {
+                        let category = activity["category"] as? String,
+                        let activityID = activity["activityID"] as? String,
+                        let locatioName = activity["locationName"] as? String,
+                        let pathToImage = activity["pathToImage"] as? String {
                         
                         var imageFileName : String = ""
                         for (key, value) in FirebaseDataContoller.sharedInstance.categoriesDictionary {
@@ -124,6 +132,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                         let activityPin = ActivityPin(title: title, subtitle: subtitle, coordinate: coordinate, category: category, imageName: imageFileName)
                         activityObj.title = title
                         activityObj.theDescription = subtitle
+                        activityObj.longitude = longitude
+                        activityObj.latitude = latitude
+                        activityObj.category = category
+                        activityObj.pathToImage = pathToImage
+                        activityObj.locationName = locatioName
+                        activityObj.activityID = activityID
                         
                         self.activities.append(activityObj)
                         self.activitiesPin.append(activityPin)
