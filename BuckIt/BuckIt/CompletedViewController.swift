@@ -56,8 +56,8 @@ class CompletedViewController: UIViewController, UICollectionViewDelegate, UICol
                                 let theActivity = Activity()
                                 if let description = activity["description"] as? String,
                                     let category = activity["category"] as? String,
-                                    let latitude = activity["latitude"] as? String,
-                                    let longitude = activity["longitude"] as? String,
+                                    let latitude = activity["latitude"] as? Double,
+                                    let longitude = activity["longitude"] as? Double,
                                     let activityID = activity["activityID"] as? String,
                                     let pathToImage = activity["pathToImage"] as? String,
                                     let title = activity["activityName"] as? String,
@@ -70,7 +70,9 @@ class CompletedViewController: UIViewController, UICollectionViewDelegate, UICol
                                     theActivity.title = title
                                     theActivity.userID = uid
                                     theActivity.locationName = location
-                                    
+                                    theActivity.longitude = longitude
+                                    theActivity.latitude = latitude
+
                                     //add activity to the list
                                     self.activities.append(theActivity)
                                 }
