@@ -50,9 +50,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w2o-e7-ZuO">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <subviews>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" bounces="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="B0W-tl-d5H">
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="B0W-tl-d5H">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="15" id="X5D-yG-WXE">
                                             <size key="itemSize" width="374" height="209"/>
@@ -112,7 +111,7 @@
                                                                         <fragment content="Label">
                                                                             <attributes>
                                                                                 <font key="NSFont" size="12" name="KohinoorDevanagari-Light"/>
-                                                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                                <paragraphStyle key="NSParagraphStyle" alignment="right" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                             </attributes>
                                                                         </fragment>
                                                                     </attributedString>
@@ -188,6 +187,12 @@
                                     </collectionView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="B0W-tl-d5H" firstAttribute="top" secondItem="w2o-e7-ZuO" secondAttribute="top" id="ALo-hZ-mco"/>
+                                    <constraint firstAttribute="trailing" secondItem="B0W-tl-d5H" secondAttribute="trailing" id="kFV-Cc-Qst"/>
+                                    <constraint firstAttribute="bottom" secondItem="B0W-tl-d5H" secondAttribute="bottom" id="roi-D0-BmX"/>
+                                    <constraint firstItem="B0W-tl-d5H" firstAttribute="leading" secondItem="w2o-e7-ZuO" secondAttribute="leading" id="zGg-FE-1ea"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

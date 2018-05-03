@@ -171,7 +171,7 @@ class ActivityProfileViewController: UIViewController, UICollectionViewDelegate,
         
         let placemark = MKPlacemark(coordinate: coordinate)
         let mapItem = MKMapItem(placemark: placemark)
-        mapItem.name = activity.locationName!
+        mapItem.name = activity.locationName
         mapItem.openInMaps(launchOptions: options)
         
     }

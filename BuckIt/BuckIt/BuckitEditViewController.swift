@@ -24,7 +24,11 @@ class BuckitEditViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var selectButton: UIButton!
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         picker.delegate = self
