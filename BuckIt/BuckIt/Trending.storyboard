@@ -41,7 +41,7 @@
         <!--Trending-->
         <scene sceneID="R0x-Kf-RtJ">
             <objects>
-                <viewController id="VbG-TS-vlH" customClass="TrendingViewController" customModule="BuckIt" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="trendingVC" id="VbG-TS-vlH" customClass="TrendingViewController" customModule="BuckIt" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="isk-48-cDE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
