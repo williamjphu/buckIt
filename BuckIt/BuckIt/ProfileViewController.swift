@@ -18,21 +18,23 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        buckits.removeAll()
+        
         collectionview.layer.cornerRadius = 10
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        buckits.removeAll()
         fetchUserBuckIts()
+        self.fetchUsers()
     }
     
     override func viewDidLoad() {
         Auth.auth().addStateDidChangeListener { (auth, user) in
             if user != nil {
-                self.fetchUsers()
                 self.fetchComplete()
             }
             else{

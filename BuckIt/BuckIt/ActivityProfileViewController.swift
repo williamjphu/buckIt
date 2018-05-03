@@ -305,7 +305,7 @@ class ActivityProfileViewController: UIViewController, UICollectionViewDelegate,
     }
 }
 
-class createTipViewController : UIViewController{
+class createTipViewController : UIViewController, UITextViewDelegate{
     
     let ref = FirebaseDataContoller.sharedInstance.refToFirebase
     let store = FirebaseDataContoller.sharedInstance.refToStorage
@@ -313,32 +313,41 @@ class createTipViewController : UIViewController{
     @IBOutlet weak var postButton: UIButton!
     var activity = Activity()
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
-        
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
+        self.navigationController?.navigationBar.shadowImage = nil
     }
-    override func viewDidLoad() {
-    }
+
     
     override func viewWillDisappear(_ animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
     //textbox for the creating the tip
-    @IBOutlet var tipText: UITextView!
     var alert: UIAlertController!
     
-    @IBAction func backPressed(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+    @IBOutlet weak var textView: UITextView!
+    //needed to dismiss the keyboard
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        textView.endEditing(true)
+    }
+    
+    //doesnt work
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if(text == "\n") {
+            textView.resignFirstResponder()
+            return false
+        }
+        return true
     }
     
     //Need to post the tip under the Tip Node and also under the activity Node
     @IBAction func postTipPressed(_ sender: Any) {
         //if there is a tip written, add the tip
-        if(tipText.text != ""){
-            print(tipText.text)
+        if(textView.text != ""){
+            print(textView.text)
             //create a Tip Node in the Database
             let uid = Auth.auth().currentUser!.uid
             let key = self.ref.child("Tips").childByAutoId().key
-            let tip = ["desc" : tipText.text,
+            let tip = ["desc" : textView.text,
                        "tipID" : key,
                        "userID" : uid] as [String : Any]
             let tipFeed = ["\(key)" : tip]

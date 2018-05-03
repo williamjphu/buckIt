@@ -20,23 +20,17 @@ class SettingsController: UIViewController{
         logoutButton.layer.cornerRadius = 5
     }
     @IBAction func didTapSignOut(sender: AnyObject) {
-        
-        if Auth.auth().currentUser != nil {
-            GIDSignIn.sharedInstance().signOut()
-            let loginManager = FBSDKLoginManager()
-            loginManager.logOut()
-            let firebaseAuth = Auth.auth()
-            do {
-                try firebaseAuth.signOut()
-            } catch let signOutError as NSError {
-                print ("Error signing out: %@", signOutError)
-            }
-            
-            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Login")
-            present(vc, animated: true, completion: nil)
-            
+        GIDSignIn.sharedInstance().signOut()
+        let loginManager = FBSDKLoginManager()
+        loginManager.logOut()
+        let firebaseAuth = Auth.auth()
+        do {
+            try firebaseAuth.signOut()
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
         }
         
-        
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Login")
+        present(vc, animated: true, completion: nil)
     }
 }

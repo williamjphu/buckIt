@@ -21,7 +21,7 @@ class BuckitEditViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var descriptionText: UITextField!
     @IBOutlet weak var nameText: UITextField!
     @IBOutlet weak var saveButton: UIButton!
-    @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var deleteButton: UIBarButtonItem!
     @IBOutlet weak var selectButton: UIButton!
     
     override func viewWillAppear(_ animated: Bool) {
@@ -36,7 +36,6 @@ class BuckitEditViewController: UIViewController, UIImagePickerControllerDelegat
         
         //round corners of buttons
         saveButton.layer.cornerRadius = 5
-        deleteButton.layer.cornerRadius = 5
         selectButton.layer.cornerRadius = 3
         
         //maximize text input to 80 character

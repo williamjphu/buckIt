@@ -29,6 +29,7 @@ class HomepageController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInU
     
     func reloadPage()
     {
+        
         if FBSDKAccessToken.current() != nil {
             DispatchQueue.main.async {
                 let vc = UIStoryboard(name: "TabController" , bundle: nil).instantiateViewController(withIdentifier: "tabBarVC")
