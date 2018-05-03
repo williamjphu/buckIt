@@ -32,6 +32,7 @@ class ActivityProfileViewController: UIViewController, UICollectionViewDelegate,
         loadUserData()
         tips.removeAll()
         loadTips()
+        setupLikeButton()
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
@@ -66,6 +67,7 @@ class ActivityProfileViewController: UIViewController, UICollectionViewDelegate,
             let user = snap.value as! [String: AnyObject]
             CacheImage.getImage(withURL: URL(string: user["picture"] as! String)!) { image in
                 self.userProfilePic.image = image
+                self.userProfilePic.layer.cornerRadius = self.userProfilePic.bounds.width/2
             }
             self.userName.text = user["name"] as? String
         }
@@ -74,6 +76,117 @@ class ActivityProfileViewController: UIViewController, UICollectionViewDelegate,
     func textFieldDidBeginEditing(_ textField: UITextField) {
         performSegue(withIdentifier: "addTip", sender: self.activity)
         addTipTextField.resignFirstResponder()
+    }
+    func setupLikeButton(){
+        let ref = FirebaseDataContoller.sharedInstance.refToFirebase
+        ref.child("Activities").child(activity.activityID!).observeSingleEvent(of: .value) { (snapshot) in
+            if let activity = snapshot.value as? [String : AnyObject]{
+                
+                //the activity has some likes
+                if let like = activity["likes"] as? Int{
+                    self.likeCount.text = "\(like)"
+                    if let people = activity["peopleWhoLike"] as? [String : AnyObject]{
+                        for (id,person) in people{
+                            //the user liked the activity already
+                            if person as? String == Auth.auth().currentUser!.uid{
+                                print("ALREADY LIKED")
+                                self.likeButton.isHidden = true
+                                self.unlikeButton.isHidden = false
+                                return
+                            }
+                        }
+                        //the user did not like the activity yet
+                        print("NOT LIKED, BUT HAS LIKES")
+                        self.likeButton.isHidden = false
+                        self.unlikeButton.isHidden = true
+                        return
+                    }
+
+                }
+                //the activity is not liked by any users
+                print("NOT LIKED YET")
+                self.likeButton.isHidden = false
+                self.unlikeButton.isHidden = true
+                self.likeCount.text = "0"
+                return
+            }
+        }
+
+    }
+    @IBOutlet weak var unlikeButton: UIButton!
+    @IBOutlet weak var likeCount: UILabel!
+    @IBOutlet weak var likeButton: UIButton!
+    @IBAction func likePressed(_ sender: Any) {
+        self.likeButton.isEnabled = false
+        let ref = FirebaseDataContoller.sharedInstance.refToFirebase
+        let keyToActivity = ref.child("Activities").childByAutoId().key
+        
+        ref.child("Activities").child(self.activity.activityID!).observeSingleEvent(of: .value) { (snapshot) in
+            if let activity = snapshot.value as? [String : AnyObject] {
+                let updateLikes: [String: Any] = ["peopleWhoLike/\(keyToActivity)": Auth.auth().currentUser!.uid]
+                ref.child("Activities").child(self.activity.activityID!).updateChildValues(updateLikes, withCompletionBlock: { (error, reff) in
+                    if error == nil {
+                        ref.child("Activities").child(self.activity.activityID!).observeSingleEvent(of: .value, with: { (snap) in
+                            if let properties = snap.value as? [String : AnyObject]{
+                                if let likes = properties["peopleWhoLike"] as? [String : Any]{
+                                    let count = likes.count
+                                    self.likeCount.text = "\(count)"
+                                    
+                                    let update = ["likes" : count]
+                                    ref.child("Activities").child(self.activity.activityID!).updateChildValues(update)
+                                    self.likeButton.isHidden = true
+                                    self.unlikeButton.isHidden = false
+                                    self.likeButton.isEnabled = true
+                                   
+                                }
+                            }
+                        })
+                    }
+                })
+            }
+        }
+        ref.removeAllObservers()
+    }
+    
+    @IBAction func unlikePressed(_ sender: Any) {
+        self.unlikeButton.isEnabled = false
+        let ref = FirebaseDataContoller.sharedInstance.refToFirebase
+        
+        
+        ref.child("Activities").child(self.activity.activityID!).observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            if let properties = snapshot.value as? [String : AnyObject] {
+                if let peopleWhoLike = properties["peopleWhoLike"] as? [String : AnyObject] {
+                    for (id,person) in peopleWhoLike {
+                        if person as? String == Auth.auth().currentUser!.uid {
+                            ref.child("Activities").child(self.activity.activityID!).child("peopleWhoLike").child(id).removeValue(completionBlock: { (error, reff) in
+                                if error == nil {
+                                    ref.child("Activities").child(self.activity.activityID!).observeSingleEvent(of: .value, with: { (snap) in
+                                        if let prop = snap.value as? [String : AnyObject] {
+                                            if let likes = prop["peopleWhoLike"] as? [String : AnyObject] {
+                                                let count = likes.count
+                                                self.likeCount.text = "\(count)"
+                                                ref.child("Activities").child(self.activity.activityID!).updateChildValues(["likes" : count])
+                                            }else {
+                                                self.likeCount.text = "0"
+                                            ref.child("Activities").child(self.activity.activityID!).updateChildValues(["likes" : 0])
+                                            }
+                                        }
+                                    })
+                                }
+                            })
+                            
+                            self.likeButton.isHidden = false
+                            self.unlikeButton.isHidden = true
+                            self.unlikeButton.isEnabled = true
+                            break
+                        }
+                    }
+                }
+            }
+            
+        })
+        ref.removeAllObservers()
     }
     
     func loadTips(){
@@ -132,6 +245,7 @@ class ActivityProfileViewController: UIViewController, UICollectionViewDelegate,
                 let user = snap.value as! [String: AnyObject]
                 CacheImage.getImage(withURL: URL(string: user["picture"] as! String)!) { image in
                     cell.tipImage.image = image
+                    cell.tipImage.layer.cornerRadius = cell.tipImage.bounds.width/2
                 }
                 cell.tipOwnerName.text = user["name"] as? String
             }
@@ -246,34 +360,5 @@ class createTipViewController : UIViewController{
             alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
             self.present(alert, animated: true)
         }
-    }
-}
-
-class CustomView: UIView {
-    
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-        // Get Height and Width
-        let layerHeight = layer.frame.height
-        let layerWidth = layer.frame.width
-        // Create Path
-        let bezierPath = UIBezierPath()
-        //  Points
-        let pointA = CGPoint(x: 0, y: 0)
-        let pointB = CGPoint(x: layerWidth, y: 0)
-        let pointC = CGPoint(x: layerWidth, y: layerHeight*9/10)
-        let pointD = CGPoint(x: 0, y: layerHeight)
-        // Draw the path
-        bezierPath.move(to: pointA)
-        bezierPath.addLine(to: pointB)
-        bezierPath.addLine(to: pointC)
-        bezierPath.addLine(to: pointD)
-        bezierPath.close()
-        // Mask to Path
-        let shapeLayer = CAShapeLayer()
-        shapeLayer.path = bezierPath.cgPath
-        layer.mask = shapeLayer
     }
 }

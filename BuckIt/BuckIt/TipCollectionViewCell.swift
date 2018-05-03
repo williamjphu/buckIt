@@ -13,4 +13,6 @@ class TipCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var tipDescription: UILabel!
     @IBOutlet weak var tipImage: UIImageView!
     @IBOutlet weak var tipOwnerName: UILabel!
+    
+    
 }

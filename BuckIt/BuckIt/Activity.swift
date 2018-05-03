@@ -19,7 +19,8 @@ class Activity : NSObject {
     var latitude : Double?
     var longitude : Double?
     var category : String?
-    
+    var likes : Int?
+    var peopleWhoLike: [String] = [String]()
 //    init(title: String?="", description: String?="", category: String?="", pathToImage: String?="", activityID: String?="", userID: String?="", locationName: String?="") {
 //        self.title = title
 //        self.theDescription = description

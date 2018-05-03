@@ -91,7 +91,16 @@ class TrendingViewController: UIViewController, UICollectionViewDelegate, UIColl
                         let location = activity["locationName"] as? String,
                         let title = activity["activityName"] as? String,
                         let longitude = activity["longitude"] as? Double,
-                        let latitude = activity["latitude"] as? Double {
+                        let latitude = activity["latitude"] as? Double{
+                        
+                        if let likes = activity["likes"] as? Int{
+                            theActivity.likes = likes
+                        }
+                        if let peopleWhoLike = activity["peopleWhoLike"] as? [String : AnyObject]{
+                            for (_,person) in peopleWhoLike {
+                                theActivity.peopleWhoLike.append(person as! String)
+                            }
+                        }
 
                         theActivity.locationName = location
                         theActivity.theDescription = description

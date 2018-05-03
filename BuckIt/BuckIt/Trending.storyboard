@@ -239,7 +239,7 @@
                                                 <rect key="frame" x="0.0" y="293" width="375" height="107.5"/>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </mapView>
-                                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hrx-OL-fxb" customClass="CustomView" customModule="BuckIt" customModuleProvider="target">
+                                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hrx-OL-fxb">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="231"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zLs-jo-tSP">
@@ -278,12 +278,27 @@
                                                     <constraint firstAttribute="bottom" secondItem="zLs-jo-tSP" secondAttribute="bottom" constant="0.5" id="lvV-pe-iLh"/>
                                                 </constraints>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleAspectFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qbD-VQ-hRw">
-                                                <rect key="frame" x="324" y="239" width="43" height="49"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TBW-N9-f4d">
+                                                <rect key="frame" x="333" y="270" width="34" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" image="addBucket Icon"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <color key="textColor" red="0.92156862750000001" green="0.47843137250000001" blue="0.039215686270000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7lc-ep-XON">
+                                                <rect key="frame" x="330" y="239" width="40" height="36"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" image="buckit-1"/>
                                                 <connections>
-                                                    <action selector="addToBucketPressed:" destination="VpB-LJ-32i" eventType="touchUpInside" id="2DM-8p-mI8"/>
+                                                    <action selector="likePressed:" destination="VpB-LJ-32i" eventType="touchUpInside" id="4VI-ha-IS3"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wXa-1i-ohi">
+                                                <rect key="frame" x="330" y="239" width="40" height="36"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" image="star"/>
+                                                <connections>
+                                                    <action selector="unlikePressed:" destination="VpB-LJ-32i" eventType="touchUpInside" id="hE8-o3-Egu"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -495,7 +510,14 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Lml-pa-gfs"/>
                     </view>
-                    <navigationItem key="navigationItem" id="SUz-rN-vDn"/>
+                    <navigationItem key="navigationItem" id="SUz-rN-vDn">
+                        <barButtonItem key="rightBarButtonItem" image="add-1" id="CPg-3P-gf2">
+                            <color key="tintColor" red="0.92156862750000001" green="0.47843137250000001" blue="0.039215686270000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="addToBucketPressed:" destination="VpB-LJ-32i" id="01t-gk-xNF"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <size key="freeformSize" width="375" height="1000"/>
                     <connections>
                         <outlet property="activityDescription" destination="lVZ-Qu-8qo" id="2iI-mX-Gcs"/>
@@ -503,9 +525,12 @@
                         <outlet property="activityTitle" destination="shf-LH-DkD" id="ZZw-xb-hhd"/>
                         <outlet property="addTipTextField" destination="cq4-hM-D58" id="WJY-3p-6ix"/>
                         <outlet property="collectionView" destination="lnI-hq-T6p" id="kCn-si-aYq"/>
+                        <outlet property="likeButton" destination="7lc-ep-XON" id="8lL-oM-aWD"/>
+                        <outlet property="likeCount" destination="TBW-N9-f4d" id="A2t-US-u8D"/>
                         <outlet property="locationLabel" destination="540-0z-8SL" id="L5h-hB-Zdx"/>
                         <outlet property="mapView" destination="Tjc-oW-3Ap" id="64n-VL-z36"/>
                         <outlet property="navigationItem" destination="SUz-rN-vDn" id="rJz-mM-yNE"/>
+                        <outlet property="unlikeButton" destination="wXa-1i-ohi" id="h0T-6R-62h"/>
                         <outlet property="userName" destination="sHs-H5-ro0" id="HGm-E7-aH0"/>
                         <outlet property="userProfilePic" destination="ol5-4M-Mc2" id="NP6-oS-9cr"/>
                         <segue destination="uLi-qg-YN1" kind="show" identifier="addToBuckit" id="oAQ-ac-Xlk"/>
@@ -678,7 +703,9 @@
     </scenes>
     <resources>
         <image name="Trending" width="32" height="32"/>
-        <image name="addBucket Icon" width="69" height="69"/>
+        <image name="add-1" width="32" height="32"/>
+        <image name="buckit-1" width="128" height="128"/>
         <image name="location" width="64" height="64"/>
+        <image name="star" width="128" height="128"/>
     </resources>
 </document>
