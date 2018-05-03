@@ -155,7 +155,7 @@ class HomepageController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInU
         
         //Draw Google sign in button
         let googleButton = GIDSignInButton()
-        googleButton.frame = CGRect(x: 55, y: 523, width: 265, height: 30)
+        googleButton.frame = CGRect(x: 55, y: 520, width: 265, height: 30)
         googleButton.style = .wide
         googleButton.colorScheme = .dark
         GIDSignIn.sharedInstance().uiDelegate = self

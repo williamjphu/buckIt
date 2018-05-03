@@ -18,12 +18,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bucket-1" translatesAutoresizingMaskIntoConstraints="NO" id="orC-GF-be7">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jfkgawrz" translatesAutoresizingMaskIntoConstraints="NO" id="yTO-aP-ycH">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="buckit-1" translatesAutoresizingMaskIntoConstraints="NO" id="orC-GF-be7">
                                 <rect key="frame" x="115" y="273" width="145" height="120"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="yTO-aP-ycH" secondAttribute="trailing" id="Jj7-0t-XiV"/>
+                            <constraint firstItem="yTO-aP-ycH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="RYt-Ta-nCA"/>
+                            <constraint firstItem="yTO-aP-ycH" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="-20" id="kUr-WA-6pP"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="yTO-aP-ycH" secondAttribute="bottom" id="nS3-6g-PV5"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
@@ -33,6 +42,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="bucket-1" width="64" height="64"/>
+        <image name="buckit-1" width="64" height="64"/>
+        <image name="jfkgawrz" width="200" height="200"/>
     </resources>
 </document>
