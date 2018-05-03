@@ -88,11 +88,9 @@ class CompletedViewController: UIViewController, UICollectionViewDelegate, UICol
     //section number
     func numberOfSections(in tableView: UICollectionView) -> Int {
         if activities.count > 0 {
-            print("IT WORKS")
             tableView.backgroundView = nil
             return 1
         } else {
-            print("IT SHOW EMPTY")
             tableView.backgroundView = emptyView
             return 0
         }

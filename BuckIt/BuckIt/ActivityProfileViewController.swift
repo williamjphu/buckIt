@@ -55,7 +55,7 @@ class ActivityProfileViewController: UIViewController, UICollectionViewDelegate,
             self.activityImage.image = image
         }
         locationLabel.text = activity.locationName
-//        addAnnotation()
+        addAnnotation()
     }
     
     //fetch for the current_user to display their picture on the tips section
@@ -161,19 +161,33 @@ class ActivityProfileViewController: UIViewController, UICollectionViewDelegate,
         }
     }
 
+    @IBAction func getDirections(){
+        let lon: Double = activity.longitude!
+        let lat: Double = activity.latitude!
+        let regionDistance : CLLocationDistance = 1000;
+        let coordinate = CLLocationCoordinate2DMake(lat, lon)
+        let regionSpan = MKCoordinateRegionMakeWithDistance(coordinate, regionDistance, regionDistance)
+        let options = [MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center), MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)]
+        
+        let placemark = MKPlacemark(coordinate: coordinate)
+        let mapItem = MKMapItem(placemark: placemark)
+        mapItem.name = activity.locationName!
+        mapItem.openInMaps(launchOptions: options)
+        
+    }
     func addAnnotation() {
-//        let span = MKCoordinateSpanMake(0.05, 0.05)
-//        let lon: Double = activity.longitude!
-//        let lat: Double = activity.latitude!
-//        let activityLocation: CLLocationCoordinate2D = CLLocationCoordinate2DMake(lon, lat)
-//        let region = MKCoordinateRegionMake(activityLocation, span)
-//        mapView.setRegion(region, animated: true)
-//
-//        let annotation = MKPointAnnotation()
-//        annotation.coordinate = activityLocation
-//        annotation.title = activity.title
-//        annotation.subtitle = activity.theDescription
-//        mapView.addAnnotation(annotation)
+        let span = MKCoordinateSpanMake(0.075, 0.075)
+        let lon: Double = activity.longitude!    
+        let lat: Double = activity.latitude!
+        let activityLocation: CLLocationCoordinate2D = CLLocationCoordinate2DMake(lat, lon)
+        let region = MKCoordinateRegionMake(activityLocation, span)
+        mapView.setRegion(region, animated: true)
+
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = activityLocation
+        annotation.title = activity.title
+        annotation.subtitle = activity.theDescription
+        mapView.addAnnotation(annotation)
     }
 }
 

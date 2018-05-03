@@ -101,7 +101,6 @@ class TrendingViewController: UIViewController, UICollectionViewDelegate, UIColl
                         theActivity.userID = uid
                         theActivity.latitude = latitude
                         theActivity.longitude = longitude
-                        print("\n\n\tLong: \(longitude)")
                         self.activities.append(theActivity)
                     }
                     self.collectionView.reloadData()
