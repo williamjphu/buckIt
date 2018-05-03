@@ -42,10 +42,10 @@
             </objects>
             <point key="canvasLocation" x="632.79999999999995" y="-216.34182908545728"/>
         </scene>
-        <!--trendingVC-->
+        <!--activityProfilePage-->
         <scene sceneID="vws-ga-ZKe">
             <objects>
-                <viewControllerPlaceholder storyboardName="Trending" referencedIdentifier="trendingVC" id="IcV-Uk-EiW" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Trending" referencedIdentifier="activityProfilePage" id="IcV-Uk-EiW" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wfj-S3-QpA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1396" y="-285.15742128935534"/>
