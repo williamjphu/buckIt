@@ -24,15 +24,6 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
 
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        buckits.removeAll()
-        fetchUserBuckIts()
-        self.fetchUsers()
-    }
-    
-    override func viewDidLoad() {
         Auth.auth().addStateDidChangeListener { (auth, user) in
             if user != nil {
                 self.fetchComplete()
@@ -42,6 +33,13 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate,UICollec
             }
         }
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        buckits.removeAll()
+        fetchUserBuckIts()
+        self.fetchUsers()
+    }
+    
     
     @IBOutlet weak var emptyBuckit: UIView!
     @IBOutlet weak var name: UILabel!
