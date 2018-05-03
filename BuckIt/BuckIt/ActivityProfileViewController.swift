@@ -203,7 +203,6 @@ class createTipViewController : UIViewController{
         
     }
     override func viewDidLoad() {
-        postButton.layer.cornerRadius = postButton.bounds.height/2
     }
     
     override func viewWillDisappear(_ animated: Bool) {

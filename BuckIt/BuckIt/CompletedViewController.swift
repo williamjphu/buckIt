@@ -55,9 +55,9 @@ class CompletedViewController: UIViewController, UICollectionViewDelegate, UICol
                             if activity["activityID"] as? String == key {
                                 let theActivity = Activity()
                                 if let description = activity["description"] as? String,
-                                    //                                    let category = activity["category"] as? String,
-                                    //                                    let latitude = activity["latitude"] as? String,
-                                    //                                    let longitude = activity["longitude"] as? String,
+                                    let category = activity["category"] as? String,
+                                    let latitude = activity["latitude"] as? String,
+                                    let longitude = activity["longitude"] as? String,
                                     let activityID = activity["activityID"] as? String,
                                     let pathToImage = activity["pathToImage"] as? String,
                                     let title = activity["activityName"] as? String,
