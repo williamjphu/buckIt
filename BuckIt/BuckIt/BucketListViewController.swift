@@ -21,7 +21,8 @@ class BucketListViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var buckitDescription: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var buckitImage: UIImageView!
-
+    @IBOutlet weak var emptyActivity: UIView!
+    
     var activities = [Activity]()
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -40,7 +41,7 @@ class BucketListViewController: UIViewController, UITableViewDelegate, UITableVi
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.register(SwipeTableViewCell.self, forCellReuseIdentifier: "cell")
-
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -83,7 +84,13 @@ class BucketListViewController: UIViewController, UITableViewDelegate, UITableVi
     
     //the number of items in the list
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.activities.count
+        if self.activities.count > 0 {
+            tableView.backgroundView = nil
+            return self.activities.count
+        } else {
+            tableView.backgroundView = emptyActivity
+            return 0
+        }
     }
     
     //makes the row able to be edited
@@ -100,7 +107,7 @@ class BucketListViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SwipeTableViewCell
         row.delegate = self
-
+        
         //check to see if the table have user completed firebase then do a checkmark
         let selectedBuckit = self.activities[indexPath.row]
         for i in match{
@@ -110,6 +117,7 @@ class BucketListViewController: UIViewController, UITableViewDelegate, UITableVi
                 row.accessoryType = .checkmark
             }
         }
+        
         //create label from database
         let label = UILabel(frame: CGRect(x: 140.0, y: 14.0, width: 200.0, height: 30.0))
         label.text = self.activities[indexPath.row].title
@@ -155,9 +163,9 @@ class BucketListViewController: UIViewController, UITableViewDelegate, UITableVi
                 let popup = PopupDialog(title: title, message: message, image: image)
                 
                 // Create buttons
-                let buttonOne = CancelButton(title: "Share it!") {
-                    print("You canceled the car dialog.")
-                }
+//                let buttonOne = CancelButton(title: "Share it!") {
+//                    print("You canceled the car dialog.")
+//                }
                 let buttonTwo = DefaultButton(title: "OK", height: 60) {
                     print("Ah, maybe next time :)")
                 }
@@ -176,14 +184,14 @@ class BucketListViewController: UIViewController, UITableViewDelegate, UITableVi
 
                 
 //              Add buttons to dialog
-                popup.addButtons([buttonOne, buttonTwo])
+                popup.addButtons([buttonTwo])
                 
 //              Present dialog
                 self.present(popup, animated: true, completion: nil)
                 
             }
             
-            addAction.backgroundColor = UIColor.green
+            addAction.backgroundColor = UIColor.init(red: 45.0/255.0, green: 196.0/255.0, blue: 118.0/255.0, alpha: 1)
             return [addAction]
         }
         }

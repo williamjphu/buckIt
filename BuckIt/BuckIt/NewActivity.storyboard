@@ -22,21 +22,6 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="152"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CmB-gk-IXP">
-                                <rect key="frame" x="137" y="182" width="134" height="34"/>
-                                <color key="backgroundColor" red="1" green="0.59999999999999998" blue="0.043137254901960784" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <state key="normal" title="Select Image ">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="3"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="importImage:" destination="hc8-6c-VPp" eventType="touchUpInside" id="zt0-NU-ueO"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ACTIVITY TITLE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3pQ-U5-Ly9">
                                 <rect key="frame" x="16" y="230" width="97" height="15"/>
                                 <constraints>
@@ -214,6 +199,24 @@
                                     <constraint firstAttribute="width" constant="170" id="bBW-1d-UmA"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CmB-gk-IXP">
+                                <rect key="frame" x="120" y="167" width="134" height="34"/>
+                                <color key="backgroundColor" red="1" green="0.59999999999999998" blue="0.043137254901960784" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="yfP-Ja-jim"/>
+                                </constraints>
+                                <state key="normal" title="Select Image ">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="importImage:" destination="hc8-6c-VPp" eventType="touchUpInside" id="zt0-NU-ueO"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -223,7 +226,7 @@
                             <constraint firstItem="Lok-Jl-cPV" firstAttribute="trailing" secondItem="eIt-ax-H1g" secondAttribute="trailing" constant="12" id="7MX-J6-zDT"/>
                             <constraint firstItem="IAO-pL-zcB" firstAttribute="top" secondItem="hVc-43-1qx" secondAttribute="bottom" id="9Ad-W9-ztL"/>
                             <constraint firstItem="Zf1-A7-gPU" firstAttribute="top" secondItem="Lu4-yx-IBN" secondAttribute="bottom" constant="85" id="AGV-pV-Nch"/>
-                            <constraint firstItem="CmB-gk-IXP" firstAttribute="top" secondItem="Lok-Jl-cPV" secondAttribute="top" constant="118" id="Bj8-uN-FTZ"/>
+                            <constraint firstItem="Bql-Fw-y0m" firstAttribute="top" secondItem="CmB-gk-IXP" secondAttribute="bottom" constant="44" id="D2U-18-UgV"/>
                             <constraint firstItem="3pQ-U5-Ly9" firstAttribute="top" secondItem="rdf-OL-sus" secondAttribute="bottom" constant="14" id="E0v-GG-vrt"/>
                             <constraint firstItem="eIt-ax-H1g" firstAttribute="leading" secondItem="Lok-Jl-cPV" secondAttribute="leading" constant="16" id="Fwf-ks-9CX"/>
                             <constraint firstItem="rdf-OL-sus" firstAttribute="top" secondItem="Lok-Jl-cPV" secondAttribute="top" id="GbX-10-Yo1"/>
@@ -232,13 +235,13 @@
                             <constraint firstItem="mD3-IL-3Yx" firstAttribute="top" secondItem="1cF-hZ-yHp" secondAttribute="bottom" constant="8" id="J6m-hh-F0w"/>
                             <constraint firstItem="Lok-Jl-cPV" firstAttribute="trailing" secondItem="rdf-OL-sus" secondAttribute="trailing" id="Jja-mw-N9M"/>
                             <constraint firstItem="hVc-43-1qx" firstAttribute="top" secondItem="xTp-vR-Td6" secondAttribute="bottom" constant="8" id="L7G-u5-wZg"/>
+                            <constraint firstItem="Lok-Jl-cPV" firstAttribute="trailing" secondItem="CmB-gk-IXP" secondAttribute="trailing" constant="121" id="LWW-Ko-gFR"/>
                             <constraint firstItem="Lok-Jl-cPV" firstAttribute="bottom" secondItem="eIt-ax-H1g" secondAttribute="bottom" constant="19" id="MFt-GN-L81"/>
                             <constraint firstItem="1cF-hZ-yHp" firstAttribute="leading" secondItem="Lok-Jl-cPV" secondAttribute="leading" constant="16" id="O4x-k0-sM9"/>
                             <constraint firstItem="i1o-7O-Z24" firstAttribute="top" secondItem="IAO-pL-zcB" secondAttribute="bottom" constant="2" id="OV3-Cl-4OB"/>
-                            <constraint firstItem="Lok-Jl-cPV" firstAttribute="bottom" secondItem="CmB-gk-IXP" secondAttribute="bottom" constant="402" id="Pyx-Kd-dOn"/>
+                            <constraint firstItem="CmB-gk-IXP" firstAttribute="leading" secondItem="Lok-Jl-cPV" secondAttribute="leading" constant="120" id="Qam-BA-z5s"/>
                             <constraint firstItem="eyb-ak-CsE" firstAttribute="top" secondItem="Bql-Fw-y0m" secondAttribute="bottom" constant="2" id="RFy-jd-5oP"/>
                             <constraint firstItem="Bql-Fw-y0m" firstAttribute="leading" secondItem="Lok-Jl-cPV" secondAttribute="leading" constant="16" id="UwL-qf-1qh"/>
-                            <constraint firstItem="CmB-gk-IXP" firstAttribute="leading" secondItem="Lok-Jl-cPV" secondAttribute="leading" constant="137" id="Vea-G6-kB1"/>
                             <constraint firstItem="rdf-OL-sus" firstAttribute="leading" secondItem="Lok-Jl-cPV" secondAttribute="leading" id="Vwz-0z-zWT"/>
                             <constraint firstItem="IAO-pL-zcB" firstAttribute="leading" secondItem="Lok-Jl-cPV" secondAttribute="leading" constant="193" id="WRZ-MZ-VZW"/>
                             <constraint firstItem="Lok-Jl-cPV" firstAttribute="trailing" secondItem="Lu4-yx-IBN" secondAttribute="trailing" constant="279" id="Wut-wq-PIg"/>
@@ -247,6 +250,7 @@
                             <constraint firstItem="xTp-vR-Td6" firstAttribute="top" secondItem="V58-Eh-kkv" secondAttribute="bottom" constant="2" id="aOE-oq-coB"/>
                             <constraint firstItem="Cjd-jm-4rD" firstAttribute="leading" secondItem="Lok-Jl-cPV" secondAttribute="leading" constant="16" id="aj1-gW-j3a"/>
                             <constraint firstItem="Lok-Jl-cPV" firstAttribute="bottom" secondItem="rdf-OL-sus" secondAttribute="bottom" constant="402" id="bZX-KN-VR6"/>
+                            <constraint firstItem="CmB-gk-IXP" firstAttribute="top" secondItem="Lok-Jl-cPV" secondAttribute="top" constant="103" id="dah-18-fGJ"/>
                             <constraint firstItem="MS1-qb-SRe" firstAttribute="top" secondItem="1cF-hZ-yHp" secondAttribute="bottom" constant="8" id="fFJ-G0-SSA"/>
                             <constraint firstItem="xTp-vR-Td6" firstAttribute="leading" secondItem="Lok-Jl-cPV" secondAttribute="leading" constant="193" id="gAU-go-1Qv"/>
                             <constraint firstItem="Hxr-Kt-3RN" firstAttribute="top" secondItem="1nH-Xc-YWL" secondAttribute="bottom" constant="2" id="gDy-aE-EUS"/>
@@ -259,7 +263,6 @@
                             <constraint firstItem="kp3-IU-sMR" firstAttribute="leading" secondItem="Lok-Jl-cPV" secondAttribute="leading" constant="16" id="rke-jS-vIH"/>
                             <constraint firstItem="7xS-Tg-VmB" firstAttribute="top" secondItem="kp3-IU-sMR" secondAttribute="bottom" id="sNS-rr-wax"/>
                             <constraint firstItem="1nH-Xc-YWL" firstAttribute="leading" secondItem="Lok-Jl-cPV" secondAttribute="leading" constant="16" id="sT5-pH-QVb"/>
-                            <constraint firstItem="Lok-Jl-cPV" firstAttribute="trailing" secondItem="CmB-gk-IXP" secondAttribute="trailing" constant="104" id="uuz-Xo-Lef"/>
                             <constraint firstItem="V58-Eh-kkv" firstAttribute="leading" secondItem="Lok-Jl-cPV" secondAttribute="leading" constant="193" id="vkc-4Q-5SY"/>
                             <constraint firstItem="Hxr-Kt-3RN" firstAttribute="leading" secondItem="Lok-Jl-cPV" secondAttribute="leading" constant="16" id="xqC-tI-YMF"/>
                             <constraint firstItem="mD3-IL-3Yx" firstAttribute="leading" secondItem="Lok-Jl-cPV" secondAttribute="leading" constant="16" id="ych-Tq-Nfd"/>
