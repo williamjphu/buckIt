@@ -550,10 +550,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ldq-gv-y7g">
-                                <rect key="frame" x="16" y="79" width="343" height="353"/>
+                                <rect key="frame" x="16" y="79" width="343" height="269"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" lookupSuggestion="YES"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder">
                                         <string key="value">Example: This is one of my favorite activities to do the the Bay Area because of the perfect view of the San Francisco Golden Gate Bridge! Definitely a must!</string>
@@ -564,7 +565,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="avB-8O-qtJ">
-                                <rect key="frame" x="39" y="440" width="304" height="34"/>
+                                <rect key="frame" x="35" y="356" width="304" height="34"/>
                                 <color key="backgroundColor" red="1" green="0.59999999999999998" blue="0.043137254901960784" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="Post Tip">
@@ -582,14 +583,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="ar3-fX-jUm" firstAttribute="trailing" secondItem="avB-8O-qtJ" secondAttribute="trailing" constant="32" id="6or-ZQ-ICw"/>
-                            <constraint firstItem="ar3-fX-jUm" firstAttribute="bottom" secondItem="avB-8O-qtJ" secondAttribute="bottom" constant="144" id="Bgp-ab-AfH"/>
-                            <constraint firstItem="ldq-gv-y7g" firstAttribute="leading" secondItem="ar3-fX-jUm" secondAttribute="leading" constant="16" id="I5H-af-Fvs"/>
-                            <constraint firstItem="ar3-fX-jUm" firstAttribute="trailing" secondItem="ldq-gv-y7g" secondAttribute="trailing" constant="16" id="Q4r-l5-taz"/>
-                            <constraint firstItem="avB-8O-qtJ" firstAttribute="leading" secondItem="ar3-fX-jUm" secondAttribute="leading" constant="39" id="SNg-y4-hGh"/>
-                            <constraint firstItem="ldq-gv-y7g" firstAttribute="top" secondItem="ar3-fX-jUm" secondAttribute="top" constant="15" id="bsR-iC-U4c"/>
-                            <constraint firstItem="avB-8O-qtJ" firstAttribute="top" secondItem="ldq-gv-y7g" secondAttribute="bottom" constant="8" id="f06-qW-M05"/>
-                            <constraint firstItem="ar3-fX-jUm" firstAttribute="bottom" secondItem="ldq-gv-y7g" secondAttribute="bottom" constant="186" id="z28-RR-0uf"/>
+                            <constraint firstItem="avB-8O-qtJ" firstAttribute="leading" secondItem="ar3-fX-jUm" secondAttribute="leading" constant="35" id="36F-ah-Lwa"/>
+                            <constraint firstItem="avB-8O-qtJ" firstAttribute="top" secondItem="ldq-gv-y7g" secondAttribute="bottom" constant="8" id="4Vz-Bk-HY3"/>
+                            <constraint firstItem="ar3-fX-jUm" firstAttribute="trailing" secondItem="avB-8O-qtJ" secondAttribute="trailing" constant="36" id="4vw-3A-IFY"/>
+                            <constraint firstItem="ldq-gv-y7g" firstAttribute="top" secondItem="ar3-fX-jUm" secondAttribute="top" constant="15" id="CaO-cY-oEo"/>
+                            <constraint firstItem="avB-8O-qtJ" firstAttribute="top" secondItem="ldq-gv-y7g" secondAttribute="bottom" constant="8" id="flo-A3-ubv"/>
+                            <constraint firstItem="ar3-fX-jUm" firstAttribute="bottom" secondItem="avB-8O-qtJ" secondAttribute="bottom" constant="228" id="hyY-YJ-VUA"/>
+                            <constraint firstItem="ldq-gv-y7g" firstAttribute="leading" secondItem="ar3-fX-jUm" secondAttribute="leading" constant="16" id="ktK-9L-Agp"/>
+                            <constraint firstItem="ar3-fX-jUm" firstAttribute="trailing" secondItem="ldq-gv-y7g" secondAttribute="trailing" constant="16" id="zTp-7r-A31"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ar3-fX-jUm"/>
                     </view>

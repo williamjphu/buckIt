@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--BuckIt!-->
+        <!--Map View-->
         <scene sceneID="rHf-7W-2nn">
             <objects>
                 <viewController id="yP7-1q-uae" customClass="MapViewController" customModule="BuckIt" customModuleProvider="target" sceneMemberID="viewController">
@@ -31,7 +31,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5kj-Pj-nBO"/>
                     </view>
-                    <navigationItem key="navigationItem" title="BuckIt!" id="m89-9X-zn8"/>
+                    <navigationItem key="navigationItem" title="Map View" id="m89-9X-zn8"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="mapView" destination="JY5-El-f4I" id="nno-FK-XkT"/>
@@ -60,7 +60,7 @@
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="barTintColor" red="0.92156862745098034" green="0.47843137254901957" blue="0.039215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="1" green="0.59999999999999998" blue="0.043137254901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textAttributes>

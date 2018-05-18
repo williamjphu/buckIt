@@ -86,7 +86,7 @@
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iEE-hC-kQx">
                                 <rect key="frame" x="16" y="394" width="343" height="42"/>
-                                <color key="backgroundColor" red="0.92156862745098034" green="0.47843137254901957" blue="0.039215686274509803" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" red="1" green="0.59999999999999998" blue="0.043137254901960784" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="N5p-jI-Cr3"/>
                                 </constraints>

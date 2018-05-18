@@ -18,20 +18,19 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     var selectedActivity = Activity()
     
     @IBOutlet weak var mapView: MKMapView!
-    
     @IBOutlet weak var search: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
         configureLocationServices()
     }
-    
-//    override func viewWillAppear(_ animated: Bool) {
-//        self.navigationController?.setNavigationBarHidden(true, animated: false)
-//    }
-//    override func viewWillDisappear(_ animated: Bool) {
-//        self.navigationController?.setNavigationBarHidden(false, animated: false)
-//    }
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+    }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         print("Did get latest location")
@@ -74,7 +73,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 }
             }
         }
-        
         annotationView?.canShowCallout = true
         annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
         return annotationView
@@ -88,15 +86,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 self.selectedActivity = item
             }
         }
-        print("\n\n\t\t SELECTED Object \(self.selectedActivity.title)")
-        print("\n\n\t\t SELECTED Object \(self.selectedActivity.category)")
-        print("\n\n\t\t SELECTED Object \(self.selectedActivity.longitude)")
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-//        let annotationView = view.annotation
-        
-        performSegue(withIdentifier: "showActivityProfileVC", sender: self)
+        if view.annotation?.title == "My Location" {
+            print("No segue is performed")
+            return
+        } else {
+            performSegue(withIdentifier: "showActivityProfileVC", sender: self)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -112,7 +110,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             if snap.exists() {
                 let activitySnap = snap.value as! [String: AnyObject]
                 for (_,activity) in activitySnap {
-                    var activityObj = Activity()
+                    let activityObj = Activity()
                     if let title = activity["activityName"] as? String,
                         let subtitle = activity["description"] as? String,
                         let latitude = activity["latitude"] as? Double,
@@ -141,7 +139,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                         
                         self.activities.append(activityObj)
                         self.activitiesPin.append(activityPin)
-                        print("Count inside: \(self.activitiesPin.count) \n")
+//                        print("Count inside: \(self.activitiesPin.count) \n")
                         self.mapView.addAnnotation(activityPin)
                     }
                 }
